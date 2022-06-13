@@ -2,15 +2,6 @@ import 'babel-polyfill';
 import microApp, { unmountApp, unmountAllApps } from '@micro-zoe/micro-app';
 import config from './config';
 
-// microApp.preFetch([
-//   {name: 'vite', url: `${config.vite}micro-app/vite`},
-//   {name: 'vue2', url: `${config.vue2}micro-app/vue2`},
-//   {name: 'dataFront', url: `${config.dataFront}micro-app/dataFront`},
-//   {name: 'react17', url: `${config.react17}micro-app/react17`},
-//   {name: 'vue3', url: `${config.vue3}micro-app/vue3`},
-//   {name: 'angular11', url: `${config.angular11}micro-app/angular11`},
-// ])
-
 microApp.start({
   // shadowDOM: true,
   // inline: true,
@@ -66,18 +57,16 @@ microApp.start({
           escapeProperties: ['escapeKey3', 'escapeKey4'],
           loader(code, url) {
             if (process.env.NODE_ENV === 'development' && code.indexOf('sockjs-node') > -1) {
-              console.log('react16插件', url);
               code = code.replace('window.location.port', '3001');
             }
             return code;
           },
         },
       ],
-      react17: [
+      thunderBi: [
         {
           loader(code, url) {
             if (process.env.NODE_ENV === 'development' && code.indexOf('sockjs-node') > -1) {
-              console.log('react17插件', url);
               code = code.replace('window.location.port', '3002');
             }
             return code;

@@ -9,7 +9,7 @@ import config from '../../config';
 
 const antIcon = <LoadingOutlined style={{ fontSize: 30 }} spin />;
 
-function React17() {
+function ThunderBi() {
   const [showLoading, hideLoading] = useState(true);
 
   // function handleData(data) {
@@ -17,10 +17,10 @@ function React17() {
   // }
 
   // useEffect(() => {
-  //   microApp.addDataListener('react17', handleData)
+  //   microApp.addDataListener('thunderBi', handleData)
   //   return function clearup () {
-  //     microApp.removeDataListener('react17', handleData)
-  //     microApp.clearDataListener('react17')
+  //     microApp.removeDataListener('thunderBi', handleData)
+  //     microApp.clearDataListener('thunderBi')
   //   }
   // }, [])
 
@@ -28,12 +28,12 @@ function React17() {
     <div style={{ height: '100%' }}>
       {showLoading && <Spin indicator={antIcon} />}
       <micro-app
-        name="react17"
-        baseRoute="/micro-app/react17"
-        url={`${config.react17}`}
+        name="thunderBi"
+        baseRoute="/micro-app/thunderBi"
+        url={`${config.thunderBi}`}
         keep-alive
         // data={{ from: '来自基座的数据' }}
-        // onMounted={() => hideLoading(false)}
+        onMounted={() => hideLoading(false)}
         // destroy
         // inline
       />
@@ -41,4 +41,4 @@ function React17() {
   );
 }
 
-export default React17;
+export default ThunderBi;

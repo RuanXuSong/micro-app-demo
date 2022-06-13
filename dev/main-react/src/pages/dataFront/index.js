@@ -15,9 +15,8 @@ export default class App extends React.Component {
     data: {
       name: '初始化数据',
     },
-    name: 'react#16',
+    name: 'dataFront',
     url: `${config.dataFront}micro-app/dataFront`,
-    // url: 'http://127.0.0.1:8080/micro-app/dataFront',
     showLoading: true,
     showMicroApp: true,
     testNum: 0,

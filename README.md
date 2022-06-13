@@ -159,3 +159,8 @@ yarn start # 访问 http://localhost:3000
 
 # License
 [MIT License](https://github.com/micro-zoe/micro-app/blob/master/LICENSE)
+
+
+# 注意
+
+如果本地启动跨域报错，可以在 host 里设置 <code>127.0.0.1  bi-sso.dev.thundersdata.com</code> 域名，使用这个域名访问不会报错。此时，访问 http://bi-sso.dev.thundersdata.com:3000/ 就可以访问微前端本地服务了

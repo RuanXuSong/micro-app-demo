@@ -19,11 +19,11 @@ export async function query() {
       age: 32,
       address: 'Sidney No. 1 Lake Park',
     },
-  ])
+  ]);
 }
 export async function queryCurrent() {
   return Promise.resolve({
-    name: 'Serati Ma',
+    name: 'admin',
     avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
     userid: '00000001',
     email: 'antdesign@alipay.com',
@@ -71,7 +71,7 @@ export async function queryCurrent() {
     },
     address: '西湖区工专路 77 号',
     phone: '0752-268888888',
-  })
+  });
 }
 export async function queryNotices() {
   return request('/api/notices');

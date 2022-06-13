@@ -2,10 +2,6 @@
 
 ### 下载并运行
 ```bash
-git clone https://github.com/micro-zoe/micro-app.git
-
-cd micro-app
-
 // 安装项目以及demo的依赖
 yarn bootstrap 
 
@@ -13,13 +9,7 @@ yarn bootstrap
 yarn start
 ```
 
-默认基座应用是`main-dataFront`，启动的子应用为：dataFront、react17、vue2、vue3、angular11、vite。
-
-如果要切换到基座应用`main-vue2`，运行命令：
-
-```bash
-yarn start:main-vue2
-```
+默认基座应用是`main-react`，启动的子应用为：dataFront、thunderBi。
 
 ### 单独运行
 `yarn start`默认会同时启动8个应用，这可能会导致系统卡顿，建议单独运行某些应用，以获取更好的开发体验。
@@ -31,7 +21,7 @@ yarn build:watch
 
 2、进入基座应用并启动
 ```
-cd dev/main-dataFront/
+cd dev/main-react/
 
 yarn start
 ```

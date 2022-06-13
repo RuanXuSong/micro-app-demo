@@ -7,7 +7,7 @@ const proSettings = {
   fixedHeader: false,
   fixSiderbar: false,
   colorWeak: false,
-  title: 'Micro App',
+  title: '雷数微前端平台',
   pwa: false,
   iconfontUrl: '',
   headerHeight: 64,

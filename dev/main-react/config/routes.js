@@ -17,6 +17,10 @@ export default [
                 redirect: '/dataFront',
               },
               {
+                path: '/thunderBi',
+                redirect: '/thunderBi/login',
+              },
+              {
                 path: '/dataFront',
                 name: 'dataFront',
                 icon: 'StarOutlined',
@@ -24,10 +28,10 @@ export default [
                 exact: false,
               },
               {
-                path: '/react17',
-                name: 'react17',
+                path: '/thunderBi',
+                name: 'thunderBi',
                 icon: 'TrademarkOutlined',
-                component: './react17/react17',
+                component: './thunderBi',
                 exact: false,
               },
               {
