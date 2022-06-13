@@ -14,11 +14,11 @@ export default [
             routes: [
               {
                 path: '/',
-                redirect: '/react16',
+                redirect: '/dataFront',
               },
               {
-                path: '/react16',
-                name: 'react16',
+                path: '/dataFront',
+                name: 'dataFront',
                 icon: 'StarOutlined',
                 component: './react16/react16',
                 exact: false,

@@ -29,7 +29,7 @@ function React17() {
       {showLoading && <Spin indicator={antIcon} />}
       <micro-app
         name="react17"
-        baseRoute="/micro-app/demo/react17"
+        baseRoute="/micro-app/react17"
         url={`${config.react17}`}
         keep-alive
         // data={{ from: '来自基座的数据' }}

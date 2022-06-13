@@ -16,8 +16,8 @@ export default class App extends React.Component {
       name: '初始化数据',
     },
     name: 'react#16',
-    url: `${config.react16}micro-app/react16?a=1`,
-    // url: 'http://127.0.0.1:8080/micro-app/react16',
+    url: `${config.dataFront}micro-app/dataFront`,
+    // url: 'http://127.0.0.1:8080/micro-app/dataFront',
     showLoading: true,
     showMicroApp: true,
     testNum: 0,
@@ -162,7 +162,7 @@ export default class App extends React.Component {
     return (
       <>
         <micro-app
-          name="data-front"
+          name="dataFront"
           url={this.state.url}
           data={this.state.data}
           onCreated={this.handleCreated}
@@ -174,7 +174,7 @@ export default class App extends React.Component {
           onAftershow={this.handleAftershow}
           onAfterhidden={this.handleAfterhidden}
           onDataChange={this.handleDataChange}
-          baseRoute="/micro-app/demo/react16"
+          baseRoute="/micro-app/dataFront"
           keep-alive
           // destroy
           // inline

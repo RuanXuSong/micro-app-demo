@@ -1,6 +1,5 @@
 export default {
   'menu.dataFront': '数融平台',
-  'menu.react16': 'react16应用',
   'menu.react17': 'react17应用',
   'menu.vue2': 'vue2应用',
   'menu.vue3': 'vue3应用',

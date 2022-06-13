@@ -1,5 +1,5 @@
 // https://umijs.org/config/
-const openBrowser = require('react-dev-utils/openBrowser')
+const openBrowser = require('react-dev-utils/openBrowser');
 import { defineConfig } from 'umi';
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
@@ -31,7 +31,7 @@ export default defineConfig({
   },
   // umi routes: https://umijs.org/docs/routing
   routes,
-  base: '/micro-app/demo/',
+  base: '/micro-app/',
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
   theme: {
     'primary-color': defaultSettings.primaryColor,
@@ -47,22 +47,22 @@ export default defineConfig({
     '@micro-zoe/micro-app/polyfill': path.join(__dirname, '../../../polyfill'),
     '@micro-zoe/micro-app': path.join(__dirname, '../../../lib/index.esm.js'),
   },
-  outputPath: 'demo',
-  publicPath: process.env.NODE_ENV === 'production' ? '/micro-app/demo/' : '/',
+  outputPath: 'build',
+  publicPath: process.env.NODE_ENV === 'production' ? '/micro-app/' : '/',
   chainWebpack(webpackConfig) {
     if (process.env.NODE_ENV === 'development') {
       webpackConfig.plugin('openBrowser').use({
-        apply (compiler) {
+        apply(compiler) {
           compiler.hooks.done.tap('openBrowser', () => {
             if (!openBrowser.used) {
-              openBrowser.used = true
+              openBrowser.used = true;
               setTimeout(() => {
-                openBrowser(`http://localhost:3000/`)
-              }, 1000)
+                openBrowser(`http://localhost:3000/`);
+              }, 1000);
             }
-          })
-        }
-      })
+          });
+        },
+      });
     }
   },
   mfsu: {},

@@ -5,7 +5,7 @@ import config from './config';
 // microApp.preFetch([
 //   {name: 'vite', url: `${config.vite}micro-app/vite`},
 //   {name: 'vue2', url: `${config.vue2}micro-app/vue2`},
-//   {name: 'react16', url: `${config.react16}micro-app/react16`},
+//   {name: 'dataFront', url: `${config.dataFront}micro-app/dataFront`},
 //   {name: 'react17', url: `${config.react17}micro-app/react17`},
 //   {name: 'vue3', url: `${config.vue3}micro-app/vue3`},
 //   {name: 'angular11', url: `${config.angular11}micro-app/angular11`},
@@ -60,7 +60,7 @@ microApp.start({
       },
     ],
     modules: {
-      react16: [
+      react: [
         {
           scopeProperties: ['scopeKey3', 'scopeKey4'],
           escapeProperties: ['escapeKey3', 'escapeKey4'],
@@ -98,7 +98,7 @@ microApp.start({
     }
 
     let config = null;
-    if (url === 'http://localhost:3001/micro-app/react16/?a=1') {
+    if (url === 'http://localhost:3001/micro-app/dataFront') {
       config = {
         // headers: {
         //   'custom-head': 'custom-head',

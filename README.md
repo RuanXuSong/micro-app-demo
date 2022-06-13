@@ -25,27 +25,26 @@
   </a>
 </p>
 
-English｜[简体中文](./README.zh-cn.md)｜[Documentation](https://micro-zoe.github.io/micro-app/)｜[Discussions](https://github.com/micro-zoe/micro-app/discussions)｜[Gitter](https://gitter.im/microzoe/micro-app)
+[English](https://github.com/micro-zoe/micro-app)｜简体中文｜[官网文档](https://micro-zoe.github.io/micro-app/)｜[讨论组](https://github.com/micro-zoe/micro-app/discussions)｜[聊天室](https://gitter.im/microzoe/micro-app)
 
-# 📖Introduction
-micro-app is a micro front-end framework launched by JD Retail. It renders based on webcomponent-like and realizes the micro front-end from component thinking, it aiming to reduce the difficulty of getting started and improve work efficiency. 
+# 📖简介
+micro-app是京东零售推出的一款微前端框架，它基于类WebComponent进行渲染，从组件化的思维实现微前端，旨在降低上手难度、提升工作效率。它是目前接入微前端成本最低的框架，并且提供了JS沙箱、样式隔离、元素隔离、预加载、资源地址补全、插件系统、数据通信等一系列完善的功能。
 
-It is the lowest cost framework for accessing micro front-end, and provides a series of perfect functions such as JS sandbox, style isolation, element isolation, preloading, resource address completion, plugin system, data communication and so on.
+micro-app与技术栈无关，对前端框架没有限制，任何框架都可以作为基座应用嵌入任何类型的子应用。
 
-micro-app has no restrictions on the front-end framework, and any framework can be used as a base application to embed any type of micro application of the framework.
+# 如何使用
+微前端分为基座应用（也可以叫做主应用）和子应用。
 
-# How to use
-The micro front end is divided into a base application (also called main application) and a micro application.
+这里以一种比较常见的情况举例：基座应用使用vue框架，采用history路由，子应用使用react框架，采用hash路由，我们分别列出基座应用和子应用需要进行的修改，具体介绍micro-app的使用方式。
 
-Here is a common example: the base application uses the Vue framework, uses history routing, the micro application uses the react framework, and uses hash routing. We list the modifications that need to be made by the base application and the micro application, and introduce the use of micro-app in detail.
+## 基座应用
 
-## base application
-**1、Install**
+**1、安装依赖**
 ```bash
 yarn add @micro-zoe/micro-app
 ```
 
-**2、import at the entrance**
+**2、在入口文件引入**
 ```js
 // main.js
 import microApp from '@micro-zoe/micro-app'
@@ -53,17 +52,18 @@ import microApp from '@micro-zoe/micro-app'
 microApp.start()
 ```
 
-**3、Use components in page**
+**3、在页面中嵌入微前端应用**
 ```html
 <!-- my-page.vue -->
 <template>
-  <!-- 👇 name is the app name, url is the app address -->
+  <!-- 👇 name为应用名称，url为应用地址 -->
   <micro-app name='my-app' url='http://localhost:3000/'></micro-app>
 </template>
 ```
 
-## micro application
-**Set cross-domain support in the headers of webpack-dev-server**
+## 子应用
+
+**在webpack-dev-server的headers中设置跨域支持。**
 ```js
 devServer: {
   headers: {
@@ -72,61 +72,63 @@ devServer: {
 },
 ```
 
-The above micro front-end rendering is completed, and the effect is as follows:
+以上微前端基本渲染完成，效果如下：
 
-![image](https://img10.360buyimg.com/imagetools/jfs/t1/188373/14/17696/41854/6111f4a0E532736ba/4b86f4f8e2044519.png)
+<img src="https://img12.360buyimg.com/imagetools/jfs/t1/196940/34/1541/38365/610a14fcE46c21374/c321b9f8fa50a8fc.png" alt="result" width='900'/>
 
-More detailed configuration can be viewed [Documentation](https://micro-zoe.github.io/micro-app/docs.html#/zh-cn/start).
+更多详细配置可以查看[官网文档](https://micro-zoe.github.io/micro-app/docs.html#/zh-cn/start)
 
-# 🤝 Contribution
-If you're interested in this project, you're welcome to mention pull request, and also welcome your "Star" ^_^
+# 🤝 参与共建
+如果您对这个项目感兴趣，欢迎提 pull request，也欢迎 "Star" 支持一下 ^_^
 
-### development
-1、Clone
+### 本地运行
+1、克隆项目
 ```
 git clone https://github.com/micro-zoe/micro-app.git
 ```
 
-2、Install dependencies
+2、安装依赖
 ```
 yarn bootstrap
 ```
 
-3、Run project
+3、运行项目
 ```
-yarn start
+yarn start # 访问 http://localhost:3000
 ```
 
-For more commands, see [DEVELOP](https://github.com/micro-zoe/micro-app/blob/master/DEVELOP.md)
+更多命令请查看[DEVELP](https://github.com/micro-zoe/micro-app/blob/master/DEVELOP.zh-cn.md)
 
 # FAQ
+[问题汇总](https://micro-zoe.github.io/micro-app/docs.html#/zh-cn/questions)
 <details>
 
-  <summary>What are the advantages of micro-app?</summary>
-  It is easy to use and low invasive. It only needs to change a small amount of code to access the micro front-end, and provides rich functions at the same time.
+  <summary>micro-app的优势在哪里？</summary>
+  上手简单、侵入性低，只需改动少量的代码即可接入微前端，同时提供丰富的功能。
+
+  具体细节请参考文章：[micro-app介绍](https://github.com/micro-zoe/micro-app/issues/8)
 
 </details>
 <details>
-  <summary>How compatible?</summary>
-  The micro-app relies on two newer APIs, CustomElements and Proxy.
+  <summary>兼容性如何？</summary>
+  micro-app依赖于CustomElements和Proxy两个较新的API。
 
-  For browsers that do not support CustomElements, they can be compatible by introducing polyfills. For details, please refer to: [webcomponents/polyfills](https://github.com/webcomponents/polyfills/tree/master/packages/custom-elements)。
+  对于不支持CustomElements的浏览器，可以通过引入polyfill进行兼容，详情可参考：[webcomponents/polyfills](https://github.com/webcomponents/polyfills/tree/master/packages/custom-elements)。
 
-  However, Proxy is not compatible for the time being, so the micro-app cannot be run on browsers that do not support Proxy.
+  但是Proxy暂时没有做兼容，所以对于不支持Proxy的浏览器无法运行micro-app。
 
-  Browser compatibility can be viewed: [Can I Use](https://caniuse.com/?search=Proxy)
+  浏览器兼容性可以查看：[Can I Use](https://caniuse.com/?search=Proxy)
 
-  The general is as follows:
-  - desktop: Except IE browser, other browsers are basically compatible.
-  - mobile: ios10+、android5+
+  总体如下：
+  - PC端：除了IE浏览器，其它浏览器基本兼容。
+  - 移动端：ios10+、android5+
 </details>
 
 <details>
-  <summary>Must micro applications support cross-domain?</summary>
-  yes!
+  <summary>子应用一定要支持跨域吗？</summary>
+  是的！
 
-  If it is a development environment, you can set headers in webpack-dev-server to support cross-domain.
-
+  如果是开发环境，可以在webpack-dev-server中设置headers支持跨域。
   ```js
   devServer: {
     headers: {
@@ -135,23 +137,22 @@ For more commands, see [DEVELOP](https://github.com/micro-zoe/micro-app/blob/mas
   }
   ```
 
-  If it is a production environment, you can support cross-domain through [Configuration nginx](https://segmentfault.com/a/1190000012550346).
-
+  如果是线上环境，可以通过[配置nginx](https://segmentfault.com/a/1190000012550346)支持跨域。
 </details>
 
 <details>
-  <summary>Does it support vite?</summary>
+  <summary>支持vite吗?</summary>
   
-  Yes, please see [adapt vite](https://micro-zoe.github.io/micro-app/docs.html#/zh-cn/framework/vite) for details.
+  支持，详情请查看[适配vite](https://micro-zoe.github.io/micro-app/docs.html#/zh-cn/framework/vite)
 </details>
 
 <details>
-  <summary>Does it support ssr?</summary>
+  <summary>支持ssr吗?</summary>
   
-  Yes, please see [nextjs](https://micro-zoe.github.io/micro-app/docs.html#/zh-cn/framework/nextjs), [nuxtjs](https://micro-zoe.github.io/micro-app/docs.html#/zh-cn/framework/nuxtjs) for details.
+  支持，详情请查看[nextjs](https://micro-zoe.github.io/micro-app/docs.html#/zh-cn/framework/nextjs)、[nuxtjs](https://micro-zoe.github.io/micro-app/docs.html#/zh-cn/framework/nuxtjs)
 </details>
 
-# Contributors
+# 贡献者们
 <a href="https://github.com/micro-zoe/micro-app/graphs/contributors"><img src="https://micro-zoe.com/contributors.svg?height=55&people=13" /></a>
 <!-- opencollective is inaccurate  -->
 <!-- <a href="https://github.com/micro-zoe/micro-app/graphs/contributors"><img src="https://opencollective.com/micro-app/contributors.svg?width=890&button=false" /></a> -->

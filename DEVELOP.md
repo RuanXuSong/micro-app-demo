@@ -1,46 +1,46 @@
-# develop
+# 开发指南
 
-### clone & run project
+### 下载并运行
 ```bash
 git clone https://github.com/micro-zoe/micro-app.git
 
 cd micro-app
 
-// install dependencies
+// 安装项目以及demo的依赖
 yarn bootstrap 
 
-// run project
+// 运行
 yarn start
 ```
 
-The base application `main-react16` is started by default, the sub applications started are: react16, react17, vue2, vue3, angular11, vite.
+默认基座应用是`main-dataFront`，启动的子应用为：dataFront、react17、vue2、vue3、angular11、vite。
 
-If you want to start the `main-vue2` base application, you can run: 
+如果要切换到基座应用`main-vue2`，运行命令：
 
 ```bash
 yarn start:main-vue2
 ```
 
-### run alone
-`yarn start` will start 8 applications at the same time by default, which may cause the system to get stuck. It is recommended to run some applications separately to get a better development experience.
+### 单独运行
+`yarn start`默认会同时启动8个应用，这可能会导致系统卡顿，建议单独运行某些应用，以获取更好的开发体验。
 
-1、run main program
+1、启动主程序
 ```
 yarn build:watch
 ```
 
-2、enter the base application and start
+2、进入基座应用并启动
 ```
-cd dev/main-react16/
+cd dev/main-dataFront/
 
 yarn start
 ```
 
-3、enter a sub application and start it
+3、进入某个子应用并启动
 ```
-cd dev/children/react16
+cd dev/children/dataFront
 
 yarn start
 ```
 
-If you want to start more sub applications, you can continue to enter their directory and start.
+如果要启动更多的子应用，可以继续进入它们的目录并启动。

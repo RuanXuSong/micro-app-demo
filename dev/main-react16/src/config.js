@@ -1,5 +1,5 @@
 let config = {
-  react16: 'http://localhost:8000/',
+  dataFront: 'http://localhost:8000/',
   react17: 'http://bi-sso.dev.thundersdata.com:8181/',
   // vue2: 'http://localhost:4001/',
   // vue3: 'http://localhost:4002/',
@@ -11,7 +11,7 @@ const isEnvPro = process.env.NODE_ENV === 'production';
 if (isEnvPro) {
   const locationOrigin = `${location.origin}/`;
   config = {
-    react16: locationOrigin,
+    dataFront: locationOrigin,
     react17: locationOrigin,
     // vue2: locationOrigin,
     // vue3: locationOrigin,
