@@ -11,8 +11,7 @@
   },
   "scripts": {
     "bootstrap": "yarn && npm-run-all --serial install:*",
-    "start": "yarn start:main-react",
-    "start:main-react": "npm-run-all --parallel build:watch start-child:* main-react",
+    "start": "npm run main-react",
     "build:watch": "cross-env NODE_ENV='development' rollup -c -w",
     "build": "cross-env NODE_ENV='production' rollup -c && npm run createtype && npm run afterbuild",
     "install:main-react": "cd dev/main-react && yarn",
@@ -23,9 +22,6 @@
     "createtype": "node scripts/create_type.js",
     "afterbuild": "node scripts/after_build.js",
     "test:server": "node scripts/test_server.js --start",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "commit": "git-cz"
   },

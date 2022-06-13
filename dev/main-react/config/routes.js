@@ -20,7 +20,7 @@ export default [
                 path: '/dataFront',
                 name: 'dataFront',
                 icon: 'StarOutlined',
-                component: './react16/react16',
+                component: './dataFront',
                 exact: false,
               },
               {

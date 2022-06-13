@@ -6,7 +6,7 @@ import { Spin, Row, Col, Button, Modal } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import microApp, { unmountApp, unmountAllApps } from '@micro-zoe/micro-app';
 import config from '../../config';
-import './react16.less';
+import './index.less';
 
 const antIcon = <LoadingOutlined style={{ fontSize: 30 }} spin />;
 
