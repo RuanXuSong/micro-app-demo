@@ -1,33 +1,33 @@
-import './public-path';
+import "./public-path";
 // import 'babel-polyfill'
 // import '@babel/polyfill'
-import React from 'react';
-import ReactDOM from 'react-dom';
-import 'antd/dist/antd.css';
-import './index.css';
-import Router from './router';
-import { Modal, notification } from 'antd';
-import subMicroApp from '@micro-zoe/micro-app'
+import React from "react";
+import ReactDOM from "react-dom";
+import "antd/dist/antd.css";
+import "./index.css";
+import Router from "./router";
+import { Modal, notification } from "antd";
+import subMicroApp from "@micro-zoe/micro-app";
 
 // 循环内嵌
 subMicroApp.start({
-  tagName: 'micro-app-sub'
-})
+  tagName: "micro-app-sub",
+});
 
 // 数据监听
-window.microApp?.addDataListener((data) => {
-  console.log('react16 来自基座应用的数据', data)
-  notification.open({
-    message: '来自基座应用的数据',
-    description: JSON.stringify(data),
-    duration: 1,
-  })
-}, true)
+// window.microApp?.addDataListener((data) => {
+//   console.log('react16 来自基座应用的数据', data)
+//   notification.open({
+//     message: '来自基座应用的数据',
+//     description: JSON.stringify(data),
+//     duration: 1,
+//   })
+// }, true)
 
 function handleGlobalData(data) {
-  console.log('react16: 来自全局数据')
+  console.log("react16: 来自全局数据");
   Modal.info({
-    title: 'react16: 来自全局数据',
+    title: "react16: 来自全局数据",
     content: (
       <div>
         <p>{JSON.stringify(data)}</p>
@@ -41,23 +41,26 @@ function handleGlobalData(data) {
 window.microApp?.addGlobalDataListener(handleGlobalData);
 
 // 监听keep-alive模式下的app状态
-window.addEventListener('appstate-change', function (e) {
-  console.log('子应用内部console.log -- keep-alive app 状态：', e.detail.appState);
-})
+window.addEventListener("appstate-change", function (e) {
+  console.log(
+    "子应用内部console.log -- keep-alive app 状态：",
+    e.detail.appState
+  );
+});
 
 // ----------------------分割线-默认模式--------------------- //
 ReactDOM.render(
   <React.StrictMode>
     <Router />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // 监听卸载
-window.addEventListener('unmount', function () {
-  ReactDOM.unmountComponentAtNode(document.getElementById('root'));
-  console.log('微应用react16卸载了 -- 自定义事件unmount');
-})
+window.addEventListener("unmount", function () {
+  ReactDOM.unmountComponentAtNode(document.getElementById("root"));
+  console.log("微应用react16卸载了 -- 自定义事件unmount");
+});
 
 // console.timeEnd('react#16');
 
@@ -88,7 +91,6 @@ window.addEventListener('unmount', function () {
 //   // 非微前端环境直接渲染
 //   mount();
 // }
-
 
 // ----------------------分割线-特殊场景测试--------------------- //
 // document.addEventListener('click', function () {
@@ -125,7 +127,6 @@ window.addEventListener('unmount', function () {
 // document.head.appendChild(dynamicStyle)
 // dynamicStyle.textContent = '.test-class { color: red } '
 
-
 // // BUG TEST: https://github.com/micro-zoe/micro-app/issues/56
 // const parser = new DOMParser()
 // const htmlString = `
@@ -156,7 +157,6 @@ window.addEventListener('unmount', function () {
 //   console.log('DOMParser createElement', d1, d2, d3)
 // }, 3000)
 
-
 // // 测试 Image
 // const newImg = new Image()
 // newImg.src = '/static/media/logo.6ce24c58.svg'
@@ -165,8 +165,6 @@ window.addEventListener('unmount', function () {
 // // 测试 cloneNode
 // var img2 = newImg.cloneNode(true)
 // document.body.appendChild(img2)
-
-
 
 // setInterval(() => {
 //   console.log(4444444, document.activeElement)
@@ -220,39 +218,39 @@ window.addEventListener('unmount', function () {
 
 // ----------------------分割线--接口相关--------------------- //
 // 测试proxy代理
-fetch('http://localhost:3001/sugrec').then((res) => {
-  return res.json()
-}).then((data) => {
-  console.log('proxy代理 https://www.baidu.com/sugrec 返回数据', data)
-})
-
+fetch("http://localhost:3001/sugrec")
+  .then((res) => {
+    return res.json();
+  })
+  .then((data) => {
+    console.log("proxy代理 https://www.baidu.com/sugrec 返回数据", data);
+  });
 
 // ----------------------分割线--插件相关--------------------- //
-window.scopeKey1 = 'scopeKey1'
-window.scopeKey2 = 'scopeKey2'
-window.scopeKey3 = 'scopeKey3'
-window.scopeKey4 = 'scopeKey4'
-window.scopeKey5 = 'scopeKey5'
-window.scopeKey6 = 'scopeKey6'
+window.scopeKey1 = "scopeKey1";
+window.scopeKey2 = "scopeKey2";
+window.scopeKey3 = "scopeKey3";
+window.scopeKey4 = "scopeKey4";
+window.scopeKey5 = "scopeKey5";
+window.scopeKey6 = "scopeKey6";
 
-window.escapeKey1 = 'escapeKey1'
-window.escapeKey2 = 'escapeKey2'
-window.escapeKey3 = 'escapeKey3'
-window.escapeKey4 = 'escapeKey4'
-window.escapeKey5 = 'escapeKey5' // should be undefined in rawWindow
-window.escapeKey6 = 'escapeKey6' // should be undefined in rawWindow
-
+window.escapeKey1 = "escapeKey1";
+window.escapeKey2 = "escapeKey2";
+window.escapeKey3 = "escapeKey3";
+window.escapeKey4 = "escapeKey4";
+window.escapeKey5 = "escapeKey5"; // should be undefined in rawWindow
+window.escapeKey6 = "escapeKey6"; // should be undefined in rawWindow
 
 // ----------------------分割线-- pureCreateElement & removeDomScope --------------------- //
 if (window.__MICRO_APP_ENVIRONMENT__) {
-  const unBoundDom1 = window.microApp.pureCreateElement('div')
-  unBoundDom1.innerHTML = 'unBoundDom1'
-  document.body.appendChild(unBoundDom1)
+  const unBoundDom1 = window.microApp.pureCreateElement("div");
+  unBoundDom1.innerHTML = "unBoundDom1";
+  document.body.appendChild(unBoundDom1);
 
-  const createElement = document.createElement
-  const rawDocument = window.rawDocument
-  window.microApp.removeDomScope()
-  const unBoundDom2 = createElement.call(rawDocument, 'div')
-  unBoundDom2.innerHTML = 'unBoundDom2'
-  document.body.appendChild(unBoundDom2)
+  const createElement = document.createElement;
+  const rawDocument = window.rawDocument;
+  window.microApp.removeDomScope();
+  const unBoundDom2 = createElement.call(rawDocument, "div");
+  unBoundDom2.innerHTML = "unBoundDom2";
+  document.body.appendChild(unBoundDom2);
 }
