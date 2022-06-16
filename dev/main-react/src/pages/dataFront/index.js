@@ -143,7 +143,6 @@ export default class App extends React.Component {
 
   componentDidMount() {
     console.time(`mounted-${this.state.name}`);
-    console.time(this.state.name);
 
     microApp.addDataListener(this.state.name, (data) => {
       console.log('来自子应用react16的数据', data);

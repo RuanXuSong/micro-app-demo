@@ -18,7 +18,7 @@ export default [
               },
               {
                 path: '/thunderBi',
-                redirect: '/thunderBi/login',
+                redirect: '/thunderBi/dashboards',
               },
               {
                 path: '/dataFront',

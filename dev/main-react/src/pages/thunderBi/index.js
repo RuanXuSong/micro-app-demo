@@ -4,10 +4,7 @@ import jsxCustomEvent from '@micro-zoe/micro-app/polyfill/jsx-custom-event';
 import { useState, useEffect } from 'react';
 import microApp from '@micro-zoe/micro-app';
 import { Spin } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
 import config from '../../config';
-
-const antIcon = <LoadingOutlined style={{ fontSize: 30 }} spin />;
 
 function ThunderBi() {
   const [showLoading, hideLoading] = useState(true);
@@ -26,11 +23,11 @@ function ThunderBi() {
 
   return (
     <div style={{ height: '100%' }}>
-      {showLoading && <Spin indicator={antIcon} />}
+      {showLoading && <Spin style={{ position: 'fixed', left: '50%', top: '50%' }} />}
       <micro-app
         name="thunderBi"
         baseRoute="/micro-app/thunderBi"
-        url={`${config.thunderBi}`}
+        url={config.thunderBi}
         keep-alive
         // data={{ from: '来自基座的数据' }}
         onMounted={() => hideLoading(false)}

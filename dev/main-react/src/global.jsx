@@ -112,3 +112,6 @@ microApp.start({
 //     console.log('unmountAllApps方法 -- 主动卸载所有应用成功')
 //   })
 // }, 10000)
+
+// 预加载子应用
+microApp.preFetch([{ name: 'thunderBi', url: config.thunderBi }]);
