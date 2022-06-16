@@ -1,6 +1,7 @@
 # 注意
 
-如果本地启动跨域报错，可以在 host 里设置 <code>127.0.0.1  bi-sso.dev.thundersdata.com</code> 域名，使用这个域名访问不会报错。此时，访问 http://bi-sso.dev.thundersdata.com:3000/ 就可以访问微前端本地服务了
+1.如果本地启动跨域报错，可以在 host 里设置 <code>127.0.0.1  bi-sso.dev.thundersdata.com</code> 域名，使用这个域名访问不会报错。此时，访问 http://bi-sso.dev.thundersdata.com:3000/ 就可以访问微前端本地服务了。
+2.如果是本地起服务，请切到对应的子应用下 `platform-sso` 的分支选择手动起服务，该分支下是经过微前端调整过后的兼容版本。
 
 # micro-app 简介
 micro-app是京东零售推出的一款微前端框架，它基于类WebComponent进行渲染，从组件化的思维实现微前端，旨在降低上手难度、提升工作效率。它是目前接入微前端成本最低的框架，并且提供了JS沙箱、样式隔离、元素隔离、预加载、资源地址补全、插件系统、数据通信等一系列完善的功能。
