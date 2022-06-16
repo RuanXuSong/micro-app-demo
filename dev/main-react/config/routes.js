@@ -35,6 +35,13 @@ export default [
                 exact: false,
               },
               {
+                path: '/biSheng',
+                name: 'biSheng',
+                icon: 'StarOutlined',
+                component: './biSheng',
+                exact: false,
+              },
+              {
                 component: './404',
               },
             ],
