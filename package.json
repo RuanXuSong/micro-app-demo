@@ -13,7 +13,7 @@
     "bootstrap": "yarn && npm-run-all --serial install:*",
     "start": "npm run main-react",
     "build:watch": "cross-env NODE_ENV='development' rollup -c -w",
-    "build": "cross-env NODE_ENV='production' rollup -c && npm run createtype && npm run afterbuild && npm run build:main-react",
+    "build": "cross-env NODE_ENV='production' rollup -c && npm run createtype && npm run afterbuild && npm run install:main-react && npm run build:main-react",
     "install:main-react": "cd dev/main-react && yarn",
     "build:main-react": "cd dev/main-react && yarn build",
     "main-react": "cd dev/main-react && yarn start",
