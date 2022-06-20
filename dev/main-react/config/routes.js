@@ -21,6 +21,10 @@ export default [
                 redirect: '/thunderBi/dashboards',
               },
               {
+                path: '/biSheng',
+                redirect: '/biSheng/dashboard/analysis',
+              },
+              {
                 path: '/dataFront',
                 name: 'dataFront',
                 icon: 'StarOutlined',

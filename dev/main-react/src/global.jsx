@@ -114,4 +114,7 @@ microApp.start({
 // }, 10000)
 
 // 预加载子应用
-microApp.preFetch([{ name: 'thunderBi', url: config.thunderBi }]);
+microApp.preFetch([
+  { name: 'thunderBi', url: config.thunderBi },
+  { name: 'biSheng', url: config.biSheng },
+]);
