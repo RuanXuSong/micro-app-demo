@@ -86,16 +86,13 @@ microApp.start({
       return Promise.resolve('');
     }
 
-    let config = null;
-    if (url === 'http://localhost:3001/micro-app/dataFront') {
-      config = {
-        // headers: {
-        //   'custom-head': 'custom-head',
-        // },
-        // micro-app默认不带cookie，如果需要添加cookie需要设置credentials
-        // credentials: 'include',
-      };
-    }
+    let config = {
+      // headers: {
+      //   'custom-head': 'custom-head',
+      // },
+      // micro-app默认不带cookie，如果需要添加cookie需要设置credentials
+      credentials: 'include',
+    };
 
     return fetch(url, Object.assign(options, config)).then((res) => {
       return res.text();
