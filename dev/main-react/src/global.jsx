@@ -115,6 +115,6 @@ microApp.start({
 
 // 预加载子应用
 microApp.preFetch([
-  { name: 'thunderBi', url: config.thunderBi },
+  { name: 'dataFront', url: config.dataFront },
   { name: 'biSheng', url: config.biSheng },
 ]);

@@ -20,10 +20,21 @@ const UserModel = {
         payload: response,
       });
     },
+
+    *setCurrentUser({ payload }, { call, put }) {
+      yield put({
+        type: 'changeCurrentUser',
+        payload: payload,
+      });
+    },
   },
   reducers: {
     saveCurrentUser(state, action) {
       return { ...state, currentUser: action.payload || {} };
+    },
+
+    changeCurrentUser(state, { payload }) {
+      return { ...state, currentUser: payload || {} };
     },
 
     changeNotifyCount(

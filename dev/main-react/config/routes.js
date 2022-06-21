@@ -5,16 +5,14 @@ export default [
     routes: [
       {
         path: '/',
-        component: '../layouts/SecurityLayout',
         routes: [
           {
             path: '/',
             component: '../layouts/BasicLayout',
-            authority: ['admin', 'user'],
             routes: [
               {
                 path: '/',
-                redirect: '/dataFront',
+                redirect: '/thunderBi/dashboards',
               },
               {
                 path: '/thunderBi',
@@ -25,17 +23,17 @@ export default [
                 redirect: '/biSheng/dashboard/analysis',
               },
               {
-                path: '/dataFront',
-                name: 'dataFront',
-                icon: 'StarOutlined',
-                component: './dataFront',
-                exact: false,
-              },
-              {
                 path: '/thunderBi',
                 name: 'thunderBi',
                 icon: 'TrademarkOutlined',
                 component: './thunderBi',
+                exact: false,
+              },
+              {
+                path: '/dataFront',
+                name: 'dataFront',
+                icon: 'StarOutlined',
+                component: './dataFront',
                 exact: false,
               },
               {
