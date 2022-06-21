@@ -86,15 +86,12 @@ microApp.start({
       return Promise.resolve('');
     }
 
-    let config = {
-      // headers: {
-      //   'custom-head': 'custom-head',
-      // },
-      // micro-app默认不带cookie，如果需要添加cookie需要设置credentials
-      credentials: 'include',
-    };
-
-    return fetch(url, Object.assign(options, config)).then((res) => {
+    return fetch(
+      url,
+      Object.assign(options, {
+        credentials: 'include',
+      }),
+    ).then((res) => {
       return res.text();
     });
   },
