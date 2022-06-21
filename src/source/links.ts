@@ -1,23 +1,17 @@
-import type {
-  AppInterface,
-  sourceLinkInfo,
-} from '@micro-app/types'
-import { fetchSource } from './fetch'
+import type { AppInterface, sourceLinkInfo } from "@micro-app/types";
+import { fetchSource } from "./fetch";
 import {
   CompletionPath,
   promiseStream,
   pureCreateElement,
   defer,
   logError,
-} from '../libs/utils'
-import scopedCSS from './scoped_css'
-import {
-  dispatchOnLoadEvent,
-  dispatchOnErrorEvent,
-} from './load_event'
+} from "../libs/utils";
+import scopedCSS from "./scoped_css";
+import { dispatchOnLoadEvent, dispatchOnErrorEvent } from "./load_event";
 
 // Global links, reuse across apps
-export const globalLinks = new Map<string, string>()
+export const globalLinks = new Map<string, string>();
 
 /**
  * Extract link elements
@@ -27,49 +21,60 @@ export const globalLinks = new Map<string, string>()
  * @param microAppHead micro-app-head element
  * @param isDynamic dynamic insert
  */
-export function extractLinkFromHtml (
+export function extractLinkFromHtml(
   link: HTMLLinkElement,
   parent: Node,
   app: AppInterface,
-  isDynamic = false,
+  isDynamic = false
 ): any {
-  const rel = link.getAttribute('rel')
-  let href = link.getAttribute('href')
-  let replaceComment: Comment | null = null
-  if (rel === 'stylesheet' && href) {
-    href = CompletionPath(href, app.url)
+  const rel = link.getAttribute("rel");
+  let href = link.getAttribute("href");
+  let replaceComment: Comment | null = null;
+  if (rel === "stylesheet" && href) {
+    href = CompletionPath(href, app.url);
     if (!isDynamic) {
-      replaceComment = document.createComment(`link element with href=${href} move to micro-app-head as style element`)
+      replaceComment = document.createComment(
+        `link element with href=${href} move to micro-app-head as style element`
+      );
       app.source.links.set(href, {
-        code: '',
+        code: "",
         placeholder: replaceComment,
-        isGlobal: link.hasAttribute('global'),
-      })
+        isGlobal: link.hasAttribute("global"),
+      });
     } else {
       return {
         url: href,
         info: {
-          code: '',
-          isGlobal: link.hasAttribute('global'),
-        }
-      }
+          code: "",
+          isGlobal: link.hasAttribute("global"),
+        },
+      };
     }
-  } else if (rel && ['prefetch', 'preload', 'prerender', 'icon', 'apple-touch-icon'].includes(rel)) {
+  } else if (
+    rel &&
+    ["prefetch", "preload", "prerender", "icon", "apple-touch-icon"].includes(
+      rel
+    )
+  ) {
     // preload prefetch icon ....
     if (isDynamic) {
-      replaceComment = document.createComment(`link element with rel=${rel}${href ? ' & href=' + href : ''} removed by micro-app`)
+      replaceComment = document.createComment(
+        `link element with rel=${rel}${
+          href ? " & href=" + href : ""
+        } removed by micro-app`
+      );
     } else {
-      parent.removeChild(link)
+      parent.removeChild(link);
     }
   } else if (href) {
     // dns-prefetch preconnect modulepreload search ....
-    link.setAttribute('href', CompletionPath(href, app.url))
+    link.setAttribute("href", CompletionPath(href, app.url));
   }
 
   if (isDynamic) {
-    return { replaceComment }
+    return { replaceComment };
   } else if (replaceComment) {
-    return parent.replaceChild(replaceComment, link)
+    return parent.replaceChild(replaceComment, link);
   }
 }
 
@@ -79,30 +84,41 @@ export function extractLinkFromHtml (
  * @param app app
  * @param microAppHead micro-app-head
  */
-export function fetchLinksFromHtml (
+export function fetchLinksFromHtml(
   wrapElement: HTMLElement,
   app: AppInterface,
-  microAppHead: Element,
+  microAppHead: Element
 ): void {
-  const linkEntries: Array<[string, sourceLinkInfo]> = Array.from(app.source.links.entries())
+  const linkEntries: Array<[string, sourceLinkInfo]> = Array.from(
+    app.source.links.entries()
+  );
 
-  const fetchLinkPromise: Array<Promise<string>|string> = linkEntries.map(([url]) => {
-    return globalLinks.has(url) ? globalLinks.get(url)! : fetchSource(url, app.name)
-  })
+  const fetchLinkPromise: Array<Promise<string> | string> = linkEntries.map(
+    ([url]) => {
+      return globalLinks.has(url)
+        ? globalLinks.get(url)!
+        : fetchSource(url, app.name);
+    }
+  );
 
-  promiseStream<string>(fetchLinkPromise, (res: {data: string, index: number}) => {
-    fetchLinkSuccess(
-      linkEntries[res.index][0],
-      linkEntries[res.index][1],
-      res.data,
-      microAppHead,
-      app,
-    )
-  }, (err: {error: Error, index: number}) => {
-    logError(err, app.name)
-  }, () => {
-    app.onLoad(wrapElement)
-  })
+  promiseStream<string>(
+    fetchLinkPromise,
+    (res: { data: string; index: number }) => {
+      fetchLinkSuccess(
+        linkEntries[res.index][0],
+        linkEntries[res.index][1],
+        res.data,
+        microAppHead,
+        app
+      );
+    },
+    (err: { error: Error; index: number }) => {
+      logError(err, app.name);
+    },
+    () => {
+      app.onLoad(wrapElement);
+    }
+  );
 }
 
 /**
@@ -113,30 +129,33 @@ export function fetchLinksFromHtml (
  * @param microAppHead micro-app-head
  * @param app app
  */
-export function fetchLinkSuccess (
+export function fetchLinkSuccess(
   url: string,
   info: sourceLinkInfo,
   data: string,
   microAppHead: Element,
-  app: AppInterface,
+  app: AppInterface
 ): void {
   if (info.isGlobal && !globalLinks.has(url)) {
-    globalLinks.set(url, data)
+    globalLinks.set(url, data);
   }
 
-  const styleLink = pureCreateElement('style')
-  styleLink.textContent = data
-  styleLink.__MICRO_APP_LINK_PATH__ = url
-  styleLink.setAttribute('data-origin-href', url)
+  const styleLink = pureCreateElement("style");
+  styleLink.textContent = data;
+  styleLink.__MICRO_APP_LINK_PATH__ = url;
+  styleLink.setAttribute("data-origin-href", url);
 
   if (info.placeholder!.parentNode) {
-    info.placeholder!.parentNode.replaceChild(scopedCSS(styleLink, app), info.placeholder!)
+    info.placeholder!.parentNode.replaceChild(
+      scopedCSS(styleLink, app),
+      info.placeholder!
+    );
   } else {
-    microAppHead.appendChild(scopedCSS(styleLink, app))
+    microAppHead.appendChild(scopedCSS(styleLink, app));
   }
 
-  info.placeholder = null
-  info.code = data
+  info.placeholder = null;
+  info.code = data;
 }
 
 /**
@@ -147,39 +166,41 @@ export function fetchLinkSuccess (
  * @param originLink origin link element
  * @param replaceStyle style element which replaced origin link
  */
-export function formatDynamicLink (
+export function formatDynamicLink(
   url: string,
   info: sourceLinkInfo,
   app: AppInterface,
   originLink: HTMLLinkElement,
-  replaceStyle: HTMLStyleElement,
+  replaceStyle: HTMLStyleElement
 ): void {
   if (app.source.links.has(url)) {
-    replaceStyle.textContent = app.source.links.get(url)!.code
-    scopedCSS(replaceStyle, app)
-    defer(() => dispatchOnLoadEvent(originLink))
-    return
+    replaceStyle.textContent = app.source.links.get(url)!.code;
+    scopedCSS(replaceStyle, app);
+    defer(() => dispatchOnLoadEvent(originLink));
+    return;
   }
 
   if (globalLinks.has(url)) {
-    const code = globalLinks.get(url)!
-    info.code = code
-    app.source.links.set(url, info)
-    replaceStyle.textContent = code
-    scopedCSS(replaceStyle, app)
-    defer(() => dispatchOnLoadEvent(originLink))
-    return
+    const code = globalLinks.get(url)!;
+    info.code = code;
+    app.source.links.set(url, info);
+    replaceStyle.textContent = code;
+    scopedCSS(replaceStyle, app);
+    defer(() => dispatchOnLoadEvent(originLink));
+    return;
   }
 
-  fetchSource(url, app.name).then((data: string) => {
-    info.code = data
-    app.source.links.set(url, info)
-    info.isGlobal && globalLinks.set(url, data)
-    replaceStyle.textContent = data
-    scopedCSS(replaceStyle, app)
-    dispatchOnLoadEvent(originLink)
-  }).catch((err) => {
-    logError(err, app.name)
-    dispatchOnErrorEvent(originLink)
-  })
+  fetchSource(url, app.name)
+    .then((data: string) => {
+      info.code = data;
+      app.source.links.set(url, info);
+      info.isGlobal && globalLinks.set(url, data);
+      replaceStyle.textContent = data;
+      scopedCSS(replaceStyle, app);
+      dispatchOnLoadEvent(originLink);
+    })
+    .catch((err) => {
+      logError(err, app.name);
+      dispatchOnErrorEvent(originLink);
+    });
 }

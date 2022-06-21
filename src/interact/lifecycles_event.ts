@@ -1,19 +1,24 @@
-import microApp from '../micro_app'
-import { logError, isFunction, removeDomScope, getRootContainer } from '../libs/utils'
+import microApp from "../micro_app";
+import {
+  logError,
+  isFunction,
+  removeDomScope,
+  getRootContainer,
+} from "../libs/utils";
 
-function formatEventInfo (event: CustomEvent, element: HTMLElement): void {
+function formatEventInfo(event: CustomEvent, element: HTMLElement): void {
   Object.defineProperties(event, {
     currentTarget: {
-      get () {
-        return element
-      }
+      get() {
+        return element;
+      },
     },
     target: {
-      get () {
-        return element
-      }
+      get() {
+        return element;
+      },
     },
-  })
+  });
 }
 
 /**
@@ -24,41 +29,47 @@ function formatEventInfo (event: CustomEvent, element: HTMLElement): void {
  * @param lifecycleName lifeCycle name
  * @param error param from error hook
  */
-export default function dispatchLifecyclesEvent (
+export default function dispatchLifecyclesEvent(
   element: HTMLElement | ShadowRoot,
   appName: string,
   lifecycleName: string,
-  error?: Error,
+  error?: Error
 ): void {
   if (!element) {
-    return logError(`element does not exist in lifecycle ${lifecycleName}`, appName)
+    return logError(
+      `element does not exist in lifecycle ${lifecycleName}`,
+      appName
+    );
   }
 
-  element = getRootContainer(element)
+  element = getRootContainer(element);
 
   // clear dom scope before dispatch lifeCycles event to base app, especially mounted & unmount
-  removeDomScope()
+  removeDomScope();
 
-  const detail = Object.assign({
-    name: appName,
-    container: element,
-  }, error && {
-    error
-  })
+  const detail = Object.assign(
+    {
+      name: appName,
+      container: element,
+    },
+    error && {
+      error,
+    }
+  );
 
   const event = new CustomEvent(lifecycleName, {
     detail,
-  })
+  });
 
-  formatEventInfo(event, element)
+  formatEventInfo(event, element);
   // global hooks
   // @ts-ignore
   if (isFunction(microApp.lifeCycles?.[lifecycleName])) {
     // @ts-ignore
-    microApp.lifeCycles[lifecycleName](event)
+    microApp.lifeCycles[lifecycleName](event);
   }
 
-  element.dispatchEvent(event)
+  element.dispatchEvent(event);
 }
 
 /**
@@ -67,13 +78,13 @@ export default function dispatchLifecyclesEvent (
  * @param appName app name
  * @param detail event detail
  */
-export function dispatchCustomEventToMicroApp (
+export function dispatchCustomEventToMicroApp(
   eventName: string,
   appName: string,
-  detail: Record<string, any> = {},
+  detail: Record<string, any> = {}
 ): void {
   const event = new CustomEvent(`${eventName}-${appName}`, {
     detail,
-  })
-  window.dispatchEvent(event)
+  });
+  window.dispatchEvent(event);
 }
