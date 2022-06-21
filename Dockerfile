@@ -1,5 +1,5 @@
 FROM nginx
-MAINTAINER thundersdata.com
+MAINTAINER dev.thundersdata.com
 VOLUME /tmp
 ENV LANG en_US.UTF-8
 RUN echo "server {  \
