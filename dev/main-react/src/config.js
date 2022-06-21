@@ -9,7 +9,7 @@ if (isEnvPro) {
   const locationOrigin = `${location.origin}/`;
   config = {
     thunderBi: 'http://bi-sso.dev.thundersdata.com/',
-    dataFront: 'http://data.realtime.dev.thundersdata.com/',
+    dataFront: 'http://data-sso.dev.thundersdata.com/',
     biSheng: 'http://bisheng-online-frontend-sso.dev.thundersdata.com/',
   };
 }
