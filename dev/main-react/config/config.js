@@ -48,7 +48,7 @@ export default defineConfig({
     '@micro-zoe/micro-app': path.join(__dirname, '../../../lib/index.esm.js'),
   },
   outputPath: 'build',
-  publicPath: process.env.NODE_ENV === 'production' ? '/micro-app/' : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',
   chainWebpack(webpackConfig) {
     if (process.env.NODE_ENV === 'development') {
       webpackConfig.plugin('openBrowser').use({
