@@ -18,28 +18,22 @@ RUN echo "server {  \
 
                         location /micro-app/thunderBi {\
                             add_header Access-Control-Allow-Origin *;\
-                            if ( $request_uri ~* ^.+.(js|css|jpg|png|gif|tif|dpg|jpeg|eot|svg|ttf|woff|json|mp4|rmvb|rm|wmv|avi|3gp)$ ){\
-                                add_header Cache-Control max-age=7776000;\
-                                add_header Access-Control-Allow-Origin *;\
-                            }\
+                            add_header Cache-Control max-age=7776000;\
+                            add_header Access-Control-Allow-Origin *;\
                             try_files $uri $uri/ /micro-app/thunderBi/index.html;\
                         }\
 
                         location /micro-app/dataFront {\
                             add_header Access-Control-Allow-Origin *;\
-                            if ( $request_uri ~* ^.+.(js|css|jpg|png|gif|tif|dpg|jpeg|eot|svg|ttf|woff|json|mp4|rmvb|rm|wmv|avi|3gp)$ ){\
-                                add_header Cache-Control max-age=7776000;\
-                                add_header Access-Control-Allow-Origin *;\
-                            }\
+                            add_header Cache-Control max-age=7776000;\
+                            add_header Access-Control-Allow-Origin *;\
                             try_files $uri $uri/ /micro-app/dataFront/index.html;\
                         }\
 
                         location /micro-app/biSheng {\
                             add_header Access-Control-Allow-Origin *;\
-                            if ( $request_uri ~* ^.+.(js|css|jpg|png|gif|tif|dpg|jpeg|eot|svg|ttf|woff|json|mp4|rmvb|rm|wmv|avi|3gp)$ ){\
-                                add_header Cache-Control max-age=7776000;\
-                                add_header Access-Control-Allow-Origin *;\
-                            }\
+                            add_header Cache-Control max-age=7776000;\
+                            add_header Access-Control-Allow-Origin *;\
                             try_files $uri $uri/ /micro-app/biSheng/index.html;\
                         }\
                   
