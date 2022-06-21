@@ -1,7 +1,7 @@
 {
-  "name": "@micro-zoe/micro-app",
-  "version": "0.8.5",
-  "description": "A lightweight, efficient and powerful micro front-end framework",
+  "name": "platform-frontend",
+  "version": "0.0.1",
+  "description": "雷数低代码开发平台",
   "private": false,
   "main": "lib/index.min.js",
   "module": "lib/index.esm.js",
