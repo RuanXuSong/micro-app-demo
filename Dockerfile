@@ -1,4 +1,4 @@
-FROM nginx
+FROM registry-vpc.cn-hangzhou.aliyuncs.com/thundersdata-public/nginx:1.17.2
 MAINTAINER dev.thundersdata.com
 VOLUME /tmp
 ENV LANG en_US.UTF-8
