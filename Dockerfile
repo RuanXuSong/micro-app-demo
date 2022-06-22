@@ -22,7 +22,7 @@ RUN echo "server {  \
                     } \
                     location /thunderBi {\
                         root   /var/www/html/; \
-                        add_header Access-Control-Allow-Origin *;
+                        add_header Access-Control-Allow-Origin *;\
                         if ( \$request_uri ~* ^.+.(js|css|jpg|png|gif|tif|dpg|jpeg|eot|svg|ttf|woff|json|mp4|rmvb|rm|wmv|avi|3gp)\$ ){\
                             add_header Cache-Control max-age=7776000;\
                             add_header Access-Control-Allow-Origin *;\
