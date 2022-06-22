@@ -8,9 +8,9 @@ const isEnvPro = process.env.NODE_ENV === 'production';
 if (isEnvPro) {
   const locationOrigin = `${location.origin}/`;
   config = {
-    dataFront: locationOrigin,
-    thunderBi: locationOrigin,
-    biSheng: locationOrigin,
+    thunderBi: 'http://bi-sso.dev.thundersdata.com/',
+    dataFront: 'http://data-sso.dev.thundersdata.com/',
+    biSheng: 'http://bisheng-online-frontend-sso.dev.thundersdata.com/',
   };
 }
 
