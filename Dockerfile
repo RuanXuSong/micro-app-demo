@@ -13,19 +13,19 @@ RUN echo "server {  \
                         add_header Access-Control-Allow-Origin platform-frontend.dev.thundersdata.com;\
                         add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';\
                         add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';\
-                        try_files \$uri \$uri/ /main-react/index.html;
+                        try_files \$uri \$uri/ /main-react/index.html;\
                     }\
                     location /micro-app/biSheng {\
                         add_header Access-Control-Allow-Origin platform-frontend.dev.thundersdata.com;\
                         add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';\
                         add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';\
-                        try_files \$uri \$uri/ /micro-app/biSheng/index.html;
+                        try_files \$uri \$uri/ /micro-app/biSheng/index.html;\
                     }\
                     location /micro-app/dataFront {\
                         add_header Access-Control-Allow-Origin platform-frontend.dev.thundersdata.com;\
                         add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';\
                         add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';\
-                        try_files \$uri \$uri/ /micro-app/dataFront/index.html;
+                        try_files \$uri \$uri/ /micro-app/dataFront/index.html;\
                     }\
                     #解决Router(mode: 'history')模式下，刷新路由地址不能找到页面的问题 \
                     location / { \
