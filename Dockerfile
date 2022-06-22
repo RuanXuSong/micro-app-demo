@@ -4,11 +4,21 @@ VOLUME /tmp
 ENV LANG en_US.UTF-8
 RUN echo "server {  \
                       listen       80; \
-                    location ^~ /micro-app/ { \
-                      add_header Access-Control-Allow-Origin '*';\
-                      add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';\
-                      add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';\
-                     } \
+                    location /thunderBi {\
+                        add_header Access-Control-Allow-Origin *;\
+                        add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';\
+                        add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';\
+                    }\
+                    location /biSheng {\
+                        add_header Access-Control-Allow-Origin *;\
+                        add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';\
+                        add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';\
+                    }\
+                    location /dataFront {\
+                        add_header Access-Control-Allow-Origin *;\
+                        add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';\
+                        add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';\
+                    }\
                     #解决Router(mode: 'history')模式下，刷新路由地址不能找到页面的问题 \
                     location / { \
                         root   /var/www/html/; \
