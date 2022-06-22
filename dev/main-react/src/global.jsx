@@ -86,12 +86,14 @@ microApp.start({
       return Promise.resolve('');
     }
 
-    return fetch(
-      url,
-      Object.assign(options, {
+    let config = null;
+    if (process.env.NODE_ENV === 'production') {
+      config = {
         credentials: 'include',
-      }),
-    ).then((res) => {
+      };
+    }
+
+    return fetch(url, Object.assign(options, config)).then((res) => {
       return res.text();
     });
   },

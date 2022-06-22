@@ -39,7 +39,7 @@ function ThunderBi(props) {
       {showLoading && <Spin style={{ position: 'fixed', left: '50%', top: '50%' }} />}
       <micro-app
         name="thunderBi"
-        baseRoute="/micro-app/thunderBi"
+        baseRoute="/thunderBi"
         url={config.thunderBi}
         keep-alive
         // data={{ from: '来自基座的数据' }}

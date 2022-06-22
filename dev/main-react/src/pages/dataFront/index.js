@@ -172,7 +172,7 @@ export default class App extends React.Component {
           onAftershow={this.handleAftershow}
           onAfterhidden={this.handleAfterhidden}
           onDataChange={this.handleDataChange}
-          baseRoute="/micro-app/dataFront"
+          baseRoute="/dataFront"
           keep-alive
           // destroy
           // inline

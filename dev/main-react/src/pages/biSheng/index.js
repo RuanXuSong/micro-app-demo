@@ -39,7 +39,7 @@ function BiSheng(props) {
       {showLoading && <Spin style={{ position: 'fixed', left: '50%', top: '50%' }} />}
       <micro-app
         name="biSheng"
-        baseRoute="/micro-app/biSheng"
+        baseRoute="/biSheng"
         url={config.biSheng}
         keep-alive
         onMounted={() => hideLoading(false)}
