@@ -67,13 +67,12 @@ const BasicLayout = (props) => {
   }; // get children authority
 
   /** 渲染菜单元素 */
-  const renderMenuItem = (menuItemProps) => {
+  const renderMenuItem = (menuItemProps, defaultDom) => {
     const { customIcon, name } = menuItemProps;
-    console.log('menuItemProps: ', menuItemProps);
     return (
       <div className={styles.menuItemWrap}>
         <img src={require(`@/assets/icon/${customIcon}.png`)} alt={name} />
-        <div className={styles.menuTitle}>{name}</div>
+        <div className={styles.menuTitle}>{defaultDom}</div>
       </div>
     );
   };
@@ -95,16 +94,14 @@ const BasicLayout = (props) => {
       onCollapse={handleMenuCollapse}
       onMenuHeaderClick={() => history.push('/')}
       menuItemRender={(menuItemProps, defaultDom) => {
-        console.log('menuItemProps: ', menuItemProps);
-        // removeDomScope()
         if (
           menuItemProps.isUrl ||
           !menuItemProps.path ||
           location.pathname === menuItemProps.path
         ) {
-          return renderMenuItem(menuItemProps);
+          return renderMenuItem(menuItemProps, defaultDom);
         }
-        return <Link to={menuItemProps.path}>{renderMenuItem(menuItemProps)}</Link>;
+        return <Link to={menuItemProps.path}>{renderMenuItem(menuItemProps, defaultDom)}</Link>;
       }}
       // breadcrumbRender={(routers = []) => [
       //   {
