@@ -5,12 +5,13 @@ import React from 'react';
 import { Spin, Row, Col, Button, Modal } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import microApp, { unmountApp, unmountAllApps } from '@micro-zoe/micro-app';
+import { connect } from 'umi';
 import config from '../../config';
 import './index.less';
 
 const antIcon = <LoadingOutlined style={{ fontSize: 30 }} spin />;
 
-export default class App extends React.Component {
+class App extends React.Component {
   state = {
     data: {
       name: '初始化数据',
@@ -145,7 +146,15 @@ export default class App extends React.Component {
     console.time(`mounted-${this.state.name}`);
 
     microApp.addDataListener(this.state.name, (data) => {
-      console.log('来自子应用react16的数据', data);
+      console.log('来自子应用dataFront的数据', data);
+    });
+
+    // TODO: 数融平台接通用户信息后从子应用获取
+    this.props.dispatch({
+      type: 'user/setCurrentUser',
+      payload: {
+        name: 'admin',
+      },
     });
 
     microApp.addGlobalDataListener(this.handleGlobalDataForBaseApp);
@@ -174,15 +183,11 @@ export default class App extends React.Component {
           onDataChange={this.handleDataChange}
           baseRoute="/dataFront"
           keep-alive
-          // destroy
-          // inline
-          // disableSandbox
-          // disable-sandbox
-          // disableScopecss
-          // disable-scopecss
-          // macro
         ></micro-app>
       </>
     );
   }
 }
+export default connect(({ user }) => ({
+  currentUser: user.currentUser,
+}))(App);

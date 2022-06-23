@@ -5,7 +5,7 @@
  */
 import ProLayout, { DefaultFooter } from '@ant-design/pro-layout';
 import React, { useEffect, useMemo, useRef } from 'react';
-import { Link, useIntl, connect, history } from 'umi';
+import { Link, connect, history } from 'umi';
 import { GithubOutlined } from '@ant-design/icons';
 import { Result, Button } from 'antd';
 import Authorized from '@/utils/Authorized';
@@ -84,11 +84,9 @@ const BasicLayout = (props) => {
       },
     [location.pathname],
   );
-  const { formatMessage } = useIntl();
   return (
     <ProLayout
       logo={logo}
-      formatMessage={formatMessage}
       {...props}
       {...settings}
       onCollapse={handleMenuCollapse}
@@ -103,15 +101,6 @@ const BasicLayout = (props) => {
         }
         return <Link to={menuItemProps.path}>{renderMenuItem(menuItemProps, defaultDom)}</Link>;
       }}
-      // breadcrumbRender={(routers = []) => [
-      //   {
-      //     path: '/',
-      //     breadcrumbName: formatMessage({
-      //       id: 'menu.home',
-      //     }),
-      //   },
-      //   ...routers,
-      // ]}
       itemRender={(route, params, routes, paths) => {
         const first = routes.indexOf(route) === 0;
         return first ? (
