@@ -13,6 +13,8 @@ import RightContent from '@/components/GlobalHeader/RightContent';
 import { getMatchMenu } from '@umijs/route-utils';
 import logo from '../assets/logo.svg';
 import { removeDomScope } from '@micro-zoe/micro-app';
+import styles from './index.module.less';
+
 const noMatch = (
   <Result
     status={403}
@@ -64,6 +66,18 @@ const BasicLayout = (props) => {
     }
   }; // get children authority
 
+  /** 渲染菜单元素 */
+  const renderMenuItem = (menuItemProps) => {
+    const { customIcon, name } = menuItemProps;
+    console.log('menuItemProps: ', menuItemProps);
+    return (
+      <div className={styles.menuItemWrap}>
+        <img src={require(`@/assets/icon/${customIcon}.png`)} alt={name} />
+        <div className={styles.menuTitle}>{name}</div>
+      </div>
+    );
+  };
+
   const authorized = useMemo(
     () =>
       getMatchMenu(location.pathname || '/', menuDataRef.current).pop() || {
@@ -81,15 +95,16 @@ const BasicLayout = (props) => {
       onCollapse={handleMenuCollapse}
       onMenuHeaderClick={() => history.push('/')}
       menuItemRender={(menuItemProps, defaultDom) => {
+        console.log('menuItemProps: ', menuItemProps);
+        // removeDomScope()
         if (
           menuItemProps.isUrl ||
           !menuItemProps.path ||
           location.pathname === menuItemProps.path
         ) {
-          return defaultDom;
+          return renderMenuItem(menuItemProps);
         }
-        // removeDomScope()
-        return <Link to={menuItemProps.path}>{defaultDom}</Link>;
+        return <Link to={menuItemProps.path}>{renderMenuItem(menuItemProps)}</Link>;
       }}
       // breadcrumbRender={(routers = []) => [
       //   {

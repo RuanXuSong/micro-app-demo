@@ -29,6 +29,13 @@ export default defineConfig({
   targets: {
     ie: 11,
   },
+  links: [
+    {
+      type: 'text/css',
+      rel: 'stylesheet',
+      href: '//at.alicdn.com/t/font_1269694_ssyauvyyv8j.css',
+    },
+  ],
   // umi routes: https://umijs.org/docs/routing
   routes,
   base: '/',
