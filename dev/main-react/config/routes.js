@@ -12,7 +12,7 @@ export default [
             routes: [
               {
                 path: '/',
-                redirect: '/thunderBi/dashboards',
+                redirect: '/dataFront',
               },
               {
                 path: '/thunderBi',
