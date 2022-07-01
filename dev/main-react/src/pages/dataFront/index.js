@@ -17,7 +17,6 @@ class App extends React.Component {
       name: '初始化数据',
     },
     name: 'dataFront',
-    url: `${config.dataFront}micro-app/dataFront`,
     showLoading: true,
     showMicroApp: true,
     testNum: 0,
@@ -154,6 +153,7 @@ class App extends React.Component {
       type: 'user/setCurrentUser',
       payload: {
         name: 'admin',
+        avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
       },
     });
 
@@ -170,7 +170,7 @@ class App extends React.Component {
       <>
         <micro-app
           name="dataFront"
-          url={this.state.url}
+          url={`${config.dataFront}micro-app/dataFront`}
           data={this.state.data}
           onCreated={this.handleCreated}
           onBeforemount={this.beforemount}
