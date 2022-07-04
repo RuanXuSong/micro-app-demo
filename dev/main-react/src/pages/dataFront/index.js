@@ -6,7 +6,7 @@ import { Spin, Row, Col, Button, Modal } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import microApp, { unmountApp, unmountAllApps } from '@micro-zoe/micro-app';
 import { connect } from 'umi';
-import config from '../../config';
+import config, { LOGOUT_PATH } from '../../config';
 import './index.less';
 
 const antIcon = <LoadingOutlined style={{ fontSize: 30 }} spin />;
@@ -182,6 +182,7 @@ class App extends React.Component {
           onAfterhidden={this.handleAfterhidden}
           onDataChange={this.handleDataChange}
           baseRoute="/dataFront"
+          data={{ logoutUrl: LOGOUT_PATH }}
           keep-alive
         ></micro-app>
       </>

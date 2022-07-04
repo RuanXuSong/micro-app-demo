@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import microApp from '@micro-zoe/micro-app';
 import { connect } from 'umi';
 import { Spin } from 'antd';
-import config from '../../config';
+import config, { LOGOUT_PATH } from '../../config';
 
 function ThunderBi(props) {
   const [showLoading, hideLoading] = useState(true);
@@ -42,8 +42,7 @@ function ThunderBi(props) {
         baseRoute="/thunderBi"
         url={config.thunderBi}
         keep-alive
-        // data={{ from: '来自基座的数据' }}
-        onMounted={() => hideLoading(false)}
+        data={{ logoutUrl: LOGOUT_PATH }}
         // destroy
         // inline
       />
