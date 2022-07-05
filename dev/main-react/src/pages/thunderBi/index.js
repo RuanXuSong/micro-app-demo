@@ -5,10 +5,11 @@ import { useState, useEffect } from 'react';
 import microApp from '@micro-zoe/micro-app';
 import { connect } from 'umi';
 import { Spin } from 'antd';
+import Loading from '@/components/Loading';
 import config, { LOGOUT_PATH } from '../../config';
 
 function ThunderBi(props) {
-  const [showLoading, hideLoading] = useState(true);
+  const [showLoading, setLoading] = useState(true);
 
   function handleData(data) {
     const { payload, type } = data || {};
@@ -36,15 +37,15 @@ function ThunderBi(props) {
 
   return (
     <div style={{ height: '100%' }}>
-      {showLoading && <Spin style={{ position: 'fixed', left: '50%', top: '50%' }} />}
+      <Loading loading={showLoading} />
       <micro-app
         name="thunderBi"
         baseRoute="/thunderBi"
         url={config.thunderBi}
+        onMounted={() => setLoading(false)}
+        onAftershow={() => setLoading(false)}
         keep-alive
         data={{ logoutUrl: LOGOUT_PATH }}
-        // destroy
-        // inline
       />
     </div>
   );

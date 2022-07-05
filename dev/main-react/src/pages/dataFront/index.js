@@ -6,6 +6,7 @@ import { Spin, Row, Col, Button, Modal } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import microApp, { unmountApp, unmountAllApps } from '@micro-zoe/micro-app';
 import { connect } from 'umi';
+import Loading from '@/components/Loading';
 import config, { LOGOUT_PATH } from '../../config';
 import './index.less';
 
@@ -168,6 +169,7 @@ class App extends React.Component {
   render() {
     return (
       <>
+        <Loading loading={this.state.showLoading} />
         <micro-app
           name="dataFront"
           url={`${config.dataFront}micro-app/dataFront`}
