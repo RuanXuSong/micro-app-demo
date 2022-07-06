@@ -149,6 +149,8 @@ class App extends React.Component {
       console.log('来自子应用dataFront的数据', data);
     });
 
+    microApp.setGlobalData({ showDropDown: true });
+
     // TODO: 数融平台接通用户信息后从子应用获取
     this.props.dispatch({
       type: 'user/setCurrentUser',
@@ -164,6 +166,7 @@ class App extends React.Component {
   componentWillUnmount() {
     microApp.clearDataListener(this.state.name);
     microApp.removeGlobalDataListener(this.handleGlobalDataForBaseApp);
+    microApp.setGlobalData({ showDropDown: false });
   }
 
   render() {
