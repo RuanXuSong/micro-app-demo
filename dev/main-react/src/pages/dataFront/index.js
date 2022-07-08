@@ -56,6 +56,7 @@ class App extends React.Component {
   };
 
   handleAftershow = (e) => {
+    microApp.setGlobalData({ showDropDown: true });
     console.timeEnd(`mounted-${this.state.name}`);
     console.log(
       `生命周期：keep-alive aftershow -- ${this.state.name}`,
@@ -68,8 +69,8 @@ class App extends React.Component {
 
   handleAfterhidden = (e) => {
     console.log(`生命周期：keep-alive afterhidden -- ${this.state.name}`, e);
+    microApp.setGlobalData({ showDropDown: false });
   };
-
   changeData = () => {
     this.setState({
       data: {
@@ -149,8 +150,6 @@ class App extends React.Component {
       console.log('来自子应用dataFront的数据', data);
     });
 
-    microApp.setGlobalData({ showDropDown: true });
-
     // TODO: 数融平台接通用户信息后从子应用获取
     this.props.dispatch({
       type: 'user/setCurrentUser',
@@ -166,7 +165,6 @@ class App extends React.Component {
   componentWillUnmount() {
     microApp.clearDataListener(this.state.name);
     microApp.removeGlobalDataListener(this.handleGlobalDataForBaseApp);
-    microApp.setGlobalData({ showDropDown: false });
   }
 
   render() {

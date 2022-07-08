@@ -8,6 +8,8 @@ import { Spin } from 'antd';
 import Loading from '@/components/Loading';
 import config, { LOGOUT_PATH } from '../../config';
 
+let userInfo;
+
 function ThunderBi(props) {
   const [showLoading, setLoading] = useState(true);
 
@@ -16,14 +18,16 @@ function ThunderBi(props) {
     const { dispatch } = props;
     if (type === 'setCurrentUser') {
       const { name, profile_image_url } = payload;
+      const newPayload = {
+        ...payload,
+        name,
+        avatar: profile_image_url,
+      };
       dispatch({
         type: 'user/setCurrentUser',
-        payload: {
-          ...payload,
-          name,
-          avatar: profile_image_url,
-        },
+        payload: newPayload,
       });
+      userInfo = newPayload;
     }
   }
 
@@ -43,7 +47,14 @@ function ThunderBi(props) {
         baseRoute="/thunderBi"
         url={config.thunderBi}
         onMounted={() => setLoading(false)}
-        onAftershow={() => setLoading(false)}
+        onAftershow={() => {
+          userInfo &&
+            props.dispatch({
+              type: 'user/setCurrentUser',
+              payload: userInfo,
+            });
+          setLoading(false);
+        }}
         keep-alive
         data={{ logoutUrl: LOGOUT_PATH }}
       />

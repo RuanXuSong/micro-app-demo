@@ -8,6 +8,8 @@ import { Spin } from 'antd';
 import Loading from '@/components/Loading';
 import config, { LOGOUT_PATH } from '../../config';
 
+let userInfo;
+
 function BiSheng(props) {
   const [showLoading, setLoading] = useState(true);
 
@@ -15,15 +17,17 @@ function BiSheng(props) {
     const { payload, type } = data || {};
     const { dispatch } = props;
     if (type === 'setCurrentUser') {
-      const { realname, avatar } = payload;
+      const { realname, avatar } = payload || {};
+      const newPayload = {
+        ...payload,
+        name: realname,
+        avatar,
+      };
       dispatch({
         type: 'user/setCurrentUser',
-        payload: {
-          ...payload,
-          name: realname,
-          avatar,
-        },
+        payload: newPayload,
       });
+      userInfo = newPayload;
     }
   }
 
@@ -44,7 +48,14 @@ function BiSheng(props) {
         url={config.biSheng}
         keep-alive
         onMounted={() => setLoading(false)}
-        onAftershow={() => setLoading(false)}
+        onAftershow={() => {
+          userInfo &&
+            props.dispatch({
+              type: 'user/setCurrentUser',
+              payload: userInfo,
+            });
+          setLoading(false);
+        }}
         data={{ logoutUrl: LOGOUT_PATH }}
       />
     </div>
