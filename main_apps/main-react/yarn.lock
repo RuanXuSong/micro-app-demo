@@ -1689,6 +1689,11 @@
   dependencies:
     extend "3.0.2"
 
+"@micro-zoe/micro-app@latest":
+  version "0.8.7"
+  resolved "https://registry.npmmirror.com/@micro-zoe/micro-app/-/micro-app-0.8.7.tgz#837d926e42dad62d0ff3ef55e25f02bf250c8666"
+  integrity sha512-iD7J+8mXy3dvLX2jJ3Uz47yKJixsaOkuX4eGINabJ+EIqymI3geAKVkm3ARjYv/8rq3j75CnB8RSp8RRsOAK8g==
+
 "@micro-zoe/plugin-painful-joya@~1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@micro-zoe/plugin-painful-joya/-/plugin-painful-joya-1.0.0.tgz#a501ebb5430e9c84c2bf9411e64ada775503b060"

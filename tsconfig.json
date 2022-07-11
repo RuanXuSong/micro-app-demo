@@ -25,13 +25,7 @@
     "esModuleInterop": true,
     "experimentalDecorators": true
   },
-  "include": [
-    "src",
-    "typings"
-  ],
-  "exclude": [
-    "node_modules",
-    "dev"
-  ],
+  "include": ["src", "typings"],
+  "exclude": ["node_modules"],
   "compileOnSave": false
 }

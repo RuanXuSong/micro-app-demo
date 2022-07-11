@@ -2,7 +2,6 @@
 const openBrowser = require('react-dev-utils/openBrowser');
 import { defineConfig } from 'umi';
 import defaultSettings from './defaultSettings';
-import proxy from './proxy';
 import routes from './routes';
 const path = require('path');
 
@@ -38,15 +37,10 @@ export default defineConfig({
   },
   title: false,
   ignoreMomentLocale: true,
-  proxy: proxy[REACT_APP_ENV || 'dev'],
   manifest: {
     basePath: '/',
   },
   esbuild: {},
-  alias: {
-    '@micro-zoe/micro-app/polyfill': path.join(__dirname, '../../../polyfill'),
-    '@micro-zoe/micro-app': path.join(__dirname, '../../../lib/index.esm.js'),
-  },
   outputPath: 'build',
   publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',
   chainWebpack(webpackConfig) {
