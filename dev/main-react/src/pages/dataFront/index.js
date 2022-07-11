@@ -38,6 +38,7 @@ class App extends React.Component {
     this.setState({
       showLoading: false,
     });
+    microApp.setGlobalData({ showDropDown: true });
   };
 
   unmount = () => {
