@@ -4,16 +4,19 @@
  * @see You can view component api by: https://github.com/ant-design/ant-design-pro-layout
  */
 import ProLayout, { DefaultFooter } from '@ant-design/pro-layout';
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, connect, history } from 'umi';
 import { GithubOutlined } from '@ant-design/icons';
-import { Result, Button } from 'antd';
+import { Result, Button, Menu } from 'antd';
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { getMatchMenu } from '@umijs/route-utils';
 import logo from '../assets/logo.svg';
-import { removeDomScope } from '@micro-zoe/micro-app';
+import microApp, { removeDomScope } from '@micro-zoe/micro-app';
 import styles from './index.module.less';
+import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
+import classNames from 'classnames';
+import { isEmpty } from 'lodash';
 
 const noMatch = (
   <Result
@@ -31,6 +34,7 @@ const noMatch = (
 /** Use Authorized check all menu item */
 const menuDataRender = (menuList) =>
   menuList.map((item) => {
+    if (item.hidden) return null;
     const localItem = {
       ...item,
       children: item.children ? menuDataRender(item.children) : undefined,
@@ -48,6 +52,8 @@ const BasicLayout = (props) => {
     },
   } = props;
   const menuDataRef = useRef([]);
+  const [showSubMenu, setShowSubMenu] = useState(false);
+  const [subMenuCollapsed, setSubMenuCollapsed] = useState(false);
   useEffect(() => {
     if (dispatch) {
       dispatch({
@@ -55,7 +61,17 @@ const BasicLayout = (props) => {
       });
     }
   }, []);
-  /** Init variables */
+
+  useEffect(() => {
+    const { pathname = '' } = props.location || {};
+    // 重定向到权限管理页
+    if (/^\/authorization\/?$/.test(pathname)) {
+      history.replace('/authorization/resource/list');
+    }
+    // if (/^\/biSheng\/?$/.test(pathname)) {
+    //   history.replace('/biSheng/dashboard/analysis');
+    // }
+  }, [props]);
 
   const handleMenuCollapse = (payload) => {
     if (dispatch) {
@@ -64,13 +80,14 @@ const BasicLayout = (props) => {
         payload,
       });
     }
-  }; // get children authority
+  };
 
   /** 渲染菜单元素 */
   const renderMenuItem = (menuItemProps, defaultDom) => {
-    const { customIcon, name } = menuItemProps;
+    const { customIcon, name, pro_layout_parentKeys = [] } = menuItemProps;
+    const isChild = !isEmpty(pro_layout_parentKeys);
     return (
-      <div className={styles.menuItemWrap}>
+      <div className={classNames(!isChild ? styles.menuItemWrap : styles.childMenuItem)}>
         <img src={require(`@/assets/icon/${customIcon}.png`)} alt={name} />
         <div className={styles.menuTitle}>{defaultDom}</div>
       </div>
@@ -101,6 +118,7 @@ const BasicLayout = (props) => {
         }
         return <Link to={menuItemProps.path}>{renderMenuItem(menuItemProps, defaultDom)}</Link>;
       }}
+      splitMenus
       itemRender={(route, params, routes, paths) => {
         const first = routes.indexOf(route) === 0;
         return first ? (

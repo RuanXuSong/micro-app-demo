@@ -1,0 +1,51 @@
+/**
+ * 初始化分页数据
+ */
+export const initialPagination = {
+  page: 1,
+  pageSize: 10,
+};
+
+// 后端返回的code
+export enum LoginFailure {
+  TOKEN缺失 = 60001,
+  TOKEN无效 = 60002,
+  TOKEN过期 = 60003,
+  TOKEN有效但未注册 = 60004,
+}
+
+/** 资源类型枚举 */
+export enum RESOURCE_TYPE_MAP {
+  菜单 = 0,
+  按钮 = 1,
+}
+
+/**
+ * 登录配置
+ */
+export const LOGIN_CONFIG = Object.freeze({
+  /** 应用ID */
+  clientId: 'micro-platform',
+  /** 是否是单点登录 */
+  isSSO: true,
+  /** 密钥 */
+  secret: '',
+});
+
+/** 角色状态枚举 */
+export enum ROLE_STATUS_MAP {
+  正常 = 0,
+  禁用 = 1,
+}
+
+/** 最大标题长度 */
+export const MAX_TITLE_LENGTH = 30;
+
+/** 最大地址/邮箱长度 */
+export const MAX_ADDRESS_LENGTH = 100;
+
+/** 最大描述长度 */
+export const MAX_DESCRIPTION_LENGTH = 200;
+
+/** 最大长文本长度 */
+export const MAX_TEXTAREA_LENGTH = 500;

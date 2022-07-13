@@ -1,8 +1,9 @@
 const proSettings = {
-  navTheme: 'dark',
+  headerTheme: 'dark',
+  navTheme: 'light',
   // 拂晓蓝
   primaryColor: '#1890ff',
-  layout: 'topmenu',
+  layout: 'mix',
   contentWidth: 'Fluid',
   fixedHeader: false,
   fixSiderbar: false,
@@ -10,6 +11,6 @@ const proSettings = {
   title: '雷数低代码开发平台',
   pwa: false,
   iconfontUrl: '',
-  headerHeight: 64,
+  headerHeight: 72,
 };
 export default proSettings;

@@ -6,6 +6,7 @@
     "declaration": true,
     "outDir": "lib",
     "rootDir": "src",
+    "jsx": "preserve",
     "importHelpers": true,
     "downlevelIteration": true,
     "strict": true,
