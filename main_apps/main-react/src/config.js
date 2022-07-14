@@ -1,6 +1,6 @@
 let config = {
   thunderBi: 'http://bi-sso.dev.thundersdata.com:8181/',
-  dataFront: 'http://localhost:8000/',
+  dataFront: 'http://127.0.0.1:8000/',
   biSheng: 'http://localhost:3001/',
 };
 const isEnvPro = process.env.NODE_ENV === 'production';

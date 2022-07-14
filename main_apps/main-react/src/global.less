@@ -71,6 +71,10 @@ micro-app-body {
   margin: 0 !important;
 }
 
+.ant-pro-fixed-header {
+  z-index: 10 !important;
+}
+
 micro-app-body {
   #root,
   #application-root,
@@ -120,13 +124,17 @@ micro-app[name='biSheng'] {
     content: '';
   }
 
+  .header .dark .action {
+    color: #fff !important;
+  }
+
   .user-wrapper {
     position: fixed;
     top: 0;
     right: -79px;
     z-index: 100;
     height: 72px !important;
-    color: #1890ff;
+    color: #fff;
     line-height: 72px;
 
     .logout_title {
@@ -146,6 +154,10 @@ micro-app[name='biSheng'] {
     }
   }
 
+  .user-dropdown-menu-wrapper.ant-dropdown-menu .ant-dropdown-menu-item {
+    width: auto !important;
+  }
+
   .logout_menu_item {
     display: block !important;
   }
@@ -159,4 +171,8 @@ micro-app[name='dataFront'] {
   .rumtime-keep-alive-layout {
     overflow: unset !important;
   }
+}
+
+.ant-table-content table {
+  width: 100%;
 }
