@@ -53,6 +53,7 @@
     "@micro-zoe/micro-app": "latest",
     "@micro-zoe/plugin-painful-joya": "~1.0.0",
     "@umijs/route-utils": "^1.0.33",
+    "ahooks": "^3.5.2",
     "antd": "4.15.4",
     "babel-polyfill": "~6.26.0",
     "classnames": "^2.2.6",
