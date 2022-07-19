@@ -1,7 +1,7 @@
 {
   "name": "platform-frontend",
   "version": "0.0.1",
-  "description": "雷数低代码开发平台",
+  "description": "雷数云平台",
   "author": "rxs-michael",
   "private": false,
   "main": "lib/index.min.js",
