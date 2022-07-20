@@ -18,12 +18,43 @@ export default [
                 path: '/',
                 name: '首页',
                 customIcon: 'data-front',
+                component: '../layouts/TabPanelLayout',
                 routes: [
                   {
                     path: '/homepage',
                     name: '首页',
                     component: './homepage',
                     customIcon: 'auth-resource',
+                  },
+                  {
+                    path: '/authorization/resource/list',
+                    name: '资源管理',
+                    component: './authorization/resource/list',
+                    customIcon: 'auth-resource',
+                  },
+                  {
+                    path: '/authorization/character/list',
+                    name: '角色管理',
+                    component: './authorization/character/list',
+                    customIcon: 'auth-character',
+                  },
+                  {
+                    path: '/authorization/tenant/list',
+                    name: '租户管理',
+                    component: './authorization/tenant/list',
+                    customIcon: 'auth-character',
+                  },
+                  {
+                    path: '/authorization/resource/edit',
+                    name: '新增资源',
+                    component: './authorization/resource/edit',
+                    hidden: true,
+                  },
+                  {
+                    path: '/authorization/character/edit',
+                    name: '新增角色',
+                    component: './authorization/character/edit',
+                    hidden: true,
                   },
                 ],
               },

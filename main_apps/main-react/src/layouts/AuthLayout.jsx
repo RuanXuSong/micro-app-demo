@@ -7,7 +7,7 @@ import ProLayout, { DefaultFooter } from '@ant-design/pro-layout';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, connect, history } from 'umi';
 import { GithubOutlined } from '@ant-design/icons';
-import { Result, Button, Menu } from 'antd';
+import { Result, Button, Menu, Tabs } from 'antd';
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { getMatchMenu } from '@umijs/route-utils';
@@ -15,8 +15,11 @@ import logo from '../assets/logo.svg';
 import microApp, { removeDomScope } from '@micro-zoe/micro-app';
 import styles from './index.module.less';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
+import { getTabsComponent } from '@/utils/tabsConfig';
 import classNames from 'classnames';
 import { isEmpty } from 'lodash';
+
+const { TabPane } = Tabs;
 
 const noMatch = (
   <Result
@@ -68,9 +71,6 @@ const BasicLayout = (props) => {
     if (/^\/authorization\/?$/.test(pathname)) {
       history.replace('/authorization/resource/list');
     }
-    // if (/^\/biSheng\/?$/.test(pathname)) {
-    //   history.replace('/biSheng/dashboard/analysis');
-    // }
   }, [props]);
 
   const handleMenuCollapse = (payload) => {
@@ -145,7 +145,14 @@ const BasicLayout = (props) => {
   );
 };
 
-export default connect(({ global, settings }) => ({
-  collapsed: global.collapsed,
-  settings,
-}))(BasicLayout);
+function mapStateToProps(state) {
+  const {
+    router: { location },
+    global,
+    settings,
+  } = state;
+  const menuKey = location.pathname;
+  return { menuKey, collapsed: global.collapsed, settings };
+}
+
+export default connect(mapStateToProps)(BasicLayout);

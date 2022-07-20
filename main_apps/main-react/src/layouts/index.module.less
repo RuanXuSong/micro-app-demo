@@ -38,3 +38,14 @@
     margin-right: 10px;
   }
 }
+
+.tabContainer {
+  height: calc(100vh - 72px);
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

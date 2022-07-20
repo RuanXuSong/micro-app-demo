@@ -49,3 +49,10 @@ export const MAX_DESCRIPTION_LENGTH = 200;
 
 /** 最大长文本长度 */
 export const MAX_TEXTAREA_LENGTH = 500;
+
+/** tab 类型 */
+export enum TabCloseType {
+  line = 'line',
+  card = 'card',
+  EditableCard = 'editable-card',
+}
