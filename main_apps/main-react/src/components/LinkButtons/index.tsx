@@ -1,15 +1,14 @@
 /*
- * @文件描述: table 操作按钮渲染
+ * @文件描述: table 操作按钮
  * @公司: thundersdata
- * @作者: 廖军
- * @Date: 2020-06-08 11:36:36
- * @LastEditors: 廖军
- * @LastEditTime: 2020-10-12 10:56:12
+ * @作者: 阮旭松
+ * @Date: 2022-07-19 15:52:41
+ * @LastEditors: 阮旭松
+ * @LastEditTime: 2022-07-21 17:04:24
  */
 
-import React from 'react';
-import { Divider } from 'antd';
-import { TableDropdown } from '@ant-design/pro-table';
+import React, { useMemo } from 'react';
+import { Dropdown, Menu } from 'antd';
 import { history } from 'umi';
 
 export interface ButtonsType {
@@ -29,43 +28,51 @@ export interface HandleButtonsProps {
   className?: string;
 }
 
-export default ({ buttons, maxNumber = 3, className, style }: HandleButtonsProps) => {
+export default ({ buttons, maxNumber = 2, className, style }: HandleButtonsProps) => {
   const filteredButtons = buttons.filter((item) => !item.hidden);
   const { length } = filteredButtons;
-  const frontButtons = filteredButtons.slice(0, maxNumber);
-  const restButtons = filteredButtons.slice(maxNumber, length);
+
+  // 2个全部显示，3个及以上只显示第1个和更多，其他都在 dropdown
+  const getButtons = (newButtons: ButtonsType[]) => {
+    let frontButtons = buttons;
+    let restButtons: ButtonsType[] = [];
+    if (newButtons.length > maxNumber) {
+      frontButtons = newButtons.slice(0, maxNumber - 1);
+      restButtons = newButtons.slice(maxNumber - 1);
+    }
+    return [frontButtons, restButtons];
+  };
+  const [frontButtons, restButtons] = useMemo(() => getButtons(filteredButtons), [filteredButtons]);
 
   return (
     <div className={className} style={style}>
       {frontButtons.map(({ name, key, onClick, path }, index) => {
         const aDom = (
-          <a key={key} onClick={path ? () => history.push(path) : onClick}>
+          <a
+            style={{ marginRight: 18 }}
+            key={key}
+            onClick={path ? () => history.push(path) : onClick}
+          >
             {name}
           </a>
         );
         if (index !== length - 1) {
-          return (
-            <React.Fragment key={key}>
-              {aDom}
-              <Divider type="vertical" />
-            </React.Fragment>
-          );
+          return <React.Fragment key={key}>{aDom}</React.Fragment>;
         }
         return aDom;
       })}
       {restButtons.length > 0 && (
-        <TableDropdown
-          key="dropdown"
-          onSelect={async (key) => {
-            const selectItem = restButtons.find((item) => item.key === key);
-            if (selectItem?.path) {
-              history.push(selectItem?.path);
-            } else {
-              selectItem?.onClick && selectItem?.onClick();
-            }
-          }}
-          menus={restButtons}
-        />
+        <Dropdown
+          overlay={
+            <Menu>
+              {restButtons.map((item) => (
+                <Menu.Item>{item.name}</Menu.Item>
+              ))}
+            </Menu>
+          }
+        >
+          <a>更多</a>
+        </Dropdown>
       )}
     </div>
   );

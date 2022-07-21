@@ -50,12 +50,6 @@ export default [
                     component: './authorization/resource/edit',
                     hidden: true,
                   },
-                  {
-                    path: '/auth/authorization/user/edit',
-                    name: '新增用户',
-                    component: './authorization/user/edit',
-                    hidden: true,
-                  },
                 ],
               },
             ],

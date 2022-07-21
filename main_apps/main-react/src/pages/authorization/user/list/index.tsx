@@ -4,45 +4,29 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-07-20 14:21:48
+ * @LastEditTime: 2022-07-21 17:09:32
  */
-import React, { useRef } from 'react';
+import React from 'react';
 import { message, Button, Modal } from 'antd';
-import ProTable, { ProColumns, ActionType } from '@ant-design/pro-table';
-import { history } from 'umi';
-import { initialPagination, ROLE_STATUS_MAP, LOGIN_CONFIG } from '@/constant';
+import ProTable, { ProColumns } from '@ant-design/pro-table';
+import { ROLE_STATUS_MAP, LOGIN_CONFIG } from '@/constant';
 import { PlusOutlined } from '@ant-design/icons';
 import { enumToValueEnum } from '@/utils/array';
 import LinkButtons from '@/components/LinkButtons';
-import { useRequest } from 'ahooks';
-import { removeEmpty } from '@/utils/json';
-import { Store } from 'antd/es/form/interface';
+import Edit from '../Edit';
+import useUserListService from './useUserListService';
 
 export default () => {
-  const actionRef = useRef<ActionType>();
-
-  /**
-   * 启用/禁用
-   */
-  const { run: handleDisable } = useRequest(API.authorization.role.update.fetch, {
-    manual: true,
-    onSuccess: () => {
-      message.success('操作成功');
-      actionRef.current?.reload();
-    },
-  });
-
-  /**
-   * 角色删除
-   * @param id
-   */
-  const { run: handleDelete } = useRequest(API.authorization.resourceRole.resourceDelete.fetch, {
-    manual: true,
-    onSuccess: () => {
-      message.success('删除成功');
-      actionRef.current?.reload();
-    },
-  });
+  const {
+    actionRef,
+    reload,
+    editModalConfig,
+    fetchList,
+    handleDisable,
+    handleUserAdd,
+    handleUserEdit,
+    handleModalHide,
+  } = useUserListService();
 
   const columns: ProColumns<defs.authorization.ResourceRole>[] = [
     {
@@ -60,6 +44,26 @@ export default () => {
       copyable: false,
       valueType: 'text',
       hideInSearch: false,
+    },
+    {
+      title: '企业名称',
+      dataIndex: 'comment',
+      align: 'left',
+      copyable: false,
+      valueType: 'text',
+      hideInSearch: false,
+      hideInTable: true,
+      valueEnum: enumToValueEnum(ROLE_STATUS_MAP),
+    },
+
+    {
+      title: '手机号',
+      dataIndex: 'comment',
+      align: 'left',
+      valueType: 'text',
+      hideInSearch: false,
+      hideInTable: true,
+      valueEnum: enumToValueEnum(ROLE_STATUS_MAP),
     },
     {
       title: '负责人手机号',
@@ -119,7 +123,7 @@ export default () => {
               {
                 name: '编辑',
                 key: 'edit',
-                path: `/admin/authorization/edit?id=${row.id}`,
+                onClick: () => handleUserEdit(row),
               },
               {
                 name: '授权',
@@ -164,45 +168,56 @@ export default () => {
   ];
 
   return (
-    <ProTable
-      style={{ padding: '18px 22px' }}
-      actionRef={actionRef}
-      request={async (params: Store) => {
-        const { list, page, total } = await API.authorization.resourceRole.listPagination.fetch(
-          removeEmpty({
-            ...params,
-            roleName: params.role,
-            clientKey: LOGIN_CONFIG.clientId,
-            page: '' + (params?.current || initialPagination.page),
-            pageSize: '' + (params?.pageSize || initialPagination.pageSize),
-          }),
-        );
-        return {
-          data: list || [],
-          page,
-          success: true,
-          total,
-        };
-      }}
-      onRequestError={(error) => {
-        console.error(error.message);
-        message.error(`数据加载失败,${error.message}`);
-      }}
-      columns={columns}
-      bordered
-      rowKey="id"
-      pagination={{
-        size: 'default',
-      }}
-      dateFormatter="string"
-      headerTitle="用户列表"
-      tableAlertRender={false}
-      toolBarRender={() => [
-        <Button onClick={() => history.push('/authorization/user/edit')} key="add" type="primary">
-          <PlusOutlined />
-          新建
-        </Button>,
-      ]}
-    />
+    <>
+      <ProTable
+        style={{ padding: '18px 22px' }}
+        actionRef={actionRef}
+        // TODO:联调
+        request={fetchList as any}
+        // request={async (params: Store) => {
+        //   const { list, page, total } = await API.authorization.resourceRole.listPagination.fetch(
+        //     removeEmpty({
+        //       ...params,
+        //       roleName: params.role,
+        //       clientKey: LOGIN_CONFIG.clientId,
+        //       page: '' + (params?.current || initialPagination.page),
+        //       pageSize: '' + (params?.pageSize || initialPagination.pageSize),
+        //     }),
+        //   );
+        //   return {
+        //     data: list || [],
+        //     page,
+        //     success: true,
+        //     total,
+        //   };
+        // }}
+        onRequestError={(error) => {
+          console.error(error.message);
+          message.error(`数据加载失败,${error.message}`);
+        }}
+        columns={columns}
+        bordered
+        rowKey="id"
+        pagination={{
+          size: 'default',
+        }}
+        dateFormatter="string"
+        headerTitle="用户列表"
+        tableAlertRender={false}
+        toolBarRender={() => [
+          <Button onClick={handleUserAdd} key="add" type="primary">
+            <PlusOutlined />
+            新建
+          </Button>,
+        ]}
+      />
+      <Edit
+        visible={editModalConfig.visible}
+        formData={editModalConfig.formData}
+        loading={editModalConfig.loading}
+        toggleVisible={handleModalHide}
+        reload={reload}
+      />
+    </>
   );
 };

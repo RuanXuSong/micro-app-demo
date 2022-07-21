@@ -27,7 +27,6 @@ const CharacterList = Loadable({
   loading: Loading,
   delay: 150,
 });
-const NotFound = Loadable({ loader: () => import('../pages/404'), loading: Loading, delay: 150 });
 
 export interface TabModel {
   title: string;
@@ -49,7 +48,7 @@ const TABS_CONFIG = {
     component: <CharacterList />,
   },
   '/authorization/tenant/list': {
-    title: '资源管理',
+    title: '租户管理',
     component: <TenantList />,
   },
 };
