@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
 import { ConnectState } from '@/models/connect';
@@ -101,13 +102,7 @@ const UserModel: TabModelType = {
     *ReduceTabEffect({ payload }: any, { put, select }: any) {
       const { tabList, currentKey } = yield select((state: ConnectState) => state.tabs);
       if (tabList.length === 1) {
-        console.log('最后一个tab不能关闭');
-        // 如果是删除最后一个，默认跳转首页
-        yield put({
-          type: 'ReduceTabReducer',
-          payload: { newTabs: [], newActiveKey: '' },
-        });
-        history.push('/');
+        message.error('至少保留一个标签！');
         return;
       }
       if (tabList.length <= 2) {
@@ -124,6 +119,7 @@ const UserModel: TabModelType = {
         }
       });
       // 删除最后一个
+      console.log('tabList: ', tabList);
       if (removeIndex === tabList.length - 1) {
         if (payload === tabList[removeIndex].tabKey) {
           newActiveKey = tabList[tabList.length - 2].tabKey;
@@ -136,6 +132,7 @@ const UserModel: TabModelType = {
         type: 'ReduceTabReducer',
         payload: { newTabs, newActiveKey },
       });
+      console.log('newActiveKey: ', newActiveKey);
       history.push(newActiveKey);
     },
   },

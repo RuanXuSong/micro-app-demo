@@ -15,7 +15,6 @@ import logo from '../assets/logo.svg';
 import microApp, { removeDomScope } from '@micro-zoe/micro-app';
 import styles from './index.module.less';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-import { getTabsComponent } from '@/utils/tabsConfig';
 import classNames from 'classnames';
 import { isEmpty } from 'lodash';
 

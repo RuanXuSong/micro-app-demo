@@ -8,52 +8,52 @@ export default [
         routes: [
           {
             path: '/',
+            redirect: '/auth/homepage',
+          },
+          {
+            path: '/auth',
             component: '../layouts/AuthLayout',
             routes: [
               {
-                path: '/',
-                redirect: '/homepage',
-              },
-              {
-                path: '/',
+                path: '/auth',
                 name: '首页',
                 customIcon: 'data-front',
                 component: '../layouts/TabPanelLayout',
                 routes: [
                   {
-                    path: '/homepage',
+                    path: '/auth/homepage',
                     name: '首页',
                     component: './homepage',
                     customIcon: 'auth-resource',
                   },
                   {
-                    path: '/authorization/resource/list',
+                    path: '/auth/authorization/resource/list',
                     name: '资源管理',
                     component: './authorization/resource/list',
                     customIcon: 'auth-resource',
                   },
                   {
-                    path: '/authorization/character/list',
-                    name: '角色管理',
-                    component: './authorization/character/list',
+                    path: '/auth/authorization/user/list',
+                    name: '用户管理',
+                    component: './authorization/user/list',
                     customIcon: 'auth-character',
                   },
                   {
-                    path: '/authorization/tenant/list',
+                    path: '/auth/authorization/tenant/list',
                     name: '租户管理',
                     component: './authorization/tenant/list',
                     customIcon: 'auth-character',
                   },
                   {
-                    path: '/authorization/resource/edit',
+                    path: '/auth/authorization/resource/edit',
                     name: '新增资源',
                     component: './authorization/resource/edit',
                     hidden: true,
                   },
                   {
-                    path: '/authorization/character/edit',
-                    name: '新增角色',
-                    component: './authorization/character/edit',
+                    path: '/auth/authorization/user/edit',
+                    name: '新增用户',
+                    component: './authorization/user/edit',
                     hidden: true,
                   },
                 ],
@@ -82,38 +82,6 @@ export default [
                 customIcon: 'thunder-bi',
                 component: './thunderBi',
               },
-              // {
-              //   path: '/authorization',
-              //   name: '权限管理',
-              //   title: '权限管理',
-              //   customIcon: 'authorization',
-              //   routes: [
-              //     {
-              //       path: '/authorization/resource/list',
-              //       name: '资源管理',
-              //       component: './authorization/resource/list',
-              //       customIcon: 'auth-resource',
-              //     },
-              //     {
-              //       path: '/authorization/character/list',
-              //       name: '角色管理',
-              //       component: './authorization/character/list',
-              //       customIcon: 'auth-character',
-              //     },
-              //     {
-              //       path: '/authorization/resource/edit',
-              //       name: '新增资源',
-              //       component: './authorization/resource/edit',
-              //       hidden: true,
-              //     },
-              //     {
-              //       path: '/authorization/character/edit',
-              //       name: '新增角色',
-              //       component: './authorization/character/edit',
-              //       hidden: true,
-              //     },
-              //   ],
-              // },
               {
                 component: './404',
               },

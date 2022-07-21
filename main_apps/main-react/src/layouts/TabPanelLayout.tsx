@@ -15,10 +15,11 @@ class SwitchTabs extends Component<any, any> {
     super(props);
     this.props.history.listen((location: any) => {
       const localUrl = window.location;
-      if (location.pathname === '/') {
-        location.pathname = '/homepage';
+      // 只记录平台端的 auth 标签页
+      if (location.pathname.indexOf('/auth/') < 0) {
+        return;
       }
-      const { title } = getTabsComponent(location.pathname);
+      const { title } = getTabsComponent(location.pathname) || {};
       const tabKey = location.pathname + localUrl.search;
       this.props.dispatch({
         type: 'tabs/ChangeTabsEffect',
@@ -49,11 +50,16 @@ class SwitchTabs extends Component<any, any> {
           activeKey={tabs.currentKey}
           type={TabCloseType.EditableCard}
         >
-          {tabs.tabList.map((panel: any) => (
-            <TabPane tab={panel.title} key={panel.tabKey}>
-              {getTabsComponent(panel.tabKey).component}
-            </TabPane>
-          ))}
+          {tabs.tabList.map((panel: any) => {
+            const tabComponent = getTabsComponent(panel.tabKey);
+            return (
+              tabComponent && (
+                <TabPane tab={panel.title} key={panel.tabKey}>
+                  {tabComponent.component}
+                </TabPane>
+              )
+            );
+          })}
         </Tabs>
       </div>
     );

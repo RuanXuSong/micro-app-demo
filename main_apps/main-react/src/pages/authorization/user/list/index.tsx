@@ -1,3 +1,11 @@
+/*
+ * @文件描述: 用户管理
+ * @公司: thundersdata
+ * @作者: 阮旭松
+ * @Date: 2022-07-19 15:52:41
+ * @LastEditors: 阮旭松
+ * @LastEditTime: 2022-07-20 14:21:48
+ */
 import React, { useRef } from 'react';
 import { message, Button, Modal } from 'antd';
 import ProTable, { ProColumns, ActionType } from '@ant-design/pro-table';
@@ -38,7 +46,15 @@ export default () => {
 
   const columns: ProColumns<defs.authorization.ResourceRole>[] = [
     {
-      title: '角色名称',
+      title: '登录账号',
+      dataIndex: 'account',
+      align: 'left',
+      copyable: false,
+      valueType: 'text',
+      hideInSearch: false,
+    },
+    {
+      title: '用户昵称',
       dataIndex: 'role',
       align: 'left',
       copyable: false,
@@ -46,17 +62,42 @@ export default () => {
       hideInSearch: false,
     },
     {
-      title: '角色描述',
+      title: '负责人手机号',
       dataIndex: 'comment',
       align: 'left',
       copyable: false,
       valueType: 'text',
       hideInSearch: true,
-      width: '30%',
       render: (_, row) => row.comment,
     },
     {
-      title: '角色状态',
+      title: '邮箱',
+      dataIndex: 'role',
+      align: 'left',
+      copyable: false,
+      valueType: 'text',
+      hideInSearch: false,
+    },
+    {
+      title: '头像',
+      dataIndex: 'comment',
+      align: 'left',
+      copyable: false,
+      valueType: 'text',
+      hideInSearch: true,
+      render: (_, row) => row.comment,
+    },
+    {
+      title: '性别',
+      dataIndex: 'sex',
+      align: 'left',
+      copyable: false,
+      valueType: 'text',
+      hideInSearch: true,
+      render: (_, row) => row.comment,
+    },
+    {
+      title: '状态',
       dataIndex: 'status',
       align: 'left',
       copyable: false,
@@ -76,13 +117,13 @@ export default () => {
           <LinkButtons
             buttons={[
               {
-                name: '查看',
-                key: 'view',
-                path: `/admin/authorization/detail?id=${row.id}`,
-              },
-              {
                 name: '编辑',
                 key: 'edit',
+                path: `/admin/authorization/edit?id=${row.id}`,
+              },
+              {
+                name: '授权',
+                key: 'authorize',
                 path: `/admin/authorization/edit?id=${row.id}`,
               },
               {
@@ -115,21 +156,6 @@ export default () => {
                   }),
                 hidden: ROLE_STATUS_MAP.禁用 !== +row.status!,
               },
-              {
-                name: '删除',
-                key: 'delete',
-                onClick: () =>
-                  Modal.confirm({
-                    title: '确认删除？',
-                    onOk: () =>
-                      handleDelete({
-                        clientKey: LOGIN_CONFIG.clientId,
-                        id: row.id!,
-                      }),
-                    okText: '是',
-                    cancelText: '否',
-                  }),
-              },
             ]}
           />
         );
@@ -139,6 +165,7 @@ export default () => {
 
   return (
     <ProTable
+      style={{ padding: '18px 22px' }}
       actionRef={actionRef}
       request={async (params: Store) => {
         const { list, page, total } = await API.authorization.resourceRole.listPagination.fetch(
@@ -168,16 +195,12 @@ export default () => {
         size: 'default',
       }}
       dateFormatter="string"
-      headerTitle="角色列表"
+      headerTitle="用户列表"
       tableAlertRender={false}
       toolBarRender={() => [
-        <Button
-          onClick={() => history.push('/authorization/character/edit')}
-          key="add"
-          type="primary"
-        >
+        <Button onClick={() => history.push('/authorization/user/edit')} key="add" type="primary">
           <PlusOutlined />
-          新增角色
+          新建
         </Button>,
       ]}
     />

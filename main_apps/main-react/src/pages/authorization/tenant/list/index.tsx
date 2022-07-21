@@ -161,6 +161,7 @@ export default () => {
 
   return (
     <ProTable
+      style={{ padding: '18px 22px' }}
       actionRef={actionRef}
       request={async (params: Store) => {
         const { list, page, total } = await API.authorization.resourceRole.listPagination.fetch(
@@ -193,11 +194,7 @@ export default () => {
       headerTitle="租户列表"
       tableAlertRender={false}
       toolBarRender={() => [
-        <Button
-          onClick={() => history.push('/authorization/character/edit')}
-          key="add"
-          type="primary"
-        >
+        <Button onClick={() => history.push('/authorization/tenant/edit')} key="add" type="primary">
           <PlusOutlined />
           新增
         </Button>,

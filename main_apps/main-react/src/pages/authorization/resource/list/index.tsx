@@ -146,6 +146,7 @@ export default () => {
   return (
     <>
       <ProTable
+        style={{ padding: '18px 22px' }}
         actionRef={actionRef}
         request={treeModal ? fetchTreeList : fetchList}
         onRequestError={(error) => {

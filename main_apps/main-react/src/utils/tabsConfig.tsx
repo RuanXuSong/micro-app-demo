@@ -23,7 +23,7 @@ const TenantList = Loadable({
   delay: 150,
 });
 const CharacterList = Loadable({
-  loader: () => import('../pages/authorization/character/list'),
+  loader: () => import('../pages/authorization/user/list'),
   loading: Loading,
   delay: 150,
 });
@@ -44,8 +44,8 @@ const TABS_CONFIG = {
     title: '资源管理',
     component: <ResourceList />,
   },
-  '/authorization/character/list': {
-    title: '角色管理',
+  '/authorization/user/list': {
+    title: '用户管理',
     component: <CharacterList />,
   },
   '/authorization/tenant/list': {
@@ -59,10 +59,7 @@ export const getTabsComponent = (key: string) => {
   if (key.includes('?')) {
     newKey = key.split('?')[0];
   }
-  const defaultTab: TabModel = {
-    title: '没有找到',
-    component: <NotFound />,
-  };
-  const tab = TABS_CONFIG[newKey] || defaultTab;
+
+  const tab = TABS_CONFIG[`${newKey.replace('/auth', '')}`];
   return tab;
 };
