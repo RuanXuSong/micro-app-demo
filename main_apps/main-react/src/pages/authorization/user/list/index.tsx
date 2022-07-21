@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-07-21 17:09:32
+ * @LastEditTime: 2022-07-21 17:34:00
  */
 import React from 'react';
 import { message, Button, Modal } from 'antd';
@@ -13,7 +13,7 @@ import { ROLE_STATUS_MAP, LOGIN_CONFIG } from '@/constant';
 import { PlusOutlined } from '@ant-design/icons';
 import { enumToValueEnum } from '@/utils/array';
 import LinkButtons from '@/components/LinkButtons';
-import Edit from '../Edit';
+import Edit from '../edit';
 import useUserListService from './useUserListService';
 
 export default () => {
