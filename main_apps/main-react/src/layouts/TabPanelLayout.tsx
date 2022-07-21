@@ -49,6 +49,7 @@ class SwitchTabs extends Component<any, any> {
           onChange={this.onChange}
           activeKey={tabs.currentKey}
           type={TabCloseType.EditableCard}
+          className={styles.tabsNavWrap}
         >
           {tabs.tabList.map((panel: any) => {
             const tabComponent = getTabsComponent(panel.tabKey);
