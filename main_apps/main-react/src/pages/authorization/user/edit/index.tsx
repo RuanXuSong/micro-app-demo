@@ -165,17 +165,6 @@ export default ({
           >
             <Input placeholder="请输入" />
           </Form.Item>
-          <Form.Item
-            label="联系人"
-            name="nickName"
-            rules={[
-              {
-                whitespace: true,
-              },
-            ]}
-          >
-            <Input placeholder="请输入" />
-          </Form.Item>
           <div className={styles.uploadWrap}>
             <UploadFormItem
               formItemProps={formLayout}

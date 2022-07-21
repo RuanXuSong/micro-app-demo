@@ -57,3 +57,21 @@
     }
   }
 }
+
+.tabPaneContainer {
+  height: calc(100vh - 112px);
+  overflow: auto;
+
+  :global {
+    .ant-pro-table {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .ant-card {
+      flex: 1;
+      height: auto;
+    }
+  }
+}

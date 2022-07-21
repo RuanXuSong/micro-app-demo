@@ -56,7 +56,7 @@ class SwitchTabs extends Component<any, any> {
             return (
               tabComponent && (
                 <TabPane tab={panel.title} key={panel.tabKey}>
-                  {tabComponent.component}
+                  <div className={styles.tabPaneContainer}>{tabComponent.component}</div>
                 </TabPane>
               )
             );

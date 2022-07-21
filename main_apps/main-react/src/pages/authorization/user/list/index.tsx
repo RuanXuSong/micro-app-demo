@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-07-21 17:34:00
+ * @LastEditTime: 2022-07-21 18:03:05
  */
 import React from 'react';
 import { message, Button, Modal } from 'antd';
@@ -51,6 +51,7 @@ export default () => {
       align: 'left',
       copyable: false,
       valueType: 'text',
+      // TODO: 根据角色类型判断是否隐藏
       hideInSearch: false,
       hideInTable: true,
       valueEnum: enumToValueEnum(ROLE_STATUS_MAP),
