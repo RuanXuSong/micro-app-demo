@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Modal, Form, Spin, Input, Select, message } from 'antd';
+import { Modal, Form, Spin, Input, message, DatePicker } from 'antd';
 import { isEmpty, isNil } from 'lodash-es';
 import 'antd/lib/form';
 import { Store } from 'antd/es/form/interface';
@@ -8,8 +8,10 @@ import useSpinning from '@/hooks/useSpinning';
 import UploadFormItem from '@/components/UploadFormItem';
 import { FILE_TYPE_MAP } from '@/utils/upload';
 import PlusOutlined from '@ant-design/icons/lib/icons/PlusOutlined';
+import ExclamationCircleOutlined from '@ant-design/icons/lib/icons/ExclamationCircleOutlined';
 import styles from './index.module.less';
 import { phoneValidator } from '@/utils/validators';
+import classNames from 'classnames';
 
 const formLayout = {
   labelCol: {
@@ -18,6 +20,13 @@ const formLayout = {
   wrapperCol: {
     span: 16,
   },
+};
+
+const rowLayout = {
+  labelCol: {
+    span: 3,
+  },
+  wrapperCol: { span: 20 },
 };
 
 export default ({
@@ -37,9 +46,9 @@ export default ({
   const { tip, setTip } = useSpinning();
   const { id } = formData;
 
-  const { data: roleList } = useRequest(API.authorization.resourceRole.resourceRoleList.fetch, {
-    manual: true,
-  });
+  // const { data: roleList } = useRequest(API.authorization.resourceRole.resourceRoleList.fetch, {
+  //   manual: true,
+  // });
 
   useEffect(() => {
     if (!isEmpty(formData)) {
@@ -100,7 +109,7 @@ export default ({
       visible={visible}
       forceRender
       maskClosable={false}
-      title={`${!isNil(id) ? '编辑' : '新增'}用户`}
+      title={`${!isNil(id) ? '编辑' : '新建'}企业`}
       okButtonProps={{
         htmlType: 'submit',
       }}
@@ -112,8 +121,12 @@ export default ({
       <Spin spinning={loading && submitting} tip={tip}>
         <Form form={form} onFinish={handleFinish} {...formLayout} className={styles.formWrap}>
           <Form.Item
-            label="登录账号"
+            label="企业编码"
             name="account"
+            tooltip={{
+              icon: <ExclamationCircleOutlined />,
+              title: '企业编码将作为企业下所有账号后缀',
+            }}
             rules={[
               {
                 whitespace: true,
@@ -126,7 +139,7 @@ export default ({
             <Input placeholder="请输入" />
           </Form.Item>
           <Form.Item
-            label="用户昵称"
+            label="企业名称"
             name="nickName"
             rules={[
               {
@@ -136,39 +149,11 @@ export default ({
           >
             <Input placeholder="请输入" />
           </Form.Item>
-          <Form.Item
-            label="手机号"
-            name="userPhone"
-            rules={[
-              {
-                whitespace: true,
-              },
-              {
-                required: true,
-                validator: phoneValidator,
-              },
-            ]}
-          >
-            <Input placeholder="请输入" />
-          </Form.Item>
-          <Form.Item
-            label="邮箱"
-            name="email"
-            rules={[
-              {
-                whitespace: true,
-              },
-              {
-                required: true,
-              },
-            ]}
-          >
-            <Input placeholder="请输入" />
-          </Form.Item>
-          <div className={styles.uploadWrap}>
+
+          <div className={styles.rowWrap}>
             <UploadFormItem
               formItemProps={formLayout}
-              label="头像"
+              label="企业logo"
               name="certificateUrls"
               maxCount={1}
               accept={FILE_TYPE_MAP['图片'].join(',')}
@@ -182,24 +167,65 @@ export default ({
             </UploadFormItem>
           </div>
 
-          <Form.Item label="性别" name="sex">
-            <Select
-              placeholder="请选择"
-              options={roleList?.map((item) => ({
-                label: item.role,
-                value: item.id!,
-              }))}
-            />
+          <div className={styles.rowWrap}>
+            <Form.Item
+              label="企业代码"
+              name="userPhone"
+              rules={[
+                {
+                  whitespace: true,
+                },
+              ]}
+            >
+              <Input placeholder="请输入" />
+            </Form.Item>
+          </div>
+          <Form.Item
+            label="负责人"
+            name="email"
+            rules={[
+              {
+                whitespace: true,
+              },
+            ]}
+          >
+            <Input placeholder="请输入" />
           </Form.Item>
-          <Form.Item label="状态" name="sex">
-            <Select
-              placeholder="请选择"
-              options={roleList?.map((item) => ({
-                label: item.role,
-                value: item.id!,
-              }))}
-            />
+
+          <Form.Item
+            label="负责人手机号"
+            name="email"
+            rules={[
+              {
+                whitespace: true,
+              },
+              {
+                validator: phoneValidator,
+              },
+            ]}
+          >
+            <Input placeholder="请输入" />
           </Form.Item>
+          <Form.Item label="有效期" name="date">
+            <DatePicker />
+          </Form.Item>
+          <div className={classNames(styles.rowWrap, styles.description)}>
+            <Form.Item
+              label="描述"
+              name="description"
+              rules={[
+                {
+                  whitespace: true,
+                },
+                {
+                  required: true,
+                },
+              ]}
+              {...rowLayout}
+            >
+              <Input placeholder="请输入" />
+            </Form.Item>
+          </div>
         </Form>
       </Spin>
     </Modal>

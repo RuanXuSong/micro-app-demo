@@ -191,12 +191,12 @@ export default () => {
         size: 'default',
       }}
       dateFormatter="string"
-      headerTitle="租户列表"
+      headerTitle="企业列表"
       tableAlertRender={false}
       toolBarRender={() => [
         <Button onClick={() => history.push('/authorization/tenant/edit')} key="add" type="primary">
           <PlusOutlined />
-          新增
+          新建
         </Button>,
       ]}
     />

@@ -17,8 +17,8 @@ const ResourceList = Loadable({
   loading: Loading,
   delay: 150,
 });
-const TenantList = Loadable({
-  loader: () => import('../pages/authorization/tenant/list'),
+const CompanyList = Loadable({
+  loader: () => import('../pages/authorization/company/list'),
   loading: Loading,
   delay: 150,
 });
@@ -47,9 +47,9 @@ const TABS_CONFIG = {
     title: '用户管理',
     component: <CharacterList />,
   },
-  '/authorization/tenant/list': {
-    title: '租户管理',
-    component: <TenantList />,
+  '/authorization/company/list': {
+    title: '企业管理',
+    component: <CompanyList />,
   },
 };
 

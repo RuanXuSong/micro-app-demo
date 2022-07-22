@@ -39,9 +39,9 @@ export default [
                     customIcon: 'auth-character',
                   },
                   {
-                    path: '/auth/authorization/tenant/list',
-                    name: '租户管理',
-                    component: './authorization/tenant/list',
+                    path: '/auth/authorization/company/list',
+                    name: '企业管理',
+                    component: './authorization/company/list',
                     customIcon: 'auth-character',
                   },
                   {
@@ -58,6 +58,10 @@ export default [
             path: '/',
             component: '../layouts/BasicLayout',
             routes: [
+              {
+                path: '/biSheng/auth/homepage',
+                redirect: '/auth/homepage',
+              },
               {
                 path: '/dataFront',
                 name: '数融',

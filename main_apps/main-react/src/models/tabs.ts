@@ -102,7 +102,7 @@ const UserModel: TabModelType = {
     *ReduceTabEffect({ payload }: any, { put, select }: any) {
       const { tabList, currentKey } = yield select((state: ConnectState) => state.tabs);
       if (tabList.length === 1) {
-        message.error('至少保留一个标签！');
+        message.info('至少要保留一个窗口');
         return;
       }
       if (tabList.length <= 2) {

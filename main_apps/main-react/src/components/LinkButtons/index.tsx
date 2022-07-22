@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-07-21 17:04:24
+ * @LastEditTime: 2022-07-22 17:29:44
  */
 
 import React, { useMemo } from 'react';
@@ -66,7 +66,11 @@ export default ({ buttons, maxNumber = 2, className, style }: HandleButtonsProps
           overlay={
             <Menu>
               {restButtons.map((item) => (
-                <Menu.Item>{item.name}</Menu.Item>
+                <Menu.Item
+                  onClick={item.path ? () => history.push(item.path!) : () => item.onClick?.()}
+                >
+                  {item.name}
+                </Menu.Item>
               ))}
             </Menu>
           }

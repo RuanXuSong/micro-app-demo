@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2020-06-11 10:22:48
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-07-21 17:01:19
+ * @LastEditTime: 2022-07-22 15:36:45
  */
 import React, { forwardRef, CSSProperties } from 'react';
 import { Form, Button, Upload, Tooltip } from 'antd';
@@ -137,7 +137,7 @@ const UploadFormItem: React.FC<UploadFormItemProps> = (uploadItemProps) => {
       <div>
         <span>{label}&nbsp;</span>
         <Tooltip title={renderLabelTitle()}>
-          <QuestionCircleOutlined />
+          <QuestionCircleOutlined style={{ color: 'rgba(0, 0, 0, 0.45)' }} />
         </Tooltip>
       </div>
     ) : (
