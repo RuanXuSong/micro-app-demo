@@ -17,6 +17,7 @@ import styles from './index.module.less';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
 import { isEmpty } from 'lodash';
+import Iconfont from '@/components/Iconfont';
 
 const { TabPane } = Tabs;
 
@@ -83,11 +84,15 @@ const BasicLayout = (props) => {
 
   /** 渲染菜单元素 */
   const renderMenuItem = (menuItemProps, defaultDom) => {
-    const { customIcon, name, pro_layout_parentKeys = [] } = menuItemProps;
+    const { customIcon, fontIcon, name, pro_layout_parentKeys = [] } = menuItemProps;
     const isChild = !isEmpty(pro_layout_parentKeys);
     return isChild ? (
       <div className={classNames(!isChild ? styles.menuItemWrap : styles.childMenuItem)}>
-        <img src={require(`@/assets/icon/${customIcon}.png`)} alt={name} />
+        {fontIcon ? (
+          <Iconfont name={fontIcon} className={styles.fontIcon} style={{ marginRight: 10 }} />
+        ) : (
+          <img src={require(`@/assets/icon/${customIcon}.png`)} alt={name} />
+        )}
         <div className={styles.menuTitle}>{defaultDom}</div>
       </div>
     ) : null;

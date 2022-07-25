@@ -1,65 +1,34 @@
 import React, { useEffect } from 'react';
-import { Modal, Form, Spin, message } from 'antd';
+import { Modal, Form, Spin, Input, message, DatePicker, TreeSelect } from 'antd';
 import { isEmpty, isNil } from 'lodash-es';
 import 'antd/lib/form';
 import { Store } from 'antd/es/form/interface';
 import { useRequest } from 'ahooks';
 import useSpinning from '@/hooks/useSpinning';
+import UploadFormItem from '@/components/UploadFormItem';
+import { FILE_TYPE_MAP } from '@/utils/upload';
+import PlusOutlined from '@ant-design/icons/lib/icons/PlusOutlined';
 import ExclamationCircleOutlined from '@ant-design/icons/lib/icons/ExclamationCircleOutlined';
-import styles from './index.module.less';
-import { DataNode } from 'antd/lib/tree';
-import TreeItem from '@/components/TreeItem';
+import { phoneValidator } from '@/utils/validators';
+import classNames from 'classnames';
 
-const treeData: DataNode[] = [
-  {
-    title: '0-0',
-    key: '0-0',
-    children: [
-      {
-        title: '0-0-0',
-        key: '0-0-0',
-        children: [
-          { title: '0-0-0-0', key: '0-0-0-0' },
-          { title: '0-0-0-1', key: '0-0-0-1' },
-          { title: '0-0-0-2', key: '0-0-0-2' },
-        ],
-      },
-      {
-        title: '0-0-1',
-        key: '0-0-1',
-        children: [
-          { title: '0-0-1-0', key: '0-0-1-0' },
-          { title: '0-0-1-1', key: '0-0-1-1' },
-          { title: '0-0-1-2', key: '0-0-1-2' },
-        ],
-      },
-      {
-        title: '0-0-2',
-        key: '0-0-2',
-      },
-    ],
-  },
-  {
-    title: '0-1',
-    key: '0-1',
-    children: [
-      { title: '0-1-0-0', key: '0-1-0-0' },
-      { title: '0-1-0-1', key: '0-1-0-1' },
-      { title: '0-1-0-2', key: '0-1-0-2' },
-    ],
-  },
-  {
-    title: '0-2',
-    key: '0-2',
-  },
-];
+const { TreeNode } = TreeSelect;
 
 const formLayout = {
   labelCol: {
-    span: 6,
+    span: 3,
   },
   wrapperCol: {
-    span: 16,
+    span: 20,
+  },
+};
+
+const halfFormLayout = {
+  labelCol: {
+    span: 3,
+  },
+  wrapperCol: {
+    span: 10,
   },
 };
 
@@ -143,27 +112,64 @@ export default ({
       visible={visible}
       forceRender
       maskClosable={false}
-      title="企业授权"
+      title={`${!isNil(id) ? '编辑' : '新建'}角色`}
       okButtonProps={{
         htmlType: 'submit',
       }}
-      width={412}
+      width={800}
       onOk={() => form.submit()}
       onCancel={handleCancel}
       confirmLoading={submitting}
     >
       <Spin spinning={loading && submitting} tip={tip}>
-        <Form form={form} onFinish={handleFinish} {...formLayout} className={styles.formWrap}>
+        <Form form={form} onFinish={handleFinish} {...halfFormLayout}>
           <Form.Item
-            label="企业编码"
+            label="角色名称"
             name="account"
-            tooltip={{
-              icon: <ExclamationCircleOutlined />,
-              title: '企业编码将作为企业下所有账号后缀',
-            }}
-            noStyle
+            rules={[
+              {
+                whitespace: true,
+              },
+              {
+                required: true,
+              },
+            ]}
           >
-            <TreeItem treeData={treeData} />
+            <Input placeholder="请输入" />
+          </Form.Item>
+          <Form.Item
+            label="角色描述"
+            name="nickName"
+            {...formLayout}
+            rules={[
+              {
+                whitespace: true,
+              },
+            ]}
+          >
+            <Input placeholder="请输入" />
+          </Form.Item>
+
+          <Form.Item label="拥有资源" name="email">
+            <TreeSelect
+              showSearch
+              style={{ width: '100%' }}
+              dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+              placeholder="请选择"
+              allowClear
+              multiple
+              treeDefaultExpandAll
+            >
+              <TreeNode value="parent 1" title="parent 1">
+                <TreeNode value="parent 1-0" title="parent 1-0">
+                  <TreeNode value="leaf1" title="my leaf" />
+                  <TreeNode value="leaf2" title="your leaf" />
+                </TreeNode>
+                <TreeNode value="parent 1-1" title="parent 1-1">
+                  <TreeNode value="sss" title={<b style={{ color: '#08c' }}>sss</b>} />
+                </TreeNode>
+              </TreeNode>
+            </TreeSelect>
           </Form.Item>
         </Form>
       </Spin>

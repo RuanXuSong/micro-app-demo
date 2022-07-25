@@ -12,8 +12,8 @@ const Homepage = Loadable({
   loading: Loading,
   delay: 150,
 });
-const ResourceList = Loadable({
-  loader: () => import('../pages/authorization/resource/list'),
+const AuthorityList = Loadable({
+  loader: () => import('../pages/authorization/authority/list'),
   loading: Loading,
   delay: 150,
 });
@@ -22,7 +22,7 @@ const CompanyList = Loadable({
   loading: Loading,
   delay: 150,
 });
-const CharacterList = Loadable({
+const UserList = Loadable({
   loader: () => import('../pages/authorization/user/list'),
   loading: Loading,
   delay: 150,
@@ -39,17 +39,21 @@ const TABS_CONFIG = {
     title: '首页',
     component: <Homepage />,
   },
-  '/authorization/resource/list': {
-    title: '资源管理',
-    component: <ResourceList />,
+  '/authorization/authority/list': {
+    title: '权限管理',
+    component: <AuthorityList />,
   },
   '/authorization/user/list': {
     title: '用户管理',
-    component: <CharacterList />,
+    component: <UserList />,
   },
   '/authorization/company/list': {
     title: '企业管理',
     component: <CompanyList />,
+  },
+  '/authorization/central/list': {
+    title: '个人中心',
+    component: <UserList />,
   },
 };
 

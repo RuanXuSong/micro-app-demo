@@ -119,12 +119,12 @@ const UserModel: TabModelType = {
         }
       });
       // 删除最后一个
-      console.log('tabList: ', tabList);
       if (removeIndex === tabList.length - 1) {
         if (payload === tabList[removeIndex].tabKey) {
           newActiveKey = tabList[tabList.length - 2].tabKey;
         }
-      } else {
+      } else if (currentKey === tabList[removeIndex].tabKey) {
+        // 删除当前 tab
         newActiveKey = tabList[removeIndex + 1].tabKey;
       }
       const newTabs = tabList.filter((pane: any) => pane.tabKey !== payload);
@@ -132,7 +132,6 @@ const UserModel: TabModelType = {
         type: 'ReduceTabReducer',
         payload: { newTabs, newActiveKey },
       });
-      console.log('newActiveKey: ', newActiveKey);
       history.push(newActiveKey);
     },
   },
