@@ -58,11 +58,15 @@ const BasicLayout = (props) => {
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [subMenuCollapsed, setSubMenuCollapsed] = useState(false);
   useEffect(() => {
+    microApp.setGlobalData({ showDropDown: true });
     if (dispatch) {
       dispatch({
         type: 'user/fetchCurrent',
       });
     }
+    return () => {
+      microApp.setGlobalData({ showDropDown: false });
+    };
   }, []);
 
   useEffect(() => {
