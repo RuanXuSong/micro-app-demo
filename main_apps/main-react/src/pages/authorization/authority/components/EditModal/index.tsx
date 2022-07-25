@@ -1,18 +1,55 @@
 import React, { useEffect } from 'react';
-import { Modal, Form, Spin, Input, message, DatePicker, TreeSelect } from 'antd';
+import { Modal, Form, Spin, Input, message, TreeSelect } from 'antd';
 import { isEmpty, isNil } from 'lodash-es';
 import 'antd/lib/form';
 import { Store } from 'antd/es/form/interface';
 import { useRequest } from 'ahooks';
 import useSpinning from '@/hooks/useSpinning';
-import UploadFormItem from '@/components/UploadFormItem';
-import { FILE_TYPE_MAP } from '@/utils/upload';
-import PlusOutlined from '@ant-design/icons/lib/icons/PlusOutlined';
-import ExclamationCircleOutlined from '@ant-design/icons/lib/icons/ExclamationCircleOutlined';
-import { phoneValidator } from '@/utils/validators';
-import classNames from 'classnames';
+import { DataNode } from 'antd/lib/tree';
 
-const { TreeNode } = TreeSelect;
+const treeData: DataNode[] = [
+  {
+    title: '0-0',
+    key: '0-0',
+    children: [
+      {
+        title: '0-0-0',
+        key: '0-0-0',
+        children: [
+          { title: '0-0-0-0', key: '0-0-0-0' },
+          { title: '0-0-0-1', key: '0-0-0-1' },
+          { title: '0-0-0-2', key: '0-0-0-2' },
+        ],
+      },
+      {
+        title: '0-0-1',
+        key: '0-0-1',
+        children: [
+          { title: '0-0-1-0', key: '0-0-1-0' },
+          { title: '0-0-1-1', key: '0-0-1-1' },
+          { title: '0-0-1-2', key: '0-0-1-2' },
+        ],
+      },
+      {
+        title: '0-0-2',
+        key: '0-0-2',
+      },
+    ],
+  },
+  {
+    title: '0-1',
+    key: '0-1',
+    children: [
+      { title: '0-1-0-0', key: '0-1-0-0' },
+      { title: '0-1-0-1', key: '0-1-0-1' },
+      { title: '0-1-0-2', key: '0-1-0-2' },
+    ],
+  },
+  {
+    title: '0-2',
+    key: '0-2',
+  },
+];
 
 const formLayout = {
   labelCol: {
@@ -152,24 +189,13 @@ export default ({
 
           <Form.Item label="拥有资源" name="email">
             <TreeSelect
-              showSearch
-              style={{ width: '100%' }}
-              dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-              placeholder="请选择"
+              treeData={treeData}
               allowClear
+              disabled={false}
               multiple
-              treeDefaultExpandAll
-            >
-              <TreeNode value="parent 1" title="parent 1">
-                <TreeNode value="parent 1-0" title="parent 1-0">
-                  <TreeNode value="leaf1" title="my leaf" />
-                  <TreeNode value="leaf2" title="your leaf" />
-                </TreeNode>
-                <TreeNode value="parent 1-1" title="parent 1-1">
-                  <TreeNode value="sss" title={<b style={{ color: '#08c' }}>sss</b>} />
-                </TreeNode>
-              </TreeNode>
-            </TreeSelect>
+              placeholder="请选择"
+              showSearch
+            />
           </Form.Item>
         </Form>
       </Spin>
