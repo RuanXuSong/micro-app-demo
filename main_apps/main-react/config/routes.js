@@ -11,6 +11,9 @@ export default [
             redirect: '/auth/homepage',
           },
           {
+            path: '/logout',
+          },
+          {
             path: '/auth',
             component: '../layouts/AuthLayout',
             routes: [

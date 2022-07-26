@@ -59,21 +59,23 @@
 }
 
 :global {
-  .ant-menu-item {
-    .iconfont,span {
-      color: rgba(0, 0, 0, 0.65);
+  .auth-layout {
+    .ant-menu-item {
+      .iconfont,span {
+        color: rgba(0, 0, 0, 0.65);
+      }
+  
+      &:hover {
+        .iconfont,span {
+          color: #1890ff!important;
+        }
+      }
     }
-
-    &:hover {
+  
+    .ant-menu-item-selected,.ant-menu-item-active {
       .iconfont,span {
         color: #1890ff!important;
       }
-    }
-  }
-
-  .ant-menu-item-selected,.ant-menu-item-active {
-    .iconfont,span {
-      color: #1890ff!important;
     }
   }
 }
