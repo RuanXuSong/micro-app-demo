@@ -4,9 +4,9 @@
  * @作者: 阮旭松
  * @Date: 2020-06-11 10:22:48
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-07-26 14:47:43
+ * @LastEditTime: 2022-07-26 15:47:55
  */
-import React, { forwardRef, CSSProperties } from 'react';
+import React, { forwardRef } from 'react';
 import { Form, Button, Upload, Tooltip } from 'antd';
 import {
   getFileValidators,
