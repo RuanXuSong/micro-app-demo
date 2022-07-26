@@ -4,14 +4,12 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-07-26 15:31:31
+ * @LastEditTime: 2022-07-26 15:41:38
  */
 import React from 'react';
-import { message, Button, Modal } from 'antd';
+import { message, Button } from 'antd';
 import ProTable, { ProColumns } from '@ant-design/pro-table';
-import { ROLE_STATUS_MAP, LOGIN_CONFIG } from '@/constant';
 import { PlusOutlined } from '@ant-design/icons';
-import { enumToValueEnum } from '@/utils/array';
 import LinkButtons from '@/components/LinkButtons';
 import EditModal from '../components/EditModal';
 import AuthModal from '../components/AuthModal';
@@ -23,7 +21,6 @@ export default () => {
     reload,
     editModalConfig,
     fetchList,
-    handleDisable,
     handleCompanyAdd,
     handleCompanyEdit,
     handleModalHide,

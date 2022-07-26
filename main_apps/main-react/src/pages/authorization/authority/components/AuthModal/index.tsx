@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Modal, Form, Spin, message } from 'antd';
-import { isEmpty, isNil } from 'lodash-es';
+import { isEmpty } from 'lodash-es';
 import 'antd/lib/form';
 import { Store } from 'antd/es/form/interface';
 import { useRequest } from 'ahooks';
@@ -79,6 +79,7 @@ export default ({
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
   const { id } = formData;
+  console.log('id: ', id);
 
   // const { data: roleList } = useRequest(API.authorization.resourceRole.resourceRoleList.fetch, {
   //   manual: true,
