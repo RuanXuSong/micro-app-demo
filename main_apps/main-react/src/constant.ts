@@ -56,3 +56,7 @@ export enum TabCloseType {
   card = 'card',
   EditableCard = 'editable-card',
 }
+
+/** 默认头像地址 */
+export const AVATAR_URL =
+  'https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1658819849135012474.png';

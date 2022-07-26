@@ -89,7 +89,6 @@ export default () => {
 
   /** 给企业授权 */
   const handleAuthorize = (row: defs.authorization.ResourceRole) => {
-    console.log('row: ', row);
     setAuthModalConfig((config) => {
       config.visible = true;
       config.loading = true;

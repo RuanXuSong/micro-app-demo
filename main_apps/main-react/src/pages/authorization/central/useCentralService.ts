@@ -1,7 +1,5 @@
 import { useRef } from 'react';
 import { useImmer } from 'use-immer';
-import { message } from 'antd';
-import { useRequest } from 'ahooks';
 import { ActionType } from '@ant-design/pro-table';
 import { initialPagination, LOGIN_CONFIG } from '@/constant';
 
@@ -27,32 +25,9 @@ export default () => {
   });
 
   const { reload } = actionRef.current || {};
-
   /**
-   * 启用/禁用
-   */
-  const { run: handleDisable } = useRequest(API.authorization.role.update.fetch, {
-    manual: true,
-    onSuccess: () => {
-      message.success('操作成功');
-      reload?.();
-    },
-  });
-
-  /**
-   * 角色删除
-   * @param id
-   */
-  const { run: handleDelete } = useRequest(API.authorization.resourceRole.resourceDelete.fetch, {
-    manual: true,
-    onSuccess: () => {
-      message.success('删除成功');
-      reload?.();
-    },
-  });
-
-  /**
-   * 获取普通分页列表
+   * TODO
+   * 获取详情
    * @param params
    */
   const fetchList = async (params?: { pageSize?: number; current?: number }) => {
@@ -70,29 +45,11 @@ export default () => {
     };
   };
 
-  /** 编辑企业 */
-  const handleCompanyEdit = (row: defs.authorization.ResourceRole) => {
+  /** 修改密码 */
+  const handlePasswordEdit = (id: string) => {
     setEditModalConfig((config) => {
       config.visible = true;
-      config.loading = true;
-      config.formData = row;
-    });
-  };
-
-  /** 新建企业 */
-  const handleCompanyAdd = () => {
-    setEditModalConfig((config) => {
-      config.visible = true;
-      config.formData = {};
-    });
-  };
-
-  /** 给企业授权 */
-  const handleAuthorize = (row: defs.authorization.ResourceRole) => {
-    setAuthModalConfig((config) => {
-      config.visible = true;
-      config.loading = true;
-      config.formData = row;
+      config.formData = { id };
     });
   };
 
@@ -116,12 +73,8 @@ export default () => {
     setEditModalConfig,
     authModalConfig,
     setAuthModalConfig,
-    handleDisable,
-    handleDelete,
     fetchList,
-    handleCompanyEdit,
-    handleCompanyAdd,
-    handleAuthorize,
+    handlePasswordEdit,
     handleModalHide,
   };
 };

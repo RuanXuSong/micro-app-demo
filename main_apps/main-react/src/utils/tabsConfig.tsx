@@ -27,6 +27,11 @@ const UserList = Loadable({
   loading: Loading,
   delay: 150,
 });
+const CentralList = Loadable({
+  loader: () => import('../pages/authorization/central'),
+  loading: Loading,
+  delay: 150,
+});
 
 export interface TabModel {
   title: string;
@@ -51,9 +56,9 @@ const TABS_CONFIG = {
     title: '企业管理',
     component: <CompanyList />,
   },
-  '/authorization/central/list': {
+  '/authorization/central': {
     title: '个人中心',
-    component: <UserList />,
+    component: <CentralList />,
   },
 };
 

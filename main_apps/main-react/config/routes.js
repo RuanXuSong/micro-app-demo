@@ -45,9 +45,9 @@ export default [
                     fontIcon: 'icon-company',
                   },
                   {
-                    path: '/auth/authorization/central/list',
+                    path: '/auth/authorization/central',
                     name: '个人中心',
-                    component: './authorization/user/list',
+                    component: './authorization/central',
                     fontIcon: 'icon-person',
                   },
                   {

@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-05-25 16:07:51
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-07-21 17:17:24
+ * @LastEditTime: 2022-07-26 11:14:31
  */
 import { UploadProps } from 'antd/lib/upload';
 import string from '@/utils/string';
@@ -77,7 +77,13 @@ export const getDownloadUrlWithId = (fileId: number | string) => {
 };
 
 export const onPreview = (file: UploadFile) => {
-  window.open(file.url || getDownloadUrlWithId(file.response.data.fileId), '_blank');
+  let fileUrl;
+  if (file.url) {
+    fileUrl = file.url;
+  } else if (file.response?.data?.fileId) {
+    fileUrl = getDownloadUrlWithId(file.response.data.fileId);
+  }
+  fileUrl && window.open(fileUrl, '_blank');
 };
 
 // 判断是否符合文件格式，不传默认校验type

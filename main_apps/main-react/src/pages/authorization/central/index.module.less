@@ -1,0 +1,77 @@
+.container {
+  height: 100%;
+  padding: 18px 22px;
+
+  .content {
+    height: 100%;
+    padding: 14px 42px;
+    background: #fff;
+
+    .title {
+      font-weight: 500;
+      font-size: 16px;
+      font-family: 'PingFang SC';
+      font-style: normal;
+      line-height: 24px;
+    }
+
+    .infoWrap {
+      width: 450px;
+      margin-left: 306px;
+      padding-top: 35px;
+
+      .avatarWrap {
+        position: relative;
+        margin-bottom: 38px;
+
+        :global {
+          .ant-upload-list {
+            display: flex;
+            flex-direction: column;
+          }
+
+          .ant-upload-list-item {
+            width: 72px;
+            height: 72px;
+            padding: 0;
+            overflow: hidden;
+            border-radius: 100%;
+          }
+
+          .ant-upload-list-item,
+          .ant-upload-select-picture-card {
+            height: auto;
+            padding: 0;
+            border: none !important;
+          }
+
+          .ant-upload-select-picture-card {
+            width: 74px;
+          }
+
+          .ant-upload-list-picture-card-container {
+            height: 82px;
+          }
+        }
+      }
+
+      .passwordWrap {
+        position: relative;
+
+        .editBtn {
+          position: absolute;
+          top: 0;
+          right: -28px;
+        }
+      }
+
+      .submitWrap {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        margin-top: 44px;
+        padding-right: 8.4%;
+      }
+    }
+  }
+}

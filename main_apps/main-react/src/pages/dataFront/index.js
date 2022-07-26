@@ -7,6 +7,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import microApp, { unmountApp, unmountAllApps } from '@micro-zoe/micro-app';
 import { connect } from 'umi';
 import Loading from '@/components/Loading';
+import { AVATAR_URL } from '@/constant';
 import config, { LOGOUT_PATH } from '../../config';
 import './index.less';
 
@@ -156,7 +157,7 @@ class App extends React.Component {
       type: 'user/setCurrentUser',
       payload: {
         name: 'admin',
-        avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
+        avatar: AVATAR_URL,
       },
     });
 

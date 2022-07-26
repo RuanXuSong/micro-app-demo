@@ -38,6 +38,19 @@ export const checkNickName = (_: unknown, value: string, callback: (msg?: string
   }
 };
 
+/**
+ * 第二次输入的密码和第一次的进行比较
+ * @param firstPassword
+ */
+export const compareToFirstPassword =
+  (firstPassword?: string) => (_: unknown, value: string, callback: (msg?: string) => void) => {
+    if (value && value !== firstPassword) {
+      callback('两次输入的密码不一致');
+    } else {
+      callback();
+    }
+  };
+
 export default {
   phoneValidator,
   checkPassword,

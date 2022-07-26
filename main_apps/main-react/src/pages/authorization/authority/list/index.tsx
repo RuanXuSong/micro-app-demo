@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-07-25 13:54:23
+ * @LastEditTime: 2022-07-26 15:31:31
  */
 import React from 'react';
 import { message, Button, Modal } from 'antd';
@@ -76,7 +76,6 @@ export default () => {
                 name: '授权',
                 key: 'authorize',
                 onClick: () => {
-                  console.log('row: ', row);
                   handleAuthorize(row);
                 },
               },
