@@ -6,13 +6,6 @@ export default defineConfig({
     // https://github.com/zthxxx/react-dev-inspector
     'react-dev-inspector/plugins/umi/react-inspector',
   ],
-  links: [
-    {
-      type: 'text/css',
-      rel: 'stylesheet',
-      href: '//at.alicdn.com/t/font_1269694_ssyauvyyv8j.css',
-    },
-  ],
   // https://github.com/zthxxx/react-dev-inspector#inspector-loader-props
   inspectorConfig: {
     exclude: [],
