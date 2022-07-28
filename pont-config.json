@@ -11,6 +11,10 @@
     {
       "name": "authorization",
       "originUrl": "http://authorization.dev.thundersdata.com/v2/api-docs"
+    },
+    {
+      "name": "platform",
+      "originUrl": "http://192.168.1.236:8080/v2/api-docs"
     }
   ]
 }
