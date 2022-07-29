@@ -4,17 +4,18 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-07-21 18:03:05
+ * @LastEditTime: 2022-07-29 16:38:53
  */
 import React from 'react';
 import { message, Button, Modal } from 'antd';
 import ProTable, { ProColumns } from '@ant-design/pro-table';
-import { ROLE_STATUS_MAP, LOGIN_CONFIG } from '@/constant';
+import { ROLE_STATUS_MAP, SEX_ENUM } from '@/constant';
 import { PlusOutlined } from '@ant-design/icons';
 import { enumToValueEnum } from '@/utils/array';
 import LinkButtons from '@/components/LinkButtons';
 import Edit from '../edit';
 import useUserListService from './useUserListService';
+import AuthModal from '../components/AuthModal';
 
 export default () => {
   const {
@@ -22,16 +23,18 @@ export default () => {
     reload,
     editModalConfig,
     fetchList,
-    handleDisable,
+    handleUpdateStatus,
     handleUserAdd,
     handleUserEdit,
     handleModalHide,
+    handleAuthorize,
+    authModalConfig,
   } = useUserListService();
 
-  const columns: ProColumns<defs.authorization.ResourceRole>[] = [
+  const columns: ProColumns<defs.platform.TheUserInformation>[] = [
     {
       title: '登录账号',
-      dataIndex: 'account',
+      dataIndex: 'userName',
       align: 'left',
       copyable: false,
       valueType: 'text',
@@ -39,7 +42,7 @@ export default () => {
     },
     {
       title: '用户昵称',
-      dataIndex: 'role',
+      dataIndex: 'name',
       align: 'left',
       copyable: false,
       valueType: 'text',
@@ -59,25 +62,23 @@ export default () => {
 
     {
       title: '手机号',
-      dataIndex: 'comment',
+      dataIndex: 'phone',
       align: 'left',
       valueType: 'text',
       hideInSearch: false,
       hideInTable: true,
-      valueEnum: enumToValueEnum(ROLE_STATUS_MAP),
     },
     {
       title: '负责人手机号',
-      dataIndex: 'comment',
+      dataIndex: 'phone',
       align: 'left',
       copyable: false,
       valueType: 'text',
       hideInSearch: true,
-      render: (_, row) => row.comment,
     },
     {
       title: '邮箱',
-      dataIndex: 'role',
+      dataIndex: 'email',
       align: 'left',
       copyable: false,
       valueType: 'text',
@@ -85,12 +86,12 @@ export default () => {
     },
     {
       title: '头像',
-      dataIndex: 'comment',
+      dataIndex: 'avatar',
       align: 'left',
       copyable: false,
       valueType: 'text',
       hideInSearch: true,
-      render: (_, row) => row.comment,
+      render: (_, row) => <img alt="头像" src={row.avatar} width={72} />,
     },
     {
       title: '性别',
@@ -99,7 +100,7 @@ export default () => {
       copyable: false,
       valueType: 'text',
       hideInSearch: true,
-      render: (_, row) => row.comment,
+      valueEnum: SEX_ENUM,
     },
     {
       title: '状态',
@@ -129,7 +130,7 @@ export default () => {
               {
                 name: '授权',
                 key: 'authorize',
-                path: `/admin/authorization/edit?id=${row.id}`,
+                onClick: () => handleAuthorize(row),
               },
               {
                 name: '禁用',
@@ -138,12 +139,10 @@ export default () => {
                   Modal.confirm({
                     title: '确认禁用？',
                     onOk: () =>
-                      handleDisable({
-                        ...row,
+                      row.id &&
+                      handleUpdateStatus({
                         status: ROLE_STATUS_MAP.禁用,
                         id: row.id,
-                        clientKey: LOGIN_CONFIG.clientId,
-                        role: row.role,
                       }),
                   }),
                 hidden: ROLE_STATUS_MAP.禁用 === +row.status!,
@@ -152,12 +151,10 @@ export default () => {
                 name: '启用',
                 key: 'enable',
                 onClick: async () =>
-                  handleDisable({
-                    ...row,
+                  row.id &&
+                  handleUpdateStatus({
                     status: ROLE_STATUS_MAP.正常,
                     id: row.id,
-                    clientKey: LOGIN_CONFIG.clientId,
-                    role: row.role,
                   }),
                 hidden: ROLE_STATUS_MAP.禁用 !== +row.status!,
               },
@@ -173,25 +170,7 @@ export default () => {
       <ProTable
         style={{ padding: '18px 22px' }}
         actionRef={actionRef}
-        // TODO:联调
         request={fetchList as any}
-        // request={async (params: Store) => {
-        //   const { list, page, total } = await API.authorization.resourceRole.listPagination.fetch(
-        //     removeEmpty({
-        //       ...params,
-        //       roleName: params.role,
-        //       clientKey: LOGIN_CONFIG.clientId,
-        //       page: '' + (params?.current || initialPagination.page),
-        //       pageSize: '' + (params?.pageSize || initialPagination.pageSize),
-        //     }),
-        //   );
-        //   return {
-        //     data: list || [],
-        //     page,
-        //     success: true,
-        //     total,
-        //   };
-        // }}
         onRequestError={(error) => {
           console.error(error.message);
           message.error(`数据加载失败,${error.message}`);
@@ -216,7 +195,14 @@ export default () => {
         visible={editModalConfig.visible}
         formData={editModalConfig.formData}
         loading={editModalConfig.loading}
-        toggleVisible={handleModalHide}
+        toggleVisible={() => handleModalHide('edit')}
+        reload={reload}
+      />
+      <AuthModal
+        visible={authModalConfig.visible}
+        formData={authModalConfig.formData}
+        loading={authModalConfig.loading}
+        toggleVisible={() => handleModalHide('auth')}
         reload={reload}
       />
     </>

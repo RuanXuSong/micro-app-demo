@@ -10,19 +10,19 @@
       margin-top: 0;
     }
     .delete-icon-wrap {
-      background-color: #ff4d4f;
       position: absolute;
-      right: -8px;
       top: -8px;
+      right: -8px;
       display: none;
+      align-items: center;
+      justify-content: center;
       width: 16px;
       height: 16px;
-      border-radius: 100%;
-      justify-content: center;
-      align-items: center;
       padding-top: 2px;
       color: #fff;
       font-size: 10px;
+      background-color: #ff4d4f;
+      border-radius: 100%;
       cursor: pointer;
 
       .anticon-close {
@@ -48,18 +48,13 @@
     .ant-upload-list-picture-card-container {
       margin-right: 12px;
 
-      .ant-upload-list-item-actions {
-        display: none;
-      }
-
-      .ant-upload-list-item-list-type-picture-card:hover
-        .ant-upload-list-item-name {
-        width: auto;
+      .ant-upload-list-item-list-type-picture-card:hover .ant-upload-list-item-name {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        width: auto;
         margin: 0;
+        transform: translate(-50%, -50%);
       }
     }
 
@@ -69,10 +64,10 @@
 
     .ant-upload-list-item-list-type-picture-card:hover {
       .ant-upload-list-item-name {
-        display: block;
-        z-index: 1;
         position: absolute;
         top: 0;
+        z-index: 1;
+        display: block;
         color: #fff;
       }
     }

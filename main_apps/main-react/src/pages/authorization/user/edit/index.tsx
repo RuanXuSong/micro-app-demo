@@ -9,7 +9,9 @@ import UploadFormItem from '@/components/UploadFormItem';
 import { FILE_TYPE_MAP } from '@/utils/upload';
 import PlusOutlined from '@ant-design/icons/lib/icons/PlusOutlined';
 import styles from './index.module.less';
-import { phoneValidator } from '@/utils/validators';
+import { emailValidator, phoneValidator } from '@/utils/validators';
+import { ROLE_STATUS_MAP, SEX_ENUM } from '@/constant';
+import { enumToOptions } from '@/utils/array';
 
 const formLayout = {
   labelCol: {
@@ -37,19 +39,24 @@ export default ({
   const { tip, setTip } = useSpinning();
   const { id } = formData;
 
-  const { data: roleList } = useRequest(API.authorization.resourceRole.resourceRoleList.fetch, {
-    manual: true,
-  });
-
   useEffect(() => {
     if (!isEmpty(formData)) {
-      const roleList = formData.roleList || [];
       form.setFieldsValue({
         ...formData,
-        roleList: roleList.length > 0 ? roleList[0].roleId : null,
+        avatar: formData?.avatar
+          ? [
+              {
+                uid: '1',
+                name: '头像',
+                status: 'done',
+                url: formData?.avatar,
+                size: 0,
+              },
+            ]
+          : [],
       });
     }
-    // fetchRoleList({ clientKey: LOGIN_CONFIG.clientId });
+
     return () => {
       form.resetFields();
     };
@@ -63,25 +70,18 @@ export default ({
   const submit = (values: Store) => {
     setTip('数据保存中，请稍候...');
 
-    // TODO: 联调
-    console.log('values: ', values);
+    const payload = {
+      ...formData,
+      ...values,
+      avatar: values.avatar.map((item: Store) => item.url || item.response.data.url)[0],
+    } as defs.platform.TheUserInformation;
 
-    // const payload = {
-    //   ...formData,
-    //   ...values,
-    //   roleList: roleList
-    //     ?.filter(item => values.roleList === item.id)
-    //     .map(item => ({ roleId: item.id, roleName: item.role })),
-    // } as defs.platform.AddingUserAccountDTO;
-
-    // if (formData.userCode) {
-    //   return API.platform.platformUserAccountManagement.editBaseInfo.fetch({
-    //     ...payload,
-    //     password: payload.password ? payload.password : null,
-    //   } as defs.platform.AddingUserAccountDTO);
-    // }
-    // return API.platform.platformUserAccountManagement.add.fetch(payload);
-    return Promise.resolve();
+    if (id) {
+      return API.platform.sysUser.update.fetch({
+        ...payload,
+      });
+    }
+    return API.platform.sysUser.save.fetch(payload);
   };
 
   const { run: handleFinish, loading: submitting } = useRequest(submit, {
@@ -113,7 +113,7 @@ export default ({
         <Form form={form} onFinish={handleFinish} {...formLayout} className={styles.formWrap}>
           <Form.Item
             label="登录账号"
-            name="account"
+            name="userName"
             rules={[
               {
                 whitespace: true,
@@ -127,7 +127,7 @@ export default ({
           </Form.Item>
           <Form.Item
             label="用户昵称"
-            name="nickName"
+            name="name"
             rules={[
               {
                 whitespace: true,
@@ -138,7 +138,7 @@ export default ({
           </Form.Item>
           <Form.Item
             label="手机号"
-            name="userPhone"
+            name="phone"
             rules={[
               {
                 whitespace: true,
@@ -160,6 +160,7 @@ export default ({
               },
               {
                 required: true,
+                validator: emailValidator,
               },
             ]}
           >
@@ -169,7 +170,7 @@ export default ({
             <UploadFormItem
               formItemProps={formLayout}
               label="头像"
-              name="certificateUrls"
+              name="avatar"
               maxCount={1}
               accept={FILE_TYPE_MAP['图片'].join(',')}
               uploadProps={{
@@ -183,22 +184,10 @@ export default ({
           </div>
 
           <Form.Item label="性别" name="sex">
-            <Select
-              placeholder="请选择"
-              options={roleList?.map((item) => ({
-                label: item.role,
-                value: item.id!,
-              }))}
-            />
+            <Select placeholder="请选择" options={enumToOptions(SEX_ENUM)} />
           </Form.Item>
-          <Form.Item label="状态" name="sex">
-            <Select
-              placeholder="请选择"
-              options={roleList?.map((item) => ({
-                label: item.role,
-                value: item.id!,
-              }))}
-            />
+          <Form.Item label="状态" name="status">
+            <Select placeholder="请选择" options={enumToOptions(ROLE_STATUS_MAP)} />
           </Form.Item>
         </Form>
       </Spin>

@@ -1,13 +1,23 @@
+import { removeEmpty } from './../../../../utils/json';
 import { useRef } from 'react';
 import { useImmer } from 'use-immer';
 import { message } from 'antd';
 import { useRequest } from 'ahooks';
 import { ActionType } from '@ant-design/pro-table';
-import { initialPagination, LOGIN_CONFIG } from '@/constant';
+import { initialPagination } from '@/constant';
 
 export default () => {
   const actionRef = useRef<ActionType>();
   const [editModalConfig, setEditModalConfig] = useImmer<{
+    visible: boolean;
+    formData: any;
+    loading: boolean;
+  }>({
+    visible: false,
+    formData: {},
+    loading: false,
+  });
+  const [authModalConfig, setAuthModalConfig] = useImmer<{
     visible: boolean;
     formData: any;
     loading: boolean;
@@ -22,7 +32,7 @@ export default () => {
   /**
    * 启用/禁用
    */
-  const { run: handleDisable } = useRequest(API.authorization.role.update.fetch, {
+  const { run: handleUpdateStatus } = useRequest(API.platform.sysUser.updateStatus.fetch, {
     manual: true,
     onSuccess: () => {
       message.success('操作成功');
@@ -47,12 +57,13 @@ export default () => {
    * @param params
    */
   const fetchList = async (params?: { pageSize?: number; current?: number }) => {
-    const { list, page, total } = await API.authorization.resource.listPagination.fetch({
-      ...params,
-      clientKey: LOGIN_CONFIG.clientId,
-      page: params?.current || initialPagination.page,
-      pageSize: params?.pageSize || initialPagination.pageSize,
-    });
+    const { list, page, total } = await API.platform.sysUser.pageList.fetch(
+      removeEmpty({
+        ...params,
+        page: params?.current || initialPagination.page,
+        pageSize: params?.pageSize || initialPagination.pageSize,
+      }),
+    );
     return {
       data: list || [],
       page,
@@ -62,7 +73,7 @@ export default () => {
   };
 
   /** 编辑用户 */
-  const handleUserEdit = (row: defs.authorization.ResourceRole) => {
+  const handleUserEdit = (row: defs.platform.TheUserInformation) => {
     setEditModalConfig((config) => {
       config.visible = true;
       config.loading = true;
@@ -79,11 +90,24 @@ export default () => {
   };
 
   /** 隐藏弹窗 */
-  const handleModalHide = () => {
-    setEditModalConfig((config) => {
+  const handleModalHide = (type: 'edit' | 'auth') => {
+    const methodsObj = {
+      edit: setEditModalConfig,
+      auth: setAuthModalConfig,
+    };
+    methodsObj[type]((config) => {
       config.visible = false;
       config.loading = false;
       config.formData = {};
+    });
+  };
+
+  /** 给用户授权 */
+  const handleAuthorize = (row: defs.platform.TheUserInformation) => {
+    setAuthModalConfig((config) => {
+      config.visible = true;
+      config.loading = true;
+      config.formData = row;
     });
   };
 
@@ -91,9 +115,10 @@ export default () => {
     actionRef,
     reload,
     editModalConfig,
-    setEditModalConfig,
-    handleDisable,
+    authModalConfig,
+    handleUpdateStatus,
     handleDelete,
+    handleAuthorize,
     fetchList,
     handleUserAdd,
     handleUserEdit,

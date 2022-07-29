@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { useImmer } from 'use-immer';
 import { ActionType } from '@ant-design/pro-table';
 import { initialPagination, LOGIN_CONFIG } from '@/constant';
+import { removeEmpty } from '@/utils/json';
 
 export default () => {
   const actionRef = useRef<ActionType>();
@@ -31,12 +32,14 @@ export default () => {
    * @param params
    */
   const fetchList = async (params?: { pageSize?: number; current?: number }) => {
-    const { list, page, total } = await API.authorization.resource.listPagination.fetch({
-      ...params,
-      clientKey: LOGIN_CONFIG.clientId,
-      page: params?.current || initialPagination.page,
-      pageSize: params?.pageSize || initialPagination.pageSize,
-    });
+    const { list, page, total } = await API.authorization.resource.listPagination.fetch(
+      removeEmpty({
+        ...params,
+        clientKey: LOGIN_CONFIG.clientId,
+        page: params?.current || initialPagination.page,
+        pageSize: params?.pageSize || initialPagination.pageSize,
+      }),
+    );
     return {
       data: list || [],
       page,

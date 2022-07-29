@@ -6,6 +6,8 @@ export const initialPagination = {
   pageSize: 10,
 };
 
+export const THROTTLE_INTERVAL = 500;
+
 // 后端返回的code
 export enum LoginFailure {
   TOKEN缺失 = 60001,
@@ -34,8 +36,14 @@ export const LOGIN_CONFIG = Object.freeze({
 
 /** 角色状态枚举 */
 export enum ROLE_STATUS_MAP {
-  正常 = 0,
-  禁用 = 1,
+  禁用 = 0,
+  正常 = 1,
+}
+
+/** 性别枚举 */
+export enum SEX_ENUM {
+  女 = 0,
+  男 = 1,
 }
 
 /** 最大标题长度 */

@@ -3,7 +3,8 @@ import { useImmer } from 'use-immer';
 import { message } from 'antd';
 import { useRequest } from 'ahooks';
 import { ActionType } from '@ant-design/pro-table';
-import { initialPagination, LOGIN_CONFIG } from '@/constant';
+import { initialPagination } from '@/constant';
+import { removeEmpty } from '@/utils/json';
 
 export default () => {
   const actionRef = useRef<ActionType>();
@@ -31,7 +32,7 @@ export default () => {
   /**
    * 启用/禁用
    */
-  const { run: handleDisable } = useRequest(API.authorization.role.update.fetch, {
+  const { run: handleUpdateStatus } = useRequest(API.platform.sysOrg.updateStatus.fetch, {
     manual: true,
     onSuccess: () => {
       message.success('操作成功');
@@ -56,12 +57,13 @@ export default () => {
    * @param params
    */
   const fetchList = async (params?: { pageSize?: number; current?: number }) => {
-    const { list, page, total } = await API.authorization.resource.listPagination.fetch({
-      ...params,
-      clientKey: LOGIN_CONFIG.clientId,
-      page: params?.current || initialPagination.page,
-      pageSize: params?.pageSize || initialPagination.pageSize,
-    });
+    const { list, page, total } = await API.platform.sysOrg.pageList.fetch(
+      removeEmpty({
+        ...params,
+        page: params?.current || initialPagination.page,
+        pageSize: params?.pageSize || initialPagination.pageSize,
+      }),
+    );
     return {
       data: list || [],
       page,
@@ -116,10 +118,10 @@ export default () => {
     setEditModalConfig,
     authModalConfig,
     setAuthModalConfig,
-    handleDisable,
     handleDelete,
     fetchList,
     handleCompanyEdit,
+    handleUpdateStatus,
     handleCompanyAdd,
     handleAuthorize,
     handleModalHide,

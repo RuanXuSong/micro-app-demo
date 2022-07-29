@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-05-25 16:07:51
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-07-26 11:14:31
+ * @LastEditTime: 2022-07-28 17:53:02
  */
 import { UploadProps } from 'antd/lib/upload';
 import string from '@/utils/string';
@@ -106,11 +106,10 @@ export const getPublicUploadProps: () => UploadProps = () => ({
   withCredentials: false,
   action: `${UPLOAD_URL}/file/uploadToPub`,
   data: {
-    access_token: localStorage.getItem('accessToken'),
+    access_token: '223bc111017d323b00fee4cf9c59a2be',
   },
   showUploadList: {
     showDownloadIcon: false,
-    showPreviewIcon: false,
   },
   onPreview,
 });

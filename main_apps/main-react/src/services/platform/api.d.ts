@@ -81,7 +81,7 @@ declare namespace defs {
       createTime?: string;
 
       /** 描述 */
-      descrption?: string;
+      description?: string;
 
       /** 负责人 */
       director?: string;
@@ -131,7 +131,7 @@ declare namespace defs {
       createTime?: string;
 
       /** 描述 */
-      descrption?: string;
+      description?: string;
 
       /** 负责人 */
       director?: string;
@@ -343,25 +343,6 @@ declare namespace API {
       }
 
       /**
-       * 添加新用户
-       * /api/authorization/registerUser
-       */
-      export namespace registerUser {
-        export class Params {
-          /** phoneNumber */
-          phoneNumber?: string;
-          /** pwd */
-          pwd?: string;
-        }
-
-        export type Response = number;
-
-        export const init: Response;
-
-        export function fetch(params?: Params): Promise<Response>;
-      }
-
-      /**
        * 发送验证码
        * /api/authorization/sendSms
        */
@@ -544,23 +525,6 @@ declare namespace API {
       }
 
       /**
-       * 禁用租户
-       * /api/org/disable
-       */
-      export namespace disable {
-        export class Params {
-          /** id */
-          id: string;
-        }
-
-        export type Response = any;
-
-        export const init: Response;
-
-        export function fetch(params?: Params): Promise<Response>;
-      }
-
-      /**
        * 查看所有租户（分页）
        * /api/org/page
        */
@@ -609,6 +573,25 @@ declare namespace API {
           bodyParams: defs.platform.TenantInformation,
         ): Promise<Response>;
       }
+
+      /**
+       * 禁用租户
+       * /api/org/updateStatus
+       */
+      export namespace updateStatus {
+        export class Params {
+          /** id */
+          id: string;
+          /** status */
+          status: number;
+        }
+
+        export type Response = any;
+
+        export const init: Response;
+
+        export function fetch(params?: Params): Promise<Response>;
+      }
     }
 
     /**
@@ -643,23 +626,6 @@ declare namespace API {
         }
 
         export type Response = defs.platform.TheUserInformation;
-
-        export const init: Response;
-
-        export function fetch(params?: Params): Promise<Response>;
-      }
-
-      /**
-       * 禁用用户
-       * /api/user/disable
-       */
-      export namespace disable {
-        export class Params {
-          /** id */
-          id: string;
-        }
-
-        export type Response = any;
 
         export const init: Response;
 
@@ -726,6 +692,25 @@ declare namespace API {
           newPwd: string;
           /** oldPwd */
           oldPwd: string;
+        }
+
+        export type Response = any;
+
+        export const init: Response;
+
+        export function fetch(params?: Params): Promise<Response>;
+      }
+
+      /**
+       * 设置用户状态
+       * /api/user/updateStatus
+       */
+      export namespace updateStatus {
+        export class Params {
+          /** id */
+          id: string;
+          /** status */
+          status: number;
         }
 
         export type Response = any;

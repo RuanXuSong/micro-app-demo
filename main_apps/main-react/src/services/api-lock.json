@@ -6333,56 +6333,6 @@
             "consumes": [
               "application/json"
             ],
-            "description": "添加新用户",
-            "name": "registerUser",
-            "method": "post",
-            "path": "/api/authorization/registerUser",
-            "response": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "parameters": [
-              {
-                "in": "query",
-                "description": "phoneNumber",
-                "name": "phoneNumber",
-                "required": false,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "string",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "in": "query",
-                "description": "pwd",
-                "name": "pwd",
-                "required": false,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "string",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              }
-            ]
-          },
-          {
-            "consumes": [
-              "application/json"
-            ],
             "description": "发送验证码",
             "name": "sendSms",
             "method": "post",
@@ -6698,38 +6648,6 @@
             ]
           },
           {
-            "description": "禁用租户",
-            "name": "disable",
-            "method": "get",
-            "path": "/api/org/disable",
-            "response": {
-              "typeArgs": [],
-              "typeName": "",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "parameters": [
-              {
-                "in": "query",
-                "description": "id",
-                "name": "id",
-                "required": true,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "string",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              }
-            ]
-          },
-          {
             "consumes": [
               "application/json"
             ],
@@ -6843,6 +6761,53 @@
                 }
               }
             ]
+          },
+          {
+            "description": "禁用租户",
+            "name": "updateStatus",
+            "method": "get",
+            "path": "/api/org/updateStatus",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "description": "status",
+                "name": "status",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
           }
         ],
         "name": "sysOrg"
@@ -6891,38 +6856,6 @@
               "typeArgs": [],
               "typeName": "TheUserInformation",
               "isDefsType": true,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "parameters": [
-              {
-                "in": "query",
-                "description": "id",
-                "name": "id",
-                "required": true,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "string",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              }
-            ]
-          },
-          {
-            "description": "禁用用户",
-            "name": "disable",
-            "method": "get",
-            "path": "/api/user/disable",
-            "response": {
-              "typeArgs": [],
-              "typeName": "",
-              "isDefsType": false,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
               "enum": [],
@@ -7099,6 +7032,53 @@
                 "dataType": {
                   "typeArgs": [],
                   "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "设置用户状态",
+            "name": "updateStatus",
+            "method": "get",
+            "path": "/api/user/updateStatus",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "description": "status",
+                "name": "status",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
                   "isDefsType": false,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
@@ -7451,7 +7431,7 @@
               "enum": [],
               "typeProperties": []
             },
-            "name": "descrption",
+            "name": "description",
             "description": "描述",
             "required": false
           },
@@ -7676,7 +7656,7 @@
               "enum": [],
               "typeProperties": []
             },
-            "name": "descrption",
+            "name": "description",
             "description": "描述",
             "required": false
           },

@@ -68,7 +68,7 @@ class TenantInformation {
   createTime = '';
 
   /** 描述 */
-  descrption = '';
+  description = '';
 
   /** 负责人 */
   director = '';
@@ -118,7 +118,7 @@ class TheTenantDetailsDto {
   createTime = '';
 
   /** 描述 */
-  descrption = '';
+  description = '';
 
   /** 负责人 */
   director = '';

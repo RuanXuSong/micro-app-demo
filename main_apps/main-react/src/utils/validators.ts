@@ -1,4 +1,4 @@
-import { isPhone } from './regex';
+import { isPhone, isEmail } from './regex';
 
 /**
  * 手机号码校验
@@ -9,6 +9,20 @@ import { isPhone } from './regex';
 export const phoneValidator = (_: unknown, value: string, callback: (message?: string) => void) => {
   if (value && !isPhone(value)) {
     callback('请输入有效的电话号码');
+  } else {
+    callback();
+  }
+};
+
+/**
+ * 邮箱校验
+ * @param _rule
+ * @param value
+ * @param callback
+ */
+export const emailValidator = (_: unknown, value: string, callback: (message?: string) => void) => {
+  if (value && !isEmail(value)) {
+    callback('请输入有效的邮箱');
   } else {
     callback();
   }

@@ -4,12 +4,12 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-07-26 15:31:40
+ * @LastEditTime: 2022-07-29 16:33:29
  */
 import React from 'react';
 import { message, Button, Modal } from 'antd';
 import ProTable, { ProColumns } from '@ant-design/pro-table';
-import { ROLE_STATUS_MAP, LOGIN_CONFIG } from '@/constant';
+import { ROLE_STATUS_MAP } from '@/constant';
 import { PlusOutlined } from '@ant-design/icons';
 import { enumToValueEnum } from '@/utils/array';
 import LinkButtons from '@/components/LinkButtons';
@@ -23,7 +23,7 @@ export default () => {
     reload,
     editModalConfig,
     fetchList,
-    handleDisable,
+    handleUpdateStatus,
     handleCompanyAdd,
     handleCompanyEdit,
     handleModalHide,
@@ -34,7 +34,7 @@ export default () => {
   const columns: ProColumns<defs.authorization.ResourceRole>[] = [
     {
       title: '企业编码',
-      dataIndex: 'account',
+      dataIndex: 'orgCode',
       align: 'left',
       copyable: false,
       valueType: 'text',
@@ -42,7 +42,7 @@ export default () => {
     },
     {
       title: '企业名称',
-      dataIndex: 'role',
+      dataIndex: 'orgName',
       align: 'left',
       copyable: false,
       valueType: 'text',
@@ -50,7 +50,7 @@ export default () => {
     },
     {
       title: '负责人',
-      dataIndex: 'comment',
+      dataIndex: 'director',
       align: 'left',
       copyable: false,
       valueType: 'text',
@@ -58,7 +58,7 @@ export default () => {
     },
     {
       title: '负责人手机号',
-      dataIndex: 'comment',
+      dataIndex: 'phone',
       align: 'left',
       copyable: false,
       valueType: 'text',
@@ -75,7 +75,7 @@ export default () => {
     },
     {
       title: '有效期',
-      dataIndex: 'date',
+      dataIndex: 'validBefore',
       align: 'left',
       copyable: false,
       valueType: 'date',
@@ -100,9 +100,7 @@ export default () => {
               {
                 name: '授权',
                 key: 'authorize',
-                onClick: () => {
-                  handleAuthorize(row);
-                },
+                onClick: () => handleAuthorize(row),
               },
               {
                 name: '禁用',
@@ -111,12 +109,10 @@ export default () => {
                   Modal.confirm({
                     title: '确认禁用？',
                     onOk: () =>
-                      handleDisable({
-                        ...row,
+                      row.id &&
+                      handleUpdateStatus({
                         status: ROLE_STATUS_MAP.禁用,
-                        id: row.id,
-                        clientKey: LOGIN_CONFIG.clientId,
-                        role: row.role,
+                        id: `${row.id}`,
                       }),
                   }),
                 hidden: ROLE_STATUS_MAP.禁用 === +row.status!,
@@ -125,12 +121,10 @@ export default () => {
                 name: '启用',
                 key: 'enable',
                 onClick: async () =>
-                  handleDisable({
-                    ...row,
+                  row.id &&
+                  handleUpdateStatus({
                     status: ROLE_STATUS_MAP.正常,
-                    id: row.id,
-                    clientKey: LOGIN_CONFIG.clientId,
-                    role: row.role,
+                    id: `${row.id}`,
                   }),
                 hidden: ROLE_STATUS_MAP.禁用 !== +row.status!,
               },
@@ -146,25 +140,7 @@ export default () => {
       <ProTable
         style={{ padding: '18px 22px' }}
         actionRef={actionRef}
-        // TODO:联调
         request={fetchList as any}
-        // request={async (params: Store) => {
-        //   const { list, page, total } = await API.authorization.resourceRole.listPagination.fetch(
-        //     removeEmpty({
-        //       ...params,
-        //       roleName: params.role,
-        //       clientKey: LOGIN_CONFIG.clientId,
-        //       page: '' + (params?.current || initialPagination.page),
-        //       pageSize: '' + (params?.pageSize || initialPagination.pageSize),
-        //     }),
-        //   );
-        //   return {
-        //     data: list || [],
-        //     page,
-        //     success: true,
-        //     total,
-        //   };
-        // }}
         onRequestError={(error) => {
           console.error(error.message);
           message.error(`数据加载失败,${error.message}`);

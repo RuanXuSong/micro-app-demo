@@ -53,12 +53,6 @@ export default [
                     component: './authorization/central',
                     fontIcon: 'icon-person',
                   },
-                  {
-                    path: '/auth/authorization/resource/edit',
-                    name: '新增资源',
-                    component: './authorization/resource/edit',
-                    hidden: true,
-                  },
                 ],
               },
             ],

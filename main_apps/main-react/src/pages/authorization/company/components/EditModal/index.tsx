@@ -12,6 +12,7 @@ import ExclamationCircleOutlined from '@ant-design/icons/lib/icons/ExclamationCi
 import styles from './index.module.less';
 import { phoneValidator } from '@/utils/validators';
 import classNames from 'classnames';
+import moment from 'moment';
 
 const formLayout = {
   labelCol: {
@@ -46,19 +47,25 @@ export default ({
   const { tip, setTip } = useSpinning();
   const { id } = formData;
 
-  // const { data: roleList } = useRequest(API.authorization.resourceRole.resourceRoleList.fetch, {
-  //   manual: true,
-  // });
-
   useEffect(() => {
     if (!isEmpty(formData)) {
-      const roleList = formData.roleList || [];
       form.setFieldsValue({
         ...formData,
-        roleList: roleList.length > 0 ? roleList[0].roleId : null,
+        validBefore: moment(formData.validBefore),
+        logo: formData?.logo
+          ? [
+              {
+                uid: '1',
+                name: 'logo',
+                status: 'done',
+                url: formData?.logo,
+                size: 0,
+              },
+            ]
+          : [],
       });
     }
-    // fetchRoleList({ clientKey: LOGIN_CONFIG.clientId });
+
     return () => {
       form.resetFields();
     };
@@ -72,25 +79,18 @@ export default ({
   const submit = (values: Store) => {
     setTip('数据保存中，请稍候...');
 
-    // TODO: 联调
-    console.log('values: ', values);
+    const payload = {
+      ...formData,
+      ...values,
+      logo: values.logo.map((item: Store) => item.url || item.response.data.url)[0],
+    } as defs.platform.TheUserInformation;
 
-    // const payload = {
-    //   ...formData,
-    //   ...values,
-    //   roleList: roleList
-    //     ?.filter(item => values.roleList === item.id)
-    //     .map(item => ({ roleId: item.id, roleName: item.role })),
-    // } as defs.platform.AddingUserAccountDTO;
-
-    // if (formData.userCode) {
-    //   return API.platform.platformUserAccountManagement.editBaseInfo.fetch({
-    //     ...payload,
-    //     password: payload.password ? payload.password : null,
-    //   } as defs.platform.AddingUserAccountDTO);
-    // }
-    // return API.platform.platformUserAccountManagement.add.fetch(payload);
-    return Promise.resolve();
+    if (id) {
+      return API.platform.sysOrg.update.fetch({
+        ...payload,
+      });
+    }
+    return API.platform.sysOrg.save.fetch(payload);
   };
 
   const { run: handleFinish, loading: submitting } = useRequest(submit, {
@@ -122,7 +122,7 @@ export default ({
         <Form form={form} onFinish={handleFinish} {...formLayout} className={styles.formWrap}>
           <Form.Item
             label="企业编码"
-            name="account"
+            name="orgCode"
             tooltip={{
               icon: <ExclamationCircleOutlined />,
               title: '企业编码将作为企业下所有账号后缀',
@@ -140,7 +140,7 @@ export default ({
           </Form.Item>
           <Form.Item
             label="企业名称"
-            name="nickName"
+            name="orgName"
             rules={[
               {
                 whitespace: true,
@@ -154,7 +154,7 @@ export default ({
             <UploadFormItem
               formItemProps={formLayout}
               label="企业logo"
-              name="certificateUrls"
+              name="logo"
               maxCount={1}
               accept={FILE_TYPE_MAP['图片'].join(',')}
               uploadProps={{
@@ -170,7 +170,7 @@ export default ({
           <div className={styles.rowWrap}>
             <Form.Item
               label="企业代码"
-              name="userPhone"
+              name="enterpriseCode"
               rules={[
                 {
                   whitespace: true,
@@ -182,7 +182,7 @@ export default ({
           </div>
           <Form.Item
             label="负责人"
-            name="email"
+            name="director"
             rules={[
               {
                 whitespace: true,
@@ -194,7 +194,7 @@ export default ({
 
           <Form.Item
             label="负责人手机号"
-            name="email"
+            name="phone"
             rules={[
               {
                 whitespace: true,
@@ -206,7 +206,7 @@ export default ({
           >
             <Input placeholder="请输入" />
           </Form.Item>
-          <Form.Item label="有效期" name="date">
+          <Form.Item label="有效期" name="validBefore">
             <DatePicker />
           </Form.Item>
           <div className={classNames(styles.rowWrap, styles.description)}>
@@ -216,9 +216,6 @@ export default ({
               rules={[
                 {
                   whitespace: true,
-                },
-                {
-                  required: true,
                 },
               ]}
               {...rowLayout}
