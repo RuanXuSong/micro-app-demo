@@ -52,6 +52,7 @@ export const initRequest = async () => {
   const request = extend({
     useCache: false,
     ttl: 60000,
+    mode: 'cors',
     credentials: 'same-origin',
     headers: {
       // accessToken: `${token}`,

@@ -144,7 +144,7 @@ export default ({
       visible={visible}
       forceRender
       maskClosable={false}
-      title="企业授权"
+      title="用户授权"
       okButtonProps={{
         htmlType: 'submit',
       }}
