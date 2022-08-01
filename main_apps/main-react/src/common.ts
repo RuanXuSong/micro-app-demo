@@ -52,11 +52,10 @@ export const initRequest = async () => {
   const request = extend({
     useCache: false,
     ttl: 60000,
-    credentials: 'include',
-    mode: 'cors',
+    credentials: 'same-origin',
     headers: {
       // accessToken: `${token}`,
-      // accessToken: '1973c908b6fe99c446c8b2a0c6eaa58b',
+      accessToken: '1973c908b6fe99c446c8b2a0c6eaa58b',
     },
     errorHandler,
     signal: controller.signal,

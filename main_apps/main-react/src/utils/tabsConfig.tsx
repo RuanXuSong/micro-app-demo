@@ -44,19 +44,19 @@ const TABS_CONFIG = {
     title: '首页',
     component: <Homepage />,
   },
-  '/authorization/authority/list': {
+  '/authority/list': {
     title: '权限管理',
     component: <AuthorityList />,
   },
-  '/authorization/user/list': {
+  '/user/list': {
     title: '用户管理',
     component: <UserList />,
   },
-  '/authorization/company/list': {
+  '/company/list': {
     title: '企业管理',
     component: <CompanyList />,
   },
-  '/authorization/central': {
+  '/central': {
     title: '个人中心',
     component: <CentralList />,
   },

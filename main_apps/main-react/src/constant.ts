@@ -27,7 +27,7 @@ export enum RESOURCE_TYPE_MAP {
  */
 export const LOGIN_CONFIG = Object.freeze({
   /** 应用ID */
-  clientId: 'micro-platform',
+  clientId: 'td-data-sso',
   /** 是否是单点登录 */
   isSSO: true,
   /** 密钥 */
