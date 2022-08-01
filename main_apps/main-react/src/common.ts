@@ -73,7 +73,8 @@ export const initRequest = async () => {
         ) {
           controller.abort();
           controller = new AbortController();
-          window.location.replace(LOGOUT_PATH);
+          // window.location.replace(LOGOUT_PATH);
+          console.log('LOGOUT_PATH: ', LOGOUT_PATH);
         }
       });
     return response;
