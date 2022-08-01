@@ -38,23 +38,24 @@ export function errorHandler(error: ResponseError) {
   throw error;
 }
 
-const getToken = () =>
-  new Promise((resolve) => {
-    setTimeout(() => {
-      const token = localStorage.getItem('accessToken');
-      resolve(token);
-    }, 0);
-  });
+// const getToken = () =>
+//   new Promise((resolve) => {
+//     setTimeout(() => {
+//       const token = localStorage.getItem('accessToken');
+//       resolve(token);
+//     }, 0);
+//   });
 
 export const initRequest = async () => {
-  const token = await getToken();
+  // const token = await getToken();
   /** 这边可对接口请求做一些统一的封装 */
   const request = extend({
     useCache: false,
     ttl: 60000,
-    credentials: 'same-origin',
+    credentials: 'include',
+    mode: 'cors',
     headers: {
-      accessToken: `${token}`,
+      // accessToken: `${token}`,
       // accessToken: '1973c908b6fe99c446c8b2a0c6eaa58b',
     },
     errorHandler,
