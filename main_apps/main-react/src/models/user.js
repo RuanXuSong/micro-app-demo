@@ -1,4 +1,3 @@
-import { queryCurrent } from '../../mock/user';
 const UserModel = {
   namespace: 'user',
   state: {
@@ -6,7 +5,7 @@ const UserModel = {
   },
   effects: {
     *fetchCurrent(_, { call, put }) {
-      const response = yield call(queryCurrent);
+      const response = yield call(API.platform.sysUser.myself.fetch);
       yield put({
         type: 'saveCurrentUser',
         payload: response,

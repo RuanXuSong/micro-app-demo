@@ -1,11 +1,11 @@
-import { useRef } from 'react';
+import { useEffect } from 'react';
 import { useImmer } from 'use-immer';
-import { ActionType } from '@ant-design/pro-table';
-import { initialPagination, LOGIN_CONFIG } from '@/constant';
-import { removeEmpty } from '@/utils/json';
+import { useRequest } from 'ahooks';
+import { Form, message } from 'antd';
+import useSpinning from '@/hooks/useSpinning';
 
-export default () => {
-  const actionRef = useRef<ActionType>();
+export default ({ currentUser, dispatch }: any) => {
+  const [form] = Form.useForm();
   const [editModalConfig, setEditModalConfig] = useImmer<{
     visible: boolean;
     formData: any;
@@ -24,35 +24,56 @@ export default () => {
     formData: {},
     loading: false,
   });
+  const { tip, setTip } = useSpinning();
 
-  const { reload } = actionRef.current || {};
-  /**
-   * TODO
-   * 获取详情
-   * @param params
-   */
-  const fetchList = async (params?: { pageSize?: number; current?: number }) => {
-    const { list, page, total } = await API.authorization.resource.listPagination.fetch(
-      removeEmpty({
-        ...params,
-        clientKey: LOGIN_CONFIG.clientId,
-        page: params?.current || initialPagination.page,
-        pageSize: params?.pageSize || initialPagination.pageSize,
-      }),
-    );
-    return {
-      data: list || [],
-      page,
-      success: true,
-      total,
-    };
+  // 重新获取用户信息
+  const reload = () =>
+    dispatch({
+      type: 'user/fetchCurrent',
+    });
+
+  useEffect(() => {
+    const { avatar, ...rest } = currentUser;
+    // 回显表单数据
+    form.setFieldsValue({
+      ...rest,
+      avatar: avatar
+        ? [
+            {
+              uid: '1',
+              name: '头像',
+              status: 'done',
+              url: avatar,
+              size: 0,
+            },
+          ]
+        : [],
+    });
+  }, []);
+
+  const submit = (values: any) => {
+    setTip('数据保存中，请稍候...');
+
+    const payload = {
+      ...values,
+      avatar: values.avatar.map((item: any) => item.url || item.response.data.url)[0],
+    } as defs.platform.TheUserInformation;
+
+    return API.platform.sysUser.update.fetch(payload);
   };
+  const { run: handleFinish, loading: submitting } = useRequest(submit, {
+    manual: true,
+    onSuccess: () => {
+      message.success('保存成功');
+      reload?.();
+    },
+  });
 
   /** 修改密码 */
-  const handlePasswordEdit = (id: string) => {
+  const handlePasswordEdit = () => {
     setEditModalConfig((config) => {
       config.visible = true;
-      config.formData = { id };
+      config.formData = { id: form.getFieldValue('id') };
     });
   };
 
@@ -70,13 +91,14 @@ export default () => {
   };
 
   return {
-    actionRef,
-    reload,
+    tip,
+    form,
+    submitting,
+    handleFinish,
     editModalConfig,
     setEditModalConfig,
     authModalConfig,
     setAuthModalConfig,
-    fetchList,
     handlePasswordEdit,
     handleModalHide,
   };

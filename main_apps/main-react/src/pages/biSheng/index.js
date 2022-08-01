@@ -20,7 +20,7 @@ function BiSheng(props) {
       const { realname, avatar } = payload || {};
       const newPayload = {
         ...payload,
-        name: realname,
+        userName: realname,
         avatar,
       };
       dispatch({

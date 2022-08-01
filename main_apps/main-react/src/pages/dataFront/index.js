@@ -156,7 +156,7 @@ class App extends React.Component {
     this.props.dispatch({
       type: 'user/setCurrentUser',
       payload: {
-        name: 'admin',
+        userName: 'admin',
         avatar: AVATAR_URL,
       },
     });

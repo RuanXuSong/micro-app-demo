@@ -21,7 +21,6 @@ export default ({
   toggleVisible,
   formData,
   loading,
-  reload,
 }: {
   visible: boolean;
   toggleVisible: () => void;
@@ -31,13 +30,7 @@ export default ({
 }) => {
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
-  const { id } = formData;
   const [currentPassword, setCurrentPassword] = useState<string>();
-  console.log('id: ', id);
-
-  // const { data: roleList } = useRequest(API.authorization.resourceRole.resourceRoleList.fetch, {
-  //   manual: true,
-  // });
 
   useEffect(() => {
     if (!isEmpty(formData)) {
@@ -47,7 +40,6 @@ export default ({
         roleList: roleList.length > 0 ? roleList[0].roleId : null,
       });
     }
-    // fetchRoleList({ clientKey: LOGIN_CONFIG.clientId });
     return () => {
       form.resetFields();
     };
@@ -58,37 +50,19 @@ export default ({
     form.resetFields();
   };
 
-  const submit = (values: Store) => {
+  const submit = (values: any) => {
     setTip('数据保存中，请稍候...');
+    const { confirmPassword, ...rest } = values;
 
-    // TODO: 联调
-    console.log('values: ', values);
-
-    // const payload = {
-    //   ...formData,
-    //   ...values,
-    //   roleList: roleList
-    //     ?.filter(item => values.roleList === item.id)
-    //     .map(item => ({ roleId: item.id, roleName: item.role })),
-    // } as defs.platform.AddingUserAccountDTO;
-
-    // if (formData.userCode) {
-    //   return API.platform.platformUserAccountManagement.editBaseInfo.fetch({
-    //     ...payload,
-    //     password: payload.password ? payload.password : null,
-    //   } as defs.platform.AddingUserAccountDTO);
-    // }
-    // return API.platform.platformUserAccountManagement.add.fetch(payload);
-    return Promise.resolve();
+    return API.platform.sysUser.updatePassword.fetch(rest);
   };
 
   const { run: handleFinish, loading: submitting } = useRequest(submit, {
     manual: true,
     onSuccess: () => {
-      message.success('保存成功');
+      message.success('修改成功');
       form.resetFields();
       toggleVisible();
-      reload?.();
     },
   });
 
@@ -111,7 +85,7 @@ export default ({
         <Form form={form} onFinish={handleFinish} {...formLayout}>
           <Form.Item
             label="旧密码"
-            name="password"
+            name="oldPwd"
             rules={[
               {
                 whitespace: true,
@@ -125,7 +99,7 @@ export default ({
           </Form.Item>
           <Form.Item
             label="新密码"
-            name="newPassword"
+            name="newPwd"
             rules={[
               {
                 whitespace: true,

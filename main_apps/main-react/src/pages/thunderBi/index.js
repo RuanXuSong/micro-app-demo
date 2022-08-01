@@ -20,7 +20,7 @@ function ThunderBi(props) {
       const { name, profile_image_url } = payload;
       const newPayload = {
         ...payload,
-        name,
+        userName: name,
         avatar: profile_image_url,
       };
       dispatch({

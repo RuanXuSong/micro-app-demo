@@ -6584,38 +6584,6 @@
         "description": "TenantInformation接口",
         "interfaces": [
           {
-            "description": "删除租户",
-            "name": "remove",
-            "method": "get",
-            "path": "/api/org/delete",
-            "response": {
-              "typeArgs": [],
-              "typeName": "",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "parameters": [
-              {
-                "in": "query",
-                "description": "id",
-                "name": "id",
-                "required": true,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "string",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              }
-            ]
-          },
-          {
             "description": "租户详情",
             "name": "detail",
             "method": "get",
@@ -6816,38 +6784,6 @@
         "description": "TheUserInformation接口",
         "interfaces": [
           {
-            "description": "删除用户",
-            "name": "remove",
-            "method": "get",
-            "path": "/api/user/delete",
-            "response": {
-              "typeArgs": [],
-              "typeName": "",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "parameters": [
-              {
-                "in": "query",
-                "description": "id",
-                "name": "id",
-                "required": true,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "string",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              }
-            ]
-          },
-          {
             "description": "用户详情",
             "name": "detail",
             "method": "get",
@@ -6878,6 +6814,22 @@
                 }
               }
             ]
+          },
+          {
+            "description": "个人信息",
+            "name": "myself",
+            "method": "get",
+            "path": "/api/user/myself",
+            "response": {
+              "typeArgs": [],
+              "typeName": "TheUserInformation",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": []
           },
           {
             "consumes": [

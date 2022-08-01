@@ -491,23 +491,6 @@ declare namespace API {
      */
     export namespace sysOrg {
       /**
-       * 删除租户
-       * /api/org/delete
-       */
-      export namespace remove {
-        export class Params {
-          /** id */
-          id: string;
-        }
-
-        export type Response = any;
-
-        export const init: Response;
-
-        export function fetch(params?: Params): Promise<Response>;
-      }
-
-      /**
        * 租户详情
        * /api/org/detail
        */
@@ -599,23 +582,6 @@ declare namespace API {
      */
     export namespace sysUser {
       /**
-       * 删除用户
-       * /api/user/delete
-       */
-      export namespace remove {
-        export class Params {
-          /** id */
-          id: string;
-        }
-
-        export type Response = any;
-
-        export const init: Response;
-
-        export function fetch(params?: Params): Promise<Response>;
-      }
-
-      /**
        * 用户详情
        * /api/user/detail
        */
@@ -630,6 +596,20 @@ declare namespace API {
         export const init: Response;
 
         export function fetch(params?: Params): Promise<Response>;
+      }
+
+      /**
+       * 个人信息
+       * /api/user/myself
+       */
+      export namespace myself {
+        export class Params {}
+
+        export type Response = defs.platform.TheUserInformation;
+
+        export const init: Response;
+
+        export function fetch(): Promise<Response>;
       }
 
       /**

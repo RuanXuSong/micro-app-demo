@@ -1,14 +1,11 @@
 import React from 'react';
-import { Form, Button, Input, Upload, message, Spin } from 'antd';
-import { history } from 'umi';
-import { LOGIN_CONFIG } from '@/constant';
-import { useRequest } from 'ahooks';
+import { Form, Button, Input, Upload, Spin } from 'antd';
 import styles from './index.module.less';
 import { FILE_TYPE_MAP } from '@/utils/upload';
+import { connect } from 'umi';
 import { AVATAR_URL } from '@/constant';
 import EditModal from './components/EditModal';
 import useCentralService from './useCentralService';
-import useSpinning from '@/hooks/useSpinning';
 
 const formLayout = {
   labelCol: {
@@ -19,70 +16,16 @@ const formLayout = {
   },
 };
 
-export default () => {
-  const [form] = Form.useForm();
-  const { id = '' } = history.location.query || {};
-  const { reload, editModalConfig, handlePasswordEdit, handleModalHide } = useCentralService();
-  const { tip, setTip } = useSpinning();
-
-  /**
-   * 获取详情
-   */
-  const fetchDetail = () => {
-    if (id) {
-      return API.authorization.resourceRole.resourceRoleDetailUser.fetch({
-        clientKey: LOGIN_CONFIG.clientId,
-        roleId: +id,
-      });
-    }
-    return Promise.resolve(new defs.authorization.RoleDTO());
-  };
-
-  useRequest(fetchDetail, {
-    refreshDeps: [id],
-    onSuccess: (result) => {
-      const { role, comment, resourceVOList, ...rest } = result;
-      // 回显表单数据
-      form.setFieldsValue({
-        ...rest,
-        role,
-        comment,
-      });
-    },
-  });
-
-  const submit = (values: any) => {
-    setTip('数据保存中，请稍候...');
-
-    // TODO: 联调
-    console.log('values: ', values);
-
-    // const payload = {
-    //   ...formData,
-    //   ...values,
-    //   roleList: roleList
-    //     ?.filter(item => values.roleList === item.id)
-    //     .map(item => ({ roleId: item.id, roleName: item.role })),
-    // } as defs.platform.AddingUserAccountDTO;
-
-    // if (formData.userCode) {
-    //   return API.platform.platformUserAccountManagement.editBaseInfo.fetch({
-    //     ...payload,
-    //     password: payload.password ? payload.password : null,
-    //   } as defs.platform.AddingUserAccountDTO);
-    // }
-    // return API.platform.platformUserAccountManagement.add.fetch(payload);
-    return Promise.resolve();
-  };
-
-  const { run: handleFinish, loading: submitting } = useRequest(submit, {
-    manual: true,
-    onSuccess: () => {
-      message.success('保存成功');
-      form.resetFields();
-      reload?.();
-    },
-  });
+const Central = (props: any) => {
+  const {
+    form,
+    tip,
+    submitting,
+    handleFinish,
+    editModalConfig,
+    handlePasswordEdit,
+    handleModalHide,
+  } = useCentralService(props);
 
   return (
     <div className={styles.container}>
@@ -92,6 +35,18 @@ export default () => {
             <div className={styles.title}>个人资料</div>
             <div className={styles.infoWrap}>
               <div className={styles.avatarWrap}>
+                <Form.Item
+                  label="id"
+                  name="id"
+                  hidden
+                  rules={[
+                    {
+                      whitespace: true,
+                    },
+                  ]}
+                >
+                  <Input placeholder="请输入" />
+                </Form.Item>
                 <Form.Item label="头像" name="avatar">
                   <Upload
                     maxCount={1}
@@ -118,7 +73,7 @@ export default () => {
 
               <Form.Item
                 label="账号名称"
-                name="account"
+                name="userName"
                 rules={[
                   {
                     whitespace: true,
@@ -127,26 +82,20 @@ export default () => {
               >
                 <Input placeholder="请输入" />
               </Form.Item>
-              <div className={styles.passwordWrap}>
-                <Form.Item
-                  label="账号密码"
-                  name="password"
-                  rules={[
-                    {
-                      whitespace: true,
-                    },
-                  ]}
-                >
-                  <Input type="password" placeholder="请输入" />
-                </Form.Item>
-                <Button
-                  className={styles.editBtn}
-                  type="link"
-                  onClick={() => handlePasswordEdit(`${id}`)}
-                >
-                  修改
+              <Form.Item
+                label="账号密码"
+                name="password"
+                rules={[
+                  {
+                    whitespace: true,
+                  },
+                ]}
+              >
+                <Button className={styles.editBtn} type="link" onClick={handlePasswordEdit}>
+                  修改密码
                 </Button>
-              </div>
+              </Form.Item>
+
               <div className={styles.submitWrap}>
                 <Button type="primary" htmlType="submit" className={styles.submitBtn}>
                   保存
@@ -161,8 +110,11 @@ export default () => {
         formData={editModalConfig.formData}
         loading={editModalConfig.loading}
         toggleVisible={() => handleModalHide('edit')}
-        reload={reload}
       />
     </div>
   );
 };
+
+export default connect(({ user }: any) => ({
+  currentUser: user.currentUser,
+}))(Central);

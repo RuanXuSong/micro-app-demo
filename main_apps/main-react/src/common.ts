@@ -54,7 +54,8 @@ export const initRequest = async () => {
     ttl: 60000,
     credentials: 'same-origin',
     headers: {
-      accessToken: token! as string,
+      accessToken: `${token}`,
+      // accessToken: '1973c908b6fe99c446c8b2a0c6eaa58b',
     },
     errorHandler,
     signal: controller.signal,
