@@ -4,7 +4,7 @@
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:18
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-02 17:17:45
+ * @LastEditTime: 2022-08-02 18:00:14
  */
 import { MenuDataItem } from '@ant-design/pro-layout';
 import arrayUtils, { deepFlatten } from '@/utils/array';
@@ -20,8 +20,7 @@ export async function getInitialState() {
   if (LOGIN_CONFIG.isSSO) {
     try {
       /** 获取菜单资源 */
-      // TODO:改为个人权限资源接口
-      const source = (await API.authorization.resource.listTree.fetch({
+      const source = (await API.authorization.resource.listUserResourceData.fetch({
         clientKey: LOGIN_CONFIG.clientId,
       })) as unknown as PrivilegeResource[];
 

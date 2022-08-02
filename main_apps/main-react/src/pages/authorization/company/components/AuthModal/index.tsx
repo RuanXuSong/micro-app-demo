@@ -7,52 +7,8 @@ import { useRequest } from 'ahooks';
 import useSpinning from '@/hooks/useSpinning';
 import ExclamationCircleOutlined from '@ant-design/icons/lib/icons/ExclamationCircleOutlined';
 import styles from './index.module.less';
-import { DataNode } from 'antd/lib/tree';
 import TreeItem from '@/components/TreeItem';
-
-const treeData: DataNode[] = [
-  {
-    title: '0-0',
-    key: '0-0',
-    children: [
-      {
-        title: '0-0-0',
-        key: '0-0-0',
-        children: [
-          { title: '0-0-0-0', key: '0-0-0-0' },
-          { title: '0-0-0-1', key: '0-0-0-1' },
-          { title: '0-0-0-2', key: '0-0-0-2' },
-        ],
-      },
-      {
-        title: '0-0-1',
-        key: '0-0-1',
-        children: [
-          { title: '0-0-1-0', key: '0-0-1-0' },
-          { title: '0-0-1-1', key: '0-0-1-1' },
-          { title: '0-0-1-2', key: '0-0-1-2' },
-        ],
-      },
-      {
-        title: '0-0-2',
-        key: '0-0-2',
-      },
-    ],
-  },
-  {
-    title: '0-1',
-    key: '0-1',
-    children: [
-      { title: '0-1-0-0', key: '0-1-0-0' },
-      { title: '0-1-0-1', key: '0-1-0-1' },
-      { title: '0-1-0-2', key: '0-1-0-2' },
-    ],
-  },
-  {
-    title: '0-2',
-    key: '0-2',
-  },
-];
+import { useModel } from 'umi';
 
 const formLayout = {
   labelCol: {
@@ -79,6 +35,7 @@ export default ({
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
   const { id } = formData;
+  const { resourceData } = useModel('resourceTree');
   console.log('id: ', id);
 
   // const { data: roleList } = useRequest(API.authorization.resourceRole.resourceRoleList.fetch, {
@@ -164,7 +121,7 @@ export default ({
             }}
             noStyle
           >
-            <TreeItem treeData={treeData} />
+            <TreeItem treeData={resourceData} />
           </Form.Item>
         </Form>
       </Spin>
