@@ -42,13 +42,7 @@ export default ({
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
   const { id } = formData;
-  const { initialState } = useModel('@@initialState');
-  const { authTreeData = [] } = initialState || {};
-  console.log('authTreeData: ', authTreeData);
-
-  // const { data: roleList } = useRequest(API.authorization.resourceRole.resourceRoleList.fetch, {
-  //   manual: true,
-  // });
+  const { resourceData } = useModel('resourceTree');
 
   useEffect(() => {
     if (!isEmpty(formData)) {
@@ -58,7 +52,6 @@ export default ({
         roleList: roleList.length > 0 ? roleList[0].roleId : null,
       });
     }
-    // fetchRoleList({ clientKey: LOGIN_CONFIG.clientId });
     return () => {
       form.resetFields();
     };
@@ -138,7 +131,7 @@ export default ({
 
           <Form.Item label="拥有资源" name="resourceIds">
             <TreeSelect
-              treeData={authTreeData}
+              treeData={resourceData}
               allowClear
               disabled={false}
               multiple

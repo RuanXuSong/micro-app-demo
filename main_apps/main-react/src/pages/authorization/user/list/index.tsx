@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-01 17:16:13
+ * @LastEditTime: 2022-08-02 16:47:36
  */
 import React from 'react';
 import { message, Button, Modal } from 'antd';
@@ -116,7 +116,6 @@ export default () => {
       valueType: 'text',
       hideInSearch: true,
       render: (_, row) => {
-        console.log('row: ', row);
         return (
           <LinkButtons
             buttons={[
