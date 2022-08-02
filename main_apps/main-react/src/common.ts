@@ -75,6 +75,7 @@ export const initRequest = async () => {
           controller.abort();
           controller = new AbortController();
           // window.location.replace(LOGOUT_PATH);
+          // TODO: 联调好后改回来
           console.log('LOGOUT_PATH: ', LOGOUT_PATH);
         }
       });

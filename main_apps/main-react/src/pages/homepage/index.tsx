@@ -81,7 +81,6 @@ const appsList: SectionProps[] = [
 const Homepage = () => {
   const { initialState } = useModel('@@initialState');
   const { privileges = [] } = initialState || {};
-  console.log('privileges: ', privileges);
 
   const renderCardItem = (cardItem: CardItemProps) => {
     const { title, description, logo, link } = cardItem || {};
