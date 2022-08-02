@@ -5,51 +5,8 @@ import 'antd/lib/form';
 import { Store } from 'antd/es/form/interface';
 import { useRequest } from 'ahooks';
 import useSpinning from '@/hooks/useSpinning';
-import { DataNode } from 'antd/lib/tree';
-
-const treeData: DataNode[] = [
-  {
-    title: '0-0',
-    key: '0-0',
-    children: [
-      {
-        title: '0-0-0',
-        key: '0-0-0',
-        children: [
-          { title: '0-0-0-0', key: '0-0-0-0' },
-          { title: '0-0-0-1', key: '0-0-0-1' },
-          { title: '0-0-0-2', key: '0-0-0-2' },
-        ],
-      },
-      {
-        title: '0-0-1',
-        key: '0-0-1',
-        children: [
-          { title: '0-0-1-0', key: '0-0-1-0' },
-          { title: '0-0-1-1', key: '0-0-1-1' },
-          { title: '0-0-1-2', key: '0-0-1-2' },
-        ],
-      },
-      {
-        title: '0-0-2',
-        key: '0-0-2',
-      },
-    ],
-  },
-  {
-    title: '0-1',
-    key: '0-1',
-    children: [
-      { title: '0-1-0-0', key: '0-1-0-0' },
-      { title: '0-1-0-1', key: '0-1-0-1' },
-      { title: '0-1-0-2', key: '0-1-0-2' },
-    ],
-  },
-  {
-    title: '0-2',
-    key: '0-2',
-  },
-];
+import { useModel } from 'umi';
+import { LOGIN_CONFIG } from '@/constant';
 
 const formLayout = {
   labelCol: {
@@ -85,6 +42,9 @@ export default ({
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
   const { id } = formData;
+  const { initialState } = useModel('@@initialState');
+  const { authTreeData = [] } = initialState || {};
+  console.log('authTreeData: ', authTreeData);
 
   // const { data: roleList } = useRequest(API.authorization.resourceRole.resourceRoleList.fetch, {
   //   manual: true,
@@ -112,25 +72,14 @@ export default ({
   const submit = (values: Store) => {
     setTip('数据保存中，请稍候...');
 
-    // TODO: 联调
-    console.log('values: ', values);
+    const payload = {
+      ...values,
+      clientKey: LOGIN_CONFIG.clientId,
+      id,
+      role: formData.role,
+    } as defs.authorization.RoleDTO;
 
-    // const payload = {
-    //   ...formData,
-    //   ...values,
-    //   roleList: roleList
-    //     ?.filter(item => values.roleList === item.id)
-    //     .map(item => ({ roleId: item.id, roleName: item.role })),
-    // } as defs.platform.AddingUserAccountDTO;
-
-    // if (formData.userCode) {
-    //   return API.platform.platformUserAccountManagement.editBaseInfo.fetch({
-    //     ...payload,
-    //     password: payload.password ? payload.password : null,
-    //   } as defs.platform.AddingUserAccountDTO);
-    // }
-    // return API.platform.platformUserAccountManagement.add.fetch(payload);
-    return Promise.resolve();
+    return API.authorization.resourceRole.resourceSaveAddUser.fetch(payload);
   };
 
   const { run: handleFinish, loading: submitting } = useRequest(submit, {
@@ -162,7 +111,7 @@ export default ({
         <Form form={form} onFinish={handleFinish} {...halfFormLayout}>
           <Form.Item
             label="角色名称"
-            name="account"
+            name="role"
             rules={[
               {
                 whitespace: true,
@@ -176,7 +125,7 @@ export default ({
           </Form.Item>
           <Form.Item
             label="角色描述"
-            name="nickName"
+            name="comment"
             {...formLayout}
             rules={[
               {
@@ -187,9 +136,9 @@ export default ({
             <Input placeholder="请输入" />
           </Form.Item>
 
-          <Form.Item label="拥有资源" name="email">
+          <Form.Item label="拥有资源" name="resourceIds">
             <TreeSelect
-              treeData={treeData}
+              treeData={authTreeData}
               allowClear
               disabled={false}
               multiple

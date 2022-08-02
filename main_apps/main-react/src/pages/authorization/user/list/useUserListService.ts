@@ -17,15 +17,6 @@ export default () => {
     formData: {},
     loading: false,
   });
-  const [authModalConfig, setAuthModalConfig] = useImmer<{
-    visible: boolean;
-    formData: any;
-    loading: boolean;
-  }>({
-    visible: false,
-    formData: {},
-    loading: false,
-  });
 
   const { reload } = actionRef.current || {};
 
@@ -90,35 +81,19 @@ export default () => {
   };
 
   /** 隐藏弹窗 */
-  const handleModalHide = (type: 'edit' | 'auth') => {
-    const methodsObj = {
-      edit: setEditModalConfig,
-      auth: setAuthModalConfig,
-    };
-    methodsObj[type]((config) => {
+  const handleModalHide = () =>
+    setEditModalConfig((config) => {
       config.visible = false;
       config.loading = false;
       config.formData = {};
     });
-  };
-
-  /** 给用户授权 */
-  const handleAuthorize = (row: defs.platform.TheUserInformation) => {
-    setAuthModalConfig((config) => {
-      config.visible = true;
-      config.loading = true;
-      config.formData = row;
-    });
-  };
 
   return {
     actionRef,
     reload,
     editModalConfig,
-    authModalConfig,
     handleUpdateStatus,
     handleDelete,
-    handleAuthorize,
     fetchList,
     handleUserAdd,
     handleUserEdit,

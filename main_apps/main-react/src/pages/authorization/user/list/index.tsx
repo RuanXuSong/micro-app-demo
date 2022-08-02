@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-07-29 16:38:53
+ * @LastEditTime: 2022-08-01 17:16:13
  */
 import React from 'react';
 import { message, Button, Modal } from 'antd';
@@ -15,7 +15,6 @@ import { enumToValueEnum } from '@/utils/array';
 import LinkButtons from '@/components/LinkButtons';
 import Edit from '../edit';
 import useUserListService from './useUserListService';
-import AuthModal from '../components/AuthModal';
 
 export default () => {
   const {
@@ -27,8 +26,6 @@ export default () => {
     handleUserAdd,
     handleUserEdit,
     handleModalHide,
-    handleAuthorize,
-    authModalConfig,
   } = useUserListService();
 
   const columns: ProColumns<defs.platform.TheUserInformation>[] = [
@@ -119,6 +116,7 @@ export default () => {
       valueType: 'text',
       hideInSearch: true,
       render: (_, row) => {
+        console.log('row: ', row);
         return (
           <LinkButtons
             buttons={[
@@ -126,11 +124,6 @@ export default () => {
                 name: '编辑',
                 key: 'edit',
                 onClick: () => handleUserEdit(row),
-              },
-              {
-                name: '授权',
-                key: 'authorize',
-                onClick: () => handleAuthorize(row),
               },
               {
                 name: '禁用',
@@ -195,14 +188,7 @@ export default () => {
         visible={editModalConfig.visible}
         formData={editModalConfig.formData}
         loading={editModalConfig.loading}
-        toggleVisible={() => handleModalHide('edit')}
-        reload={reload}
-      />
-      <AuthModal
-        visible={authModalConfig.visible}
-        formData={authModalConfig.formData}
-        loading={authModalConfig.loading}
-        toggleVisible={() => handleModalHide('auth')}
+        toggleVisible={handleModalHide}
         reload={reload}
       />
     </>

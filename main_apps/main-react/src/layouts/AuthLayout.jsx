@@ -5,7 +5,7 @@
  */
 import ProLayout, { DefaultFooter } from '@ant-design/pro-layout';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Link, connect, history } from 'umi';
+import { Link, connect, history, useModel } from 'umi';
 import { GithubOutlined } from '@ant-design/icons';
 import { Result, Button, Menu, Tabs } from 'antd';
 import Authorized from '@/utils/Authorized';
@@ -13,6 +13,7 @@ import RightContent from '@/components/GlobalHeader/RightContent';
 import { getMatchMenu } from '@umijs/route-utils';
 import logo from '../assets/logo.svg';
 import microApp, { removeDomScope } from '@micro-zoe/micro-app';
+import initialState from '@/.umi/plugin-initial-state/models/initialState';
 import styles from './index.module.less';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
@@ -34,18 +35,19 @@ const noMatch = (
   />
 );
 
-/** Use Authorized check all menu item */
-const menuDataRender = (menuList) =>
-  menuList.map((item) => {
-    if (item.hidden) return null;
-    const localItem = {
-      ...item,
-      children: item.children ? menuDataRender(item.children) : undefined,
-    };
-    return Authorized.check(item.authority, localItem, null);
-  });
-
-const BasicLayout = (props) => {
+const AuthLayout = (props) => {
+  const { initialState } = useModel('@@initialState');
+  const { menus = [] } = initialState;
+  const menuDataRender = (menuList) => {
+    return menuList.map((item) => {
+      if (item.hidden) return null;
+      const localItem = {
+        ...item,
+        children: item.children ? menuDataRender(item.children) : undefined,
+      };
+      return Authorized.check(menus, localItem);
+    });
+  };
   const {
     dispatch,
     children,
@@ -163,4 +165,4 @@ function mapStateToProps(state) {
   return { menuKey, collapsed: global.collapsed, settings };
 }
 
-export default connect(mapStateToProps)(BasicLayout);
+export default connect(mapStateToProps)(AuthLayout);

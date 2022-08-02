@@ -17,7 +17,7 @@ export interface PrivilegeResource {
   orderValue: number;
   resourceKey: string;
   type: number;
-  privilegeList: string[];
+  privilegeList: PrivilegeResource[];
   resourceBusinessValue: string;
   children: PrivilegeResource[];
   isVisible: boolean;

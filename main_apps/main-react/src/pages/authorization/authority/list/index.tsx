@@ -1,10 +1,10 @@
 /*
- * @文件描述: 企业管理
+ * @文件描述: 权限菜单管理（角色管理）
  * @公司: thundersdata
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-07-26 15:41:38
+ * @LastEditTime: 2022-08-02 15:17:36
  */
 import React from 'react';
 import { message, Button } from 'antd';
@@ -21,8 +21,8 @@ export default () => {
     reload,
     editModalConfig,
     fetchList,
-    handleCompanyAdd,
-    handleCompanyEdit,
+    handleRoleAdd,
+    handleRoleEdit,
     handleModalHide,
     authModalConfig,
     handleAuthorize,
@@ -31,7 +31,7 @@ export default () => {
   const columns: ProColumns<defs.authorization.ResourceRole>[] = [
     {
       title: '角色名称',
-      dataIndex: 'account',
+      dataIndex: 'role',
       align: 'left',
       copyable: false,
       valueType: 'text',
@@ -39,7 +39,7 @@ export default () => {
     },
     {
       title: '角色描述',
-      dataIndex: 'role',
+      dataIndex: 'comment',
       align: 'left',
       copyable: false,
       valueType: 'text',
@@ -47,7 +47,7 @@ export default () => {
     },
     {
       title: '拥有资源',
-      dataIndex: 'comment',
+      dataIndex: 'operationRange',
       align: 'left',
       copyable: false,
       valueType: 'text',
@@ -67,7 +67,7 @@ export default () => {
               {
                 name: '编辑',
                 key: 'edit',
-                onClick: () => handleCompanyEdit(row),
+                onClick: () => handleRoleEdit(row),
               },
               {
                 name: '授权',
@@ -88,25 +88,7 @@ export default () => {
       <ProTable
         style={{ padding: '18px 22px' }}
         actionRef={actionRef}
-        // TODO:联调
         request={fetchList as any}
-        // request={async (params: Store) => {
-        //   const { list, page, total } = await API.authorization.resourceRole.listPagination.fetch(
-        //     removeEmpty({
-        //       ...params,
-        //       roleName: params.role,
-        //       clientKey: LOGIN_CONFIG.clientId,
-        //       page: '' + (params?.current || initialPagination.page),
-        //       pageSize: '' + (params?.pageSize || initialPagination.pageSize),
-        //     }),
-        //   );
-        //   return {
-        //     data: list || [],
-        //     page,
-        //     success: true,
-        //     total,
-        //   };
-        // }}
         onRequestError={(error) => {
           console.error(error.message);
           message.error(`数据加载失败,${error.message}`);
@@ -121,7 +103,7 @@ export default () => {
         headerTitle="权限列表"
         tableAlertRender={false}
         toolBarRender={() => [
-          <Button onClick={handleCompanyAdd} key="add" type="primary">
+          <Button onClick={handleRoleAdd} key="add" type="primary">
             <PlusOutlined />
             新建
           </Button>,
@@ -137,7 +119,6 @@ export default () => {
       <AuthModal
         visible={authModalConfig.visible}
         formData={authModalConfig.formData}
-        loading={authModalConfig.loading}
         toggleVisible={() => handleModalHide('auth')}
         reload={reload}
       />

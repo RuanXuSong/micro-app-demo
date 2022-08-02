@@ -20,11 +20,9 @@ export default () => {
   const [authModalConfig, setAuthModalConfig] = useImmer<{
     visible: boolean;
     formData: any;
-    loading: boolean;
   }>({
     visible: false,
     formData: {},
-    loading: false,
   });
 
   const { reload } = actionRef.current || {};
@@ -57,7 +55,7 @@ export default () => {
    * @param params
    */
   const fetchList = async (params?: { pageSize?: number; current?: number }) => {
-    const { list, page, total } = await API.authorization.resource.listPagination.fetch(
+    const { list, page, total } = await API.authorization.resourceRole.listPagination.fetch(
       removeEmpty({
         ...params,
         clientKey: LOGIN_CONFIG.clientId,
@@ -73,8 +71,8 @@ export default () => {
     };
   };
 
-  /** 编辑企业 */
-  const handleCompanyEdit = (row: defs.authorization.ResourceRole) => {
+  /** 编辑角色 */
+  const handleRoleEdit = (row: defs.authorization.ResourceRole) => {
     setEditModalConfig((config) => {
       config.visible = true;
       config.loading = true;
@@ -82,8 +80,8 @@ export default () => {
     });
   };
 
-  /** 新建企业 */
-  const handleCompanyAdd = () => {
+  /** 新建角色 */
+  const handleRoleAdd = () => {
     setEditModalConfig((config) => {
       config.visible = true;
       config.formData = {};
@@ -94,7 +92,6 @@ export default () => {
   const handleAuthorize = (row: defs.authorization.ResourceRole) => {
     setAuthModalConfig((config) => {
       config.visible = true;
-      config.loading = true;
       config.formData = row;
     });
   };
@@ -105,7 +102,7 @@ export default () => {
       edit: setEditModalConfig,
       auth: setAuthModalConfig,
     };
-    methodsObj[type]((config) => {
+    methodsObj[type]((config: any) => {
       config.visible = false;
       config.loading = false;
       config.formData = {};
@@ -122,8 +119,8 @@ export default () => {
     handleDisable,
     handleDelete,
     fetchList,
-    handleCompanyEdit,
-    handleCompanyAdd,
+    handleRoleEdit,
+    handleRoleAdd,
     handleAuthorize,
     handleModalHide,
   };

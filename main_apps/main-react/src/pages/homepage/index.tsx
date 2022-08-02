@@ -1,5 +1,6 @@
+import { PrivilegeResource } from '@/interfaces/common';
 import React from 'react';
-import { history } from 'umi';
+import { history, useModel } from 'umi';
 import styles from './index.module.less';
 
 interface CardItemProps {
@@ -7,6 +8,7 @@ interface CardItemProps {
   description: string;
   logo: string;
   link?: string;
+  key: string;
 }
 
 interface SectionProps {
@@ -26,12 +28,14 @@ const appsList: SectionProps[] = [
         description: '快速构建web应用',
         logo: 'web-app',
         link: '/biSheng/dashboard/analysis',
+        key: 'auth_homepage_biSheng',
       },
       {
         title: '敏捷大屏',
         description: '快速构建可视化大屏',
         logo: 'swift-screen',
         link: '',
+        key: 'auth_homepage_screen',
       },
     ],
   },
@@ -44,12 +48,14 @@ const appsList: SectionProps[] = [
         description: '雷数大数据开发平台',
         logo: 'data-front',
         link: '/dataFront',
+        key: 'auth_homepage_dataFront',
       },
       {
         title: '商业智能平台',
         description: '雷数BI平台',
         logo: 'thunder-bi',
         link: '/thunderBi/dashboards',
+        key: 'auth_homepage_thunderBi',
       },
     ],
   },
@@ -62,6 +68,7 @@ const appsList: SectionProps[] = [
         description: '雷数IOT平台',
         logo: 'iot-platform',
         link: '',
+        key: 'auth_homepage_iotPlatform',
       },
     ],
   },
@@ -72,6 +79,10 @@ const appsList: SectionProps[] = [
 ];
 
 const Homepage = () => {
+  const { initialState } = useModel('@@initialState');
+  const { privileges = [] } = initialState || {};
+  console.log('privileges: ', privileges);
+
   const renderCardItem = (cardItem: CardItemProps) => {
     const { title, description, logo, link } = cardItem || {};
     return (
@@ -116,9 +127,23 @@ const Homepage = () => {
         <div className={styles.title}>雷数云平台</div>
         <div className={styles.subTitle}>助力企业搭建高效平台</div>
       </div>
-      <div className={styles.contentWrap}>{appsList.map(renderSection)}</div>
+      <div className={styles.contentWrap}>
+        {checkPermissions(privileges, appsList).map(renderSection)}
+      </div>
     </div>
   );
 };
 
 export default Homepage;
+
+/** 筛选出拥有权限的应用 */
+const checkPermissions = (authPrivileges: PrivilegeResource[], totalAppList: SectionProps[]) => {
+  if (!authPrivileges) {
+    return [];
+  }
+  const authKeys = authPrivileges.map((item) => item.resourceKey);
+  return totalAppList.map((item) => {
+    const { cardsList = [] } = item;
+    return { ...item, cardsList: cardsList.filter((child) => authKeys.includes(child.key)) };
+  });
+};

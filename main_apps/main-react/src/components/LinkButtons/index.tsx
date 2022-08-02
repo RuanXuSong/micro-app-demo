@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-07-22 17:29:44
+ * @LastEditTime: 2022-08-01 17:31:02
  */
 
 import React, { useMemo } from 'react';
@@ -34,7 +34,7 @@ export default ({ buttons, maxNumber = 2, className, style }: HandleButtonsProps
 
   // 2个全部显示，3个及以上只显示第1个和更多，其他都在 dropdown
   const getButtons = (newButtons: ButtonsType[]) => {
-    let frontButtons = buttons;
+    let frontButtons = newButtons;
     let restButtons: ButtonsType[] = [];
     if (newButtons.length > maxNumber) {
       frontButtons = newButtons.slice(0, maxNumber - 1);
