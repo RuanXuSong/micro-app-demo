@@ -4,7 +4,7 @@
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:18
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-03 14:36:11
+ * @LastEditTime: 2022-08-03 18:36:11
  */
 import { MenuDataItem } from '@ant-design/pro-layout';
 import arrayUtils, { deepFlatten } from '@/utils/array';
@@ -16,15 +16,18 @@ import convertSourceToTreeData from './utils/convertSourceToTreeData';
 
 /** 初始化数据 */
 export async function getInitialState() {
+  let userInfo: defs.platform.TheUserInformation = {};
   let menus: MenuDataItem[] = [];
   const privileges: PrivilegeResource[] = [];
   let authResourceData: DataNode[] = [];
 
   if (LOGIN_CONFIG.isSSO) {
     try {
+      userInfo = await API.platform.sysUser.myself.fetch();
       /** 获取菜单资源 */
       const source = (await API.authorization.resource.listUserResourceData.fetch({
         clientKey: LOGIN_CONFIG.clientId,
+        userId: `${userInfo.userId}`,
       })) as unknown as PrivilegeResource[];
       authResourceData = convertSourceToTreeData(source);
 
@@ -49,6 +52,7 @@ export async function getInitialState() {
     }
   }
   return {
+    userInfo,
     menus,
     privileges,
     authResourceData,

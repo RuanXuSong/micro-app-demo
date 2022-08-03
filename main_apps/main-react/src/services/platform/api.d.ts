@@ -408,9 +408,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(
-          bodyParams: defs.platform.UserLoginDTO,
-        ): Promise<Response>;
+        export function fetch(bodyParams: defs.platform.UserLoginDTO): Promise<Response>;
       }
 
       /**
@@ -576,15 +574,11 @@ declare namespace API {
       export namespace pageList {
         export class Params {}
 
-        export type Response = defs.platform.Page<
-          defs.platform.TenantInformation
-        >;
+        export type Response = defs.platform.Page<defs.platform.TenantInformation>;
 
         export const init: Response;
 
-        export function fetch(
-          bodyParams: defs.platform.TheTenantListPageFilter,
-        ): Promise<Response>;
+        export function fetch(bodyParams: defs.platform.TheTenantListPageFilter): Promise<Response>;
       }
 
       /**
@@ -598,9 +592,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(
-          bodyParams: defs.platform.TenantInformation,
-        ): Promise<Response>;
+        export function fetch(bodyParams: defs.platform.TenantInformation): Promise<Response>;
       }
 
       /**
@@ -614,9 +606,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(
-          bodyParams: defs.platform.TenantInformation,
-        ): Promise<Response>;
+        export function fetch(bodyParams: defs.platform.TenantInformation): Promise<Response>;
       }
 
       /**
@@ -650,15 +640,11 @@ declare namespace API {
       export namespace pageList {
         export class Params {}
 
-        export type Response = defs.platform.Page<
-          defs.platform.RightsManagementRoleDtoList
-        >;
+        export type Response = defs.platform.Page<defs.platform.RightsManagementRoleDtoList>;
 
         export const init: Response;
 
-        export function fetch(
-          bodyParams: defs.platform.ScreeningRoleList,
-        ): Promise<Response>;
+        export function fetch(bodyParams: defs.platform.ScreeningRoleList): Promise<Response>;
       }
     }
 
@@ -704,15 +690,11 @@ declare namespace API {
       export namespace pageList {
         export class Params {}
 
-        export type Response = defs.platform.Page<
-          defs.platform.TheUserInformation
-        >;
+        export type Response = defs.platform.Page<defs.platform.TheUserInformation>;
 
         export const init: Response;
 
-        export function fetch(
-          bodyParams: defs.platform.UserListPageFilter,
-        ): Promise<Response>;
+        export function fetch(bodyParams: defs.platform.UserListPageFilter): Promise<Response>;
       }
 
       /**
@@ -743,9 +725,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(
-          bodyParams: defs.platform.TheUserInformation,
-        ): Promise<Response>;
+        export function fetch(bodyParams: defs.platform.TheUserInformation): Promise<Response>;
       }
 
       /**
@@ -759,9 +739,7 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(
-          bodyParams: defs.platform.TheUserInformation,
-        ): Promise<Response>;
+        export function fetch(bodyParams: defs.platform.TheUserInformation): Promise<Response>;
       }
 
       /**
