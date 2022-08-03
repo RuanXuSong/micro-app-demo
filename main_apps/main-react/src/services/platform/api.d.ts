@@ -159,6 +159,9 @@ declare namespace defs {
 
       /** 页容量 */
       pageSize?: number;
+
+      /** 角色名称 */
+      role?: string;
     }
 
     export class TenantInformation {
@@ -550,6 +553,20 @@ declare namespace API {
         export const init: Response;
 
         export function fetch(params?: Params): Promise<Response>;
+      }
+
+      /**
+       * 公司列表
+       * /api/org/list
+       */
+      export namespace orgList {
+        export class Params {}
+
+        export type Response = Array<defs.platform.TenantInformation>;
+
+        export const init: Response;
+
+        export function fetch(): Promise<Response>;
       }
 
       /**

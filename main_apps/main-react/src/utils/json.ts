@@ -48,3 +48,15 @@ export default {
   reverseObj,
   removeEmpty,
 };
+
+/**
+ * 字典转options
+ * @param obj
+ */
+export const dimToOptions = (
+  data: any[] = [],
+  mapping?: { labelMapping?: string; codeMapping?: string },
+) => {
+  const { labelMapping = 'name', codeMapping = 'code' } = mapping || {};
+  return data?.map((item) => ({ label: item[labelMapping], value: item[codeMapping] }));
+};

@@ -6261,7 +6261,6 @@
     "mods": [
       {
         "description": "登录接口",
-        "name": "authorization",
         "interfaces": [
           {
             "consumes": [
@@ -6330,11 +6329,11 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "authorization"
       },
       {
         "description": "Health Check Controller",
-        "name": "healthCheck",
         "interfaces": [
           {
             "description": "healthCheck",
@@ -6463,11 +6462,11 @@
             },
             "parameters": []
           }
-        ]
+        ],
+        "name": "healthCheck"
       },
       {
         "description": "TenantInformation接口",
-        "name": "sysOrg",
         "interfaces": [
           {
             "description": "租户详情",
@@ -6500,6 +6499,32 @@
                 }
               }
             ]
+          },
+          {
+            "description": "公司列表",
+            "name": "orgList",
+            "method": "get",
+            "path": "/api/org/list",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "TenantInformation",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": []
           },
           {
             "consumes": [
@@ -6663,11 +6688,11 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "sysOrg"
       },
       {
         "description": "角色信息接口",
-        "name": "sysRole",
         "interfaces": [
           {
             "consumes": [
@@ -6714,11 +6739,11 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "sysRole"
       },
       {
         "description": "TheUserInformation接口",
-        "name": "sysUser",
         "interfaces": [
           {
             "description": "用户详情",
@@ -7009,14 +7034,14 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "sysUser"
       }
     ],
     "name": "platform",
     "baseClasses": [
       {
         "name": "CookieItemVO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -7116,11 +7141,11 @@
             "description": "value",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "LoginResultVO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -7174,21 +7199,11 @@
             "description": "跳转url",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "Page",
-        "templateArgs": [
-          {
-            "typeArgs": [],
-            "typeName": "RightsManagementRoleDtoList",
-            "isDefsType": true,
-            "templateIndex": -1,
-            "compileTemplateKeyword": "#/definitions/",
-            "enum": [],
-            "typeProperties": []
-          }
-        ],
         "properties": [
           {
             "dataType": {
@@ -7265,11 +7280,21 @@
             "name": "totalPage",
             "required": false
           }
+        ],
+        "templateArgs": [
+          {
+            "typeArgs": [],
+            "typeName": "RightsManagementRoleDtoList",
+            "isDefsType": true,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": [],
+            "typeProperties": []
+          }
         ]
       },
       {
         "name": "ResourceObjects",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -7494,11 +7519,11 @@
             "description": "更新时间",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "RightsManagementRoleDtoList",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -7663,11 +7688,11 @@
             "description": "更新时间",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "ScreeningRoleList",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -7723,12 +7748,26 @@
             "name": "pageSize",
             "description": "页容量",
             "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "role",
+            "description": "角色名称",
+            "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "TenantInformation",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -7949,11 +7988,11 @@
             "description": "有效期",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "TheTenantDetailsDto",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -8202,11 +8241,11 @@
             "description": "有效期",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "TheTenantListPageFilter",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -8333,11 +8372,11 @@
             "description": "有效期",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "TheUserInformation",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -8529,11 +8568,11 @@
             "description": "登录账号",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "UserListPageFilter",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -8646,11 +8685,11 @@
             "description": "登录账号",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "UserLoginDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -8736,7 +8775,8 @@
             "description": "跳转url",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       }
     ]
   }

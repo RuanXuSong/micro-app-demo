@@ -4,10 +4,10 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-03 15:20:08
+ * @LastEditTime: 2022-08-03 16:03:13
  */
 import React from 'react';
-import { message, Button, Modal } from 'antd';
+import { message, Button, Modal, Select } from 'antd';
 import ProTable, { ProColumns } from '@ant-design/pro-table';
 import { ROLE_STATUS_MAP, SEX_ENUM } from '@/constant';
 import { PlusOutlined } from '@ant-design/icons';
@@ -15,9 +15,10 @@ import { enumToValueEnum } from '@/utils/array';
 import LinkButtons from '@/components/LinkButtons';
 import Edit from '../edit';
 import useUserListService from './useUserListService';
-import { connect } from 'umi';
+import { connect, useModel } from 'umi';
 
 const UserList = ({ currentUser }: any) => {
+  const { companyMapOptions } = useModel('company');
   const {
     actionRef,
     reload,
@@ -55,7 +56,7 @@ const UserList = ({ currentUser }: any) => {
       // 超级管理员则不需要隐藏
       hideInSearch: !!currentUser.orgId,
       hideInTable: true,
-      valueEnum: enumToValueEnum(ROLE_STATUS_MAP),
+      renderFormItem: () => <Select allowClear options={companyMapOptions}></Select>,
     },
     {
       title: '手机号',

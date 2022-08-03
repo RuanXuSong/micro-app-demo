@@ -146,6 +146,9 @@ class ScreeningRoleList {
 
   /** 页容量 */
   pageSize = undefined;
+
+  /** 角色名称 */
+  role = '';
 }
 
 class TenantInformation {
