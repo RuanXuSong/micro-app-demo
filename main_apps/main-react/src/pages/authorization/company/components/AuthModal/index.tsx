@@ -5,10 +5,10 @@ import 'antd/lib/form';
 import { Store } from 'antd/es/form/interface';
 import { useRequest } from 'ahooks';
 import useSpinning from '@/hooks/useSpinning';
-import ExclamationCircleOutlined from '@ant-design/icons/lib/icons/ExclamationCircleOutlined';
 import styles from './index.module.less';
 import TreeItem from '@/components/TreeItem';
 import { useModel } from 'umi';
+import { LOGIN_CONFIG } from '@/constant';
 
 const formLayout = {
   labelCol: {
@@ -34,13 +34,41 @@ export default ({
 }) => {
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
-  const { id } = formData;
-  const { resourceData } = useModel('resourceTree');
-  console.log('id: ', id);
+  const { directorRoleId } = formData;
+  const { initialState } = useModel('@@initialState');
+  const { authResourceData } = initialState || {};
 
-  // const { data: roleList } = useRequest(API.authorization.resourceRole.resourceRoleList.fetch, {
-  //   manual: true,
-  // });
+  const { run } = useRequest(
+    (directorRoleId) =>
+      API.authorization.resource.listUserResourceData.fetch({
+        clientKey: LOGIN_CONFIG.clientId,
+        roleId: directorRoleId,
+      }),
+    {
+      manual: true,
+      onSuccess: (resourceList) => {
+        const newIds: number[] = [];
+        resourceList.forEach((item) => {
+          const { id, privilegeList = [] } = item;
+          newIds.push(id!);
+          if (!isEmpty(privilegeList)) {
+            privilegeList.forEach((child) => {
+              newIds.push(child.id!);
+            });
+          }
+        });
+        form.setFieldsValue({
+          resourceIds: newIds,
+        });
+      },
+    },
+  );
+
+  useEffect(() => {
+    if (visible) {
+      run(directorRoleId);
+    }
+  }, [visible]);
 
   useEffect(() => {
     if (!isEmpty(formData)) {
@@ -50,7 +78,6 @@ export default ({
         roleList: roleList.length > 0 ? roleList[0].roleId : null,
       });
     }
-    // fetchRoleList({ clientKey: LOGIN_CONFIG.clientId });
     return () => {
       form.resetFields();
     };
@@ -64,25 +91,13 @@ export default ({
   const submit = (values: Store) => {
     setTip('数据保存中，请稍候...');
 
-    // TODO: 联调
-    console.log('values: ', values);
+    const payload = {
+      ...values,
+      clientKey: LOGIN_CONFIG.clientId,
+      id: directorRoleId,
+    } as defs.authorization.RoleDTO;
 
-    // const payload = {
-    //   ...formData,
-    //   ...values,
-    //   roleList: roleList
-    //     ?.filter(item => values.roleList === item.id)
-    //     .map(item => ({ roleId: item.id, roleName: item.role })),
-    // } as defs.platform.AddingUserAccountDTO;
-
-    // if (formData.userCode) {
-    //   return API.platform.platformUserAccountManagement.editBaseInfo.fetch({
-    //     ...payload,
-    //     password: payload.password ? payload.password : null,
-    //   } as defs.platform.AddingUserAccountDTO);
-    // }
-    // return API.platform.platformUserAccountManagement.add.fetch(payload);
-    return Promise.resolve();
+    return API.authorization.resourceRole.resourceSave.fetch(payload);
   };
 
   const { run: handleFinish, loading: submitting } = useRequest(submit, {
@@ -112,16 +127,8 @@ export default ({
     >
       <Spin spinning={loading && submitting} tip={tip}>
         <Form form={form} onFinish={handleFinish} {...formLayout} className={styles.formWrap}>
-          <Form.Item
-            label="企业编码"
-            name="account"
-            tooltip={{
-              icon: <ExclamationCircleOutlined />,
-              title: '企业编码将作为企业下所有账号后缀',
-            }}
-            noStyle
-          >
-            <TreeItem treeData={resourceData} />
+          <Form.Item label="权限列表" name="resourceIds" noStyle>
+            <TreeItem treeData={authResourceData} />
           </Form.Item>
         </Form>
       </Spin>

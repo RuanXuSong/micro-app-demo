@@ -11,17 +11,6 @@ interface AjaxResponse<T> {
 
 declare namespace defs {
   export namespace platform {
-    export class CommonResponse {
-      /** code */
-      code?: number;
-
-      /** msg */
-      msg?: string;
-
-      /** success */
-      success?: boolean;
-    }
-
     export class CookieItemVO {
       /** domain */
       domain?: string;
@@ -73,6 +62,105 @@ declare namespace defs {
       totalPage?: number;
     }
 
+    export class ResourceObjects {
+      /** api url */
+      apiUrl: string;
+
+      /** 客户端标志 */
+      clientKey: string;
+
+      /** 备注 */
+      comment: string;
+
+      /** 创建时间 */
+      createdAt?: string;
+
+      /** 描述 */
+      description: string;
+
+      /** 图标 */
+      icon?: string;
+
+      /** id */
+      id?: number;
+
+      /** isDeleted */
+      isDeleted?: number;
+
+      /** 是否默认可见 */
+      isVisible?: number;
+
+      /** 资源顺位 */
+      orderValue?: number;
+
+      /** 父级菜单id */
+      parentId?: number;
+
+      /** 资源码 */
+      permissionCode?: string;
+
+      /** 资源拓展字段 */
+      resourceBusinessValue?: string;
+
+      /** 资源标志 */
+      resourceKey: string;
+
+      /** 类型 */
+      type?: number;
+
+      /** 更新时间 */
+      updatedAt?: string;
+    }
+
+    export class RightsManagementRoleDtoList {
+      /** 拓展字段值 */
+      businessValue?: string;
+
+      /** 客户端标志 */
+      clientKey: string;
+
+      /** 备注 */
+      comment?: string;
+
+      /** 创建时间 */
+      createdAt?: string;
+
+      /** id */
+      id?: number;
+
+      /** isDeleted */
+      isDeleted?: boolean;
+
+      /** 操作范围（0：可删可编辑 1：不可删可编辑 2：可删不可编辑 3：不可删不可编辑） */
+      operationRange?: number;
+
+      /** 拥有资源 */
+      resourceList?: Array<defs.platform.ResourceObjects>;
+
+      /** 角色名称 */
+      role: string;
+
+      /** 角色状态 */
+      status?: number;
+
+      /** 更新时间 */
+      updatedAt?: string;
+    }
+
+    export class ScreeningRoleList {
+      /** offset */
+      offset?: number;
+
+      /** 企业code */
+      orgCode?: string;
+
+      /** 页码 */
+      page?: number;
+
+      /** 页容量 */
+      pageSize?: number;
+    }
+
     export class TenantInformation {
       /** createBy */
       createBy?: string;
@@ -86,6 +174,9 @@ declare namespace defs {
       /** 负责人 */
       director?: string;
 
+      /** 管理员角色id */
+      directorRoleId?: number;
+
       /** 企业代码（可为空） */
       enterpriseCode?: string;
 
@@ -94,9 +185,6 @@ declare namespace defs {
 
       /** id */
       id?: string;
-
-      /** 0未删除1已删除 */
-      isDeleted?: number;
 
       /** 租户logo */
       logo?: string;
@@ -136,6 +224,9 @@ declare namespace defs {
       /** 负责人 */
       director?: string;
 
+      /** 管理员角色id */
+      directorRoleId?: number;
+
       /** 管理员账号 */
       directorUsername?: string;
 
@@ -147,9 +238,6 @@ declare namespace defs {
 
       /** id */
       id?: string;
-
-      /** 0未删除1已删除 */
-      isDeleted?: number;
 
       /** 租户logo */
       logo?: string;
@@ -223,9 +311,6 @@ declare namespace defs {
 
       /** id */
       id?: string;
-
-      /** 0未删除1已删除 */
-      isDeleted?: number;
 
       /** 昵称 */
       name?: string;
@@ -336,46 +421,6 @@ declare namespace API {
         }
 
         export type Response = defs.platform.LoginResultVO;
-
-        export const init: Response;
-
-        export function fetch(params?: Params): Promise<Response>;
-      }
-
-      /**
-       * 发送验证码
-       * /api/authorization/sendSms
-       */
-      export namespace sendSms {
-        export class Params {
-          /** phoneNumber */
-          phoneNumber?: string;
-          /** type */
-          type?: number;
-        }
-
-        export type Response = any;
-
-        export const init: Response;
-
-        export function fetch(params?: Params): Promise<Response>;
-      }
-
-      /**
-       * 验证验证码
-       * /api/authorization/verifySms
-       */
-      export namespace verifySms {
-        export class Params {
-          /** code */
-          code?: string;
-          /** phoneNumber */
-          phoneNumber?: string;
-          /** type */
-          type?: number;
-        }
-
-        export type Response = defs.platform.CommonResponse;
 
         export const init: Response;
 
@@ -578,6 +623,29 @@ declare namespace API {
     }
 
     /**
+     * 角色信息接口
+     */
+    export namespace sysRole {
+      /**
+       * 查询所有角色（分页）
+       * /api/role/page
+       */
+      export namespace pageList {
+        export class Params {}
+
+        export type Response = defs.platform.Page<
+          defs.platform.RightsManagementRoleDtoList
+        >;
+
+        export const init: Response;
+
+        export function fetch(
+          bodyParams: defs.platform.ScreeningRoleList,
+        ): Promise<Response>;
+      }
+    }
+
+    /**
      * TheUserInformation接口
      */
     export namespace sysUser {
@@ -628,6 +696,23 @@ declare namespace API {
         export function fetch(
           bodyParams: defs.platform.UserListPageFilter,
         ): Promise<Response>;
+      }
+
+      /**
+       * 重置密码并发送新密码至负责人手机号
+       * /api/user/resetPassword
+       */
+      export namespace resetPassword {
+        export class Params {
+          /** id */
+          id: string;
+        }
+
+        export type Response = any;
+
+        export const init: Response;
+
+        export function fetch(params?: Params): Promise<Response>;
       }
 
       /**

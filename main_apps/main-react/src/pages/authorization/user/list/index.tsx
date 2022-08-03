@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-02 16:47:36
+ * @LastEditTime: 2022-08-03 15:20:08
  */
 import React from 'react';
 import { message, Button, Modal } from 'antd';
@@ -15,8 +15,9 @@ import { enumToValueEnum } from '@/utils/array';
 import LinkButtons from '@/components/LinkButtons';
 import Edit from '../edit';
 import useUserListService from './useUserListService';
+import { connect } from 'umi';
 
-export default () => {
+const UserList = ({ currentUser }: any) => {
   const {
     actionRef,
     reload,
@@ -47,16 +48,15 @@ export default () => {
     },
     {
       title: '企业名称',
-      dataIndex: 'comment',
+      dataIndex: 'orgId',
       align: 'left',
       copyable: false,
       valueType: 'text',
-      // TODO: 根据角色类型判断是否隐藏
-      hideInSearch: false,
+      // 超级管理员则不需要隐藏
+      hideInSearch: !!currentUser.orgId,
       hideInTable: true,
       valueEnum: enumToValueEnum(ROLE_STATUS_MAP),
     },
-
     {
       title: '手机号',
       dataIndex: 'phone',
@@ -79,7 +79,7 @@ export default () => {
       align: 'left',
       copyable: false,
       valueType: 'text',
-      hideInSearch: false,
+      hideInSearch: true,
     },
     {
       title: '头像',
@@ -193,3 +193,7 @@ export default () => {
     </>
   );
 };
+
+export default connect(({ user }: any) => ({
+  currentUser: user.currentUser,
+}))(UserList);

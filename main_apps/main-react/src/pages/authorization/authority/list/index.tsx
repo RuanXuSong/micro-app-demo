@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-02 15:17:36
+ * @LastEditTime: 2022-08-03 14:45:41
  */
 import React from 'react';
 import { message, Button } from 'antd';
@@ -28,7 +28,7 @@ export default () => {
     handleAuthorize,
   } = useCompanyListService();
 
-  const columns: ProColumns<defs.authorization.ResourceRole>[] = [
+  const columns: ProColumns<defs.platform.RightsManagementRoleDtoList>[] = [
     {
       title: '角色名称',
       dataIndex: 'role',
@@ -47,11 +47,15 @@ export default () => {
     },
     {
       title: '拥有资源',
-      dataIndex: 'operationRange',
+      dataIndex: 'resourceList',
       align: 'left',
       copyable: false,
       valueType: 'text',
       hideInSearch: true,
+      render: (_, row) => {
+        const { resourceList = [] } = row || {};
+        return resourceList.map((item) => item.description).join(',');
+      },
     },
     {
       title: '操作',
@@ -72,9 +76,7 @@ export default () => {
               {
                 name: '授权',
                 key: 'authorize',
-                onClick: () => {
-                  handleAuthorize(row);
-                },
+                onClick: () => handleAuthorize(row),
               },
             ]}
           />

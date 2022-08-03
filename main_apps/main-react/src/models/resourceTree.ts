@@ -4,13 +4,13 @@
  * @作者: 阮旭松
  * @Date: 2022-08-02 17:09:38
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-02 17:13:43
+ * @LastEditTime: 2022-08-03 14:35:56
  */
 
 import { LOGIN_CONFIG } from '@/constant';
 import { PrivilegeResource } from '@/interfaces/common';
+import convertSourceToTreeData from '@/utils/convertSourceToTreeData';
 import { useRequest } from 'ahooks';
-import { DataNode } from 'antd/lib/tree';
 
 export default () => {
   const { data: sourceData } = useRequest<PrivilegeResource[]>(() =>
@@ -23,23 +23,3 @@ export default () => {
     resourceData: convertSourceToTreeData(sourceData),
   };
 };
-
-/**
- * 将 source 转换为 Tree 组件可用的数据
- * @param source
- */
-function convertSourceToTreeData(source?: PrivilegeResource[]) {
-  if (!source) return [];
-  const loopData = (data: PrivilegeResource[]): DataNode[] => {
-    const newData = data.map((item) => {
-      const { description, id, privilegeList = [] } = item;
-      return {
-        title: description,
-        key: id,
-        children: privilegeList ? loopData(privilegeList) : [],
-      };
-    });
-    return newData;
-  };
-  return loopData(source);
-}

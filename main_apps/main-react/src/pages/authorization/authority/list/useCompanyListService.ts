@@ -3,7 +3,7 @@ import { useImmer } from 'use-immer';
 import { message } from 'antd';
 import { useRequest } from 'ahooks';
 import { ActionType } from '@ant-design/pro-table';
-import { initialPagination, LOGIN_CONFIG } from '@/constant';
+import { initialPagination } from '@/constant';
 import { removeEmpty } from '@/utils/json';
 
 export default () => {
@@ -55,10 +55,9 @@ export default () => {
    * @param params
    */
   const fetchList = async (params?: { pageSize?: number; current?: number }) => {
-    const { list, page, total } = await API.authorization.resourceRole.listPagination.fetch(
+    const { list, page, total } = await API.platform.sysRole.pageList.fetch(
       removeEmpty({
         ...params,
-        clientKey: LOGIN_CONFIG.clientId,
         page: params?.current || initialPagination.page,
         pageSize: params?.pageSize || initialPagination.pageSize,
       }),
@@ -89,10 +88,11 @@ export default () => {
   };
 
   /** 给企业授权 */
-  const handleAuthorize = (row: defs.authorization.ResourceRole) => {
+  const handleAuthorize = (row: defs.platform.RightsManagementRoleDtoList) => {
+    const { resourceList = [] } = row;
     setAuthModalConfig((config) => {
       config.visible = true;
-      config.formData = row;
+      config.formData = { ...row, resourceIds: resourceList.map((item) => item.id) };
     });
   };
 

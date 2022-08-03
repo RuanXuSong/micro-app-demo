@@ -76,10 +76,8 @@ export default ({
 
   useEffect(() => {
     if (!isEmpty(formData)) {
-      const roleList = formData.roleList || [];
       form.setFieldsValue({
         ...formData,
-        roleList: roleList.length > 0 ? roleList[0].roleId : null,
       });
     }
     return () => {
@@ -99,7 +97,7 @@ export default ({
       clientKey: LOGIN_CONFIG.clientId,
       id,
       userIds: checkedIds.map((item) => +item),
-      resourceIds: [],
+      resourceIds: formData.resourceIds,
       role: formData.role,
     });
   };

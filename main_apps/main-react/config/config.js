@@ -35,7 +35,7 @@ export default defineConfig({
   },
   esbuild: {},
   outputPath: 'build',
-  publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/frontend/' : '/',
   chainWebpack(webpackConfig) {
     if (process.env.NODE_ENV === 'development') {
       webpackConfig.plugin('openBrowser').use({

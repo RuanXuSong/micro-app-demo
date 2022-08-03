@@ -46,10 +46,12 @@ export default ({
 
   useEffect(() => {
     if (!isEmpty(formData)) {
-      const roleList = formData.roleList || [];
+      const { resourceList = [] } = formData || {};
+
+      const resourceIds = resourceList.map((item: defs.platform.ResourceObjects) => item.id);
       form.setFieldsValue({
         ...formData,
-        roleList: roleList.length > 0 ? roleList[0].roleId : null,
+        resourceIds,
       });
     }
     return () => {
@@ -72,7 +74,7 @@ export default ({
       role: formData.role,
     } as defs.authorization.RoleDTO;
 
-    return API.authorization.resourceRole.resourceSaveAddUser.fetch(payload);
+    return API.authorization.resourceRole.resourceSave.fetch(payload);
   };
 
   const { run: handleFinish, loading: submitting } = useRequest(submit, {

@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-07-29 16:33:29
+ * @LastEditTime: 2022-08-03 15:32:38
  */
 import React from 'react';
 import { message, Button, Modal } from 'antd';
@@ -80,6 +80,15 @@ export default () => {
       copyable: false,
       valueType: 'date',
       hideInSearch: false,
+      hideInTable: true,
+    },
+    {
+      title: '有效期',
+      dataIndex: 'validBefore',
+      align: 'left',
+      copyable: false,
+      valueType: 'dateTime',
+      hideInSearch: true,
     },
     {
       title: '操作',

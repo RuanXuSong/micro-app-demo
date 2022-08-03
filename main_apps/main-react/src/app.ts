@@ -4,18 +4,21 @@
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:18
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-02 18:00:14
+ * @LastEditTime: 2022-08-03 14:36:11
  */
 import { MenuDataItem } from '@ant-design/pro-layout';
 import arrayUtils, { deepFlatten } from '@/utils/array';
-import { isEmpty } from 'lodash-es';
 import { PrivilegeResource } from './interfaces/common';
 import { LOGIN_CONFIG } from './constant';
+import { DataNode } from 'antd/lib/tree';
+import convertResourceToMenu from './utils/convertResourceToMenu';
+import convertSourceToTreeData from './utils/convertSourceToTreeData';
 
 /** 初始化数据 */
 export async function getInitialState() {
   let menus: MenuDataItem[] = [];
   const privileges: PrivilegeResource[] = [];
+  let authResourceData: DataNode[] = [];
 
   if (LOGIN_CONFIG.isSSO) {
     try {
@@ -23,6 +26,7 @@ export async function getInitialState() {
       const source = (await API.authorization.resource.listUserResourceData.fetch({
         clientKey: LOGIN_CONFIG.clientId,
       })) as unknown as PrivilegeResource[];
+      authResourceData = convertSourceToTreeData(source);
 
       const routes: PrivilegeResource[] = arrayUtils.deepOrder({
         data: source, // require('../mock/route').default['/resource'].data,
@@ -47,29 +51,6 @@ export async function getInitialState() {
   return {
     menus,
     privileges,
+    authResourceData,
   };
-}
-
-/**
- * 将后台返回的权限资源，转换成应用的菜单
- * @param resources
- */
-function convertResourceToMenu(list: PrivilegeResource[]): MenuDataItem[] {
-  return list.map((item) => {
-    if (!isEmpty(item.children)) {
-      return {
-        name: item.description,
-        key: `${item.apiUrl}`,
-        customIcon: item.icon,
-        path: item.apiUrl,
-        children: convertResourceToMenu(item.children),
-      };
-    }
-    return {
-      name: item.description,
-      key: `${item.apiUrl}`,
-      customIcon: item.icon,
-      path: item.apiUrl,
-    };
-  });
 }

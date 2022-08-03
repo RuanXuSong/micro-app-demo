@@ -1,14 +1,3 @@
-class CommonResponse {
-  /** code */
-  code = undefined;
-
-  /** msg */
-  msg = '';
-
-  /** success */
-  success = false;
-}
-
 class CookieItemVO {
   /** domain */
   domain = '';
@@ -60,6 +49,105 @@ class Page {
   totalPage = undefined;
 }
 
+class ResourceObjects {
+  /** api url */
+  apiUrl = '';
+
+  /** 客户端标志 */
+  clientKey = '';
+
+  /** 备注 */
+  comment = '';
+
+  /** 创建时间 */
+  createdAt = '';
+
+  /** 描述 */
+  description = '';
+
+  /** 图标 */
+  icon = '';
+
+  /** id */
+  id = undefined;
+
+  /** isDeleted */
+  isDeleted = undefined;
+
+  /** 是否默认可见 */
+  isVisible = undefined;
+
+  /** 资源顺位 */
+  orderValue = undefined;
+
+  /** 父级菜单id */
+  parentId = undefined;
+
+  /** 资源码 */
+  permissionCode = '';
+
+  /** 资源拓展字段 */
+  resourceBusinessValue = '';
+
+  /** 资源标志 */
+  resourceKey = '';
+
+  /** 类型 */
+  type = undefined;
+
+  /** 更新时间 */
+  updatedAt = '';
+}
+
+class RightsManagementRoleDtoList {
+  /** 拓展字段值 */
+  businessValue = '';
+
+  /** 客户端标志 */
+  clientKey = '';
+
+  /** 备注 */
+  comment = '';
+
+  /** 创建时间 */
+  createdAt = '';
+
+  /** id */
+  id = undefined;
+
+  /** isDeleted */
+  isDeleted = false;
+
+  /** 操作范围（0：可删可编辑 1：不可删可编辑 2：可删不可编辑 3：不可删不可编辑） */
+  operationRange = undefined;
+
+  /** 拥有资源 */
+  resourceList = [];
+
+  /** 角色名称 */
+  role = '';
+
+  /** 角色状态 */
+  status = undefined;
+
+  /** 更新时间 */
+  updatedAt = '';
+}
+
+class ScreeningRoleList {
+  /** offset */
+  offset = undefined;
+
+  /** 企业code */
+  orgCode = '';
+
+  /** 页码 */
+  page = undefined;
+
+  /** 页容量 */
+  pageSize = undefined;
+}
+
 class TenantInformation {
   /** createBy */
   createBy = '';
@@ -73,6 +161,9 @@ class TenantInformation {
   /** 负责人 */
   director = '';
 
+  /** 管理员角色id */
+  directorRoleId = undefined;
+
   /** 企业代码（可为空） */
   enterpriseCode = '';
 
@@ -81,9 +172,6 @@ class TenantInformation {
 
   /** id */
   id = '';
-
-  /** 0未删除1已删除 */
-  isDeleted = undefined;
 
   /** 租户logo */
   logo = '';
@@ -123,6 +211,9 @@ class TheTenantDetailsDto {
   /** 负责人 */
   director = '';
 
+  /** 管理员角色id */
+  directorRoleId = undefined;
+
   /** 管理员账号 */
   directorUsername = '';
 
@@ -134,9 +225,6 @@ class TheTenantDetailsDto {
 
   /** id */
   id = '';
-
-  /** 0未删除1已删除 */
-  isDeleted = undefined;
 
   /** 租户logo */
   logo = '';
@@ -210,9 +298,6 @@ class TheUserInformation {
 
   /** id */
   id = '';
-
-  /** 0未删除1已删除 */
-  isDeleted = undefined;
 
   /** 昵称 */
   name = '';
@@ -289,10 +374,12 @@ class UserLoginDTO {
 }
 
 export const platform = {
-  CommonResponse,
   CookieItemVO,
   LoginResultVO,
   Page,
+  ResourceObjects,
+  RightsManagementRoleDtoList,
+  ScreeningRoleList,
   TenantInformation,
   TheTenantDetailsDto,
   TheTenantListPageFilter,
