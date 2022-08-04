@@ -44,7 +44,7 @@ microApp.start({
             window.__micro_app_environment__ = window.__MICRO_APP_ENVIRONMENT__
             window.__micro_app_name__ = window.__MICRO_APP_NAME__
             window.__full_public_path__ = window.__MICRO_APP_PUBLIC_PATH__
-            window.baseurl = window.__MICRO_APP_BASE_ROUTE__
+            window.baseurl = window.__MICRO_APP_BASE_ROUTE__ + "/frontend"
             ;${code}
           `;
           return code;
