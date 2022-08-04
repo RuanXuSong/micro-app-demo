@@ -44,7 +44,7 @@ function BiSheng(props) {
       <Loading loading={showLoading} />
       <micro-app
         name="biSheng"
-        baseRoute="/biSheng"
+        baseRoute="/frontend/biSheng"
         url={config.biSheng}
         keep-alive
         onMounted={() => setLoading(false)}
