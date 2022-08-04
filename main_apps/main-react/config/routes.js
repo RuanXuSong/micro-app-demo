@@ -14,6 +14,10 @@ export default [
             path: '/logout',
           },
           {
+            path: '/login',
+            component: './login/index',
+          },
+          {
             path: '/auth',
             component: '../layouts/AuthLayout',
             routes: [
