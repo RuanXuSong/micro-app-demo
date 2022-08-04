@@ -12,9 +12,6 @@ export default defineConfig({
   dva: {
     hmr: true,
   },
-  history: {
-    type: 'hash',
-  },
   dynamicImport: {
     loading: '@/components/PageLoading/index',
   },
@@ -23,7 +20,7 @@ export default defineConfig({
   },
   // umi routes: https://umijs.org/docs/routing
   routes,
-  base: '/',
+  base: process.env.NODE_ENV === 'production' ? '/frontend' : '/',
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
   theme: {
     'primary-color': defaultSettings.primaryColor,
