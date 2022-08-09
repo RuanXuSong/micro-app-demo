@@ -129,6 +129,7 @@ const AuthLayout = (props) => {
         }
         return <Link to={menuItemProps.path}>{renderMenuItem(menuItemProps, defaultDom)}</Link>;
       }}
+      subMenuItemRender={(menuItemProps, defaultDom) => renderMenuItem(menuItemProps, defaultDom)}
       splitMenus
       itemRender={(route, params, routes, paths) => {
         const first = routes.indexOf(route) === 0;

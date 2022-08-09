@@ -2,6 +2,7 @@
  * @description 数据管理
  */
 import * as getDataScope from './getDataScope';
+import * as getDataTypeScope from './getDataTypeScope';
 import * as getMockData from './getMockData';
 import * as deleteDataModule from './deleteDataModule';
 import * as listModule from './listModule';
@@ -16,6 +17,7 @@ import * as saveRule from './saveRule';
 
 export {
   getDataScope,
+  getDataTypeScope,
   getMockData,
   deleteDataModule,
   listModule,

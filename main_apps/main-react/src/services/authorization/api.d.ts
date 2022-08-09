@@ -89,6 +89,9 @@ declare namespace defs {
     }
 
     export class DataRole {
+      /** businessValue */
+      businessValue?: string;
+
       /** clientKey */
       clientKey?: string;
 
@@ -112,6 +115,9 @@ declare namespace defs {
     }
 
     export class DataRoleInputDTO {
+      /** businessValue */
+      businessValue?: string;
+
       /** clientKey */
       clientKey?: string;
 
@@ -138,6 +144,9 @@ declare namespace defs {
     }
 
     export class DataRoleVO {
+      /** businessValue */
+      businessValue?: string;
+
       /** clientKey */
       clientKey?: string;
 
@@ -158,26 +167,6 @@ declare namespace defs {
 
       /** role */
       role?: string;
-
-      /** updatedAt */
-      updatedAt?: string;
-    }
-
-    export class DataRule {
-      /** createdAt */
-      createdAt?: string;
-
-      /** id */
-      id?: number;
-
-      /** isDeleted */
-      isDeleted?: number;
-
-      /** ruleKeyId */
-      ruleKeyId?: number;
-
-      /** ruleName */
-      ruleName?: string;
 
       /** updatedAt */
       updatedAt?: string;
@@ -205,6 +194,9 @@ declare namespace defs {
       /** moduleName */
       moduleName?: string;
 
+      /** originRuleInterface */
+      originRuleInterface?: string;
+
       /** ruleKeyDescription */
       ruleKeyDescription?: string;
 
@@ -219,6 +211,9 @@ declare namespace defs {
     }
 
     export class DataRuleDefinition {
+      /** businessValue */
+      businessValue?: string;
+
       /** clientKey */
       clientKey?: string;
 
@@ -234,6 +229,18 @@ declare namespace defs {
       /** moduleId */
       moduleId?: number;
 
+      /** originRuleInterface */
+      originRuleInterface?: string;
+
+      /** parentBusinessId */
+      parentBusinessId?: string;
+
+      /** parentRuleKeyId */
+      parentRuleKeyId?: number;
+
+      /** ruleDataType */
+      ruleDataType?: string;
+
       /** ruleKey */
       ruleKey?: string;
 
@@ -245,11 +252,31 @@ declare namespace defs {
     }
 
     export class DataScopeDTO {
+      /** businessValue */
+      businessValue?: string;
+
+      /** clientKey */
+      clientKey?: string;
+
+      /** dataModuleId */
+      dataModuleId?: number;
+
       /** ruleKeyList */
       ruleKeyList?: Array<string>;
 
       /** userId */
       userId?: number;
+    }
+
+    export class DataScopeResultDTO {
+      /** businessValueList */
+      businessValueList?: Array<string>;
+
+      /** dataType */
+      dataType?: string;
+
+      /** ruleKey */
+      ruleKey?: string;
     }
 
     export class OrgTreeDTO {
@@ -333,6 +360,29 @@ declare namespace defs {
       telephone?: string;
 
       /** 用户id */
+      userId?: number;
+    }
+
+    export class QueryRoleDTO {
+      /** 拓展业务字段，非必填 */
+      businessValue?: string;
+
+      /** clientKey，必填 */
+      clientKey?: string;
+
+      /** 限制规则id list */
+      dataRuleIds?: Array<number>;
+
+      /** page */
+      page?: number;
+
+      /** pageSize */
+      pageSize?: number;
+
+      /** 角色名称 */
+      roleName?: string;
+
+      /** userId */
       userId?: number;
     }
 
@@ -548,6 +598,14 @@ declare namespace defs {
 
       /** 更新时间 */
       updatedAt?: string;
+    }
+
+    export class RoleBindUserDTO {
+      /** roleId */
+      roleId?: number;
+
+      /** userIdList */
+      userIdList?: Array<number>;
     }
 
     export class RoleDTO {
@@ -770,6 +828,22 @@ declare namespace API {
       }
 
       /**
+       * 获取用户数据权限(带数据类型的)
+       * /data/getDataTypeScope
+       */
+      export namespace getDataTypeScope {
+        export class Params {}
+
+        export type Response = Array<defs.authorization.DataScopeResultDTO>;
+
+        export const init: Response;
+
+        export function fetch(
+          bodyParams: defs.authorization.DataScopeDTO,
+        ): Promise<Response>;
+      }
+
+      /**
        * 获取mock数据
        * /data/mock
        */
@@ -923,11 +997,13 @@ declare namespace API {
        */
       export namespace listRule {
         export class Params {
+          /** businessValue */
+          businessValue?: string;
           /** clientKey */
           clientKey?: string;
         }
 
-        export type Response = Array<defs.authorization.DataRule>;
+        export type Response = Array<defs.authorization.DataRuleDTO>;
 
         export const init: Response;
 
@@ -935,7 +1011,7 @@ declare namespace API {
       }
 
       /**
-       * 保存数据规则
+       * 保存数据规则(设置数据权限范围)
        * /data/rule/save
        */
       export namespace saveRule {
@@ -991,6 +1067,22 @@ declare namespace API {
       }
 
       /**
+       * 将角色绑定给用户（批量）
+       * /role/data/bindUserByRole
+       */
+      export namespace bindUserByRole {
+        export class Params {}
+
+        export type Response = any;
+
+        export const init: Response;
+
+        export function fetch(
+          bodyParams: defs.authorization.RoleBindUserDTO,
+        ): Promise<Response>;
+      }
+
+      /**
        * 删除数据角色
        * /role/data/delete
        */
@@ -1039,6 +1131,41 @@ declare namespace API {
         export const init: Response;
 
         export function fetch(params?: Params): Promise<Response>;
+      }
+
+      /**
+       * 返回角色已绑定的用户id
+       * /role/data/listBoundUser
+       */
+      export namespace listBoundUser {
+        export class Params {
+          /** roleId */
+          roleId?: number;
+        }
+
+        export type Response = Array<number>;
+
+        export const init: Response;
+
+        export function fetch(params?: Params): Promise<Response>;
+      }
+
+      /**
+       * 获取数据权限角色列表
+       * /role/data/listPagination
+       */
+      export namespace listPagination {
+        export class Params {}
+
+        export type Response = defs.authorization.PagingEntity<
+          defs.authorization.DataRoleVO
+        >;
+
+        export const init: Response;
+
+        export function fetch(
+          bodyParams: defs.authorization.QueryRoleDTO,
+        ): Promise<Response>;
       }
 
       /**
@@ -1168,6 +1295,109 @@ declare namespace API {
         export const init: Response;
 
         export function fetch(params?: Params): Promise<Response>;
+      }
+    }
+
+    /**
+     * Health Check Controller
+     */
+    export namespace healthCheck {
+      /**
+       * healthCheck
+       * /system/health/check
+       */
+      export namespace healthCheck {
+        export class Params {}
+
+        export type Response = any;
+
+        export const init: Response;
+
+        export function fetch(): Promise<Response>;
+      }
+
+      /**
+       * healthCheck
+       * /system/health/check
+       */
+      export namespace headCheck {
+        export class Params {}
+
+        export type Response = any;
+
+        export const init: Response;
+
+        export function fetch(): Promise<Response>;
+      }
+
+      /**
+       * healthCheck
+       * /system/health/check
+       */
+      export namespace postCheck {
+        export class Params {}
+
+        export type Response = any;
+
+        export const init: Response;
+
+        export function fetch(): Promise<Response>;
+      }
+
+      /**
+       * healthCheck
+       * /system/health/check
+       */
+      export namespace putCheck {
+        export class Params {}
+
+        export type Response = any;
+
+        export const init: Response;
+
+        export function fetch(): Promise<Response>;
+      }
+
+      /**
+       * healthCheck
+       * /system/health/check
+       */
+      export namespace deleteCheck {
+        export class Params {}
+
+        export type Response = any;
+
+        export const init: Response;
+
+        export function fetch(): Promise<Response>;
+      }
+
+      /**
+       * healthCheck
+       * /system/health/check
+       */
+      export namespace optionsCheck {
+        export class Params {}
+
+        export type Response = any;
+
+        export const init: Response;
+
+        export function fetch(): Promise<Response>;
+      }
+
+      /**
+       * healthCheck
+       * /system/health/check
+       */
+      export namespace patchCheck {
+        export class Params {}
+
+        export type Response = any;
+
+        export const init: Response;
+
+        export function fetch(): Promise<Response>;
       }
     }
 

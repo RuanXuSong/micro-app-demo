@@ -21,11 +21,26 @@ const checkPermissions = (authMenu, currentMenu, Exception) => {
   }
   // 数组处理
   if (Array.isArray(authMenu)) {
+    const getTotalKey = () => {
+      const keys = [];
+
+      const loopKey = (newMenu) => {
+        newMenu.forEach((item) => {
+          keys.push(item.key);
+          if (item.children) {
+            loopKey(item.children);
+          }
+        });
+      };
+      loopKey(authMenu);
+      return keys;
+    };
+    const totalKeys = getTotalKey();
     if (Array.isArray(currentMenu)) {
-      if (currentMenu.some((item) => authMenu.map((child) => child.key).includes(item.key))) {
+      if (currentMenu.some((item) => totalKeys.includes(item.key))) {
         return currentMenu;
       }
-    } else if (authMenu.map((item) => item.key).includes(currentMenu.key)) {
+    } else if (totalKeys.includes(currentMenu.key)) {
       return currentMenu;
     }
 

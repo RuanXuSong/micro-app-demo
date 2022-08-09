@@ -1,3 +1,14 @@
+class ClientKey {
+  /** 客户端id */
+  clientKey = '';
+
+  /** 客户端名称 */
+  clientName = '';
+
+  /** id */
+  id = undefined;
+}
+
 class CookieItemVO {
   /** domain */
   domain = '';
@@ -19,6 +30,47 @@ class CookieItemVO {
 
   /** value */
   value = '';
+}
+
+class DataRuleDTO {
+  /** businessValueList */
+  businessValueList = [];
+
+  /** clientKey */
+  clientKey = '';
+
+  /** createdAt */
+  createdAt = '';
+
+  /** id */
+  id = undefined;
+
+  /** isDeleted */
+  isDeleted = undefined;
+
+  /** moduleId */
+  moduleId = undefined;
+
+  /** moduleName */
+  moduleName = '';
+
+  /** originRuleInterface */
+  originRuleInterface = '';
+
+  /** ruleDataList */
+  ruleDataList = [];
+
+  /** ruleKeyDescription */
+  ruleKeyDescription = '';
+
+  /** ruleKeyId */
+  ruleKeyId = undefined;
+
+  /** ruleName */
+  ruleName = '';
+
+  /** updatedAt */
+  updatedAt = '';
 }
 
 class LoginResultVO {
@@ -149,6 +201,9 @@ class ScreeningRoleList {
 
   /** 角色名称 */
   role = '';
+
+  /** 权限类型 */
+  type = undefined;
 }
 
 class TenantInformation {
@@ -377,7 +432,9 @@ class UserLoginDTO {
 }
 
 export const platform = {
+  ClientKey,
   CookieItemVO,
+  DataRuleDTO,
   LoginResultVO,
   Page,
   ResourceObjects,

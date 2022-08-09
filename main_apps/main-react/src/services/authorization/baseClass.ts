@@ -76,6 +76,9 @@ class DataModule {
 }
 
 class DataRole {
+  /** businessValue */
+  businessValue = '';
+
   /** clientKey */
   clientKey = '';
 
@@ -99,6 +102,9 @@ class DataRole {
 }
 
 class DataRoleInputDTO {
+  /** businessValue */
+  businessValue = '';
+
   /** clientKey */
   clientKey = '';
 
@@ -125,6 +131,9 @@ class DataRoleInputDTO {
 }
 
 class DataRoleVO {
+  /** businessValue */
+  businessValue = '';
+
   /** clientKey */
   clientKey = '';
 
@@ -145,26 +154,6 @@ class DataRoleVO {
 
   /** role */
   role = '';
-
-  /** updatedAt */
-  updatedAt = '';
-}
-
-class DataRule {
-  /** createdAt */
-  createdAt = '';
-
-  /** id */
-  id = undefined;
-
-  /** isDeleted */
-  isDeleted = undefined;
-
-  /** ruleKeyId */
-  ruleKeyId = undefined;
-
-  /** ruleName */
-  ruleName = '';
 
   /** updatedAt */
   updatedAt = '';
@@ -192,6 +181,9 @@ class DataRuleDTO {
   /** moduleName */
   moduleName = '';
 
+  /** originRuleInterface */
+  originRuleInterface = '';
+
   /** ruleKeyDescription */
   ruleKeyDescription = '';
 
@@ -206,6 +198,9 @@ class DataRuleDTO {
 }
 
 class DataRuleDefinition {
+  /** businessValue */
+  businessValue = '';
+
   /** clientKey */
   clientKey = '';
 
@@ -221,6 +216,18 @@ class DataRuleDefinition {
   /** moduleId */
   moduleId = undefined;
 
+  /** originRuleInterface */
+  originRuleInterface = '';
+
+  /** parentBusinessId */
+  parentBusinessId = '';
+
+  /** parentRuleKeyId */
+  parentRuleKeyId = undefined;
+
+  /** ruleDataType */
+  ruleDataType = '';
+
   /** ruleKey */
   ruleKey = '';
 
@@ -232,11 +239,31 @@ class DataRuleDefinition {
 }
 
 class DataScopeDTO {
+  /** businessValue */
+  businessValue = '';
+
+  /** clientKey */
+  clientKey = '';
+
+  /** dataModuleId */
+  dataModuleId = undefined;
+
   /** ruleKeyList */
   ruleKeyList = [];
 
   /** userId */
   userId = undefined;
+}
+
+class DataScopeResultDTO {
+  /** businessValueList */
+  businessValueList = [];
+
+  /** dataType */
+  dataType = '';
+
+  /** ruleKey */
+  ruleKey = '';
 }
 
 class OrgTreeDTO {
@@ -320,6 +347,29 @@ class PersonListDTO {
   telephone = '';
 
   /** 用户id */
+  userId = undefined;
+}
+
+class QueryRoleDTO {
+  /** 拓展业务字段，非必填 */
+  businessValue = '';
+
+  /** clientKey，必填 */
+  clientKey = '';
+
+  /** 限制规则id list */
+  dataRuleIds = [];
+
+  /** page */
+  page = undefined;
+
+  /** pageSize */
+  pageSize = undefined;
+
+  /** 角色名称 */
+  roleName = '';
+
+  /** userId */
   userId = undefined;
 }
 
@@ -537,6 +587,14 @@ class ResourcesForDetails {
   updatedAt = '';
 }
 
+class RoleBindUserDTO {
+  /** roleId */
+  roleId = undefined;
+
+  /** userIdList */
+  userIdList = [];
+}
+
 class RoleDTO {
   /** 拓展字段值 */
   businessValue = '';
@@ -599,18 +657,20 @@ export const authorization = {
   DataRole,
   DataRoleInputDTO,
   DataRoleVO,
-  DataRule,
   DataRuleDTO,
   DataRuleDefinition,
   DataScopeDTO,
+  DataScopeResultDTO,
   OrgTreeDTO,
   PagingEntity,
   PersonListDTO,
+  QueryRoleDTO,
   ResourceObjects,
   ResourcePageObject,
   ResourceRole,
   ResourceTreeObject,
   ResourcesForDetails,
+  RoleBindUserDTO,
   RoleDTO,
   UserQueryDTO,
   UserReduceRoleDTO,

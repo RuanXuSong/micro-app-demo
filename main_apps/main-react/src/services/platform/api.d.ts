@@ -11,6 +11,17 @@ interface AjaxResponse<T> {
 
 declare namespace defs {
   export namespace platform {
+    export class ClientKey {
+      /** 客户端id */
+      clientKey?: string;
+
+      /** 客户端名称 */
+      clientName?: string;
+
+      /** id */
+      id?: number;
+    }
+
     export class CookieItemVO {
       /** domain */
       domain?: string;
@@ -32,6 +43,47 @@ declare namespace defs {
 
       /** value */
       value?: string;
+    }
+
+    export class DataRuleDTO {
+      /** businessValueList */
+      businessValueList?: Array<string>;
+
+      /** clientKey */
+      clientKey?: string;
+
+      /** createdAt */
+      createdAt?: string;
+
+      /** id */
+      id?: number;
+
+      /** isDeleted */
+      isDeleted?: number;
+
+      /** moduleId */
+      moduleId?: number;
+
+      /** moduleName */
+      moduleName?: string;
+
+      /** originRuleInterface */
+      originRuleInterface?: string;
+
+      /** ruleDataList */
+      ruleDataList?: Array<object>;
+
+      /** ruleKeyDescription */
+      ruleKeyDescription?: string;
+
+      /** ruleKeyId */
+      ruleKeyId?: number;
+
+      /** ruleName */
+      ruleName?: string;
+
+      /** updatedAt */
+      updatedAt?: string;
     }
 
     export class LoginResultVO {
@@ -162,6 +214,9 @@ declare namespace defs {
 
       /** 角色名称 */
       role?: string;
+
+      /** 权限类型 */
+      type?: number;
     }
 
     export class TenantInformation {
@@ -408,7 +463,9 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(bodyParams: defs.platform.UserLoginDTO): Promise<Response>;
+        export function fetch(
+          bodyParams: defs.platform.UserLoginDTO,
+        ): Promise<Response>;
       }
 
       /**
@@ -426,6 +483,25 @@ declare namespace API {
         export const init: Response;
 
         export function fetch(params?: Params): Promise<Response>;
+      }
+    }
+
+    /**
+     * Client Key Controller
+     */
+    export namespace clientKey {
+      /**
+       * list
+       * /client/key/list
+       */
+      export namespace list {
+        export class Params {}
+
+        export type Response = Array<defs.platform.ClientKey>;
+
+        export const init: Response;
+
+        export function fetch(): Promise<Response>;
       }
     }
 
@@ -554,7 +630,7 @@ declare namespace API {
       }
 
       /**
-       * 公司列表
+       * 企业列表
        * /api/org/list
        */
       export namespace orgList {
@@ -574,11 +650,15 @@ declare namespace API {
       export namespace pageList {
         export class Params {}
 
-        export type Response = defs.platform.Page<defs.platform.TenantInformation>;
+        export type Response = defs.platform.Page<
+          defs.platform.TenantInformation
+        >;
 
         export const init: Response;
 
-        export function fetch(bodyParams: defs.platform.TheTenantListPageFilter): Promise<Response>;
+        export function fetch(
+          bodyParams: defs.platform.TheTenantListPageFilter,
+        ): Promise<Response>;
       }
 
       /**
@@ -592,7 +672,9 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(bodyParams: defs.platform.TenantInformation): Promise<Response>;
+        export function fetch(
+          bodyParams: defs.platform.TenantInformation,
+        ): Promise<Response>;
       }
 
       /**
@@ -606,7 +688,9 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(bodyParams: defs.platform.TenantInformation): Promise<Response>;
+        export function fetch(
+          bodyParams: defs.platform.TenantInformation,
+        ): Promise<Response>;
       }
 
       /**
@@ -634,17 +718,40 @@ declare namespace API {
      */
     export namespace sysRole {
       /**
+       * listRule
+       * /api/role/data/rule
+       */
+      export namespace listRule {
+        export class Params {
+          /** businessValue */
+          businessValue?: string;
+          /** clientKey */
+          clientKey?: string;
+        }
+
+        export type Response = Array<defs.platform.DataRuleDTO>;
+
+        export const init: Response;
+
+        export function fetch(params?: Params): Promise<Response>;
+      }
+
+      /**
        * 查询所有角色（分页）
        * /api/role/page
        */
       export namespace pageList {
         export class Params {}
 
-        export type Response = defs.platform.Page<defs.platform.RightsManagementRoleDtoList>;
+        export type Response = defs.platform.Page<
+          defs.platform.RightsManagementRoleDtoList
+        >;
 
         export const init: Response;
 
-        export function fetch(bodyParams: defs.platform.ScreeningRoleList): Promise<Response>;
+        export function fetch(
+          bodyParams: defs.platform.ScreeningRoleList,
+        ): Promise<Response>;
       }
     }
 
@@ -690,11 +797,15 @@ declare namespace API {
       export namespace pageList {
         export class Params {}
 
-        export type Response = defs.platform.Page<defs.platform.TheUserInformation>;
+        export type Response = defs.platform.Page<
+          defs.platform.TheUserInformation
+        >;
 
         export const init: Response;
 
-        export function fetch(bodyParams: defs.platform.UserListPageFilter): Promise<Response>;
+        export function fetch(
+          bodyParams: defs.platform.UserListPageFilter,
+        ): Promise<Response>;
       }
 
       /**
@@ -725,7 +836,9 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(bodyParams: defs.platform.TheUserInformation): Promise<Response>;
+        export function fetch(
+          bodyParams: defs.platform.TheUserInformation,
+        ): Promise<Response>;
       }
 
       /**
@@ -739,7 +852,9 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(bodyParams: defs.platform.TheUserInformation): Promise<Response>;
+        export function fetch(
+          bodyParams: defs.platform.TheUserInformation,
+        ): Promise<Response>;
       }
 
       /**

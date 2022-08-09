@@ -1,5 +1,5 @@
 /**
- * @description 保存数据规则
+ * @description 保存数据规则(设置数据权限范围)
  */
 
 import serverConfig from '../../../../../../../server.config';

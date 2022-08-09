@@ -12,8 +12,13 @@ const Homepage = Loadable({
   loading: Loading,
   delay: 150,
 });
-const AuthorityList = Loadable({
-  loader: () => import('../pages/authorization/authority/list'),
+const AuthorityMenuList = Loadable({
+  loader: () => import('../pages/authorization/authority/menu/list'),
+  loading: Loading,
+  delay: 150,
+});
+const AuthorityDataList = Loadable({
+  loader: () => import('../pages/authorization/authority/data/list'),
   loading: Loading,
   delay: 150,
 });
@@ -44,9 +49,13 @@ const TABS_CONFIG = {
     title: '首页',
     component: <Homepage />,
   },
-  '/authority/list': {
-    title: '权限管理',
-    component: <AuthorityList />,
+  '/authority/menu': {
+    title: '菜单管理',
+    component: <AuthorityMenuList />,
+  },
+  '/authority/data': {
+    title: '数据管理',
+    component: <AuthorityDataList />,
   },
   '/user/list': {
     title: '用户管理',

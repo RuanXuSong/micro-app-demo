@@ -424,6 +424,51 @@
             ]
           },
           {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "获取用户数据权限(带数据类型的)",
+            "name": "getDataTypeScope",
+            "method": "post",
+            "path": "/data/getDataTypeScope",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "DataScopeResultDTO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "dataScopeDTO",
+                "name": "dataScopeDTO",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "DataScopeDTO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
             "description": "获取mock数据",
             "name": "getMockData",
             "method": "get",
@@ -749,7 +794,7 @@
               "typeArgs": [
                 {
                   "typeArgs": [],
-                  "typeName": "DataRule",
+                  "typeName": "DataRuleDTO",
                   "isDefsType": true,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
@@ -765,6 +810,21 @@
               "typeProperties": []
             },
             "parameters": [
+              {
+                "in": "query",
+                "description": "businessValue",
+                "name": "businessValue",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
               {
                 "in": "query",
                 "description": "clientKey",
@@ -786,7 +846,7 @@
             "consumes": [
               "application/json"
             ],
-            "description": "保存数据规则",
+            "description": "保存数据规则(设置数据权限范围)",
             "name": "saveRule",
             "method": "post",
             "path": "/data/rule/save",
@@ -912,6 +972,41 @@
             "consumes": [
               "application/json"
             ],
+            "description": "将角色绑定给用户（批量）",
+            "name": "bindUserByRole",
+            "method": "post",
+            "path": "/role/data/bindUserByRole",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "roleBindUserDTO",
+                "name": "roleBindUserDTO",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "RoleBindUserDTO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
             "description": "删除数据角色",
             "name": "remove",
             "method": "post",
@@ -1009,6 +1104,93 @@
                   "typeArgs": [],
                   "typeName": "string",
                   "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "返回角色已绑定的用户id",
+            "name": "listBoundUser",
+            "method": "get",
+            "path": "/role/data/listBoundUser",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "roleId",
+                "name": "roleId",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "获取数据权限角色列表",
+            "name": "listPagination",
+            "method": "post",
+            "path": "/role/data/listPagination",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "DataRoleVO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "PagingEntity",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "queryRoleDTO",
+                "name": "queryRoleDTO",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "QueryRoleDTO",
+                  "isDefsType": true,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
                   "enum": [],
@@ -1337,6 +1519,139 @@
                 }
               }
             ]
+          }
+        ]
+      },
+      {
+        "description": "Health Check Controller",
+        "name": "healthCheck",
+        "interfaces": [
+          {
+            "description": "healthCheck",
+            "name": "healthCheck",
+            "method": "get",
+            "path": "/system/health/check",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": []
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "healthCheck",
+            "name": "headCheck",
+            "method": "head",
+            "path": "/system/health/check",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": []
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "healthCheck",
+            "name": "postCheck",
+            "method": "post",
+            "path": "/system/health/check",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": []
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "healthCheck",
+            "name": "putCheck",
+            "method": "put",
+            "path": "/system/health/check",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": []
+          },
+          {
+            "description": "healthCheck",
+            "name": "deleteCheck",
+            "method": "delete",
+            "path": "/system/health/check",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": []
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "healthCheck",
+            "name": "optionsCheck",
+            "method": "options",
+            "path": "/system/health/check",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": []
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "healthCheck",
+            "name": "patchCheck",
+            "method": "patch",
+            "path": "/system/health/check",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": []
           }
         ]
       },
@@ -3818,6 +4133,19 @@
               "enum": [],
               "typeProperties": []
             },
+            "name": "businessValue",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
             "name": "clientKey",
             "required": false
           },
@@ -3905,6 +4233,19 @@
         "name": "DataRoleInputDTO",
         "templateArgs": [],
         "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "businessValue",
+            "required": false
+          },
           {
             "dataType": {
               "typeArgs": [],
@@ -4035,6 +4376,19 @@
               "enum": [],
               "typeProperties": []
             },
+            "name": "businessValue",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
             "name": "clientKey",
             "required": false
           },
@@ -4124,90 +4478,6 @@
               "typeProperties": []
             },
             "name": "role",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "string",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "updatedAt",
-            "required": false
-          }
-        ]
-      },
-      {
-        "name": "DataRule",
-        "templateArgs": [],
-        "properties": [
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "string",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "createdAt",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "id",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "isDeleted",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "ruleKeyId",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "string",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "ruleName",
             "required": false
           },
           {
@@ -4340,6 +4610,19 @@
               "enum": [],
               "typeProperties": []
             },
+            "name": "originRuleInterface",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
             "name": "ruleKeyDescription",
             "required": false
           },
@@ -4388,6 +4671,19 @@
         "name": "DataRuleDefinition",
         "templateArgs": [],
         "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "businessValue",
+            "required": false
+          },
           {
             "dataType": {
               "typeArgs": [],
@@ -4463,6 +4759,58 @@
               "enum": [],
               "typeProperties": []
             },
+            "name": "originRuleInterface",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "parentBusinessId",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "parentRuleKeyId",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "ruleDataType",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
             "name": "ruleKey",
             "required": false
           },
@@ -4500,6 +4848,45 @@
         "properties": [
           {
             "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "businessValue",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "clientKey",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "dataModuleId",
+            "required": false
+          },
+          {
+            "dataType": {
               "typeArgs": [
                 {
                   "typeArgs": [],
@@ -4532,6 +4919,61 @@
               "typeProperties": []
             },
             "name": "userId",
+            "required": false
+          }
+        ]
+      },
+      {
+        "name": "DataScopeResultDTO",
+        "templateArgs": [],
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "businessValueList",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "dataType",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "ruleKey",
             "required": false
           }
         ]
@@ -4665,7 +5107,7 @@
         "templateArgs": [
           {
             "typeArgs": [],
-            "typeName": "ResourceObjects",
+            "typeName": "DataRoleVO",
             "isDefsType": true,
             "templateIndex": -1,
             "compileTemplateKeyword": "#/definitions/",
@@ -4679,7 +5121,7 @@
               "typeArgs": [
                 {
                   "typeArgs": [],
-                  "typeName": "ResourceObjects",
+                  "typeName": "DataRoleVO",
                   "isDefsType": true,
                   "templateIndex": 0,
                   "compileTemplateKeyword": "#/definitions/",
@@ -4952,6 +5394,117 @@
             },
             "name": "userId",
             "description": "用户id",
+            "required": false
+          }
+        ]
+      },
+      {
+        "name": "QueryRoleDTO",
+        "templateArgs": [],
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "businessValue",
+            "description": "拓展业务字段，非必填",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "clientKey",
+            "description": "clientKey，必填",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "dataRuleIds",
+            "description": "限制规则id list",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "page",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "pageSize",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "roleName",
+            "description": "角色名称",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "userId",
             "required": false
           }
         ]
@@ -5975,6 +6528,48 @@
         ]
       },
       {
+        "name": "RoleBindUserDTO",
+        "templateArgs": [],
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "roleId",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "userIdList",
+            "required": false
+          }
+        ]
+      },
+      {
         "name": "RoleDTO",
         "templateArgs": [],
         "properties": [
@@ -6333,6 +6928,38 @@
         "name": "authorization"
       },
       {
+        "description": "Client Key Controller",
+        "interfaces": [
+          {
+            "description": "list",
+            "name": "list",
+            "method": "get",
+            "path": "/client/key/list",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "ClientKey",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": []
+          }
+        ],
+        "name": "clientKey"
+      },
+      {
         "description": "Health Check Controller",
         "interfaces": [
           {
@@ -6501,7 +7128,7 @@
             ]
           },
           {
-            "description": "公司列表",
+            "description": "企业列表",
             "name": "orgList",
             "method": "get",
             "path": "/api/org/list",
@@ -6694,6 +7321,63 @@
       {
         "description": "角色信息接口",
         "interfaces": [
+          {
+            "description": "listRule",
+            "name": "listRule",
+            "method": "get",
+            "path": "/api/role/data/rule",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "DataRuleDTO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "businessValue",
+                "name": "businessValue",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "description": "clientKey",
+                "name": "clientKey",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
           {
             "consumes": [
               "application/json"
@@ -7041,6 +7725,53 @@
     "name": "platform",
     "baseClasses": [
       {
+        "name": "ClientKey",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "clientKey",
+            "description": "客户端id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "clientName",
+            "description": "客户端名称",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "id",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
         "name": "CookieItemVO",
         "properties": [
           {
@@ -7139,6 +7870,201 @@
             },
             "name": "value",
             "description": "value",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "DataRuleDTO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "businessValueList",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "clientKey",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "createdAt",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "isDeleted",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "moduleId",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "moduleName",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "originRuleInterface",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "object",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "ruleDataList",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "ruleKeyDescription",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "ruleKeyId",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "ruleName",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "updatedAt",
             "required": false
           }
         ],
@@ -7761,6 +8687,20 @@
             },
             "name": "role",
             "description": "角色名称",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "type",
+            "description": "权限类型",
             "required": false
           }
         ],

@@ -1,5 +1,5 @@
 /**
- * @description 企业列表
+ * @description listRule
  */
 
 import serverConfig from '../../../../../../../server.config';
@@ -11,7 +11,7 @@ export const init = [];
 
 export async function fetch(params = {}) {
   const request = await initRequest();
-  const result = await request.get(backEndUrl + '/api/org/list', {
+  const result = await request.get(backEndUrl + '/api/role/data/rule', {
     headers: {
       'Content-Type': 'application/json',
     },

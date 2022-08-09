@@ -34,10 +34,23 @@ export default [
                     fontIcon: 'icon-homepage',
                   },
                   {
-                    path: '/auth/authority/list',
+                    path: '/auth/authority',
                     name: '权限管理',
-                    component: './authorization/authority/list',
                     fontIcon: 'icon-authority',
+                    routes: [
+                      {
+                        path: '/auth/authority/menu',
+                        name: '菜单权限',
+                        customIcon: 'icon-authority',
+                        component: './authorization/authority/menu/list',
+                      },
+                      {
+                        path: '/auth/authority/data',
+                        name: '数据权限',
+                        customIcon: 'icon-authority',
+                        component: './authorization/authority/data/list',
+                      },
+                    ],
                   },
                   {
                     path: '/auth/user/list',

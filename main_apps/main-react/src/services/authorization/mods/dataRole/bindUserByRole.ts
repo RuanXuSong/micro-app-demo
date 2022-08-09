@@ -1,27 +1,27 @@
 /**
- * @description 企业列表
+ * @description 将角色绑定给用户（批量）
  */
 
 import serverConfig from '../../../../../../../server.config';
 import { initRequest } from '@/common';
 
-const backEndUrl = serverConfig()['platform'];
+const backEndUrl = serverConfig()['authorization'];
 
-export const init = [];
+export const init = undefined;
 
-export async function fetch(params = {}) {
+export async function fetch(data = {}) {
   const request = await initRequest();
-  const result = await request.get(backEndUrl + '/api/org/list', {
+  const result = await request.post(backEndUrl + '/role/data/bindUserByRole', {
     headers: {
       'Content-Type': 'application/json',
     },
-    params,
+    data,
   });
   if (result) {
     if (!result.success) {
       throw new Error(JSON.stringify(result));
     } else {
-      return result.data || [];
+      return result.data || undefined;
     }
   } else {
     throw new Error(JSON.stringify({ message: '接口未响应' }));

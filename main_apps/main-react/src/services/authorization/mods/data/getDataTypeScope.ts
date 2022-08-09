@@ -1,21 +1,21 @@
 /**
- * @description 企业列表
+ * @description 获取用户数据权限(带数据类型的)
  */
 
 import serverConfig from '../../../../../../../server.config';
 import { initRequest } from '@/common';
 
-const backEndUrl = serverConfig()['platform'];
+const backEndUrl = serverConfig()['authorization'];
 
 export const init = [];
 
-export async function fetch(params = {}) {
+export async function fetch(data = {}) {
   const request = await initRequest();
-  const result = await request.get(backEndUrl + '/api/org/list', {
+  const result = await request.post(backEndUrl + '/data/getDataTypeScope', {
     headers: {
       'Content-Type': 'application/json',
     },
-    params,
+    data,
   });
   if (result) {
     if (!result.success) {

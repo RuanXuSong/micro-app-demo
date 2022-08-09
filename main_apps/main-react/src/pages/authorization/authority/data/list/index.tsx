@@ -1,41 +1,67 @@
 /*
- * @文件描述: 权限菜单管理（角色管理）
+ * @文件描述: 权限数据管理
  * @公司: thundersdata
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-03 14:45:41
+ * @LastEditTime: 2022-08-09 16:13:36
  */
-import React from 'react';
-import { message, Button } from 'antd';
+import React, { useEffect } from 'react';
+import { message, Button, Row, Col, Select } from 'antd';
 import ProTable, { ProColumns } from '@ant-design/pro-table';
 import { PlusOutlined } from '@ant-design/icons';
 import LinkButtons from '@/components/LinkButtons';
 import EditModal from '../components/EditModal';
 import AuthModal from '../components/AuthModal';
-import useCompanyListService from './useCompanyListService';
+import useAuthDataListService from './useAuthDataListService';
+import styles from './index.module.less';
+import ScopeModal from '../components/ScopeModal';
+import { useModel } from 'umi';
+import { isEmpty } from 'lodash';
 
 export default () => {
   const {
     actionRef,
     reload,
+    clientKey,
+    setClientKey,
+    scopeMapOptions,
     editModalConfig,
     fetchList,
     handleRoleAdd,
     handleRoleEdit,
+    handleScopeSet,
     handleModalHide,
     authModalConfig,
+    scopeModalConfig,
     handleAuthorize,
-  } = useCompanyListService();
+  } = useAuthDataListService();
+  const { businessMapOptions } = useModel('business');
 
-  const columns: ProColumns<defs.platform.RightsManagementRoleDtoList>[] = [
+  useEffect(() => {
+    if (!isEmpty(businessMapOptions)) {
+      // TODO:改为0
+      setClientKey(businessMapOptions[1].value);
+    }
+  }, [businessMapOptions]);
+
+  const columns: ProColumns<defs.authorization.DataRoleVO>[] = [
+    {
+      title: '角色名称',
+      dataIndex: 'roleName',
+      align: 'left',
+      copyable: false,
+      valueType: 'text',
+      hideInSearch: false,
+      hideInTable: true,
+    },
     {
       title: '角色名称',
       dataIndex: 'role',
       align: 'left',
       copyable: false,
       valueType: 'text',
-      hideInSearch: false,
+      hideInSearch: true,
     },
     {
       title: '角色描述',
@@ -46,15 +72,15 @@ export default () => {
       hideInSearch: true,
     },
     {
-      title: '拥有资源',
-      dataIndex: 'resourceList',
+      title: '限制菜单',
+      dataIndex: 'dataRuleDTOList',
       align: 'left',
       copyable: false,
       valueType: 'text',
       hideInSearch: true,
       render: (_, row) => {
-        const { resourceList = [] } = row || {};
-        return resourceList.map((item) => item.description).join(',');
+        const { dataRuleDTOList = [] } = row || {};
+        return dataRuleDTOList.map((item) => item.ruleName).join(',');
       },
     },
     {
@@ -78,6 +104,11 @@ export default () => {
                 key: 'authorize',
                 onClick: () => handleAuthorize(row),
               },
+              {
+                name: '设置范围',
+                key: 'scope',
+                onClick: () => handleScopeSet(row),
+              },
             ]}
           />
         );
@@ -87,10 +118,29 @@ export default () => {
 
   return (
     <>
+      <div className={styles.searchWrap}>
+        <Row>
+          <Col span="6" className={styles.formItemWrap}>
+            <div className={styles.label}>子系统：</div>
+            <div className={styles.inputWrap}>
+              <Select
+                value={clientKey}
+                onChange={(value) => {
+                  setClientKey(value);
+                  reload?.();
+                }}
+                allowClear
+                placeholder="请选择"
+                options={businessMapOptions}
+              />
+            </div>
+          </Col>
+        </Row>
+      </div>
       <ProTable
         style={{ padding: '18px 22px' }}
         actionRef={actionRef}
-        request={fetchList as any}
+        request={fetchList}
         onRequestError={(error) => {
           console.error(error.message);
           message.error(`数据加载失败,${error.message}`);
@@ -98,11 +148,8 @@ export default () => {
         columns={columns}
         bordered
         rowKey="id"
-        pagination={{
-          size: 'default',
-        }}
         dateFormatter="string"
-        headerTitle="权限列表"
+        headerTitle="数据权限列表"
         tableAlertRender={false}
         toolBarRender={() => [
           <Button onClick={handleRoleAdd} key="add" type="primary">
@@ -117,12 +164,22 @@ export default () => {
         loading={editModalConfig.loading}
         toggleVisible={() => handleModalHide('edit')}
         reload={reload}
+        clientKey={clientKey}
+        scopeMapOptions={scopeMapOptions}
       />
       <AuthModal
         visible={authModalConfig.visible}
         formData={authModalConfig.formData}
         toggleVisible={() => handleModalHide('auth')}
         reload={reload}
+      />
+      <ScopeModal
+        visible={scopeModalConfig.visible}
+        formData={scopeModalConfig.formData}
+        toggleVisible={() => handleModalHide('scope')}
+        reload={reload}
+        clientKey={clientKey}
+        scopeMapOptions={scopeMapOptions}
       />
     </>
   );

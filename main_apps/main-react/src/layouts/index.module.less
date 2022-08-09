@@ -103,6 +103,12 @@
 .tabPaneContainer {
   height: calc(100vh - 112px);
   overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   :global {
     .ant-pro-table {

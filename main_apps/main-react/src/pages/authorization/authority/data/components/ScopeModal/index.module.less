@@ -1,0 +1,47 @@
+.contentWrap {
+  display: flex;
+  align-content: stretch;
+  height: 100%;
+  border-top: 1px solid #d9d9d9;
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 150px;
+    padding: 8px 12px;
+    border-right: 1px solid #d9d9d9;
+
+    .selectItem {
+      display: flex;
+      margin-bottom: 4px;
+
+      .label {
+        margin-left: 8px;
+        color: #333;
+        cursor: pointer;
+      }
+
+      .selected {
+        color: #1890ff;
+      }
+    }
+
+    :global {
+      .ant-checkbox-group {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+
+  .right {
+    flex: 1;
+  }
+}
+
+:global {
+  .scope-modal .ant-modal-body {
+    padding: 0;
+  }
+}

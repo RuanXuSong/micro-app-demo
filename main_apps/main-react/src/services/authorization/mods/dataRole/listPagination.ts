@@ -1,27 +1,27 @@
 /**
- * @description 企业列表
+ * @description 获取数据权限角色列表
  */
-
+import * as defs from '../../baseClass';
 import serverConfig from '../../../../../../../server.config';
 import { initRequest } from '@/common';
 
-const backEndUrl = serverConfig()['platform'];
+const backEndUrl = serverConfig()['authorization'];
 
-export const init = [];
+export const init = new defs.authorization.PagingEntity();
 
-export async function fetch(params = {}) {
+export async function fetch(data = {}) {
   const request = await initRequest();
-  const result = await request.get(backEndUrl + '/api/org/list', {
+  const result = await request.post(backEndUrl + '/role/data/listPagination', {
     headers: {
       'Content-Type': 'application/json',
     },
-    params,
+    data,
   });
   if (result) {
     if (!result.success) {
       throw new Error(JSON.stringify(result));
     } else {
-      return result.data || [];
+      return result.data || new defs.authorization.PagingEntity();
     }
   } else {
     throw new Error(JSON.stringify({ message: '接口未响应' }));

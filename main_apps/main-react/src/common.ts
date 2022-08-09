@@ -56,7 +56,9 @@ export const initRequest = async () => {
     credentials: 'same-origin',
     headers: {
       // accessToken: `${token}`,
-      // accessToken: '1973c908b6fe99c446c8b2a0c6eaa58b',
+      // 'X-WEBAUTH-UID': 1,
+      // 'X-WEBAUTH-TOKEN': '57147a64890fa2e031b5dbcf23975678',
+      // accessToken: '57147a64890fa2e031b5dbcf23975678',
     },
     errorHandler,
     signal: controller.signal,

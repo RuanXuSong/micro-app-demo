@@ -1,17 +1,17 @@
 /**
- * @description 企业列表
+ * @description 返回角色已绑定的用户id
  */
 
 import serverConfig from '../../../../../../../server.config';
 import { initRequest } from '@/common';
 
-const backEndUrl = serverConfig()['platform'];
+const backEndUrl = serverConfig()['authorization'];
 
 export const init = [];
 
 export async function fetch(params = {}) {
   const request = await initRequest();
-  const result = await request.get(backEndUrl + '/api/org/list', {
+  const result = await request.get(backEndUrl + '/role/data/listBoundUser', {
     headers: {
       'Content-Type': 'application/json',
     },
