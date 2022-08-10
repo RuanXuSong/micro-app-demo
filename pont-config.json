@@ -10,7 +10,7 @@
   "origins": [
     {
       "name": "authorization",
-      "originUrl": "http://authorization.jxzk.thundersdata.com:38204/v2/api-docs"
+      "originUrl": "http://platform-center.jxzk.thundersdata.com:38204/auth/v2/api-docs"
     },
     {
       "name": "platform",
