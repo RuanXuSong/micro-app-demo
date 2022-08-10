@@ -90,6 +90,7 @@ const Homepage = () => {
         onClick={() => {
           link && history.push(link);
         }}
+        key={title}
       >
         <div className={styles.left}>
           <img src={require(`@/assets/${logo}.png`)} />
@@ -108,7 +109,7 @@ const Homepage = () => {
   const renderSection = (section: SectionProps) => {
     const { title, logo, cardsList = [] } = section || {};
     return (
-      <div className={styles.section}>
+      <div className={styles.section} key={title}>
         <div className={styles.sectionTitle}>
           <img src={require(`@/assets/${logo}.png`)} />
           {title}

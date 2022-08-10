@@ -53,13 +53,13 @@ export default ({ currentUser, dispatch }: any) => {
 
   const submit = (values: any) => {
     setTip('数据保存中，请稍候...');
+    const { avatar, ...rest } = values;
 
-    const payload = {
-      ...values,
-      avatar: values.avatar.map((item: any) => item.url || item.response.data.url)[0],
-    } as defs.platform.TheUserInformation;
+    if (values.avatar) {
+      rest.avatar = values.avatar?.file?.response?.data?.url;
+    }
 
-    return API.platform.sysUser.update.fetch(payload);
+    return API.platform.sysUser.update.fetch(rest);
   };
   const { run: handleFinish, loading: submitting } = useRequest(submit, {
     manual: true,

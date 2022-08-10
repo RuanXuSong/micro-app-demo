@@ -34,7 +34,7 @@ export enum RESOURCE_TYPE_MAP {
  */
 export const LOGIN_CONFIG = Object.freeze({
   /** 应用ID */
-  clientId: 'td-data-sso',
+  clientId: 'manage-center',
   /** 是否是单点登录 */
   isSSO: true,
   /** 密钥 */

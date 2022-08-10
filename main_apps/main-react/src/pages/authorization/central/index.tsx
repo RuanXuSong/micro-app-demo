@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Button, Input, Upload, Spin } from 'antd';
 import styles from './index.module.less';
-import { FILE_TYPE_MAP } from '@/utils/upload';
+import { FILE_TYPE_MAP, getPublicUploadProps, handleUpload } from '@/utils/upload';
 import { connect } from 'umi';
 import { AVATAR_URL } from '@/constant';
 import EditModal from './components/EditModal';
@@ -47,8 +47,22 @@ const Central = (props: any) => {
                 >
                   <Input placeholder="请输入" />
                 </Form.Item>
-                <Form.Item label="头像" name="avatar">
+                <Form.Item
+                  label="头像"
+                  name="avatar"
+                  valuePropName="fileList"
+                  getValueFromEvent={handleUpload}
+                  getValueProps={(value) => {
+                    const modifiedValue = value ?? [];
+                    return {
+                      fileList: Array.isArray(modifiedValue)
+                        ? modifiedValue
+                        : [{ url: modifiedValue }],
+                    };
+                  }}
+                >
                   <Upload
+                    {...getPublicUploadProps()}
                     maxCount={1}
                     accept={FILE_TYPE_MAP['图片'].join(',')}
                     multiple={false}

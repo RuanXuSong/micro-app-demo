@@ -71,7 +71,6 @@ export default ({
       ...values,
       clientKey: LOGIN_CONFIG.clientId,
       id,
-      role: formData.role,
     } as defs.authorization.RoleDTO;
 
     return API.authorization.resourceRole.resourceSave.fetch(payload);
