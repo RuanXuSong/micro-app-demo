@@ -72,6 +72,7 @@ export default ({
       ...values,
       clientKey,
       id,
+      ruleIdList: values.ruleIdList ?? [],
     } as defs.authorization.DataRoleInputDTO;
 
     return API.authorization.dataRole.save.fetch(payload);
