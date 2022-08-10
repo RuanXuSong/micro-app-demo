@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-09 16:13:47
+ * @LastEditTime: 2022-08-10 18:07:36
  */
 import React from 'react';
 import { message, Button } from 'antd';
@@ -90,7 +90,7 @@ export default () => {
       <ProTable
         style={{ padding: '18px 22px' }}
         actionRef={actionRef}
-        request={fetchList as any}
+        request={fetchList}
         onRequestError={(error) => {
           console.error(error.message);
           message.error(`数据加载失败,${error.message}`);
