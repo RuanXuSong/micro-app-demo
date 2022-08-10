@@ -57,8 +57,8 @@ export const initRequest = async () => {
     headers: {
       // accessToken: `${token}`,
       // 'X-WEBAUTH-UID': 1,
-      // 'X-WEBAUTH-TOKEN': '57147a64890fa2e031b5dbcf23975678',
-      // accessToken: '57147a64890fa2e031b5dbcf23975678',
+      // 'X-WEBAUTH-TOKEN': '1973c908b6fe99c446c8b2a0c6eaa58b',
+      // accessToken: '1973c908b6fe99c446c8b2a0c6eaa58b',
     },
     errorHandler,
     signal: controller.signal,

@@ -1,15 +1,15 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, Form, Spin, message, Table } from 'antd';
 import { isEmpty } from 'lodash-es';
 import 'antd/lib/form';
 import { Store } from 'antd/es/form/interface';
 import { useRequest } from 'ahooks';
 import useSpinning from '@/hooks/useSpinning';
-import styles from './index.module.less';
 import { ColumnsType } from 'antd/es/table/interface';
 import classNames from 'classnames';
 import { useImmer } from 'use-immer';
 import { isEqual } from 'lodash';
+import styles from './index.module.less';
 
 /**
  * 初始化分页数据
@@ -36,9 +36,15 @@ export default ({
 }) => {
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
-  const { id, businessValue } = formData;
+  const { businessValue } = formData;
   const [selectedRowKeysObj, setSelectedRowKeysObj] = useImmer<Record<string, string[]>>({});
   const [selectedId, setSelectedId] = useState<number>();
+
+  const [ruleInfoObj, setRuleInfoObj] = useImmer<
+    Record<string, { businessValues: string[]; listData: string[] }>
+  >({});
+
+  const { listData = [], businessValues = [] } = ruleInfoObj[selectedId!] || {};
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     setSelectedRowKeysObj((config) => {
@@ -47,37 +53,6 @@ export default ({
       }
     });
   };
-
-  const {
-    data: roleDetail,
-    run: fetchRoleDetail,
-    loading: detailLoading,
-  } = useRequest(API.authorization.dataRole.detail.fetch, {
-    manual: true,
-    onSuccess: (response) => {
-      const businessValuesObj = {};
-      response?.dataRuleDTOList?.forEach((item) => {
-        const { ruleKeyId, businessValueList } = item;
-
-        if (ruleKeyId) {
-          businessValuesObj[ruleKeyId] = businessValueList || [];
-        }
-      });
-      setSelectedRowKeysObj(() => businessValuesObj);
-    },
-  });
-
-  const businessValuesObj = useMemo(() => {
-    const obj = {};
-    roleDetail?.dataRuleDTOList?.forEach((item) => {
-      const { id, businessValueList } = item;
-
-      if (id) {
-        obj[id] = businessValueList || [];
-      }
-    });
-    return obj;
-  }, [roleDetail]);
 
   useEffect(() => {
     if (!isEmpty(scopeMapOptions)) {
@@ -90,37 +65,33 @@ export default ({
     onChange: onSelectChange,
   };
 
-  const {
-    data = [],
-    run: fetchListRule,
-    loading,
-  } = useRequest(API.platform.sysRole.listRule.fetch, {
+  const { run: fetchListRule, loading } = useRequest(API.platform.sysRole.listRule.fetch, {
     manual: true,
+    onSuccess: (response) => {
+      const selectedKeysObj = {};
+      const ruleInfoObj = {};
+      response?.forEach((item) => {
+        const { ruleKeyId, businessValueList, ruleDataList } = item;
+
+        if (ruleKeyId) {
+          selectedKeysObj[ruleKeyId] = businessValueList || [];
+          ruleInfoObj[ruleKeyId] = {
+            businessValues: businessValueList,
+            listData: ruleDataList,
+          };
+        }
+      });
+
+      setRuleInfoObj(() => ruleInfoObj);
+      setSelectedRowKeysObj(() => selectedKeysObj);
+    },
   });
-
-  const listDataObj = useMemo(() => {
-    const obj = {};
-    data.forEach((item) => {
-      const { ruleKeyId, ruleDataList = [] } = item;
-
-      if (ruleKeyId) {
-        obj[ruleKeyId] = ruleDataList;
-      }
-    });
-    return obj;
-  }, [data]);
-
-  const currentList = listDataObj[selectedId!] ?? [];
 
   useEffect(() => {
     if (visible) {
       fetchListRule({
         businessValue,
         clientKey,
-      });
-      // 获取角色详情
-      fetchRoleDetail({
-        id,
       });
     }
   }, [visible]);
@@ -160,9 +131,6 @@ export default ({
     {
       title: '创建人',
       dataIndex: 'userName',
-      render: (_, row) => {
-        return <span>{row.user.name}</span>;
-      },
     },
     {
       title: '创建时间',
@@ -208,7 +176,7 @@ export default ({
                     selectedId === item.value ? styles.selected : {},
                   )}
                   onClick={() => {
-                    if (!isEqual(selectedRowKeysObj[selectedId!], businessValuesObj[selectedId!])) {
+                    if (!isEqual(selectedRowKeysObj[selectedId!], businessValues)) {
                       message.error('请先保存再切换规则！');
                       return;
                     }
@@ -222,10 +190,10 @@ export default ({
           </div>
           <div className={styles.right}>
             <Table
-              loading={loading || detailLoading}
+              loading={loading}
               rowSelection={rowSelection}
               columns={columns}
-              dataSource={currentList}
+              dataSource={listData}
               rowKey={(record) => `${record.id}`}
             />
           </div>

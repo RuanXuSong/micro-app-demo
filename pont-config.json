@@ -10,11 +10,11 @@
   "origins": [
     {
       "name": "authorization",
-      "originUrl": "http://192.168.1.235:8080/v2/api-docs"
+      "originUrl": "http://authorization-platform.jxzk.thundersdata.com:38204/v2/api-docs"
     },
     {
       "name": "platform",
-      "originUrl": "http://192.168.1.235:8090/v2/api-docs"
+      "originUrl": "http://platform-center.jxzk.thundersdata.com:38204/backend/v2/api-docs"
     }
   ]
 }
