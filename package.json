@@ -8,7 +8,7 @@
     "bootstrap": "yarn && npm-run-all --serial install:*",
     "start": "npm run main-react",
     "build": "npm run install:main-react && npm run build:main-react",
-    "install:main-react": "cd main_apps/main-react && yarn",
+    "install:main-react": "cd main_apps/main-react && yarn config set registry https://registry.npm.taobao.org/ && yarn",
     "build:main-react": "cd main_apps/main-react && yarn build",
     "main-react": "cd main_apps/main-react && yarn start",
     "lint": "prettier --check main_apps/**/*.ts main_apps/**/*.tsx",
