@@ -47,7 +47,8 @@ const EditModal = ({
   const { tip, setTip } = useSpinning();
   const { id } = formData;
   const { orgCode } = currentUser || {};
-  const { resourceData } = useModel('resourceTree');
+  const { initialState } = useModel('@@initialState');
+  const { authResourceData } = initialState || {};
   const [treeModalVisible, setTreeModalVisible] = useState<boolean>(false);
 
   useEffect(() => {
@@ -140,7 +141,7 @@ const EditModal = ({
           <div className={styles.treeWrap}>
             <div className={styles.cover} onClick={() => setTreeModalVisible(true)} />
             <Form.Item label="拥有资源" name="resourceIds">
-              <TreeSelect treeData={resourceData} allowClear multiple placeholder="请选择" />
+              <TreeSelect treeData={authResourceData} allowClear multiple placeholder="请选择" />
             </Form.Item>
           </div>
         </Spin>
@@ -163,7 +164,7 @@ const EditModal = ({
         confirmLoading={submitting}
       >
         <Form.Item label="拥有资源" name="modalResourceIds" noStyle>
-          <TreeItem treeData={resourceData} />
+          <TreeItem treeData={authResourceData} />
         </Form.Item>
       </Modal>
     </Form>
