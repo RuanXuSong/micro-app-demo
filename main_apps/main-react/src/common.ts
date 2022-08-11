@@ -53,7 +53,8 @@ export const initRequest = async () => {
     useCache: false,
     ttl: 60000,
     mode: 'cors',
-    credentials: 'same-origin',
+    credentials: 'include',
+    withCredentials: true,
     headers: {
       // 'X-WEBAUTH-UID': 1,
       // 'X-WEBAUTH-TOKEN': '1973c908b6fe99c446c8b2a0c6eaa58b',

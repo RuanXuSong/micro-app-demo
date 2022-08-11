@@ -20,7 +20,7 @@ export default defineConfig({
   },
   // umi routes: https://umijs.org/docs/routing
   routes,
-  base: process.env.NODE_ENV === 'production' ? '/frontend' : '/',
+  base: '/',
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
   theme: {
     'primary-color': defaultSettings.primaryColor,
@@ -32,7 +32,7 @@ export default defineConfig({
   },
   esbuild: {},
   outputPath: 'build',
-  publicPath: process.env.NODE_ENV === 'production' ? '/frontend/' : '/',
+  publicPath: '/',
   chainWebpack(webpackConfig) {
     if (process.env.NODE_ENV === 'development') {
       webpackConfig.plugin('openBrowser').use({
