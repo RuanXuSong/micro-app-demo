@@ -18,6 +18,6 @@ if (isEnvPro) {
 
 /** 退出登录跳转页 */
 export const LOGOUT_PATH =
-  'http://platform-center.jxzk.thundersdata.com:38204/frontend/logout?redirect_url=http://platform-center.jxzk.thundersdata.com:38204/frontend';
+  'http://platform-frontend.jxzk.thundersdata.com:38204/logout?redirect_url=http://platform-frontend.jxzk.thundersdata.com:38204/';
 
 export default config;

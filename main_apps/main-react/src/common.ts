@@ -24,6 +24,13 @@ const codeMessage: { [key: number]: string } = {
 
 export function errorHandler(error: ResponseError) {
   const { response } = error;
+  console.log('response: ', response);
+
+  // 微前端环境重定向到平台首页
+  if (!response) {
+    window.location.href = LOGOUT_PATH;
+  }
+
   if (response && response.status) {
     const errorText = codeMessage[response.status] || response.statusText;
     const { status, url } = response;
@@ -62,6 +69,7 @@ export const initRequest = async () => {
     },
     errorHandler,
     signal: controller.signal,
+    redirect: 'error',
   });
 
   request.interceptors.response.use((response) => {
