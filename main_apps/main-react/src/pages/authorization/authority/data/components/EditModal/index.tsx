@@ -49,7 +49,7 @@ export default ({
     if (!isEmpty(formData)) {
       const { dataRuleDTOList = [] } = formData || {};
 
-      const ruleIdList = dataRuleDTOList.map((item: defs.platform.ResourceObjects) => item.id);
+      const ruleIdList = dataRuleDTOList.map((item: defs.authorization.DataRuleDTO) => item.id);
       form.setFieldsValue({
         ...formData,
         ruleIdList,

@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-10 18:07:36
+ * @LastEditTime: 2022-08-11 15:41:47
  */
 import React from 'react';
 import { message, Button } from 'antd';
@@ -53,8 +53,14 @@ export default () => {
       valueType: 'text',
       hideInSearch: true,
       render: (_, row) => {
-        const { resourceList = [] } = row || {};
-        return resourceList.map((item) => item.description).join(',');
+        const { resourceMap = [] } = row || {};
+        const resourceList: string[] = [];
+        Object.keys(resourceMap).forEach((key) => {
+          resourceMap[key].forEach((item: any) => {
+            resourceList.push(item.description);
+          });
+        });
+        return resourceList.join(',');
       },
     },
     {

@@ -114,56 +114,6 @@ declare namespace defs {
       totalPage?: number;
     }
 
-    export class ResourceObjects {
-      /** api url */
-      apiUrl: string;
-
-      /** 客户端标志 */
-      clientKey: string;
-
-      /** 备注 */
-      comment: string;
-
-      /** 创建时间 */
-      createdAt?: string;
-
-      /** 描述 */
-      description: string;
-
-      /** 图标 */
-      icon?: string;
-
-      /** id */
-      id?: number;
-
-      /** isDeleted */
-      isDeleted?: number;
-
-      /** 是否默认可见 */
-      isVisible?: number;
-
-      /** 资源顺位 */
-      orderValue?: number;
-
-      /** 父级菜单id */
-      parentId?: number;
-
-      /** 资源码 */
-      permissionCode?: string;
-
-      /** 资源拓展字段 */
-      resourceBusinessValue?: string;
-
-      /** 资源标志 */
-      resourceKey: string;
-
-      /** 类型 */
-      type?: number;
-
-      /** 更新时间 */
-      updatedAt?: string;
-    }
-
     export class RightsManagementRoleDtoList {
       /** 拓展字段值 */
       businessValue?: string;
@@ -187,7 +137,7 @@ declare namespace defs {
       operationRange?: number;
 
       /** 拥有资源 */
-      resourceList?: Array<defs.platform.ResourceObjects>;
+      resourceMap?: ObjectMap<any, Array<defs.platform.ResourceObjects>>;
 
       /** 角色名称 */
       role: string;
@@ -214,9 +164,6 @@ declare namespace defs {
 
       /** 角色名称 */
       role?: string;
-
-      /** 权限类型 */
-      type?: number;
     }
 
     export class TenantInformation {
@@ -234,6 +181,9 @@ declare namespace defs {
 
       /** 管理员角色id */
       directorRoleId?: number;
+
+      /** 管理员用户id */
+      directorUserId?: string;
 
       /** 企业代码（可为空） */
       enterpriseCode?: string;
@@ -284,6 +234,9 @@ declare namespace defs {
 
       /** 管理员角色id */
       directorRoleId?: number;
+
+      /** 管理员用户id */
+      directorUserId?: string;
 
       /** 管理员账号 */
       directorUsername?: string;
@@ -370,14 +323,23 @@ declare namespace defs {
       /** id */
       id?: string;
 
+      /** isAdmin */
+      isAdmin?: number;
+
       /** 昵称 */
       name?: string;
+
+      /** orgCode */
+      orgCode?: string;
 
       /** 所属租户编码 */
       orgId?: string;
 
       /** 手机号 */
       phone?: string;
+
+      /** resourceMap */
+      resourceMap?: ObjectMap<any, Array<defs.platform.ResourceTreeObject>>;
 
       /** 性别 */
       sex?: number;
@@ -399,11 +361,17 @@ declare namespace defs {
     }
 
     export class UserListPageFilter {
+      /** 是否管理员 null为全部 0为除管理员的其他用户 1为管理员用户 */
+      isAdmin?: number;
+
       /** 昵称 */
       name?: string;
 
       /** offset */
       offset?: number;
+
+      /** 租户code */
+      orgCode?: string;
 
       /** 租户id */
       orgId?: string;
@@ -419,6 +387,9 @@ declare namespace defs {
 
       /** 帐号状态 0 禁用/1 启用 */
       status?: number;
+
+      /** 用户id */
+      userId?: string;
 
       /** 登录账号 */
       userName?: string;
@@ -718,7 +689,7 @@ declare namespace API {
      */
     export namespace sysRole {
       /**
-       * listRule
+       * 获取数据权限范围
        * /api/role/data/rule
        */
       export namespace listRule {
@@ -774,6 +745,22 @@ declare namespace API {
         export const init: Response;
 
         export function fetch(params?: Params): Promise<Response>;
+      }
+
+      /**
+       * list
+       * /api/user/list
+       */
+      export namespace list {
+        export class Params {}
+
+        export type Response = Array<defs.platform.TheUserInformation>;
+
+        export const init: Response;
+
+        export function fetch(
+          bodyParams: defs.platform.UserListPageFilter,
+        ): Promise<Response>;
       }
 
       /**

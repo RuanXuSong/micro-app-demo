@@ -4,7 +4,7 @@
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:18
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-09 15:42:13
+ * @LastEditTime: 2022-08-11 15:26:26
  */
 import { MenuDataItem } from '@ant-design/pro-layout';
 import arrayUtils, { deepFlatten } from '@/utils/array';
@@ -29,7 +29,9 @@ export async function getInitialState() {
         clientKey: LOGIN_CONFIG.clientId,
         userId: `${userInfo.userId}`,
       })) as unknown as PrivilegeResource[];
-      authResourceData = convertSourceToTreeData(source);
+      const { resourceMap } = userInfo || {};
+
+      authResourceData = getResourceMapTree(resourceMap);
 
       const routes: PrivilegeResource[] = arrayUtils.deepOrder({
         data: source, // require('../mock/route').default['/resource'].data,
@@ -51,6 +53,7 @@ export async function getInitialState() {
       console.error(error);
     }
   }
+
   return {
     userInfo,
     menus,
@@ -58,3 +61,13 @@ export async function getInitialState() {
     authResourceData,
   };
 }
+
+// 获得所有子系统的菜单树级权限
+const getResourceMapTree = (resourceMapData: any) => {
+  const resourceTree: any[] = [];
+  if (!resourceMapData) return resourceTree;
+  Object.keys(resourceMapData).forEach((key: string) => {
+    resourceTree.push({ key, title: key, children: convertSourceToTreeData(resourceMapData[key]) });
+  });
+  return resourceTree;
+};

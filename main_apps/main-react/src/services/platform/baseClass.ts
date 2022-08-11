@@ -101,56 +101,6 @@ class Page {
   totalPage = undefined;
 }
 
-class ResourceObjects {
-  /** api url */
-  apiUrl = '';
-
-  /** 客户端标志 */
-  clientKey = '';
-
-  /** 备注 */
-  comment = '';
-
-  /** 创建时间 */
-  createdAt = '';
-
-  /** 描述 */
-  description = '';
-
-  /** 图标 */
-  icon = '';
-
-  /** id */
-  id = undefined;
-
-  /** isDeleted */
-  isDeleted = undefined;
-
-  /** 是否默认可见 */
-  isVisible = undefined;
-
-  /** 资源顺位 */
-  orderValue = undefined;
-
-  /** 父级菜单id */
-  parentId = undefined;
-
-  /** 资源码 */
-  permissionCode = '';
-
-  /** 资源拓展字段 */
-  resourceBusinessValue = '';
-
-  /** 资源标志 */
-  resourceKey = '';
-
-  /** 类型 */
-  type = undefined;
-
-  /** 更新时间 */
-  updatedAt = '';
-}
-
 class RightsManagementRoleDtoList {
   /** 拓展字段值 */
   businessValue = '';
@@ -174,7 +124,7 @@ class RightsManagementRoleDtoList {
   operationRange = undefined;
 
   /** 拥有资源 */
-  resourceList = [];
+  resourceMap = undefined;
 
   /** 角色名称 */
   role = '';
@@ -201,9 +151,6 @@ class ScreeningRoleList {
 
   /** 角色名称 */
   role = '';
-
-  /** 权限类型 */
-  type = undefined;
 }
 
 class TenantInformation {
@@ -221,6 +168,9 @@ class TenantInformation {
 
   /** 管理员角色id */
   directorRoleId = undefined;
+
+  /** 管理员用户id */
+  directorUserId = '';
 
   /** 企业代码（可为空） */
   enterpriseCode = '';
@@ -271,6 +221,9 @@ class TheTenantDetailsDto {
 
   /** 管理员角色id */
   directorRoleId = undefined;
+
+  /** 管理员用户id */
+  directorUserId = '';
 
   /** 管理员账号 */
   directorUsername = '';
@@ -357,14 +310,23 @@ class TheUserInformation {
   /** id */
   id = '';
 
+  /** isAdmin */
+  isAdmin = undefined;
+
   /** 昵称 */
   name = '';
+
+  /** orgCode */
+  orgCode = '';
 
   /** 所属租户编码 */
   orgId = '';
 
   /** 手机号 */
   phone = '';
+
+  /** resourceMap */
+  resourceMap = undefined;
 
   /** 性别 */
   sex = undefined;
@@ -386,11 +348,17 @@ class TheUserInformation {
 }
 
 class UserListPageFilter {
+  /** 是否管理员 null为全部 0为除管理员的其他用户 1为管理员用户 */
+  isAdmin = undefined;
+
   /** 昵称 */
   name = '';
 
   /** offset */
   offset = undefined;
+
+  /** 租户code */
+  orgCode = '';
 
   /** 租户id */
   orgId = '';
@@ -406,6 +374,9 @@ class UserListPageFilter {
 
   /** 帐号状态 0 禁用/1 启用 */
   status = undefined;
+
+  /** 用户id */
+  userId = '';
 
   /** 登录账号 */
   userName = '';
@@ -437,7 +408,6 @@ export const platform = {
   DataRuleDTO,
   LoginResultVO,
   Page,
-  ResourceObjects,
   RightsManagementRoleDtoList,
   ScreeningRoleList,
   TenantInformation,

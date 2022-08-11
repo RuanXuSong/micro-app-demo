@@ -1,5 +1,5 @@
 /**
- * @description 获取数据权限范围
+ * @description list
  */
 
 import serverConfig from '../../../../../../../server.config';
@@ -9,13 +9,13 @@ const backEndUrl = serverConfig()['platform'];
 
 export const init = [];
 
-export async function fetch(params = {}) {
+export async function fetch(data = {}) {
   const request = await initRequest();
-  const result = await request.get(backEndUrl + '/api/role/data/rule', {
+  const result = await request.post(backEndUrl + '/api/user/list', {
     headers: {
       'Content-Type': 'application/json',
     },
-    params,
+    data,
   });
   if (result) {
     if (!result.success) {

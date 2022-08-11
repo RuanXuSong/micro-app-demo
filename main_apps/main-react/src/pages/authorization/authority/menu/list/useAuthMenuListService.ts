@@ -5,6 +5,7 @@ import { useRequest } from 'ahooks';
 import { ActionType } from '@ant-design/pro-table';
 import { initialPagination } from '@/constant';
 import { removeEmpty } from '@/utils/json';
+import { getResourceIds } from '@/utils/getResourceIds';
 
 export default () => {
   const actionRef = useRef<ActionType>();
@@ -89,10 +90,11 @@ export default () => {
 
   /** 给企业授权 */
   const handleAuthorize = (row: defs.platform.RightsManagementRoleDtoList) => {
-    const { resourceList = [] } = row;
+    const { resourceMap } = row || {};
+    const resourceIds = getResourceIds(resourceMap);
     setAuthModalConfig((config) => {
       config.visible = true;
-      config.formData = { ...row, resourceIds: resourceList.map((item) => item.id) };
+      config.formData = { ...row, resourceIds };
     });
   };
 

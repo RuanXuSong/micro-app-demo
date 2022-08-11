@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Form, Spin, Input, message, TreeSelect } from 'antd';
-import { isEmpty, isNil } from 'lodash-es';
+import { isEmpty, isNil, isNumber } from 'lodash-es';
 import 'antd/lib/form';
 import { Store } from 'antd/es/form/interface';
 import { useRequest } from 'ahooks';
 import useSpinning from '@/hooks/useSpinning';
-import { connect, useModel } from 'umi';
+import { useModel } from 'umi';
 import { LOGIN_CONFIG } from '@/constant';
 import TreeItem from '@/components/TreeItem';
 import styles from './index.module.less';
+import { getResourceIds } from '@/utils/getResourceIds';
 
 const formLayout = {
   labelCol: {
@@ -34,28 +35,26 @@ const EditModal = ({
   formData,
   loading,
   reload,
-  currentUser,
 }: {
   visible: boolean;
   toggleVisible: () => void;
   formData: Store;
   loading: boolean;
   reload?: () => void;
-  currentUser?: any;
 }) => {
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
   const { id } = formData;
-  const { orgCode } = currentUser || {};
   const { initialState } = useModel('@@initialState');
-  const { authResourceData } = initialState || {};
+  const { authResourceData, userInfo } = initialState || {};
+  const { orgCode } = userInfo || {};
   const [treeModalVisible, setTreeModalVisible] = useState<boolean>(false);
 
   useEffect(() => {
     if (!isEmpty(formData)) {
-      const { resourceList = [] } = formData || {};
+      const { resourceMap = {} } = formData || {};
 
-      const resourceIds = resourceList.map((item: defs.platform.ResourceObjects) => item.id);
+      const resourceIds = getResourceIds(resourceMap);
       form.setFieldsValue({
         ...formData,
         resourceIds,
@@ -73,13 +72,15 @@ const EditModal = ({
   };
 
   const submit = (values: Store) => {
+    const { resourceIds, modalResourceIds, ...rest } = values;
     setTip('数据保存中，请稍候...');
 
     const payload = {
-      ...values,
+      ...rest,
       clientKey: LOGIN_CONFIG.clientId,
       id,
       businessValue: orgCode,
+      resourceIds: resourceIds.filter((item: string) => isNumber(item)),
     } as defs.authorization.RoleDTO;
 
     return API.authorization.resourceRole.resourceSave.fetch(payload);
@@ -171,6 +172,4 @@ const EditModal = ({
   );
 };
 
-export default connect(({ user }: any) => ({
-  currentUser: user.currentUser,
-}))(EditModal);
+export default EditModal;

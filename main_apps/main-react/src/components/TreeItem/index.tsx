@@ -16,6 +16,7 @@ export default ({ value, onChange, treeData = [] }: TreeItemProps) => {
   return (
     <Tree
       checkable
+      defaultExpandAll
       onCheck={(values) => onCheck(values as Key[])}
       checkedKeys={value}
       treeData={treeData}

@@ -101,6 +101,12 @@ export default [
                 component: './thunderBi',
               },
               {
+                path: '/swift-screen',
+                name: '敏捷大屏',
+                customIcon: 'thunder-bi',
+                component: './swiftScreen',
+              },
+              {
                 component: './404',
               },
             ],
