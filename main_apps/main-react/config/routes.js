@@ -41,14 +41,14 @@ export default [
                       {
                         path: '/auth/authority/menu',
                         name: '菜单权限',
-                        customIcon: 'icon-authority',
                         component: './authorization/authority/menu/list',
+                        fontIcon: 'icon-menu',
                       },
                       {
                         path: '/auth/authority/data',
                         name: '数据权限',
-                        customIcon: 'icon-authority',
                         component: './authorization/authority/data/list',
+                        fontIcon: 'icon-data',
                       },
                     ],
                   },

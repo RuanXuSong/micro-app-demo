@@ -145,6 +145,8 @@ export default ({
               },
               {
                 required: true,
+              },
+              {
                 validator: phoneValidator,
               },
             ]}
@@ -159,7 +161,6 @@ export default ({
                 whitespace: true,
               },
               {
-                required: true,
                 validator: emailValidator,
               },
             ]}
@@ -177,7 +178,7 @@ export default ({
                 listType: 'picture-card',
               }}
               required
-              requiredMessage="请上传"
+              requiredMessage="请上传头像"
             >
               <PlusOutlined />
             </UploadFormItem>

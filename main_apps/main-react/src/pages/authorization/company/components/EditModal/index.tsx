@@ -200,6 +200,9 @@ export default ({
                 whitespace: true,
               },
               {
+                required: true,
+              },
+              {
                 validator: phoneValidator,
               },
             ]}
