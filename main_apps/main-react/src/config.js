@@ -18,6 +18,6 @@ if (isEnvPro) {
 
 /** 退出登录跳转页 */
 export const LOGOUT_PATH =
-  'http://sso.jxzk.thundersdata.com:38204/login?client_id=jxzk-sso&client_secret=9IBMhoKp1eOHKe11&request_url=http://platform-frontend.jxzk.thundersdata.com:38204&root_domain=thundersdata.com';
+  'http://platform-frontend.jxzk.thundersdata.com:38204/logout?redirect_url=http://platform-frontend.jxzk.thundersdata.com:38204/';
 
 export default config;
