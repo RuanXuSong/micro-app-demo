@@ -12,6 +12,7 @@ import styles from './index.module.less';
 import { emailValidator, phoneValidator } from '@/utils/validators';
 import { ROLE_STATUS_MAP, SEX_ENUM } from '@/constant';
 import { enumToOptions } from '@/utils/array';
+import { removeEmpty } from '@/utils/json';
 
 const formLayout = {
   labelCol: {
@@ -70,11 +71,11 @@ export default ({
   const submit = (values: Store) => {
     setTip('数据保存中，请稍候...');
 
-    const payload = {
+    const payload = removeEmpty({
       ...formData,
       ...values,
       avatar: values.avatar.map((item: Store) => item.url || item.response.data.url)[0],
-    } as defs.platform.TheUserInformation;
+    }) as defs.platform.TheUserInformation;
 
     if (id) {
       return API.platform.sysUser.update.fetch({

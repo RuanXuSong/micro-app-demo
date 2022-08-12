@@ -13,21 +13,22 @@ import styles from './index.module.less';
 import { phoneValidator } from '@/utils/validators';
 import classNames from 'classnames';
 import moment from 'moment';
+import { removeEmpty } from '@/utils/json';
 
 const formLayout = {
   labelCol: {
-    span: 6,
+    span: 8,
   },
   wrapperCol: {
-    span: 16,
+    span: 14,
   },
 };
 
 const rowLayout = {
   labelCol: {
-    span: 3,
+    span: 4,
   },
-  wrapperCol: { span: 20 },
+  wrapperCol: { span: 19 },
 };
 
 export default ({
@@ -51,7 +52,7 @@ export default ({
     if (!isEmpty(formData)) {
       form.setFieldsValue({
         ...formData,
-        validBefore: moment(formData.validBefore),
+        validBefore: formData.validBefore ? moment(formData.validBefore) : null,
         logo: formData?.logo
           ? [
               {
@@ -79,11 +80,11 @@ export default ({
   const submit = (values: Store) => {
     setTip('数据保存中，请稍候...');
 
-    const payload = {
+    const payload = removeEmpty({
       ...formData,
       ...values,
       logo: values.logo.map((item: Store) => item.url || item.response.data.url)[0],
-    } as defs.platform.TheUserInformation;
+    }) as defs.platform.TheUserInformation;
 
     if (id) {
       return API.platform.sysOrg.update.fetch({

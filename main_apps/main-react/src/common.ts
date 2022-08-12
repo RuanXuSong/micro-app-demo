@@ -63,7 +63,6 @@ export const initRequest = async () => {
     },
     errorHandler,
     signal: controller.signal,
-    redirect: 'follow',
   });
 
   request.interceptors.response.use((response) => {

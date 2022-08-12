@@ -5,6 +5,7 @@ import 'antd/lib/form';
 import { Store } from 'antd/es/form/interface';
 import { useRequest } from 'ahooks';
 import useSpinning from '@/hooks/useSpinning';
+import { removeEmpty } from '@/utils/json';
 
 const formLayout = {
   labelCol: {
@@ -68,12 +69,12 @@ export default ({
   const submit = (values: Store) => {
     setTip('数据保存中，请稍候...');
 
-    const payload = {
+    const payload = removeEmpty({
       ...values,
       clientKey,
       id,
       ruleIdList: values.ruleIdList ?? [],
-    } as defs.authorization.DataRoleInputDTO;
+    }) as defs.authorization.DataRoleInputDTO;
 
     return API.authorization.dataRole.save.fetch(payload);
   };

@@ -93,7 +93,7 @@ export default ({
   const submit = () => {
     setTip('数据保存中，请稍候...');
 
-    return API.authorization.resourceRole.resourceSave.fetch({
+    return API.authorization.resourceRole.resourceSaveAddUser.fetch({
       clientKey: LOGIN_CONFIG.clientId,
       id,
       userIds: checkedIds.map((item) => +item),

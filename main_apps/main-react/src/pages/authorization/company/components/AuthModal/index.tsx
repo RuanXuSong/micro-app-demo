@@ -9,6 +9,7 @@ import styles from './index.module.less';
 import TreeItem from '@/components/TreeItem';
 import { useModel } from 'umi';
 import { LOGIN_CONFIG } from '@/constant';
+import { removeEmpty } from '@/utils/json';
 
 const formLayout = {
   labelCol: {
@@ -91,11 +92,11 @@ export default ({
   const submit = (values: Store) => {
     setTip('数据保存中，请稍候...');
 
-    const payload = {
+    const payload = removeEmpty({
       ...values,
       clientKey: LOGIN_CONFIG.clientId,
       id: directorRoleId,
-    } as defs.authorization.RoleDTO;
+    }) as defs.authorization.RoleDTO;
 
     return API.authorization.resourceRole.resourceSave.fetch(payload);
   };

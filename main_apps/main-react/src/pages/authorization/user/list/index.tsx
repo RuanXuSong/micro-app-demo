@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-03 16:03:13
+ * @LastEditTime: 2022-08-12 16:44:47
  */
 import React from 'react';
 import { message, Button, Modal, Select } from 'antd';
@@ -15,9 +15,11 @@ import { enumToValueEnum } from '@/utils/array';
 import LinkButtons from '@/components/LinkButtons';
 import Edit from '../edit';
 import useUserListService from './useUserListService';
-import { connect, useModel } from 'umi';
+import { useModel } from 'umi';
 
-const UserList = ({ currentUser }: any) => {
+const UserList = () => {
+  const { initialState } = useModel('@@initialState');
+  const { userInfo = {} } = initialState || {};
   const { companyMapOptions } = useModel('company');
   const {
     actionRef,
@@ -54,7 +56,7 @@ const UserList = ({ currentUser }: any) => {
       copyable: false,
       valueType: 'text',
       // 超级管理员则不需要隐藏
-      hideInSearch: !!currentUser.orgId,
+      hideInSearch: !!userInfo.orgId,
       hideInTable: true,
       renderFormItem: () => <Select allowClear options={companyMapOptions}></Select>,
     },
@@ -195,6 +197,4 @@ const UserList = ({ currentUser }: any) => {
   );
 };
 
-export default connect(({ user }: any) => ({
-  currentUser: user.currentUser,
-}))(UserList);
+export default UserList;

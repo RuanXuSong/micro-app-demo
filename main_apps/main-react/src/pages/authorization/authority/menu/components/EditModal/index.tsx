@@ -10,6 +10,7 @@ import { LOGIN_CONFIG } from '@/constant';
 import TreeItem from '@/components/TreeItem';
 import styles from './index.module.less';
 import { getResourceIds } from '@/utils/getResourceIds';
+import { removeEmpty } from '@/utils/json';
 
 const formLayout = {
   labelCol: {
@@ -72,16 +73,16 @@ const EditModal = ({
   };
 
   const submit = (values: Store) => {
-    const { resourceIds, modalResourceIds, ...rest } = values;
+    const { resourceIds = [], modalResourceIds, ...rest } = values;
     setTip('数据保存中，请稍候...');
 
-    const payload = {
+    const payload = removeEmpty({
       ...rest,
       clientKey: LOGIN_CONFIG.clientId,
       id,
       businessValue: orgCode,
       resourceIds: resourceIds.filter((item: string) => isNumber(item)),
-    } as defs.authorization.RoleDTO;
+    }) as defs.authorization.RoleDTO;
 
     return API.authorization.resourceRole.resourceSave.fetch(payload);
   };
@@ -141,7 +142,15 @@ const EditModal = ({
           </Form.Item>
           <div className={styles.treeWrap}>
             <div className={styles.cover} onClick={() => setTreeModalVisible(true)} />
-            <Form.Item label="拥有资源" name="resourceIds">
+            <Form.Item
+              label="拥有资源"
+              name="resourceIds"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
               <TreeSelect treeData={authResourceData} allowClear multiple placeholder="请选择" />
             </Form.Item>
           </div>
