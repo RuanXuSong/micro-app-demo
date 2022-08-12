@@ -95,7 +95,7 @@ export default [
                 component: './biSheng',
               },
               {
-                path: '/thunderBi/dashboards',
+                path: '/thunderBi',
                 name: '大屏配置',
                 customIcon: 'thunder-bi',
                 component: './thunderBi',

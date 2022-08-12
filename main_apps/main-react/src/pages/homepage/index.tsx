@@ -54,7 +54,7 @@ const appsList: SectionProps[] = [
         title: '商业智能平台',
         description: '雷数BI平台',
         logo: 'thunder-bi',
-        link: '/thunderBi/dashboards',
+        link: '/thunderBi',
         key: 'auth_homepage_thunderBi',
       },
     ],
