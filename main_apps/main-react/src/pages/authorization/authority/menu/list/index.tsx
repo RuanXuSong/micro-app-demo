@@ -4,18 +4,22 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-11 15:41:47
+ * @LastEditTime: 2022-08-12 15:37:52
  */
 import React from 'react';
-import { message, Button } from 'antd';
+import { message, Button, Select } from 'antd';
 import ProTable, { ProColumns } from '@ant-design/pro-table';
 import { PlusOutlined } from '@ant-design/icons';
 import LinkButtons from '@/components/LinkButtons';
 import EditModal from '../components/EditModal';
 import AuthModal from '../components/AuthModal';
 import useAuthMenuListService from './useAuthMenuListService';
+import { useModel } from 'umi';
 
 export default () => {
+  const { initialState } = useModel('@@initialState');
+  const { userInfo = {} } = initialState || {};
+  const { companyMapOptions } = useModel('company');
   const {
     actionRef,
     reload,
@@ -29,6 +33,17 @@ export default () => {
   } = useAuthMenuListService();
 
   const columns: ProColumns<defs.platform.RightsManagementRoleDtoList>[] = [
+    {
+      title: '企业名称',
+      dataIndex: 'orgCode',
+      align: 'left',
+      copyable: false,
+      valueType: 'text',
+      // 超级管理员则不需要隐藏
+      hideInSearch: !!userInfo.orgId,
+      hideInTable: true,
+      renderFormItem: () => <Select allowClear options={companyMapOptions}></Select>,
+    },
     {
       title: '角色名称',
       dataIndex: 'role',
