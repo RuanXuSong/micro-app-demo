@@ -148,6 +148,7 @@ const EditModal = ({
               rules={[
                 {
                   required: true,
+                  message: '请选择拥有资源',
                 },
               ]}
             >
