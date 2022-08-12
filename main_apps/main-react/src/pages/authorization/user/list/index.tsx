@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-12 16:44:47
+ * @LastEditTime: 2022-08-12 17:32:06
  */
 import React from 'react';
 import { message, Button, Modal, Select } from 'antd';
@@ -34,6 +34,17 @@ const UserList = () => {
 
   const columns: ProColumns<defs.platform.TheUserInformation>[] = [
     {
+      title: '企业名称',
+      dataIndex: 'orgId',
+      align: 'left',
+      copyable: false,
+      valueType: 'text',
+      // 超级管理员则不需要隐藏
+      hideInSearch: !!userInfo.orgId,
+      hideInTable: true,
+      renderFormItem: () => <Select allowClear options={companyMapOptions}></Select>,
+    },
+    {
       title: '登录账号',
       dataIndex: 'userName',
       align: 'left',
@@ -48,17 +59,6 @@ const UserList = () => {
       copyable: false,
       valueType: 'text',
       hideInSearch: false,
-    },
-    {
-      title: '企业名称',
-      dataIndex: 'orgId',
-      align: 'left',
-      copyable: false,
-      valueType: 'text',
-      // 超级管理员则不需要隐藏
-      hideInSearch: !!userInfo.orgId,
-      hideInTable: true,
-      renderFormItem: () => <Select allowClear options={companyMapOptions}></Select>,
     },
     {
       title: '手机号',

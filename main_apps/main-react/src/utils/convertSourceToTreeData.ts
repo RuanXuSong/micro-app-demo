@@ -1,5 +1,6 @@
 import { PrivilegeResource } from '@/interfaces/common';
 import { DataNode } from 'antd/lib/tree';
+import arrayUtils from '@/utils/array';
 
 /**
  * 将 source 转换为 Tree 组件可用的数据
@@ -8,7 +9,13 @@ import { DataNode } from 'antd/lib/tree';
 function convertSourceToTreeData(source?: PrivilegeResource[]) {
   if (!source) return [];
   const loopData = (data: PrivilegeResource[]): DataNode[] => {
-    const newData = data.map((item) => {
+    const modifiedData: PrivilegeResource[] = arrayUtils.deepOrder({
+      data: data,
+      childKey: 'children',
+      orderKey: 'orderValue',
+      type: 'asc',
+    });
+    const newData = modifiedData.map((item) => {
       const { description, id, privilegeList = [] } = item;
       return {
         title: description,

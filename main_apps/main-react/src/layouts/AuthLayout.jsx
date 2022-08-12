@@ -111,6 +111,7 @@ const AuthLayout = (props) => {
       },
     [location.pathname],
   );
+
   return (
     <ProLayout
       logo={logo}

@@ -31,6 +31,18 @@ export default [
                     fontIcon: 'icon-homepage',
                   },
                   {
+                    path: '/auth/company/list',
+                    name: '企业管理',
+                    component: './authorization/company/list',
+                    fontIcon: 'icon-company',
+                  },
+                  {
+                    path: '/auth/user/list',
+                    name: '用户管理',
+                    component: './authorization/user/list',
+                    fontIcon: 'icon-person',
+                  },
+                  {
                     path: '/auth/authority',
                     name: '权限管理',
                     fontIcon: 'icon-authority',
@@ -48,18 +60,6 @@ export default [
                         fontIcon: 'icon-data',
                       },
                     ],
-                  },
-                  {
-                    path: '/auth/user/list',
-                    name: '用户管理',
-                    component: './authorization/user/list',
-                    fontIcon: 'icon-person',
-                  },
-                  {
-                    path: '/auth/company/list',
-                    name: '企业管理',
-                    component: './authorization/company/list',
-                    fontIcon: 'icon-company',
                   },
                   {
                     path: '/auth/central',
