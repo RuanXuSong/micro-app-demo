@@ -11,9 +11,6 @@ export default [
             redirect: '/auth/homepage',
           },
           {
-            path: '/logout',
-          },
-          {
             path: '/login',
             component: './login/index',
           },

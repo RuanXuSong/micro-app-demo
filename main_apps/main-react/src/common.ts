@@ -24,6 +24,7 @@ const codeMessage: { [key: number]: string } = {
 
 export function errorHandler(error: ResponseError) {
   const { response } = error;
+  console.log('response: ', response);
   if (response && response.status) {
     const errorText = codeMessage[response.status] || response.statusText;
     const { status, url } = response;
@@ -62,6 +63,7 @@ export const initRequest = async () => {
     },
     errorHandler,
     signal: controller.signal,
+    redirect: 'follow',
   });
 
   request.interceptors.response.use((response) => {
