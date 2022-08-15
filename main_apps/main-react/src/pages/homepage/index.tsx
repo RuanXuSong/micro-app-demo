@@ -34,7 +34,7 @@ const appsList: SectionProps[] = [
         title: '敏捷大屏',
         description: '快速构建可视化大屏',
         logo: 'swift-screen',
-        link: '/swift-screen',
+        link: '/swiftScreen',
         key: 'auth_homepage_screen',
       },
     ],

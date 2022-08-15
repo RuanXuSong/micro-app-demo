@@ -54,7 +54,7 @@ function SwiftScreen(props) {
             });
           setLoading(false);
         }}
-        baseRoute="/swift-screen"
+        baseRoute="/swiftScreen"
         keep-alive
         data={{ logoutUrl: LOGOUT_PATH }}
       />
