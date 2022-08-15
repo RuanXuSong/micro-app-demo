@@ -54,13 +54,6 @@ const BasicLayout = (props) => {
   const menuDataRef = useRef([]);
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [subMenuCollapsed, setSubMenuCollapsed] = useState(false);
-  useEffect(() => {
-    if (dispatch) {
-      dispatch({
-        type: 'user/fetchCurrent',
-      });
-    }
-  }, []);
 
   useEffect(() => {
     const { pathname = '' } = props.location || {};
@@ -68,9 +61,6 @@ const BasicLayout = (props) => {
     if (/^\/authorization\/?$/.test(pathname)) {
       history.replace('/authorization/resource/list');
     }
-    // if (/^\/biSheng\/?$/.test(pathname)) {
-    //   history.replace('/biSheng/dashboard/analysis');
-    // }
   }, [props]);
 
   const handleMenuCollapse = (payload) => {

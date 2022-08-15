@@ -16,11 +16,11 @@ function convertSourceToTreeData(source?: PrivilegeResource[]) {
       type: 'asc',
     });
     const newData = modifiedData.map((item) => {
-      const { description, id, privilegeList = [] } = item;
+      const { description, id, privilegeList = [], children = [] } = item;
       return {
         title: description,
         key: id,
-        children: privilegeList ? loopData(privilegeList) : [],
+        children: loopData((privilegeList || []).concat(children || [])),
       };
     });
     return newData;

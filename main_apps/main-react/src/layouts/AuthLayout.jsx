@@ -61,11 +61,6 @@ const AuthLayout = (props) => {
   const [subMenuCollapsed, setSubMenuCollapsed] = useState(false);
   useEffect(() => {
     microApp.setGlobalData({ showDropDown: true });
-    if (dispatch) {
-      dispatch({
-        type: 'user/fetchCurrent',
-      });
-    }
     return () => {
       microApp.setGlobalData({ showDropDown: false });
     };
