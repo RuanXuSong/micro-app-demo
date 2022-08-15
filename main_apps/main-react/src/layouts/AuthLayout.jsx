@@ -55,6 +55,7 @@ const AuthLayout = (props) => {
     location = {
       pathname: '/',
     },
+    collapsed,
   } = props;
   const menuDataRef = useRef([]);
   const [showSubMenu, setShowSubMenu] = useState(false);
@@ -98,9 +99,16 @@ const AuthLayout = (props) => {
     const { customIcon, fontIcon, name, pro_layout_parentKeys = [] } = menuItemProps;
     const isChild = !isEmpty(pro_layout_parentKeys);
     return isChild ? (
-      <div className={classNames(!isChild ? styles.menuItemWrap : styles.childMenuItem)}>
+      <div
+        className={classNames(!isChild ? styles.menuItemWrap : styles.childMenuItem)}
+        style={collapsed ? { paddingLeft: 2 } : {}}
+      >
         {fontIcon ? (
-          <Iconfont name={fontIcon} className={styles.fontIcon} style={{ marginRight: 10 }} />
+          <Iconfont
+            name={fontIcon}
+            className={styles.fontIcon}
+            style={{ marginRight: collapsed ? 14 : 10 }}
+          />
         ) : (
           <img src={require(`@/assets/icon/${customIcon}.png`)} alt={name} />
         )}

@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-15 14:15:56
+ * @LastEditTime: 2022-08-15 16:55:33
  */
 import React from 'react';
 import { message, Button, Select } from 'antd';
@@ -16,6 +16,7 @@ import AuthModal from '../components/AuthModal';
 import useAuthMenuListService from './useAuthMenuListService';
 import { useModel } from 'umi';
 import useCompanySelect from '@/hooks/useCompanySelect';
+import TextEllipsis from '@/components/TextEllipsis';
 
 export default () => {
   const { companyMapOptions } = useModel('company');
@@ -74,7 +75,7 @@ export default () => {
             resourceList.push(item.description);
           });
         });
-        return resourceList.join(',');
+        return <TextEllipsis text={resourceList.join(',')} />;
       },
     },
     {
