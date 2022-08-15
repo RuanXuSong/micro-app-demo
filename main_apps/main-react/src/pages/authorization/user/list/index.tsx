@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-12 17:32:06
+ * @LastEditTime: 2022-08-15 14:25:26
  */
 import React from 'react';
 import { message, Button, Modal, Select } from 'antd';
@@ -16,11 +16,12 @@ import LinkButtons from '@/components/LinkButtons';
 import Edit from '../edit';
 import useUserListService from './useUserListService';
 import { useModel } from 'umi';
+import useCompanySelect from '@/hooks/useCompanySelect';
 
 const UserList = () => {
-  const { initialState } = useModel('@@initialState');
-  const { userInfo = {} } = initialState || {};
-  const { companyMapOptions } = useModel('company');
+  const { showCompanySelect } = useCompanySelect('auth_user_list_company');
+  const { companyIdMapOptions } = useModel('company');
+
   const {
     actionRef,
     reload,
@@ -39,10 +40,9 @@ const UserList = () => {
       align: 'left',
       copyable: false,
       valueType: 'text',
-      // 超级管理员则不需要隐藏
-      hideInSearch: !!userInfo.orgId,
+      hideInSearch: !showCompanySelect,
       hideInTable: true,
-      renderFormItem: () => <Select allowClear options={companyMapOptions}></Select>,
+      renderFormItem: () => <Select allowClear options={companyIdMapOptions}></Select>,
     },
     {
       title: '登录账号',

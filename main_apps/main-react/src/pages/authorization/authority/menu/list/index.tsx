@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-12 15:37:52
+ * @LastEditTime: 2022-08-15 14:15:56
  */
 import React from 'react';
 import { message, Button, Select } from 'antd';
@@ -15,11 +15,11 @@ import EditModal from '../components/EditModal';
 import AuthModal from '../components/AuthModal';
 import useAuthMenuListService from './useAuthMenuListService';
 import { useModel } from 'umi';
+import useCompanySelect from '@/hooks/useCompanySelect';
 
 export default () => {
-  const { initialState } = useModel('@@initialState');
-  const { userInfo = {} } = initialState || {};
   const { companyMapOptions } = useModel('company');
+  const { showCompanySelect } = useCompanySelect('auth_authority_menu_company');
   const {
     actionRef,
     reload,
@@ -39,8 +39,7 @@ export default () => {
       align: 'left',
       copyable: false,
       valueType: 'text',
-      // 超级管理员则不需要隐藏
-      hideInSearch: !!userInfo.orgId,
+      hideInSearch: !showCompanySelect,
       hideInTable: true,
       renderFormItem: () => <Select allowClear options={companyMapOptions}></Select>,
     },

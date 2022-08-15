@@ -8,6 +8,7 @@ import { dimToOptions, removeEmpty } from '@/utils/json';
 export default () => {
   const actionRef = useRef<ActionType>();
   const [clientKey, setClientKey] = useState<string>('');
+  const [businessValue, setBusinessValue] = useState<string>('');
   const [editModalConfig, setEditModalConfig] = useImmer<{
     visible: boolean;
     formData: any;
@@ -87,6 +88,7 @@ export default () => {
         removeEmpty({
           ...params,
           clientKey,
+          businessValue,
         }),
       );
       return {
@@ -153,6 +155,8 @@ export default () => {
     reload,
     clientKey,
     setClientKey,
+    businessValue,
+    setBusinessValue,
     scopeMapOptions,
     editModalConfig,
     setEditModalConfig,

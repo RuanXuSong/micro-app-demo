@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-09 16:13:36
+ * @LastEditTime: 2022-08-15 15:03:23
  */
 import React, { useEffect } from 'react';
 import { message, Button, Row, Col, Select } from 'antd';
@@ -18,6 +18,7 @@ import styles from './index.module.less';
 import ScopeModal from '../components/ScopeModal';
 import { useModel } from 'umi';
 import { isEmpty } from 'lodash';
+import useCompanySelect from '@/hooks/useCompanySelect';
 
 export default () => {
   const {
@@ -25,6 +26,8 @@ export default () => {
     reload,
     clientKey,
     setClientKey,
+    businessValue,
+    setBusinessValue,
     scopeMapOptions,
     editModalConfig,
     fetchList,
@@ -37,11 +40,12 @@ export default () => {
     handleAuthorize,
   } = useAuthDataListService();
   const { businessMapOptions } = useModel('business');
+  const { showCompanySelect } = useCompanySelect('auth_authority_data_company');
+  const { companyMapOptions } = useModel('company');
 
   useEffect(() => {
     if (!isEmpty(businessMapOptions)) {
-      // TODO:改为0
-      setClientKey(businessMapOptions[1].value);
+      setClientKey(businessMapOptions[0].value);
     }
   }, [businessMapOptions]);
 
@@ -120,6 +124,23 @@ export default () => {
     <>
       <div className={styles.searchWrap}>
         <Row>
+          {showCompanySelect && (
+            <Col span="8" className={styles.formItemWrap}>
+              <div className={styles.label}>企业名称：</div>
+              <div className={styles.inputWrap}>
+                <Select
+                  value={businessValue}
+                  onChange={(value) => {
+                    setBusinessValue(value);
+                    reload?.();
+                  }}
+                  allowClear
+                  placeholder="请选择"
+                  options={companyMapOptions}
+                />
+              </div>
+            </Col>
+          )}
           <Col span="6" className={styles.formItemWrap}>
             <div className={styles.label}>子系统：</div>
             <div className={styles.inputWrap}>
