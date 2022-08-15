@@ -5,7 +5,7 @@
  */
 import ProLayout, { DefaultFooter } from '@ant-design/pro-layout';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Link, connect, history } from 'umi';
+import { Link, connect, history, useModel } from 'umi';
 import { GithubOutlined } from '@ant-design/icons';
 import { Result, Button, Menu } from 'antd';
 import Authorized from '@/utils/Authorized';
