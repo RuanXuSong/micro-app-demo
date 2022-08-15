@@ -37,7 +37,7 @@ const noMatch = (
 
 const AuthLayout = (props) => {
   const { initialState } = useModel('@@initialState');
-  const { menus = [] } = initialState;
+  const { menus = [], userInfo } = initialState || {};
   const menuDataRender = (menuList) => {
     return menuList.map((item) => {
       if (item.hidden) return null;
@@ -61,10 +61,20 @@ const AuthLayout = (props) => {
   const [subMenuCollapsed, setSubMenuCollapsed] = useState(false);
   useEffect(() => {
     microApp.setGlobalData({ showDropDown: true });
+
     return () => {
       microApp.setGlobalData({ showDropDown: false });
     };
   }, []);
+
+  useEffect(() => {
+    if (dispatch) {
+      dispatch({
+        type: 'user/setCurrentUser',
+        payload: userInfo,
+      });
+    }
+  }, [userInfo]);
 
   useEffect(() => {
     const { pathname = '' } = props.location || {};

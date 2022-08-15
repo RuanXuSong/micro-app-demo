@@ -43,6 +43,8 @@ const menuDataRender = (menuList) =>
   });
 
 const BasicLayout = (props) => {
+  const { initialState } = useModel('@@initialState');
+  const { userInfo } = initialState || {};
   const {
     dispatch,
     children,
@@ -54,6 +56,15 @@ const BasicLayout = (props) => {
   const menuDataRef = useRef([]);
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [subMenuCollapsed, setSubMenuCollapsed] = useState(false);
+
+  useEffect(() => {
+    if (dispatch) {
+      dispatch({
+        type: 'user/setCurrentUser',
+        payload: userInfo,
+      });
+    }
+  }, [userInfo]);
 
   useEffect(() => {
     const { pathname = '' } = props.location || {};
