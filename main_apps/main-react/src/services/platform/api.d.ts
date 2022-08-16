@@ -149,6 +149,50 @@ declare namespace defs {
       updatedAt?: string;
     }
 
+    export class RoleDTO {
+      /** 拓展字段值 */
+      businessValue?: string;
+
+      /** 客户端标志 */
+      clientKey: string;
+
+      /** 备注 */
+      comment?: string;
+
+      /** 创建时间 */
+      createdAt?: string;
+
+      /** id */
+      id?: number;
+
+      /** isDeleted */
+      isDeleted?: boolean;
+
+      /** 是否勾选低代码 */
+      lowcode?: number;
+
+      /** 操作范围（0：可删可编辑 1：不可删可编辑 2：可删不可编辑 3：不可删不可编辑） */
+      operationRange?: number;
+
+      /** 企业id */
+      orgId?: number;
+
+      /** 资源id列表 */
+      resourceIds?: Array<number>;
+
+      /** 角色名称 */
+      role: string;
+
+      /** 角色状态 */
+      status?: number;
+
+      /** 更新时间 */
+      updatedAt?: string;
+
+      /** 用户id列表 */
+      userIds?: Array<number>;
+    }
+
     export class ScreeningRoleList {
       /** offset */
       offset?: number;
@@ -390,6 +434,9 @@ declare namespace defs {
 
       /** 用户id */
       userId?: string;
+
+      /** 用户idList */
+      userIds?: Array<number>;
 
       /** 登录账号 */
       userName?: string;
@@ -724,6 +771,22 @@ declare namespace API {
           bodyParams: defs.platform.ScreeningRoleList,
         ): Promise<Response>;
       }
+
+      /**
+       * resourceSave
+       * /api/role/resource/save
+       */
+      export namespace resourceSave {
+        export class Params {}
+
+        export type Response = number;
+
+        export const init: Response;
+
+        export function fetch(
+          bodyParams: defs.platform.RoleDTO,
+        ): Promise<Response>;
+      }
     }
 
     /**
@@ -748,8 +811,25 @@ declare namespace API {
       }
 
       /**
-       * list
-       * /api/user/list
+       * 个人信息
+       * /api/user/inner/info
+       */
+      export namespace info {
+        export class Params {
+          /** userId */
+          userId: number;
+        }
+
+        export type Response = defs.platform.TheUserInformation;
+
+        export const init: Response;
+
+        export function fetch(params?: Params): Promise<Response>;
+      }
+
+      /**
+       * 查询所有用户（列表）
+       * /api/user/inner/list
        */
       export namespace list {
         export class Params {}

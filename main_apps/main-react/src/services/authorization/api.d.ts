@@ -693,7 +693,7 @@ declare namespace API {
       export namespace saveList {
         export class Params {}
 
-        export type Response = any;
+        export type Response = Array<number>;
 
         export const init: Response;
 

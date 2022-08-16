@@ -7,7 +7,7 @@ import { initRequest } from '@/common';
 
 const backEndUrl = serverConfig()['authorization'];
 
-export const init = undefined;
+export const init = [];
 
 export async function fetch(data = {}) {
   const request = await initRequest();
@@ -21,7 +21,7 @@ export async function fetch(data = {}) {
     if (!result.success) {
       throw new Error(JSON.stringify(result));
     } else {
-      return result.data || undefined;
+      return result.data || [];
     }
   } else {
     throw new Error(JSON.stringify({ message: '接口未响应' }));

@@ -3,5 +3,6 @@
  */
 import * as listRule from './listRule';
 import * as pageList from './pageList';
+import * as resourceSave from './resourceSave';
 
-export { listRule, pageList };
+export { listRule, pageList, resourceSave };

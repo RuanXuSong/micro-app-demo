@@ -97,7 +97,7 @@ export default ({
       resourceIds: resourceIds.filter((item: string) => isNumber(item)),
     }) as defs.authorization.RoleDTO;
 
-    return API.authorization.resourceRole.resourceSave.fetch(payload);
+    return API.platform.sysRole.resourceSave.fetch(payload);
   };
 
   const { run: handleFinish, loading: submitting } = useRequest(submit, {

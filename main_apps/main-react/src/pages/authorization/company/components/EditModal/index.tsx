@@ -82,11 +82,13 @@ export default ({
   /** 编辑企业 */
   const { run: handleOrgEdit } = useRequest(API.platform.sysOrg.update.fetch, {
     onSuccess: () => reloadCompanyData(),
+    manual: true,
   });
 
   /** 新建企业 */
   const { run: handleOrgAdd } = useRequest(API.platform.sysOrg.save.fetch, {
     onSuccess: () => reloadCompanyData(),
+    manual: true,
   });
 
   const submit = (values: Store) => {

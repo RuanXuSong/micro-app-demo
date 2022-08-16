@@ -136,6 +136,50 @@ class RightsManagementRoleDtoList {
   updatedAt = '';
 }
 
+class RoleDTO {
+  /** 拓展字段值 */
+  businessValue = '';
+
+  /** 客户端标志 */
+  clientKey = '';
+
+  /** 备注 */
+  comment = '';
+
+  /** 创建时间 */
+  createdAt = '';
+
+  /** id */
+  id = undefined;
+
+  /** isDeleted */
+  isDeleted = false;
+
+  /** 是否勾选低代码 */
+  lowcode = undefined;
+
+  /** 操作范围（0：可删可编辑 1：不可删可编辑 2：可删不可编辑 3：不可删不可编辑） */
+  operationRange = undefined;
+
+  /** 企业id */
+  orgId = undefined;
+
+  /** 资源id列表 */
+  resourceIds = [];
+
+  /** 角色名称 */
+  role = '';
+
+  /** 角色状态 */
+  status = undefined;
+
+  /** 更新时间 */
+  updatedAt = '';
+
+  /** 用户id列表 */
+  userIds = [];
+}
+
 class ScreeningRoleList {
   /** offset */
   offset = undefined;
@@ -378,6 +422,9 @@ class UserListPageFilter {
   /** 用户id */
   userId = '';
 
+  /** 用户idList */
+  userIds = [];
+
   /** 登录账号 */
   userName = '';
 }
@@ -409,6 +456,7 @@ export const platform = {
   LoginResultVO,
   Page,
   RightsManagementRoleDtoList,
+  RoleDTO,
   ScreeningRoleList,
   TenantInformation,
   TheTenantDetailsDto,

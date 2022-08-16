@@ -1,27 +1,27 @@
 /**
- * @description 查询所有用户（列表）
+ * @description 个人信息
  */
-
+import * as defs from '../../baseClass';
 import serverConfig from '../../../../../../../server.config';
 import { initRequest } from '@/common';
 
 const backEndUrl = serverConfig()['platform'];
 
-export const init = [];
+export const init = new defs.platform.TheUserInformation();
 
-export async function fetch(data = {}) {
+export async function fetch(params = {}) {
   const request = await initRequest();
-  const result = await request.post(backEndUrl + '/api/user/inner/list', {
+  const result = await request.get(backEndUrl + '/api/user/inner/info', {
     headers: {
       'Content-Type': 'application/json',
     },
-    data,
+    params,
   });
   if (result) {
     if (!result.success) {
       throw new Error(JSON.stringify(result));
     } else {
-      return result.data || [];
+      return result.data || new defs.platform.TheUserInformation();
     }
   } else {
     throw new Error(JSON.stringify({ message: '接口未响应' }));
