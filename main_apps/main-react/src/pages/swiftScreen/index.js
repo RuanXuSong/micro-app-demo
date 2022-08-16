@@ -7,6 +7,7 @@ import { connect } from 'umi';
 import { Spin } from 'antd';
 import Loading from '@/components/Loading';
 import config, { LOGOUT_PATH } from '../../config';
+import { ROUTE_PATH } from '@/constant';
 
 let userInfo;
 

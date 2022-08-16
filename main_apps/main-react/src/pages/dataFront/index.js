@@ -9,6 +9,7 @@ import { connect } from 'umi';
 import Loading from '@/components/Loading';
 import { AVATAR_URL } from '@/constant';
 import config, { LOGOUT_PATH } from '../../config';
+import { ROUTE_PATH } from '@/constant';
 import './index.less';
 
 const antIcon = <LoadingOutlined style={{ fontSize: 30 }} spin />;
