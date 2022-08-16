@@ -4,7 +4,7 @@
  * @作者: 廖军
  * @Date: 2020-05-25 16:07:51
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-07-28 17:53:02
+ * @LastEditTime: 2022-08-16 11:28:37
  */
 import { UploadProps } from 'antd/lib/upload';
 import string from '@/utils/string';
@@ -58,31 +58,8 @@ export const FILE_TYPE_MAP = {
   视频: ['.avi', '.wmv', '.mpg', '.mpeg', '.mov', '.mp4', '.rm', '.ram'],
 };
 
-/**
- * 根据fileId获取下载地址
- * @param fileId
- */
-export const getDownloadUrlWithId = (fileId: number | string) => {
-  const regs = /^[0-9]+$/;
-  // 判断是否加密,若为已加密
-  if (!regs.test('' + fileId)) {
-    return `${UPLOAD_URL}/download/direct?fileId=${fileId}&access_token=${localStorage.getItem(
-      'accessToken',
-    )}`;
-  }
-  // 若没有加密
-  return `${UPLOAD_URL}/file/download?fileId=${fileId}&access_token=${localStorage.getItem(
-    'accessToken',
-  )}`;
-};
-
 export const onPreview = (file: UploadFile) => {
-  let fileUrl;
-  if (file.url) {
-    fileUrl = file.url;
-  } else if (file.response?.data?.fileId) {
-    fileUrl = getDownloadUrlWithId(file.response.data.fileId);
-  }
+  const fileUrl = file.response?.data?.url ?? file.url;
   fileUrl && window.open(fileUrl, '_blank');
 };
 
@@ -265,13 +242,13 @@ export function fileTransform(files?: FileDTO[]): UploadFile[] {
         status: 'done',
         size: 0,
         type: '',
-        name: fileName || getDownloadUrlWithId(fileId),
+        name: fileName,
         url: fileUrl,
         response: {
           success: true,
           data: {
             fileId,
-            fileName: fileName || getDownloadUrlWithId(fileId),
+            fileName,
             url: fileUrl,
           },
         },
