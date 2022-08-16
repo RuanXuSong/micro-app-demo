@@ -7,6 +7,7 @@ import { connect } from 'umi';
 import { Spin } from 'antd';
 import Loading from '@/components/Loading';
 import config, { LOGOUT_PATH } from '../../config';
+import { ROUTE_PATH } from '@/constant';
 
 let userInfo;
 
@@ -43,8 +44,8 @@ function BiSheng(props) {
     <div style={{ height: '100%' }}>
       <Loading loading={showLoading} />
       <micro-app
-        name="biSheng"
-        baseRoute="/biSheng"
+        name={`${ROUTE_PATH.BI_SHENG}/*`}
+        baseRoute={`/${ROUTE_PATH.BI_SHENG}`}
         url={config.biSheng}
         keep-alive
         onMounted={() => setLoading(false)}

@@ -43,6 +43,8 @@ function SwiftScreen(props) {
     <div style={{ height: '100%' }}>
       <Loading loading={showLoading} />
       <micro-app
+        name={`${ROUTE_PATH.SWIFT_SCREEN}/*`}
+        baseRoute={`/${ROUTE_PATH.SWIFT_SCREEN}`}
         name="swiftScreen"
         url={config.swiftScreen}
         onMounted={() => setLoading(false)}
@@ -54,7 +56,6 @@ function SwiftScreen(props) {
             });
           setLoading(false);
         }}
-        baseRoute="/swiftScreen"
         keep-alive
         data={{ logoutUrl: LOGOUT_PATH }}
       />

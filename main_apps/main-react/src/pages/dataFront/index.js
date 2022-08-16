@@ -174,6 +174,8 @@ class App extends React.Component {
       <>
         <Loading loading={this.state.showLoading} />
         <micro-app
+          name={`${ROUTE_PATH.DATA_FRONT}/*`}
+          baseRoute={`/${ROUTE_PATH.DATA_FRONT}`}
           name="dataFront"
           url={`${config.dataFront}micro-app/dataFront`}
           data={this.state.data}
@@ -186,7 +188,6 @@ class App extends React.Component {
           onAftershow={this.handleAftershow}
           onAfterhidden={this.handleAfterhidden}
           onDataChange={this.handleDataChange}
-          baseRoute="/dataFront"
           data={{ logoutUrl: LOGOUT_PATH }}
           keep-alive
         ></micro-app>

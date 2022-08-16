@@ -75,3 +75,10 @@ export enum TabCloseType {
 /** 默认头像地址 */
 export const AVATAR_URL =
   'https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1658819849135012474.png';
+
+export enum ROUTE_PATH {
+  THUNDER_BI = 'thunderBi',
+  SWIFT_SCREEN = 'swiftScreen',
+  DATA_FRONT = 'dataFront',
+  BI_SHENG = 'biSheng',
+}
