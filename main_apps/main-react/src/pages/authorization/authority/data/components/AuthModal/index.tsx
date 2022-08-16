@@ -8,6 +8,7 @@ import useSpinning from '@/hooks/useSpinning';
 import styles from './index.module.less';
 import { useImmer } from 'use-immer';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
+import { useModel } from 'umi';
 
 /**
  * 初始化分页数据
@@ -37,9 +38,13 @@ export default ({
   formData: Store;
   reload?: () => void;
 }) => {
+  const { initialState } = useModel('@@initialState');
+  const { userInfo } = initialState || {};
+  const { orgId } = userInfo || {};
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
   const { id } = formData;
+
   const [checkedIds, setCheckedIds] = useState<number[]>([]);
   const [paginationConfig, setPaginationConfig] = useImmer(initialPagination);
 
@@ -61,12 +66,12 @@ export default ({
 
   useEffect(() => {
     if (visible) {
-      fetchList(paginationConfig);
+      fetchList({ ...paginationConfig, orgId });
       fetchAuthList({
         roleId: id,
       });
     }
-  }, [visible, paginationConfig]);
+  }, [orgId, visible, paginationConfig]);
 
   useEffect(() => {
     if (!isEmpty(formData)) {

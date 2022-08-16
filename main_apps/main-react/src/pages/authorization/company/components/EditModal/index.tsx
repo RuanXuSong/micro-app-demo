@@ -14,6 +14,7 @@ import { phoneValidator } from '@/utils/validators';
 import classNames from 'classnames';
 import moment from 'moment';
 import { removeEmpty } from '@/utils/json';
+import { useModel } from 'umi';
 
 const formLayout = {
   labelCol: {
@@ -47,6 +48,7 @@ export default ({
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
   const { id } = formData;
+  const { reloadCompanyData } = useModel('company');
 
   useEffect(() => {
     if (!isEmpty(formData)) {
@@ -77,6 +79,16 @@ export default ({
     form.resetFields();
   };
 
+  /** 编辑企业 */
+  const { run: handleOrgEdit } = useRequest(API.platform.sysOrg.update.fetch, {
+    onSuccess: () => reloadCompanyData(),
+  });
+
+  /** 新建企业 */
+  const { run: handleOrgAdd } = useRequest(API.platform.sysOrg.save.fetch, {
+    onSuccess: () => reloadCompanyData(),
+  });
+
   const submit = (values: Store) => {
     setTip('数据保存中，请稍候...');
 
@@ -87,11 +99,9 @@ export default ({
     }) as defs.platform.TheUserInformation;
 
     if (id) {
-      return API.platform.sysOrg.update.fetch({
-        ...payload,
-      });
+      return handleOrgEdit(payload);
     }
-    return API.platform.sysOrg.save.fetch(payload);
+    return handleOrgAdd(payload);
   };
 
   const { run: handleFinish, loading: submitting } = useRequest(submit, {

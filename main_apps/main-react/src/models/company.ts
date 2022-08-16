@@ -2,7 +2,9 @@ import { dimToOptions } from '@/utils/json';
 import { useRequest } from 'ahooks';
 
 export default () => {
-  const { data: companyMap } = useRequest(API.platform.sysOrg.orgList.fetch);
+  const { data: companyMap, refresh: reloadCompanyData } = useRequest(
+    API.platform.sysOrg.orgList.fetch,
+  );
 
   return {
     // 公司id
@@ -12,5 +14,6 @@ export default () => {
       labelMapping: 'orgName',
       codeMapping: 'orgCode',
     }),
+    reloadCompanyData,
   };
 };
