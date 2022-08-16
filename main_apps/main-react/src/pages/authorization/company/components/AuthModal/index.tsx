@@ -10,6 +10,7 @@ import TreeItem from '@/components/TreeItem';
 import { useModel } from 'umi';
 import { LOGIN_CONFIG } from '@/constant';
 import { removeEmpty } from '@/utils/json';
+import { isNumber } from 'lodash';
 
 const formLayout = {
   labelCol: {
@@ -73,11 +74,7 @@ export default ({
 
   useEffect(() => {
     if (!isEmpty(formData)) {
-      const roleList = formData.roleList || [];
-      form.setFieldsValue({
-        ...formData,
-        roleList: roleList.length > 0 ? roleList[0].roleId : null,
-      });
+      form.setFieldsValue(formData);
     }
     return () => {
       form.resetFields();
@@ -90,12 +87,14 @@ export default ({
   };
 
   const submit = (values: Store) => {
+    const { resourceIds = [], ...restValues } = values;
     setTip('数据保存中，请稍候...');
 
     const payload = removeEmpty({
-      ...values,
+      ...restValues,
       clientKey: LOGIN_CONFIG.clientId,
       id: directorRoleId,
+      resourceIds: resourceIds.filter((item: string) => isNumber(item)),
     }) as defs.authorization.RoleDTO;
 
     return API.authorization.resourceRole.resourceSave.fetch(payload);
