@@ -44,9 +44,9 @@ function BiSheng(props) {
     <div style={{ height: '100%' }}>
       <Loading loading={showLoading} />
       <micro-app
-        name={ROUTE_PATH.BI_SHENG}
+        name={`${ROUTE_PATH.BI_SHENG}/*`}
         baseRoute={`/${ROUTE_PATH.BI_SHENG}`}
-        url={config.biSheng}
+        url={`${config.biSheng}`}
         keep-alive
         onMounted={() => setLoading(false)}
         onAftershow={() => {

@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useImmer } from 'use-immer';
 import { message } from 'antd';
 import { useRequest } from 'ahooks';
@@ -9,6 +9,7 @@ import { getResourceIds } from '@/utils/getResourceIds';
 
 export default () => {
   const actionRef = useRef<ActionType>();
+  const [orgId, setOrgId] = useState<string>();
   const [editModalConfig, setEditModalConfig] = useImmer<{
     visible: boolean;
     formData: any;
@@ -112,6 +113,8 @@ export default () => {
   };
 
   return {
+    orgId,
+    setOrgId,
     actionRef,
     reload,
     editModalConfig,

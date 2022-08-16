@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-15 16:55:33
+ * @LastEditTime: 2022-08-16 18:41:27
  */
 import React from 'react';
 import { message, Button, Select } from 'antd';
@@ -22,6 +22,8 @@ export default () => {
   const { companyMapOptions } = useModel('company');
   const { showCompanySelect } = useCompanySelect('auth_authority_menu_company');
   const {
+    orgId,
+    setOrgId,
     actionRef,
     reload,
     editModalConfig,
@@ -42,7 +44,13 @@ export default () => {
       valueType: 'text',
       hideInSearch: !showCompanySelect,
       hideInTable: true,
-      renderFormItem: () => <Select allowClear options={companyMapOptions}></Select>,
+      renderFormItem: () => (
+        <Select
+          allowClear
+          options={companyMapOptions}
+          onChange={(value) => setOrgId(value as string)}
+        ></Select>
+      ),
     },
     {
       title: '角色名称',
@@ -144,6 +152,7 @@ export default () => {
         formData={authModalConfig.formData}
         toggleVisible={() => handleModalHide('auth')}
         reload={reload}
+        orgId={orgId}
       />
     </>
   );

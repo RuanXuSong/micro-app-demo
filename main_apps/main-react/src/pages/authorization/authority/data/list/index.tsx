@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-15 15:03:23
+ * @LastEditTime: 2022-08-16 18:41:16
  */
 import React, { useEffect } from 'react';
 import { message, Button, Row, Col, Select } from 'antd';
@@ -193,6 +193,7 @@ export default () => {
         formData={authModalConfig.formData}
         toggleVisible={() => handleModalHide('auth')}
         reload={reload}
+        orgId={businessValue}
       />
       <ScopeModal
         visible={scopeModalConfig.visible}

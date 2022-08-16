@@ -44,9 +44,9 @@ function ThunderBi(props) {
     <div style={{ height: '100%' }}>
       <Loading loading={showLoading} />
       <micro-app
-        name={ROUTE_PATH.THUNDER_BI}
+        name={`${ROUTE_PATH.THUNDER_BI}/*`}
         baseRoute={`/${ROUTE_PATH.THUNDER_BI}`}
-        url={config.thunderBi}
+        url={`${config.thunderBi}`}
         onMounted={() => setLoading(false)}
         onAftershow={() => {
           userInfo &&
