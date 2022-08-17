@@ -11,8 +11,7 @@ if (isEnvPro) {
   config = {
     thunderBi: 'http://smart-bi.jxzk.thundersdata.com:38204/smart-bi',
     dataFront: 'http://data-sso.dev.thundersdata.com/smart-data',
-    // biSheng: 'http://lowcode.jxzk.thundersdata.com:38204/',
-    biSheng: 'http://bisheng-online-frontend-sso.dev.thundersdata.com/',
+    biSheng: 'http://lowcode.jxzk.thundersdata.com:38204',
     swiftScreen: 'http://smart-visualization.jxzk.thundersdata.com:38204/smart-visualization',
   };
 }

@@ -33,10 +33,10 @@ function ThunderBi(props) {
   }
 
   useEffect(() => {
-    microApp.addDataListener('thunderBi', handleData);
+    microApp.addDataListener(ROUTE_PATH.THUNDER_BI, handleData);
     return function clearup() {
-      microApp.removeDataListener('thunderBi', handleData);
-      microApp.clearDataListener('thunderBi');
+      microApp.removeDataListener(ROUTE_PATH.THUNDER_BI, handleData);
+      microApp.clearDataListener(ROUTE_PATH.THUNDER_BI);
     };
   }, []);
 

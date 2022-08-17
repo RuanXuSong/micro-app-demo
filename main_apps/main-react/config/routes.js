@@ -76,29 +76,25 @@ export default [
             component: '../layouts/BasicLayout',
             routes: [
               {
-                path: '/biSheng/auth/homepage',
-                redirect: '/auth/homepage',
-              },
-              {
-                path: '/smart-data',
+                path: '/smart-data/*',
                 name: '数融',
                 customIcon: 'data-front',
                 component: './dataFront',
               },
               {
-                path: '/biSheng/dashboard/analysis',
+                path: '/smart-lowcode/*',
                 name: '快速开发',
                 customIcon: 'bisheng',
                 component: './biSheng',
               },
               {
-                path: '/smart-bi',
+                path: '/smart-bi/*',
                 name: '大屏配置',
                 customIcon: 'thunder-bi',
                 component: './thunderBi',
               },
               {
-                path: '/smart-visualization',
+                path: '/smart-visualization/*',
                 name: '敏捷大屏',
                 customIcon: 'thunder-bi',
                 component: './swiftScreen',

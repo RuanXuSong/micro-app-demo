@@ -80,5 +80,5 @@ export enum ROUTE_PATH {
   THUNDER_BI = 'smart-bi',
   SWIFT_SCREEN = 'smart-visualization',
   DATA_FRONT = 'smart-data',
-  BI_SHENG = 'biSheng',
+  BI_SHENG = 'smart-lowcode',
 }

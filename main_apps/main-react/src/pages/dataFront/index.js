@@ -19,59 +19,28 @@ class App extends React.Component {
     data: {
       name: '初始化数据',
     },
-    name: 'dataFront',
+    name: ROUTE_PATH.DATA_FRONT,
     showLoading: true,
     showMicroApp: true,
     testNum: 0,
     modal1: false,
   };
 
-  handleCreated = () => {
-    console.log(`生命周期：created -- ${this.state.name}`);
-  };
-
-  beforemount = (e) => {
-    console.log(`生命周期：beforemount -- ${this.state.name}`, e);
-  };
-
   mounted = () => {
-    console.timeEnd(`mounted-${this.state.name}`);
-    console.log(`生命周期：mounted -- ${this.state.name}`, document.querySelector('micro-app'));
     this.setState({
       showLoading: false,
     });
     microApp.setGlobalData({ showDropDown: true });
   };
 
-  unmount = () => {
-    console.log(
-      `生命周期：unmount -- ${this.state.name}`,
-      document.querySelector('#micro-app-template-style'),
-    );
-  };
-
-  error = (e) => {
-    console.log(`生命周期：error -- ${this.state.name}`, e);
-  };
-
-  handleBeforeshow = (e) => {
-    console.log(`生命周期：keep-alive beforeshow -- ${this.state.name}`, e);
-  };
-
   handleAftershow = (e) => {
     microApp.setGlobalData({ showDropDown: true });
-    console.timeEnd(`mounted-${this.state.name}`);
-    console.log(
-      `生命周期：keep-alive aftershow -- ${this.state.name}`,
-      document.querySelector('micro-app'),
-    );
     this.setState({
       showLoading: false,
     });
   };
 
   handleAfterhidden = (e) => {
-    console.log(`生命周期：keep-alive afterhidden -- ${this.state.name}`, e);
     microApp.setGlobalData({ showDropDown: false });
   };
   changeData = () => {
@@ -142,13 +111,7 @@ class App extends React.Component {
     );
   };
 
-  handleGlobalDataForBaseApp = (data) => {
-    console.log(`这是全局数据--基座应用-${this.state.name}`, data);
-  };
-
   componentDidMount() {
-    console.time(`mounted-${this.state.name}`);
-
     microApp.addDataListener(this.state.name, (data) => {
       console.log('来自子应用dataFront的数据', data);
     });

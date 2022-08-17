@@ -27,7 +27,7 @@ const appsList: SectionProps[] = [
         title: '敏捷应用',
         description: '快速构建web应用',
         logo: 'web-app',
-        link: '/biSheng/dashboard/analysis',
+        link: '/smart-lowcode/dashboard/analysis',
         key: 'auth_homepage_biSheng',
       },
       {

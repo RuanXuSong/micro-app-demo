@@ -35,10 +35,10 @@ function BiSheng(props) {
   }
 
   useEffect(() => {
-    microApp.addDataListener('biSheng', handleData);
+    microApp.addDataListener(ROUTE_PATH.BI_SHENG, handleData);
     return function clearup() {
-      microApp.removeDataListener('biSheng', handleData);
-      microApp.clearDataListener('biSheng');
+      microApp.removeDataListener(ROUTE_PATH.BI_SHENG, handleData);
+      microApp.clearDataListener(ROUTE_PATH.BI_SHENG);
     };
   }, []);
 

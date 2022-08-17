@@ -33,10 +33,10 @@ function SwiftScreen(props) {
   }
 
   useEffect(() => {
-    microApp.addDataListener('swiftScreen', handleData);
+    microApp.addDataListener(ROUTE_PATH.SWIFT_SCREEN, handleData);
     return function clearup() {
-      microApp.removeDataListener('swiftScreen', handleData);
-      microApp.clearDataListener('swiftScreen');
+      microApp.removeDataListener(ROUTE_PATH.SWIFT_SCREEN, handleData);
+      microApp.clearDataListener(ROUTE_PATH.SWIFT_SCREEN);
     };
   }, []);
 
