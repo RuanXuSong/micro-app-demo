@@ -10,7 +10,7 @@ if (isEnvPro) {
   const locationOrigin = `${location.origin}/`;
   config = {
     thunderBi: 'http://smart-bi.jxzk.thundersdata.com:38204/smart-bi',
-    dataFront: 'http://data-sso.dev.thundersdata.com/',
+    dataFront: 'http://data-sso.dev.thundersdata.com/smart-data',
     // biSheng: 'http://lowcode.jxzk.thundersdata.com:38204/',
     biSheng: 'http://bisheng-online-frontend-sso.dev.thundersdata.com/',
     swiftScreen: 'http://smart-visualization.jxzk.thundersdata.com:38204/smart-visualization',
