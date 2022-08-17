@@ -1,163 +1,62 @@
 /** @jsxRuntime classic */
 /** @jsx jsxCustomEvent */
 import jsxCustomEvent from '@micro-zoe/micro-app/polyfill/jsx-custom-event';
-import React from 'react';
-import { Spin, Row, Col, Button, Modal } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
-import microApp, { unmountApp, unmountAllApps } from '@micro-zoe/micro-app';
+import { useState, useEffect } from 'react';
+import microApp from '@micro-zoe/micro-app';
 import { connect } from 'umi';
 import Loading from '@/components/Loading';
-import { AVATAR_URL } from '@/constant';
 import config, { LOGOUT_PATH } from '../../config';
 import { ROUTE_PATH } from '@/constant';
-import './index.less';
 
-const antIcon = <LoadingOutlined style={{ fontSize: 30 }} spin />;
+const mockUser = {
+  userName: 'admin',
+  avatar: AVATAR_URL,
+};
 
-class App extends React.Component {
-  state = {
-    data: {
-      name: '初始化数据',
-    },
-    name: ROUTE_PATH.DATA_FRONT,
-    showLoading: true,
-    showMicroApp: true,
-    testNum: 0,
-    modal1: false,
-  };
+function DataFront(props) {
+  const [showLoading, setLoading] = useState(true);
 
-  mounted = () => {
-    this.setState({
-      showLoading: false,
-    });
-    microApp.setGlobalData({ showDropDown: true });
-  };
-
-  handleAftershow = (e) => {
-    microApp.setGlobalData({ showDropDown: true });
-    this.setState({
-      showLoading: false,
-    });
-  };
-
-  handleAfterhidden = (e) => {
-    microApp.setGlobalData({ showDropDown: false });
-  };
-  changeData = () => {
-    this.setState({
-      data: {
-        name: +new Date(),
-      },
-    });
-  };
-
-  dispatchData = () => {
-    microApp.setData(this.state.name, { dispatch: 'data from dispatch' + +new Date() });
-  };
-
-  dispatchGlobalData = () => {
-    microApp.setGlobalData({ name: '全局数据' + +new Date() });
-  };
-
-  handleDataChange = (e) => {
-    console.log('通过生命周周期监听到来自子应用的数据', e);
-    Modal.info({
-      title: '来自子应用的数据',
-      content: (
-        <div>
-          <p>{JSON.stringify(e.detail.data)}</p>
-        </div>
-      ),
-      onOk() {},
-    });
-  };
-
-  toggleShow = () => {
-    this.setState({
-      showMicroApp: !this.state.showMicroApp,
-    });
-  };
-
-  changeNameUrl = () => {
-    this.setState({
-      name: 'vue2',
-      url: `${config.vue2}micro-app/vue2`,
-    });
-  };
-
-  handleModal = () => {
-    this.setState({
-      modal1: !this.state.modal1,
-    });
-  };
-
-  // 主动卸载应用
-  handleUnmountMySelf = () => {
-    // unmountApp 会删除micro-app元素
-    // 当先通过unmountApp卸载应用后再通过setState控制元素展示，会导致react报错，因为micro-app元素已经不存在了
-    // 此处先通过setState控制应用卸载，再通过unmountApp删除缓存状态，避免报错
-    this.setState(
-      {
-        showMicroApp: false,
-      },
-      () => {
-        unmountApp(this.state.name, {
-          // destroy: true,
-          clearAliveState: true,
-        }).then(() => {
-          console.log('unmountApp方法 -- 卸载成功');
-        });
-      },
-    );
-  };
-
-  componentDidMount() {
-    microApp.addDataListener(this.state.name, (data) => {
-      console.log('来自子应用dataFront的数据', data);
-    });
-
-    // TODO: 数融平台接通用户信息后从子应用获取
-    this.props.dispatch({
-      type: 'user/setCurrentUser',
-      payload: {
-        userName: 'admin',
-        avatar: AVATAR_URL,
-      },
-    });
-
-    microApp.addGlobalDataListener(this.handleGlobalDataForBaseApp);
+  function handleData(data) {
+    const { dispatch } = props;
+    if (type === 'setCurrentUser') {
+      // TODO: 对接数融权限
+      dispatch({
+        type: 'user/setCurrentUser',
+        payload: mockUser,
+      });
+    }
   }
 
-  componentWillUnmount() {
-    microApp.clearDataListener(this.state.name);
-    microApp.removeGlobalDataListener(this.handleGlobalDataForBaseApp);
-  }
+  useEffect(() => {
+    microApp.addDataListener(ROUTE_PATH.DATA_FRONT, handleData);
+    return function clearup() {
+      microApp.removeDataListener(ROUTE_PATH.DATA_FRONT, handleData);
+      microApp.clearDataListener(ROUTE_PATH.DATA_FRONT);
+    };
+  }, []);
 
-  render() {
-    return (
-      <>
-        <Loading loading={this.state.showLoading} />
-        <micro-app
-          name={ROUTE_PATH.DATA_FRONT}
-          baseRoute={`/${ROUTE_PATH.DATA_FRONT}`}
-          url={`${config.dataFront}micro-app/dataFront`}
-          data={this.state.data}
-          onCreated={this.handleCreated}
-          onBeforemount={this.beforemount}
-          onMounted={this.mounted}
-          onUnmount={this.unmount}
-          onError={this.error}
-          onBeforeshow={this.handleBeforeshow}
-          onAftershow={this.handleAftershow}
-          onAfterhidden={this.handleAfterhidden}
-          onDataChange={this.handleDataChange}
-          data={{ logoutUrl: LOGOUT_PATH }}
-          keep-alive
-        ></micro-app>
-      </>
-    );
-  }
+  return (
+    <div style={{ height: '100%' }}>
+      <Loading loading={showLoading} />
+      <micro-app
+        name={ROUTE_PATH.DATA_FRONT}
+        baseRoute={`/${ROUTE_PATH.DATA_FRONT}`}
+        url={`${config.dataFront}`}
+        onMounted={() => setLoading(false)}
+        onAftershow={() => {
+          props.dispatch({
+            type: 'user/setCurrentUser',
+            payload: mockUser,
+          });
+          setLoading(false);
+        }}
+        keep-alive
+        data={{ logoutUrl: LOGOUT_PATH }}
+      />
+    </div>
+  );
 }
+
 export default connect(({ user }) => ({
   currentUser: user.currentUser,
-}))(App);
+}))(DataFront);

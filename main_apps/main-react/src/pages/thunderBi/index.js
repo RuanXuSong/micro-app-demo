@@ -4,7 +4,6 @@ import jsxCustomEvent from '@micro-zoe/micro-app/polyfill/jsx-custom-event';
 import { useState, useEffect } from 'react';
 import microApp from '@micro-zoe/micro-app';
 import { connect } from 'umi';
-import { Spin } from 'antd';
 import Loading from '@/components/Loading';
 import config, { LOGOUT_PATH } from '../../config';
 import { ROUTE_PATH } from '@/constant';
