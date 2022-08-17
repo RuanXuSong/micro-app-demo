@@ -34,6 +34,7 @@ const noMatch = (
 /** Use Authorized check all menu item */
 const menuDataRender = (menuList) =>
   menuList.map((item) => {
+    console.log('item: ', item);
     if (item.hidden) return null;
     const localItem = {
       ...item,
@@ -134,8 +135,10 @@ const BasicLayout = (props) => {
       menuDataRender={menuDataRender}
       rightContentRender={() => <RightContent />}
       postMenuData={(menuData) => {
-        menuDataRef.current = menuData || [];
-        return menuData || [];
+        // 筛选菜单为精准匹配路由
+        const modifiedData = menuData.filter((item) => !(item.path.indexOf('/*') > -1));
+        menuDataRef.current = modifiedData || [];
+        return modifiedData || [];
       }}
     >
       <Authorized authority={authorized.authority} noMatch={noMatch}>
