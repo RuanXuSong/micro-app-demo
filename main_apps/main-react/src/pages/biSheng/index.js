@@ -11,6 +11,8 @@ import { ROUTE_PATH } from '@/constant';
 
 let userInfo;
 
+console.log('__MICRO_APP_BASE_ROUTE__', window.__MICRO_APP_BASE_ROUTE__);
+
 function BiSheng(props) {
   const [showLoading, setLoading] = useState(true);
 
