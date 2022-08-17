@@ -76,7 +76,7 @@ export default [
             component: '../layouts/BasicLayout',
             routes: [
               {
-                path: '/smart-lowcode/auth/homepage',
+                path: '/biSheng/auth/homepage',
                 redirect: '/auth/homepage',
               },
               {
@@ -86,7 +86,7 @@ export default [
                 component: './dataFront',
               },
               {
-                path: '/smart-lowcode/dashboard/analysis',
+                path: '/biSheng/dashboard/analysis',
                 name: '快速开发',
                 customIcon: 'bisheng',
                 component: './biSheng',
