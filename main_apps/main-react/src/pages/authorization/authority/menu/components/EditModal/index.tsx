@@ -6,11 +6,12 @@ import { Store } from 'antd/es/form/interface';
 import { useRequest } from 'ahooks';
 import useSpinning from '@/hooks/useSpinning';
 import { useModel } from 'umi';
-import { LOGIN_CONFIG } from '@/constant';
-import TreeItem from '@/components/TreeItem';
+import { LOGIN_CONFIG, RESOURCE_TYPE_ENUM } from '@/constant';
 import styles from './index.module.less';
 import { getResourceIds } from '@/utils/getResourceIds';
 import { removeEmpty } from '@/utils/json';
+import { ProColumns } from '@ant-design/pro-table';
+import TableItem from '@/components/TableItem';
 
 const formLayout = {
   labelCol: {
@@ -47,7 +48,8 @@ const EditModal = ({
   const { tip, setTip } = useSpinning();
   const { id } = formData;
   const { initialState } = useModel('@@initialState');
-  const { authResourceData, userInfo } = initialState || {};
+  const { userInfo } = initialState || {};
+  const { resourceList, resourceTreeData } = useModel('resourceData');
   const { orgCode } = userInfo || {};
   const [treeModalVisible, setTreeModalVisible] = useState<boolean>(false);
 
@@ -96,6 +98,31 @@ const EditModal = ({
       reload?.();
     },
   });
+
+  const columns: ProColumns<defs.platform.ResourceTreeObject>[] = [
+    {
+      title: '资源名称',
+      dataIndex: 'description',
+      align: 'left',
+      copyable: false,
+      valueType: 'text',
+    },
+    {
+      title: '资源标识',
+      dataIndex: 'resourceKey',
+      align: 'left',
+      copyable: false,
+      valueType: 'text',
+    },
+    {
+      title: '资源类型',
+      dataIndex: 'type',
+      align: 'left',
+      copyable: false,
+      valueType: 'text',
+      render: (type) => (type === RESOURCE_TYPE_ENUM.路由级资源 ? '路由级资源' : '页面级资源'),
+    },
+  ];
 
   return (
     <Form form={form} onFinish={handleFinish} {...halfFormLayout}>
@@ -152,7 +179,7 @@ const EditModal = ({
                 },
               ]}
             >
-              <TreeSelect treeData={authResourceData} allowClear multiple placeholder="请选择" />
+              <TreeSelect treeData={resourceTreeData} allowClear multiple placeholder="请选择" />
             </Form.Item>
           </div>
         </Spin>
@@ -163,7 +190,7 @@ const EditModal = ({
         forceRender
         maskClosable={false}
         title="拥有资源"
-        width={412}
+        width={800}
         onOk={() => {
           form.setFieldsValue({ resourceIds: form.getFieldValue('modalResourceIds') });
           setTreeModalVisible(false);
@@ -175,7 +202,7 @@ const EditModal = ({
         confirmLoading={submitting}
       >
         <Form.Item label="拥有资源" name="modalResourceIds" noStyle>
-          <TreeItem treeData={authResourceData} />
+          <TableItem search={false} rowKey="id" columns={columns} dataSource={resourceList} />
         </Form.Item>
       </Modal>
     </Form>

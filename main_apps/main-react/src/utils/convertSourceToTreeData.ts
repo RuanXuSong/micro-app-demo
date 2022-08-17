@@ -6,7 +6,7 @@ import arrayUtils from '@/utils/array';
  * 将 source 转换为 Tree 组件可用的数据
  * @param source
  */
-function convertSourceToTreeData(source?: PrivilegeResource[]) {
+function convertSourceToTreeData(source?: any[]) {
   if (!source) return [];
   const loopData = (data: PrivilegeResource[]): DataNode[] => {
     const modifiedData: PrivilegeResource[] = arrayUtils.deepOrder({

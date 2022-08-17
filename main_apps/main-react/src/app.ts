@@ -4,22 +4,19 @@
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:18
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-15 15:39:50
+ * @LastEditTime: 2022-08-17 18:37:41
  */
 import { MenuDataItem } from '@ant-design/pro-layout';
 import arrayUtils, { deepFlatten } from '@/utils/array';
 import { PrivilegeResource } from './interfaces/common';
 import { LOGIN_CONFIG } from './constant';
-import { DataNode } from 'antd/lib/tree';
 import convertResourceToMenu from './utils/convertResourceToMenu';
-import convertSourceToTreeData from './utils/convertSourceToTreeData';
 
 /** 初始化数据 */
 export async function getInitialState() {
   let userInfo: defs.platform.TheUserInformation = {};
   let menus: MenuDataItem[] = [];
   const privileges: PrivilegeResource[] = [];
-  let authResourceData: DataNode[] = [];
 
   if (LOGIN_CONFIG.isSSO) {
     try {
@@ -29,9 +26,6 @@ export async function getInitialState() {
         clientKey: LOGIN_CONFIG.clientId,
         userId: `${userInfo.userId}`,
       })) as unknown as PrivilegeResource[];
-      const { resourceMap } = userInfo || {};
-
-      authResourceData = getResourceMapTree(resourceMap);
 
       const routes: PrivilegeResource[] = arrayUtils.deepOrder({
         data: source, // require('../mock/route').default['/resource'].data,
@@ -58,16 +52,5 @@ export async function getInitialState() {
     userInfo,
     menus,
     privileges,
-    authResourceData,
   };
 }
-
-// 获得所有子系统的菜单树级权限
-const getResourceMapTree = (resourceMapData: any) => {
-  const resourceTree: any[] = [];
-  if (!resourceMapData) return resourceTree;
-  Object.keys(resourceMapData).forEach((key: string) => {
-    resourceTree.push({ key, title: key, children: convertSourceToTreeData(resourceMapData[key]) });
-  });
-  return resourceTree;
-};

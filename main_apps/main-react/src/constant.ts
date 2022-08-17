@@ -1,3 +1,11 @@
+/*
+ * @文件描述:
+ * @公司: thundersdata
+ * @作者: 阮旭松
+ * @Date: 2022-07-28 18:10:42
+ * @LastEditors: 阮旭松
+ * @LastEditTime: 2022-08-17 17:01:11
+ */
 /**
  * 初始化分页数据
  */
@@ -81,4 +89,9 @@ export enum ROUTE_PATH {
   SWIFT_SCREEN = 'smart-visualization',
   DATA_FRONT = 'smart-data',
   BI_SHENG = 'smart-lowcode',
+}
+
+export enum RESOURCE_TYPE_ENUM {
+  路由级资源 = 0,
+  页面级资源 = 1,
 }

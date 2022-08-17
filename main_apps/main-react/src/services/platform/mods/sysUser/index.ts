@@ -4,6 +4,7 @@
 import * as detail from './detail';
 import * as info from './info';
 import * as list from './list';
+import * as myResourceList from './myResourceList';
 import * as myself from './myself';
 import * as pageList from './pageList';
 import * as resetPassword from './resetPassword';
@@ -16,6 +17,7 @@ export {
   detail,
   info,
   list,
+  myResourceList,
   myself,
   pageList,
   resetPassword,

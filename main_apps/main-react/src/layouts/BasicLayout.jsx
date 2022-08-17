@@ -34,7 +34,6 @@ const noMatch = (
 /** Use Authorized check all menu item */
 const menuDataRender = (menuList) =>
   menuList.map((item) => {
-    console.log('item: ', item);
     if (item.hidden) return null;
     const localItem = {
       ...item,

@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-16 18:41:27
+ * @LastEditTime: 2022-08-17 18:40:12
  */
 import React from 'react';
 import { message, Button, Select } from 'antd';
@@ -20,6 +20,7 @@ import TextEllipsis from '@/components/TextEllipsis';
 
 export default () => {
   const { companyMapOptions } = useModel('company');
+  const { reloadResourceList } = useModel('resourceData');
   const { showCompanySelect } = useCompanySelect('auth_authority_menu_company');
   const {
     orgId,
@@ -48,7 +49,10 @@ export default () => {
         <Select
           allowClear
           options={companyMapOptions}
-          onChange={(value) => setOrgId(value as string)}
+          onChange={(value) => {
+            setOrgId(value as string);
+            reloadResourceList?.({ orgCode: value as string });
+          }}
         ></Select>
       ),
     },

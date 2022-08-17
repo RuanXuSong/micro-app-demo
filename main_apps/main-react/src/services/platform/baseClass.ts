@@ -32,6 +32,32 @@ class CookieItemVO {
   value = '';
 }
 
+class DataRoleInputDTO {
+  /** clientKey */
+  clientKey = '';
+
+  /** comment */
+  comment = '';
+
+  /** createdAt */
+  createdAt = '';
+
+  /** id */
+  id = undefined;
+
+  /** isDeleted */
+  isDeleted = false;
+
+  /** role */
+  role = '';
+
+  /** ruleIdList */
+  ruleIdList = [];
+
+  /** updatedAt */
+  updatedAt = '';
+}
+
 class DataRuleDTO {
   /** businessValueList */
   businessValueList = [];
@@ -101,6 +127,47 @@ class Page {
   totalPage = undefined;
 }
 
+class ResourceTreeObject {
+  /** api url */
+  apiUrl = '';
+
+  /** 子节点 */
+  children = [];
+
+  /** 备注 */
+  comment = '';
+
+  /** 描述 */
+  description = '';
+
+  /** 图标 */
+  icon = '';
+
+  /** id */
+  id = undefined;
+
+  /** 是否默认可见 */
+  isVisible = undefined;
+
+  /** 资源顺位 */
+  orderValue = undefined;
+
+  /** 父级id */
+  parentId = undefined;
+
+  /** 页面子元素 */
+  privilegeList = [];
+
+  /** 拓展字段 */
+  resourceBusinessValue = '';
+
+  /** 资源标志 */
+  resourceKey = '';
+
+  /** 类型 */
+  type = undefined;
+}
+
 class RightsManagementRoleDtoList {
   /** 拓展字段值 */
   businessValue = '';
@@ -162,7 +229,7 @@ class RoleDTO {
   operationRange = undefined;
 
   /** 企业id */
-  orgId = undefined;
+  orgId = '';
 
   /** 资源id列表 */
   resourceIds = [];
@@ -369,8 +436,8 @@ class TheUserInformation {
   /** 手机号 */
   phone = '';
 
-  /** resourceMap */
-  resourceMap = undefined;
+  /** resourceList */
+  resourceList = [];
 
   /** 性别 */
   sex = undefined;
@@ -452,9 +519,11 @@ class UserLoginDTO {
 export const platform = {
   ClientKey,
   CookieItemVO,
+  DataRoleInputDTO,
   DataRuleDTO,
   LoginResultVO,
   Page,
+  ResourceTreeObject,
   RightsManagementRoleDtoList,
   RoleDTO,
   ScreeningRoleList,

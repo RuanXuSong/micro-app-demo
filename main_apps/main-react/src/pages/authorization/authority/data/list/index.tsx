@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-16 18:41:16
+ * @LastEditTime: 2022-08-17 18:21:27
  */
 import React, { useEffect } from 'react';
 import { message, Button, Row, Col, Select } from 'antd';
@@ -28,6 +28,7 @@ export default () => {
     setClientKey,
     businessValue,
     setBusinessValue,
+    scopeMap,
     scopeMapOptions,
     editModalConfig,
     fetchList,
@@ -41,7 +42,7 @@ export default () => {
   } = useAuthDataListService();
   const { businessMapOptions } = useModel('business');
   const { showCompanySelect } = useCompanySelect('auth_authority_data_company');
-  const { companyMapOptions } = useModel('company');
+  const { companyMapOptions, companyMap } = useModel('company');
 
   useEffect(() => {
     if (!isEmpty(businessMapOptions)) {
@@ -89,7 +90,6 @@ export default () => {
     },
     {
       title: '操作',
-      dataIndex: 'id',
       align: 'left',
       copyable: false,
       valueType: 'text',
@@ -193,7 +193,7 @@ export default () => {
         formData={authModalConfig.formData}
         toggleVisible={() => handleModalHide('auth')}
         reload={reload}
-        orgId={businessValue}
+        orgId={companyMap?.find((item) => item.orgCode === businessValue)?.id}
       />
       <ScopeModal
         visible={scopeModalConfig.visible}
@@ -201,6 +201,8 @@ export default () => {
         toggleVisible={() => handleModalHide('scope')}
         reload={reload}
         clientKey={clientKey}
+        orgCode={businessValue}
+        scopeMap={scopeMap}
         scopeMapOptions={scopeMapOptions}
       />
     </>

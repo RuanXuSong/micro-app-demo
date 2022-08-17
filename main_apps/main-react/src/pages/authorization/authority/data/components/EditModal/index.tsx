@@ -76,7 +76,7 @@ export default ({
       ruleIdList: values.ruleIdList ?? [],
     }) as defs.authorization.DataRoleInputDTO;
 
-    return API.authorization.dataRole.save.fetch(payload);
+    return API.platform.sysRole.roleDataSave.fetch(payload);
   };
 
   const { run: handleFinish, loading: submitting } = useRequest(submit, {

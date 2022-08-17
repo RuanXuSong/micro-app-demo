@@ -6,11 +6,12 @@ import { Store } from 'antd/es/form/interface';
 import { useRequest } from 'ahooks';
 import useSpinning from '@/hooks/useSpinning';
 import styles from './index.module.less';
-import TreeItem from '@/components/TreeItem';
 import { useModel } from 'umi';
-import { LOGIN_CONFIG } from '@/constant';
+import { LOGIN_CONFIG, RESOURCE_TYPE_ENUM } from '@/constant';
 import { removeEmpty } from '@/utils/json';
 import { isNumber } from 'lodash';
+import TableItem from '@/components/TableItem';
+import { ProColumns } from '@ant-design/pro-table';
 
 const formLayout = {
   labelCol: {
@@ -37,8 +38,7 @@ export default ({
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
   const { directorRoleId } = formData;
-  const { initialState } = useModel('@@initialState');
-  const { authResourceData } = initialState || {};
+  const { resourceList } = useModel('resourceData');
 
   const { run } = useRequest(
     (directorRoleId) =>
@@ -110,6 +110,31 @@ export default ({
     },
   });
 
+  const columns: ProColumns<defs.platform.ResourceTreeObject>[] = [
+    {
+      title: '资源名称',
+      dataIndex: 'description',
+      align: 'left',
+      copyable: false,
+      valueType: 'text',
+    },
+    {
+      title: '资源标识',
+      dataIndex: 'resourceKey',
+      align: 'left',
+      copyable: false,
+      valueType: 'text',
+    },
+    {
+      title: '资源类型',
+      dataIndex: 'type',
+      align: 'left',
+      copyable: false,
+      valueType: 'text',
+      render: (type) => (type === RESOURCE_TYPE_ENUM.路由级资源 ? '路由级资源' : '页面级资源'),
+    },
+  ];
+
   return (
     <Modal
       centered
@@ -120,7 +145,7 @@ export default ({
       okButtonProps={{
         htmlType: 'submit',
       }}
-      width={412}
+      width={800}
       onOk={() => form.submit()}
       onCancel={handleCancel}
       confirmLoading={submitting}
@@ -128,7 +153,7 @@ export default ({
       <Spin spinning={loading && submitting} tip={tip}>
         <Form form={form} onFinish={handleFinish} {...formLayout} className={styles.formWrap}>
           <Form.Item label="权限列表" name="resourceIds" noStyle>
-            <TreeItem treeData={authResourceData} />
+            <TableItem search={false} rowKey="id" columns={columns} dataSource={resourceList} />
           </Form.Item>
         </Form>
       </Spin>

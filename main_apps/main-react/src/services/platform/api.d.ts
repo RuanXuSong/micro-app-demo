@@ -45,6 +45,32 @@ declare namespace defs {
       value?: string;
     }
 
+    export class DataRoleInputDTO {
+      /** clientKey */
+      clientKey?: string;
+
+      /** comment */
+      comment?: string;
+
+      /** createdAt */
+      createdAt?: string;
+
+      /** id */
+      id?: number;
+
+      /** isDeleted */
+      isDeleted?: boolean;
+
+      /** role */
+      role?: string;
+
+      /** ruleIdList */
+      ruleIdList?: Array<number>;
+
+      /** updatedAt */
+      updatedAt?: string;
+    }
+
     export class DataRuleDTO {
       /** businessValueList */
       businessValueList?: Array<string>;
@@ -114,6 +140,47 @@ declare namespace defs {
       totalPage?: number;
     }
 
+    export class ResourceTreeObject {
+      /** api url */
+      apiUrl?: string;
+
+      /** 子节点 */
+      children?: Array<defs.platform.ResourceTreeObject>;
+
+      /** 备注 */
+      comment?: string;
+
+      /** 描述 */
+      description: string;
+
+      /** 图标 */
+      icon?: string;
+
+      /** id */
+      id?: number;
+
+      /** 是否默认可见 */
+      isVisible?: number;
+
+      /** 资源顺位 */
+      orderValue?: number;
+
+      /** 父级id */
+      parentId?: number;
+
+      /** 页面子元素 */
+      privilegeList?: Array<defs.platform.ResourceTreeObject>;
+
+      /** 拓展字段 */
+      resourceBusinessValue?: string;
+
+      /** 资源标志 */
+      resourceKey: string;
+
+      /** 类型 */
+      type?: number;
+    }
+
     export class RightsManagementRoleDtoList {
       /** 拓展字段值 */
       businessValue?: string;
@@ -175,7 +242,7 @@ declare namespace defs {
       operationRange?: number;
 
       /** 企业id */
-      orgId?: number;
+      orgId?: string;
 
       /** 资源id列表 */
       resourceIds?: Array<number>;
@@ -382,8 +449,8 @@ declare namespace defs {
       /** 手机号 */
       phone?: string;
 
-      /** resourceMap */
-      resourceMap?: ObjectMap<any, Array<defs.platform.ResourceTreeObject>>;
+      /** resourceList */
+      resourceList?: Array<defs.platform.ResourceTreeObject>;
 
       /** 性别 */
       sex?: number;
@@ -755,6 +822,22 @@ declare namespace API {
       }
 
       /**
+       * roleDataSave
+       * /api/role/data/save
+       */
+      export namespace roleDataSave {
+        export class Params {}
+
+        export type Response = number;
+
+        export const init: Response;
+
+        export function fetch(
+          bodyParams: defs.platform.DataRoleInputDTO,
+        ): Promise<Response>;
+      }
+
+      /**
        * 查询所有角色（分页）
        * /api/role/page
        */
@@ -841,6 +924,23 @@ declare namespace API {
         export function fetch(
           bodyParams: defs.platform.UserListPageFilter,
         ): Promise<Response>;
+      }
+
+      /**
+       * myResourceList
+       * /api/user/myResource
+       */
+      export namespace myResourceList {
+        export class Params {
+          /** orgCode */
+          orgCode?: string;
+        }
+
+        export type Response = Array<defs.platform.ResourceTreeObject>;
+
+        export const init: Response;
+
+        export function fetch(params?: Params): Promise<Response>;
       }
 
       /**

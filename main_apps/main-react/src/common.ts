@@ -24,7 +24,6 @@ const codeMessage: { [key: number]: string } = {
 
 export function errorHandler(error: ResponseError) {
   const { response } = error;
-  console.log('response: ', response);
   if (response && response.status) {
     const errorText = codeMessage[response.status] || response.statusText;
     const { status, url } = response;

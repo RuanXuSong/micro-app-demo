@@ -35,7 +35,7 @@ export default () => {
 
   const { reload } = actionRef.current || {};
 
-  const { data: scopeMap } = useRequest(
+  const { data: scopeMap } = useRequest<defs.authorization.DataRuleDTO[]>(
     () =>
       API.authorization.data.listRule.fetch({
         clientKey,
@@ -157,6 +157,7 @@ export default () => {
     setClientKey,
     businessValue,
     setBusinessValue,
+    scopeMap,
     scopeMapOptions,
     editModalConfig,
     setEditModalConfig,

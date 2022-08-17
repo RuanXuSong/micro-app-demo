@@ -10,6 +10,8 @@ import classNames from 'classnames';
 import { useImmer } from 'use-immer';
 import { isEqual } from 'lodash';
 import styles from './index.module.less';
+import { initRequest } from '@/common';
+import { removeEmpty } from '@/utils/json';
 
 /**
  * 初始化分页数据
@@ -25,6 +27,8 @@ export default ({
   formData,
   reload,
   clientKey,
+  orgCode,
+  scopeMap,
   scopeMapOptions,
 }: {
   visible: boolean;
@@ -32,6 +36,8 @@ export default ({
   formData: Store;
   reload?: () => void;
   clientKey: string;
+  orgCode?: string;
+  scopeMap?: defs.authorization.DataRuleDTO[];
   scopeMapOptions: any;
 }) => {
   const [form] = Form.useForm();
@@ -40,11 +46,9 @@ export default ({
   const [selectedRowKeysObj, setSelectedRowKeysObj] = useImmer<Record<string, string[]>>({});
   const [selectedId, setSelectedId] = useState<number>();
 
-  const [ruleInfoObj, setRuleInfoObj] = useImmer<
-    Record<string, { businessValues: string[]; listData: string[] }>
-  >({});
+  const [ruleInfoObj, setRuleInfoObj] = useImmer<Record<string, { businessValues: string[] }>>({});
 
-  const { listData = [], businessValues = [] } = ruleInfoObj[selectedId!] || {};
+  const { businessValues = [] } = ruleInfoObj[selectedId!] || {};
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     setSelectedRowKeysObj((config) => {
@@ -71,13 +75,12 @@ export default ({
       const selectedKeysObj = {};
       const ruleInfoObj = {};
       response?.forEach((item) => {
-        const { ruleKeyId, businessValueList, ruleDataList } = item;
+        const { ruleKeyId, businessValueList } = item;
 
         if (ruleKeyId) {
           selectedKeysObj[ruleKeyId] = businessValueList || [];
           ruleInfoObj[ruleKeyId] = {
             businessValues: businessValueList,
-            listData: ruleDataList,
           };
         }
       });
@@ -95,6 +98,22 @@ export default ({
       });
     }
   }, [visible]);
+
+  const { data: scopeList, run: handleFetchList } = useRequest(fetchList, {
+    manual: true,
+  });
+
+  useEffect(() => {
+    if (!visible) return;
+    const { originRuleInterface = '' } = scopeMap?.find((item) => item.id === selectedId) || {};
+    originRuleInterface &&
+      handleFetchList(
+        originRuleInterface,
+        removeEmpty({
+          orgCode,
+        }),
+      );
+  }, [visible, selectedId]);
 
   const handleCancel = () => {
     toggleVisible();
@@ -193,7 +212,7 @@ export default ({
               loading={loading}
               rowSelection={rowSelection}
               columns={columns}
-              dataSource={listData}
+              dataSource={scopeList}
               rowKey={(record) => `${record.id}`}
             />
           </div>
@@ -201,4 +220,24 @@ export default ({
       </Spin>
     </Modal>
   );
+};
+
+/** 请求范围右边列表 */
+const fetchList = async (url: string, params = {}) => {
+  const request = await initRequest();
+  const result = await request.get(url, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params,
+  });
+  if (result) {
+    if (!result.success) {
+      throw new Error(JSON.stringify(result));
+    } else {
+      return result.data || undefined;
+    }
+  } else {
+    throw new Error(JSON.stringify({ message: '接口未响应' }));
+  }
 };
