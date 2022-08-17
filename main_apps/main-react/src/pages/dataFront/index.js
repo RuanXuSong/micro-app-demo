@@ -175,7 +175,7 @@ class App extends React.Component {
       <>
         <Loading loading={this.state.showLoading} />
         <micro-app
-          name={`${ROUTE_PATH.DATA_FRONT}/*`}
+          name={ROUTE_PATH.DATA_FRONT}
           baseRoute={`/${ROUTE_PATH.DATA_FRONT}`}
           url={`${config.dataFront}micro-app/dataFront`}
           data={this.state.data}

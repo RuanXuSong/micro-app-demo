@@ -2,7 +2,7 @@ let config = {
   thunderBi: 'http://bi-sso.dev.thundersdata.com:8181/',
   dataFront: 'http://127.0.0.1:8000/',
   biSheng: 'http://localhost:3001/',
-  swiftScreen: 'http://smart-visualization.jxzk.thundersdata.com:38204/',
+  swiftScreen: 'http://127.0.0.1:8000/',
 };
 const isEnvPro = process.env.NODE_ENV === 'production';
 
@@ -11,7 +11,8 @@ if (isEnvPro) {
   config = {
     thunderBi: 'http://smart-bi.jxzk.thundersdata.com:38204/smart-bi',
     dataFront: 'http://data-sso.dev.thundersdata.com/',
-    biSheng: 'http://lowcode.jxzk.thundersdata.com:38204/',
+    // biSheng: 'http://lowcode.jxzk.thundersdata.com:38204/',
+    biSheng: 'http://bisheng-online-frontend-sso.dev.thundersdata.com/',
     swiftScreen: 'http://smart-visualization.jxzk.thundersdata.com:38204/smart-visualization',
   };
 }

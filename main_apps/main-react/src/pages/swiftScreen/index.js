@@ -44,7 +44,7 @@ function SwiftScreen(props) {
     <div style={{ height: '100%' }}>
       <Loading loading={showLoading} />
       <micro-app
-        name={`${ROUTE_PATH.SWIFT_SCREEN}/*`}
+        name={ROUTE_PATH.SWIFT_SCREEN}
         baseRoute={`/${ROUTE_PATH.SWIFT_SCREEN}`}
         url={`${config.swiftScreen}`}
         onMounted={() => setLoading(false)}
