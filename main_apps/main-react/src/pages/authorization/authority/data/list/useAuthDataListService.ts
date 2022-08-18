@@ -50,7 +50,7 @@ export default () => {
     () =>
       dimToOptions(scopeMap, {
         labelMapping: 'ruleName',
-        codeMapping: 'ruleKeyId',
+        codeMapping: 'id',
       }),
     [scopeMap],
   );

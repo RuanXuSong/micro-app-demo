@@ -67,7 +67,7 @@ const appsList: SectionProps[] = [
         title: '物联网',
         description: '雷数IOT平台',
         logo: 'iot-platform',
-        link: '',
+        link: '/smart-iot',
         key: 'smart-iot',
       },
     ],

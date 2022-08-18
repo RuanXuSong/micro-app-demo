@@ -12,6 +12,7 @@ import { isEqual } from 'lodash';
 import styles from './index.module.less';
 import { initRequest } from '@/common';
 import { removeEmpty } from '@/utils/json';
+import { useModel } from 'umi';
 
 /**
  * 初始化分页数据
@@ -27,8 +28,7 @@ export default ({
   formData,
   reload,
   clientKey,
-  orgCode,
-  scopeMap,
+  scopeMap = [],
   scopeMapOptions,
 }: {
   visible: boolean;
@@ -36,13 +36,15 @@ export default ({
   formData: Store;
   reload?: () => void;
   clientKey: string;
-  orgCode?: string;
   scopeMap?: defs.authorization.DataRuleDTO[];
   scopeMapOptions: any;
 }) => {
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
   const { businessValue } = formData;
+  const { initialState } = useModel('@@initialState');
+  const { userInfo } = initialState || {};
+  const { orgCode } = userInfo || {};
   const [selectedRowKeysObj, setSelectedRowKeysObj] = useImmer<Record<string, string[]>>({});
   const [selectedId, setSelectedId] = useState<number>();
 
@@ -75,11 +77,11 @@ export default ({
       const selectedKeysObj = {};
       const ruleInfoObj = {};
       response?.forEach((item) => {
-        const { ruleKeyId, businessValueList } = item;
+        const { id, businessValueList } = item;
 
-        if (ruleKeyId) {
-          selectedKeysObj[ruleKeyId] = businessValueList || [];
-          ruleInfoObj[ruleKeyId] = {
+        if (id) {
+          selectedKeysObj[id] = businessValueList || [];
+          ruleInfoObj[id] = {
             businessValues: businessValueList,
           };
         }
@@ -122,12 +124,12 @@ export default ({
 
   const submit = () => {
     setTip('数据保存中，请稍候...');
+    const selectedRule = scopeMap.find((item) => item.id === selectedId);
 
     return API.authorization.data.saveRule.fetch({
+      ...selectedRule,
       clientKey,
       id: selectedId,
-      ruleKeyId: selectedId,
-      ruleName: scopeMapOptions.find((item: any) => item.value === selectedId)?.label ?? '',
       businessValueList: selectedRowKeysObj[selectedId!] ?? [],
     });
   };
@@ -149,11 +151,11 @@ export default ({
     },
     {
       title: '创建人',
-      dataIndex: 'userName',
+      dataIndex: 'createdBy',
     },
     {
       title: '创建时间',
-      dataIndex: 'created_at',
+      dataIndex: 'createdAt',
     },
   ];
 

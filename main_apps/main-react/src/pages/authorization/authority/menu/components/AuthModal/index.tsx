@@ -159,7 +159,6 @@ export default ({
         <Form form={form} onFinish={handleFinish} {...formLayout} className={styles.formWrap}>
           <Form.Item
             label="企业编码"
-            name="account"
             tooltip={{
               icon: <ExclamationCircleOutlined />,
               title: '企业编码将作为企业下所有账号后缀',

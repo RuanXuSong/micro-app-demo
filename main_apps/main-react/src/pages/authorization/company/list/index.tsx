@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-03 15:32:38
+ * @LastEditTime: 2022-08-18 16:52:11
  */
 import React from 'react';
 import { message, Button, Modal } from 'antd';
@@ -173,7 +173,6 @@ export default () => {
       <EditModal
         visible={editModalConfig.visible}
         formData={editModalConfig.formData}
-        loading={editModalConfig.loading}
         toggleVisible={() => handleModalHide('edit')}
         reload={reload}
       />

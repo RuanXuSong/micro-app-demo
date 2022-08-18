@@ -15,6 +15,7 @@ import classNames from 'classnames';
 import moment from 'moment';
 import { removeEmpty } from '@/utils/json';
 import { useModel } from 'umi';
+import { disabledDate } from '@/utils/getDisabledDate';
 
 const formLayout = {
   labelCol: {
@@ -36,13 +37,11 @@ export default ({
   visible,
   toggleVisible,
   formData,
-  loading,
   reload,
 }: {
   visible: boolean;
   toggleVisible: () => void;
   formData: Store;
-  loading: boolean;
   reload?: () => void;
 }) => {
   const [form] = Form.useForm();
@@ -79,15 +78,26 @@ export default ({
     form.resetFields();
   };
 
+  const handleSuccess = () => {
+    message.success('保存成功');
+    form.resetFields();
+    toggleVisible();
+    reload?.();
+    reloadCompanyData();
+  };
+
   /** 编辑企业 */
-  const { run: handleOrgEdit } = useRequest(API.platform.sysOrg.update.fetch, {
-    onSuccess: () => reloadCompanyData(),
-    manual: true,
-  });
+  const { run: handleOrgEdit, loading: editLoading } = useRequest(
+    API.platform.sysOrg.update.fetch,
+    {
+      onSuccess: handleSuccess,
+      manual: true,
+    },
+  );
 
   /** 新建企业 */
-  const { run: handleOrgAdd } = useRequest(API.platform.sysOrg.save.fetch, {
-    onSuccess: () => reloadCompanyData(),
+  const { run: handleOrgAdd, loading: addLoading } = useRequest(API.platform.sysOrg.save.fetch, {
+    onSuccess: handleSuccess,
     manual: true,
   });
 
@@ -108,13 +118,9 @@ export default ({
 
   const { run: handleFinish, loading: submitting } = useRequest(submit, {
     manual: true,
-    onSuccess: () => {
-      message.success('保存成功');
-      form.resetFields();
-      toggleVisible();
-      reload?.();
-    },
   });
+
+  const loadingStatus = submitting || editLoading || addLoading;
 
   return (
     <Modal
@@ -129,16 +135,16 @@ export default ({
       width={800}
       onOk={() => form.submit()}
       onCancel={handleCancel}
-      confirmLoading={submitting}
+      confirmLoading={loadingStatus}
     >
-      <Spin spinning={loading && submitting} tip={tip}>
+      <Spin spinning={loadingStatus} tip={tip}>
         <Form form={form} onFinish={handleFinish} {...formLayout} className={styles.formWrap}>
           <Form.Item
             label="企业编码"
             name="orgCode"
             tooltip={{
               icon: <ExclamationCircleOutlined />,
-              title: '企业编码将作为企业下所有账号后缀',
+              title: '企业编码将作为企业下所有账号后缀\n需要输入20位以内字母，区分大小写',
             }}
             rules={[
               {
@@ -200,6 +206,9 @@ export default ({
               {
                 whitespace: true,
               },
+              {
+                required: true,
+              },
             ]}
           >
             <Input placeholder="请输入" />
@@ -222,8 +231,16 @@ export default ({
           >
             <Input placeholder="请输入" />
           </Form.Item>
-          <Form.Item label="有效期" name="validBefore">
-            <DatePicker />
+          <Form.Item
+            label="有效期"
+            name="validBefore"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <DatePicker disabledDate={disabledDate} />
           </Form.Item>
           <div className={classNames(styles.rowWrap, styles.description)}>
             <Form.Item
@@ -232,6 +249,9 @@ export default ({
               rules={[
                 {
                   whitespace: true,
+                },
+                {
+                  required: true,
                 },
               ]}
               {...rowLayout}
