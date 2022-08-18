@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-18 10:24:55
+ * @LastEditTime: 2022-08-18 11:25:45
  */
 import React from 'react';
 import { message, Button, Select } from 'antd';
@@ -21,7 +21,7 @@ import TextEllipsis from '@/components/TextEllipsis';
 export default () => {
   const { companyMapOptions } = useModel('company');
   const { reloadResourceList } = useModel('resourceData');
-  const { showCompanySelect } = useCompanySelect('auth_authority_menu_company');
+  const { showCompanySelect } = useCompanySelect('cloud_authority_menu_company');
   const {
     orgCode,
     setOrgCode,

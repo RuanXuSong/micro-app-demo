@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-17 18:21:27
+ * @LastEditTime: 2022-08-18 11:25:40
  */
 import React, { useEffect } from 'react';
 import { message, Button, Row, Col, Select } from 'antd';
@@ -41,7 +41,7 @@ export default () => {
     handleAuthorize,
   } = useAuthDataListService();
   const { businessMapOptions } = useModel('business');
-  const { showCompanySelect } = useCompanySelect('auth_authority_data_company');
+  const { showCompanySelect } = useCompanySelect('cloud_authority_data_company');
   const { companyMapOptions, companyMap } = useModel('company');
 
   useEffect(() => {
