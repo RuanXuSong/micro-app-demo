@@ -37,19 +37,22 @@ const EditModal = ({
   formData,
   loading,
   reload,
+  resourceList,
+  resourceTreeData,
 }: {
   visible: boolean;
   toggleVisible: () => void;
   formData: Store;
   loading: boolean;
   reload?: () => void;
+  resourceList: any;
+  resourceTreeData: any;
 }) => {
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
   const { id } = formData;
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
-  const { resourceList, resourceTreeData } = useModel('resourceData');
   const { orgCode } = userInfo || {};
   const [treeModalVisible, setTreeModalVisible] = useState<boolean>(false);
 

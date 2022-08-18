@@ -6,6 +6,7 @@ import { ActionType } from '@ant-design/pro-table';
 import { initialPagination } from '@/constant';
 import { removeEmpty } from '@/utils/json';
 import { getResourceIds } from '@/utils/getResourceIds';
+import useResourceData from '@/hooks/useResourceData';
 
 export default () => {
   const actionRef = useRef<ActionType>();
@@ -26,6 +27,7 @@ export default () => {
     visible: false,
     formData: {},
   });
+  const { fetchResourceList, resourceList, resourceTreeData } = useResourceData();
 
   const { reload } = actionRef.current || {};
 
@@ -118,6 +120,9 @@ export default () => {
     actionRef,
     reload,
     editModalConfig,
+    resourceList,
+    fetchResourceList,
+    resourceTreeData,
     setEditModalConfig,
     authModalConfig,
     setAuthModalConfig,

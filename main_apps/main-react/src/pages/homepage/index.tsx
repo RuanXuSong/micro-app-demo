@@ -28,14 +28,14 @@ const appsList: SectionProps[] = [
         description: '快速构建web应用',
         logo: 'web-app',
         link: '/smart-lowcode/dashboard/analysis',
-        key: 'cloud_homepage_biSheng',
+        key: 'smart-lowcode',
       },
       {
         title: '敏捷大屏',
         description: '快速构建可视化大屏',
         logo: 'swift-screen',
         link: '/smart-visualization',
-        key: 'cloud_homepage_screen',
+        key: 'smart-visualization',
       },
     ],
   },
@@ -48,14 +48,14 @@ const appsList: SectionProps[] = [
         description: '雷数大数据开发平台',
         logo: 'data-front',
         link: '/smart-data',
-        key: 'cloud_homepage_dataFront',
+        key: 'smart-data',
       },
       {
         title: '商业智能平台',
         description: '雷数BI平台',
         logo: 'thunder-bi',
         link: '/smart-bi',
-        key: 'cloud_homepage_thunderBi',
+        key: 'smart-bi',
       },
     ],
   },
@@ -68,7 +68,7 @@ const appsList: SectionProps[] = [
         description: '雷数IOT平台',
         logo: 'iot-platform',
         link: '',
-        key: 'cloud_homepage_iotPlatform',
+        key: 'smart-iot',
       },
     ],
   },
@@ -79,8 +79,7 @@ const appsList: SectionProps[] = [
 ];
 
 const Homepage = () => {
-  const { initialState } = useModel('@@initialState');
-  const { privileges = [] } = initialState || {};
+  const { resourceList } = useModel('resourceData');
 
   const renderCardItem = (cardItem: CardItemProps) => {
     const { title, description, logo, link } = cardItem || {};
@@ -128,7 +127,7 @@ const Homepage = () => {
         <div className={styles.subTitle}>助力企业搭建高效平台</div>
       </div>
       <div className={styles.contentWrap}>
-        {checkPermissions(privileges, appsList).map(renderSection)}
+        {checkPermissions(resourceList, appsList).map(renderSection)}
       </div>
     </div>
   );
@@ -137,11 +136,11 @@ const Homepage = () => {
 export default Homepage;
 
 /** 筛选出拥有权限的应用 */
-const checkPermissions = (authPrivileges: PrivilegeResource[], totalAppList: SectionProps[]) => {
-  if (!authPrivileges) {
+const checkPermissions = (authResourceList: PrivilegeResource[], totalAppList: SectionProps[]) => {
+  if (!authResourceList) {
     return [];
   }
-  const authKeys = authPrivileges.map((item) => item.resourceKey);
+  const authKeys = authResourceList.map((item) => item.resourceKey);
   return totalAppList.map((item) => {
     const { cardsList = [] } = item;
     return { ...item, cardsList: cardsList.filter((child) => authKeys.includes(child.key)) };
