@@ -9,7 +9,7 @@ import { getResourceIds } from '@/utils/getResourceIds';
 
 export default () => {
   const actionRef = useRef<ActionType>();
-  const [orgId, setOrgId] = useState<string>();
+  const [orgCode, setOrgCode] = useState<string>();
   const [editModalConfig, setEditModalConfig] = useImmer<{
     visible: boolean;
     formData: any;
@@ -113,8 +113,8 @@ export default () => {
   };
 
   return {
-    orgId,
-    setOrgId,
+    orgCode,
+    setOrgCode,
     actionRef,
     reload,
     editModalConfig,

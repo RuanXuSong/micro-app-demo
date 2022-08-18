@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-17 18:40:12
+ * @LastEditTime: 2022-08-18 10:24:55
  */
 import React from 'react';
 import { message, Button, Select } from 'antd';
@@ -23,8 +23,8 @@ export default () => {
   const { reloadResourceList } = useModel('resourceData');
   const { showCompanySelect } = useCompanySelect('auth_authority_menu_company');
   const {
-    orgId,
-    setOrgId,
+    orgCode,
+    setOrgCode,
     actionRef,
     reload,
     editModalConfig,
@@ -50,7 +50,7 @@ export default () => {
           allowClear
           options={companyMapOptions}
           onChange={(value) => {
-            setOrgId(value as string);
+            setOrgCode(value as string);
             reloadResourceList?.({ orgCode: value as string });
           }}
         ></Select>
@@ -156,7 +156,7 @@ export default () => {
         formData={authModalConfig.formData}
         toggleVisible={() => handleModalHide('auth')}
         reload={reload}
-        orgId={orgId}
+        orgCode={orgCode}
       />
     </>
   );

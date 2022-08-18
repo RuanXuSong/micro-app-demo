@@ -34,17 +34,17 @@ export default ({
   toggleVisible,
   formData,
   reload,
-  orgId,
+  orgCode,
 }: {
   visible: boolean;
   toggleVisible: () => void;
   formData: Store;
   reload?: () => void;
-  orgId?: string;
+  orgCode?: string;
 }) => {
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
-  const { orgId: userOrgId } = userInfo || {};
+  const { orgCode: userOrgCode } = userInfo || {};
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
   const { id } = formData;
@@ -72,13 +72,13 @@ export default ({
 
   useEffect(() => {
     if (visible) {
-      fetchList({ ...paginationConfig, orgId: orgId || userOrgId });
+      fetchList({ ...paginationConfig, orgCode: orgCode || userOrgCode });
       fetchAuthList({
         clientKey: LOGIN_CONFIG.clientId,
         roleId: id,
       });
     }
-  }, [orgId, userOrgId, visible, paginationConfig]);
+  }, [orgCode, userOrgCode, visible, paginationConfig]);
 
   useEffect(() => {
     if (!isEmpty(formData)) {
