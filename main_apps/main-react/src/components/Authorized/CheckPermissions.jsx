@@ -16,7 +16,7 @@ const checkPermissions = (authMenu, currentMenu, Exception) => {
     return currentMenu;
   }
 
-  if (currentMenu.key === '/auth') {
+  if (currentMenu.key === '/cloud') {
     return currentMenu;
   }
   // 数组处理

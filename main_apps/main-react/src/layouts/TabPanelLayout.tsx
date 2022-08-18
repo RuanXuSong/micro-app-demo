@@ -16,7 +16,7 @@ class SwitchTabs extends Component<any, any> {
     this.props.history.listen((location: any) => {
       const localUrl = window.location;
       // 只记录平台端的 auth 标签页
-      if (location.pathname.indexOf('/auth/') < 0) {
+      if (location.pathname.indexOf('/cloud/') < 0) {
         return;
       }
       const { title } = getTabsComponent(location.pathname) || {};

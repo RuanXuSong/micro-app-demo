@@ -8,53 +8,53 @@ export default [
         routes: [
           {
             path: '/',
-            redirect: '/auth/homepage',
+            redirect: '/cloud/homepage',
           },
           {
             path: '/login',
             component: './login/index',
           },
           {
-            path: '/auth',
+            path: '/cloud',
             component: '../layouts/AuthLayout',
             routes: [
               {
-                path: '/auth',
+                path: '/cloud',
                 name: '首页',
                 customIcon: 'data-front',
                 component: '../layouts/TabPanelLayout',
                 routes: [
                   {
-                    path: '/auth/homepage',
+                    path: '/cloud/homepage',
                     name: '首页',
                     component: './homepage',
                     fontIcon: 'icon-homepage',
                   },
                   {
-                    path: '/auth/company/list',
+                    path: '/cloud/company/list',
                     name: '企业管理',
                     component: './authorization/company/list',
                     fontIcon: 'icon-company',
                   },
                   {
-                    path: '/auth/user/list',
+                    path: '/cloud/user/list',
                     name: '用户管理',
                     component: './authorization/user/list',
                     fontIcon: 'icon-person',
                   },
                   {
-                    path: '/auth/authority',
+                    path: '/cloud/authority',
                     name: '权限管理',
                     fontIcon: 'icon-authority',
                     routes: [
                       {
-                        path: '/auth/authority/menu',
+                        path: '/cloud/authority/menu',
                         name: '菜单权限',
                         component: './authorization/authority/menu/list',
                         fontIcon: 'icon-menu',
                       },
                       {
-                        path: '/auth/authority/data',
+                        path: '/cloud/authority/data',
                         name: '数据权限',
                         component: './authorization/authority/data/list',
                         fontIcon: 'icon-data',
@@ -62,7 +62,7 @@ export default [
                     ],
                   },
                   {
-                    path: '/auth/central',
+                    path: '/cloud/central',
                     name: '个人中心',
                     component: './authorization/central',
                     fontIcon: 'icon-person',

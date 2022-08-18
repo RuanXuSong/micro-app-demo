@@ -77,6 +77,6 @@ export const getTabsComponent = (key: string) => {
     newKey = key.split('?')[0];
   }
 
-  const tab = TABS_CONFIG[`${newKey.replace('/auth', '')}`];
+  const tab = TABS_CONFIG[`${newKey.replace('/cloud', '')}`];
   return tab;
 };
