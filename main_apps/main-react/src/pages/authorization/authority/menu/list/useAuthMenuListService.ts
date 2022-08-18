@@ -62,6 +62,7 @@ export default () => {
     const { list, page, total } = await API.platform.sysRole.pageList.fetch(
       removeEmpty({
         ...params,
+        orgCode,
         page: params?.current || initialPagination.page,
         pageSize: params?.pageSize || initialPagination.pageSize,
       }),
