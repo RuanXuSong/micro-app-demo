@@ -5,7 +5,6 @@ import 'antd/lib/form';
 import { Store } from 'antd/es/form/interface';
 import { useRequest } from 'ahooks';
 import useSpinning from '@/hooks/useSpinning';
-import ExclamationCircleOutlined from '@ant-design/icons/lib/icons/ExclamationCircleOutlined';
 import styles from './index.module.less';
 import { useImmer } from 'use-immer';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
@@ -157,14 +156,7 @@ export default ({
     >
       <Spin spinning={loading && submitting && authLoading} tip={tip}>
         <Form form={form} onFinish={handleFinish} {...formLayout} className={styles.formWrap}>
-          <Form.Item
-            label="企业编码"
-            tooltip={{
-              icon: <ExclamationCircleOutlined />,
-              title: '企业编码将作为企业下所有账号后缀',
-            }}
-            noStyle
-          >
+          <Form.Item label="用户授权" noStyle>
             <List
               loading={loading}
               className={styles.listWrap}

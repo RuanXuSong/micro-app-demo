@@ -33,6 +33,9 @@ class CookieItemVO {
 }
 
 class DataRoleInputDTO {
+  /** businessValue */
+  businessValue = '';
+
   /** clientKey */
   clientKey = '';
 
@@ -406,6 +409,9 @@ class TheTenantListPageFilter {
 }
 
 class TheUserInformation {
+  /** 校验用token */
+  accessToken = '';
+
   /** 头像 */
   avatar = '';
 

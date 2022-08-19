@@ -30,6 +30,17 @@ export default () => {
   const { reload } = actionRef.current || {};
 
   /**
+   * 重置密码
+   */
+  const { run: handleResetPassword } = useRequest(API.platform.sysOrg.resetPassword.fetch, {
+    manual: true,
+    onSuccess: () => {
+      message.success('重置成功');
+      reload?.();
+    },
+  });
+
+  /**
    * 启用/禁用
    */
   const { run: handleUpdateStatus } = useRequest(API.platform.sysOrg.updateStatus.fetch, {
@@ -122,6 +133,7 @@ export default () => {
     fetchList,
     handleCompanyEdit,
     handleUpdateStatus,
+    handleResetPassword,
     handleCompanyAdd,
     handleAuthorize,
     handleModalHide,

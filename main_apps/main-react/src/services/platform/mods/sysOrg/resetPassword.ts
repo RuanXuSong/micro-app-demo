@@ -1,5 +1,5 @@
 /**
- * @description 重置密码并发送新密码至负责人手机号
+ * @description 企业重置密码
  */
 
 import serverConfig from '../../../../../../../server.config';
@@ -11,7 +11,7 @@ export const init = '';
 
 export async function fetch(params = {}) {
   const request = await initRequest();
-  const result = await request.get(backEndUrl + '/api/user/resetPassword', {
+  const result = await request.get(backEndUrl + '/api/org/resetPassword', {
     headers: {
       'Content-Type': 'application/json',
     },

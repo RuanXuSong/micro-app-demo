@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Modal, Form, Spin, Input, Select, message } from 'antd';
 import { isEmpty, isNil } from 'lodash-es';
 import 'antd/lib/form';
@@ -9,10 +9,11 @@ import UploadFormItem from '@/components/UploadFormItem';
 import { FILE_TYPE_MAP } from '@/utils/upload';
 import PlusOutlined from '@ant-design/icons/lib/icons/PlusOutlined';
 import styles from './index.module.less';
-import { emailValidator, phoneValidator } from '@/utils/validators';
+import { emailValidator, phoneValidator, userAccountValidator } from '@/utils/validators';
 import { ROLE_STATUS_MAP, SEX_ENUM } from '@/constant';
 import { enumToOptions } from '@/utils/array';
 import { removeEmpty } from '@/utils/json';
+import { useModel } from 'umi';
 
 const formLayout = {
   labelCol: {
@@ -29,16 +30,22 @@ export default ({
   formData,
   loading,
   reload,
+  orgId,
 }: {
   visible: boolean;
   toggleVisible: () => void;
   formData: Store;
   loading: boolean;
   reload?: () => void;
+  orgId?: string;
 }) => {
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
   const { id } = formData;
+  const { initialState } = useModel('@@initialState');
+  const { userInfo } = initialState || {};
+  const { orgCode: userOrgCode } = userInfo || {};
+  const { companyMap } = useModel('company');
 
   useEffect(() => {
     if (!isEmpty(formData)) {
@@ -62,6 +69,10 @@ export default ({
       form.resetFields();
     };
   }, [formData]);
+
+  const orgCode = useMemo(() => {
+    return companyMap?.find((item) => item.id === orgId)?.orgCode;
+  }, [orgId]);
 
   const handleCancel = () => {
     toggleVisible();
@@ -115,6 +126,7 @@ export default ({
           <Form.Item
             label="登录账号"
             name="userName"
+            tooltip="11位以内的英文数字"
             rules={[
               {
                 whitespace: true,
@@ -122,9 +134,12 @@ export default ({
               {
                 required: true,
               },
+              {
+                validator: userAccountValidator,
+              },
             ]}
           >
-            <Input placeholder="请输入" />
+            <Input placeholder="请输入" suffix={`@${orgCode ?? userOrgCode}`} />
           </Form.Item>
           <Form.Item
             label="用户昵称"

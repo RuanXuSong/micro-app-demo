@@ -39,6 +39,7 @@ const EditModal = ({
   reload,
   resourceList,
   resourceTreeData,
+  orgCode,
 }: {
   visible: boolean;
   toggleVisible: () => void;
@@ -47,13 +48,14 @@ const EditModal = ({
   reload?: () => void;
   resourceList: any;
   resourceTreeData: any;
+  orgCode?: string;
 }) => {
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
   const { id } = formData;
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
-  const { orgCode } = userInfo || {};
+  const { orgCode: userOrgCode } = userInfo || {};
   const [treeModalVisible, setTreeModalVisible] = useState<boolean>(false);
 
   useEffect(() => {
@@ -85,7 +87,7 @@ const EditModal = ({
       ...rest,
       clientKey: LOGIN_CONFIG.clientId,
       id,
-      businessValue: orgCode,
+      businessValue: orgCode ?? userOrgCode,
       resourceIds: resourceIds.filter((item: string) => isNumber(item)),
     }) as defs.authorization.RoleDTO;
 

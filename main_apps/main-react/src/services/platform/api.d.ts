@@ -46,6 +46,9 @@ declare namespace defs {
     }
 
     export class DataRoleInputDTO {
+      /** businessValue */
+      businessValue?: string;
+
       /** clientKey */
       clientKey?: string;
 
@@ -419,6 +422,9 @@ declare namespace defs {
     }
 
     export class TheUserInformation {
+      /** 校验用token */
+      accessToken?: string;
+
       /** 头像 */
       avatar?: string;
 
@@ -747,6 +753,40 @@ declare namespace API {
       }
 
       /**
+       * 企业重置密码
+       * /api/org/resetPassword
+       */
+      export namespace resetPassword {
+        export class Params {
+          /** id */
+          id?: string;
+        }
+
+        export type Response = string;
+
+        export const init: Response;
+
+        export function fetch(params?: Params): Promise<Response>;
+      }
+
+      /**
+       * 企业权限树状列表
+       * /api/org/resourceList
+       */
+      export namespace resourceList {
+        export class Params {
+          /** id */
+          id?: string;
+        }
+
+        export type Response = Array<defs.platform.ResourceTreeObject>;
+
+        export const init: Response;
+
+        export function fetch(params?: Params): Promise<Response>;
+      }
+
+      /**
        * 新建租户
        * /api/org/save
        */
@@ -760,6 +800,20 @@ declare namespace API {
         export function fetch(
           bodyParams: defs.platform.TenantInformation,
         ): Promise<Response>;
+      }
+
+      /**
+       * scheduleStatus
+       * /api/org/schedule/status
+       */
+      export namespace scheduleStatus {
+        export class Params {}
+
+        export type Response = any;
+
+        export const init: Response;
+
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -985,7 +1039,7 @@ declare namespace API {
           id: string;
         }
 
-        export type Response = any;
+        export type Response = string;
 
         export const init: Response;
 

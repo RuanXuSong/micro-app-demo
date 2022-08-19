@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-18 16:07:42
+ * @LastEditTime: 2022-08-19 16:56:23
  */
 import React, { useEffect } from 'react';
 import { message, Button, Row, Col, Select } from 'antd';
@@ -166,6 +166,10 @@ export default () => {
           console.error(error.message);
           message.error(`数据加载失败,${error.message}`);
         }}
+        onReset={() => {
+          setBusinessValue('');
+          setClientKey('');
+        }}
         columns={columns}
         bordered
         rowKey="id"
@@ -202,7 +206,6 @@ export default () => {
         reload={reload}
         clientKey={clientKey}
         scopeMap={scopeMap}
-        scopeMapOptions={scopeMapOptions}
       />
     </>
   );

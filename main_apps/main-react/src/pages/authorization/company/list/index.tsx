@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-18 16:52:11
+ * @LastEditTime: 2022-08-19 16:05:27
  */
 import React from 'react';
 import { message, Button, Modal } from 'antd';
@@ -23,6 +23,7 @@ export default () => {
     reload,
     editModalConfig,
     fetchList,
+    handleResetPassword,
     handleUpdateStatus,
     handleCompanyAdd,
     handleCompanyEdit,
@@ -136,6 +137,19 @@ export default () => {
                     id: `${row.id}`,
                   }),
                 hidden: ROLE_STATUS_MAP.禁用 !== +row.status!,
+              },
+              {
+                name: '重置密码',
+                key: 'reset',
+                onClick: () =>
+                  Modal.confirm({
+                    title: '确认重置密码？',
+                    onOk: () =>
+                      row.id &&
+                      handleResetPassword({
+                        id: `${row.id}`,
+                      }),
+                  }),
               },
             ]}
           />

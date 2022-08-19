@@ -6,6 +6,7 @@ import { Store } from 'antd/es/form/interface';
 import { useRequest } from 'ahooks';
 import useSpinning from '@/hooks/useSpinning';
 import { removeEmpty } from '@/utils/json';
+import { useModel } from 'umi';
 
 const formLayout = {
   labelCol: {
@@ -45,6 +46,9 @@ export default ({
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
   const { id } = formData;
+  const { initialState } = useModel('@@initialState');
+  const { userInfo } = initialState || {};
+  const { orgCode } = userInfo || {};
 
   useEffect(() => {
     if (!isEmpty(formData)) {
@@ -74,6 +78,7 @@ export default ({
       clientKey,
       id,
       ruleIdList: values.ruleIdList ?? [],
+      businessValue: orgCode,
     }) as defs.authorization.DataRoleInputDTO;
 
     return API.platform.sysRole.roleDataSave.fetch(payload);
@@ -133,7 +138,15 @@ export default ({
             <Input placeholder="请输入" />
           </Form.Item>
 
-          <Form.Item label="限制菜单" name="ruleIdList">
+          <Form.Item
+            label="限制菜单"
+            name="ruleIdList"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
             <Select mode="multiple" placeholder="请选择" options={scopeMapOptions} />
           </Form.Item>
         </Form>

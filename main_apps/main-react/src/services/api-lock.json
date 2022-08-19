@@ -7209,6 +7209,80 @@
             ]
           },
           {
+            "description": "企业重置密码",
+            "name": "resetPassword",
+            "method": "get",
+            "path": "/api/org/resetPassword",
+            "response": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "id",
+                "name": "id",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "企业权限树状列表",
+            "name": "resourceList",
+            "method": "get",
+            "path": "/api/org/resourceList",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "ResourceTreeObject",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "id",
+                "name": "id",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
             "consumes": [
               "application/json"
             ],
@@ -7242,6 +7316,22 @@
                 }
               }
             ]
+          },
+          {
+            "description": "scheduleStatus",
+            "name": "scheduleStatus",
+            "method": "get",
+            "path": "/api/org/schedule/status",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": []
           },
           {
             "consumes": [
@@ -7728,7 +7818,7 @@
             "path": "/api/user/resetPassword",
             "response": {
               "typeArgs": [],
-              "typeName": "",
+              "typeName": "string",
               "isDefsType": false,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
@@ -8077,6 +8167,19 @@
       {
         "name": "DataRoleInputDTO",
         "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "businessValue",
+            "required": false
+          },
           {
             "dataType": {
               "typeArgs": [],
@@ -9870,6 +9973,20 @@
       {
         "name": "TheUserInformation",
         "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "accessToken",
+            "description": "校验用token",
+            "required": false
+          },
           {
             "dataType": {
               "typeArgs": [],

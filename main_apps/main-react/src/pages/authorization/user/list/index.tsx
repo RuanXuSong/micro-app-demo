@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-15 14:25:26
+ * @LastEditTime: 2022-08-19 17:21:00
  */
 import React from 'react';
 import { message, Button, Modal, Select } from 'antd';
@@ -19,13 +19,14 @@ import { useModel } from 'umi';
 import useCompanySelect from '@/hooks/useCompanySelect';
 
 const UserList = () => {
-  const { showCompanySelect } = useCompanySelect('auth_user_list_company');
+  const { showCompanySelect } = useCompanySelect('cloud_user_list_company');
   const { companyIdMapOptions } = useModel('company');
-
   const {
     actionRef,
     reload,
     editModalConfig,
+    orgId,
+    setOrgId,
     fetchList,
     handleUpdateStatus,
     handleUserAdd,
@@ -42,7 +43,9 @@ const UserList = () => {
       valueType: 'text',
       hideInSearch: !showCompanySelect,
       hideInTable: true,
-      renderFormItem: () => <Select allowClear options={companyIdMapOptions}></Select>,
+      renderFormItem: () => (
+        <Select allowClear value={orgId} onChange={setOrgId} options={companyIdMapOptions}></Select>
+      ),
     },
     {
       title: '登录账号',
@@ -170,6 +173,7 @@ const UserList = () => {
           console.error(error.message);
           message.error(`数据加载失败,${error.message}`);
         }}
+        onReset={() => setOrgId('')}
         columns={columns}
         bordered
         rowKey="id"
@@ -192,6 +196,7 @@ const UserList = () => {
         loading={editModalConfig.loading}
         toggleVisible={handleModalHide}
         reload={reload}
+        orgId={orgId}
       />
     </>
   );

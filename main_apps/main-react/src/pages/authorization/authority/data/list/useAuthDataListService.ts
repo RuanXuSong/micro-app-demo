@@ -151,13 +151,13 @@ export default () => {
   };
 
   return {
+    scopeMap,
     actionRef,
     reload,
     clientKey,
     setClientKey,
     businessValue,
     setBusinessValue,
-    scopeMap,
     scopeMapOptions,
     editModalConfig,
     setEditModalConfig,

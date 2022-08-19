@@ -7,6 +7,14 @@ export const isPhone = (value: string) => {
 };
 
 /**
+ * 检验用户登录账号是否合规（11位以内的英文数字）
+ */
+export const isUserAccount = (value: string) => {
+  const reg = /^([0-9]|[a-z]|[A-Z]){0,10}$/;
+  return reg.test(value);
+};
+
+/**
  * 检验是否是座机
  */
 export const isTelephone = (value: string) => {

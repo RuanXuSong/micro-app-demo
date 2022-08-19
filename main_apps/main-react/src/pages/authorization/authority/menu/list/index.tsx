@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-18 12:35:34
+ * @LastEditTime: 2022-08-19 16:55:21
  */
 import React from 'react';
 import { message, Button, Select } from 'antd';
@@ -130,6 +130,7 @@ export default () => {
           console.error(error.message);
           message.error(`数据加载失败,${error.message}`);
         }}
+        onReset={() => setOrgCode('')}
         columns={columns}
         bordered
         rowKey="id"
@@ -154,6 +155,7 @@ export default () => {
         reload={reload}
         resourceList={resourceList}
         resourceTreeData={resourceTreeData}
+        orgCode={orgCode}
       />
       <AuthModal
         visible={authModalConfig.visible}

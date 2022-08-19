@@ -29,7 +29,6 @@ export default ({
   reload,
   clientKey,
   scopeMap = [],
-  scopeMapOptions,
 }: {
   visible: boolean;
   toggleVisible: () => void;
@@ -37,11 +36,10 @@ export default ({
   reload?: () => void;
   clientKey: string;
   scopeMap?: defs.authorization.DataRuleDTO[];
-  scopeMapOptions: any;
 }) => {
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
-  const { businessValue } = formData;
+  const { businessValue, dataRuleDTOList = [] } = formData;
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
   const { orgCode } = userInfo || {};
@@ -61,10 +59,10 @@ export default ({
   };
 
   useEffect(() => {
-    if (!isEmpty(scopeMapOptions)) {
-      setSelectedId(scopeMapOptions[0].value);
+    if (!isEmpty(dataRuleDTOList)) {
+      setSelectedId(dataRuleDTOList[0].id);
     }
-  }, [scopeMapOptions]);
+  }, [dataRuleDTOList]);
 
   const rowSelection = {
     selectedRowKeys: selectedRowKeysObj[selectedId!] ?? [],
@@ -189,22 +187,22 @@ export default ({
       <Spin spinning={submitting} tip={tip}>
         <div className={styles.contentWrap}>
           <div className={styles.left}>
-            {scopeMapOptions.map((item: { label: string; value: number }) => (
+            {dataRuleDTOList.map((item: defs.authorization.DataRuleDTO) => (
               <div className={styles.selectItem}>
                 <span
                   className={classNames(
                     styles.label,
-                    selectedId === item.value ? styles.selected : {},
+                    selectedId === item.id ? styles.selected : {},
                   )}
                   onClick={() => {
                     if (!isEqual(selectedRowKeysObj[selectedId!], businessValues)) {
                       message.error('请先保存再切换规则！');
                       return;
                     }
-                    setSelectedId(item.value);
+                    setSelectedId(item.id);
                   }}
                 >
-                  {item.label}
+                  {item.ruleName}
                 </span>
               </div>
             ))}

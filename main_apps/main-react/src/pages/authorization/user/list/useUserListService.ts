@@ -1,5 +1,5 @@
 import { removeEmpty } from './../../../../utils/json';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useImmer } from 'use-immer';
 import { message } from 'antd';
 import { useRequest } from 'ahooks';
@@ -17,7 +17,7 @@ export default () => {
     formData: {},
     loading: false,
   });
-
+  const [orgId, setOrgId] = useState<string>('');
   const { reload } = actionRef.current || {};
 
   /**
@@ -43,6 +43,10 @@ export default () => {
     },
   });
 
+  useEffect(() => {
+    reload?.();
+  }, [orgId]);
+
   /**
    * 获取普通分页列表
    * @param params
@@ -53,6 +57,7 @@ export default () => {
         ...params,
         page: params?.current || initialPagination.page,
         pageSize: params?.pageSize || initialPagination.pageSize,
+        orgId,
       }),
     );
     return {
@@ -92,6 +97,8 @@ export default () => {
     actionRef,
     reload,
     editModalConfig,
+    orgId,
+    setOrgId,
     handleUpdateStatus,
     handleDelete,
     fetchList,

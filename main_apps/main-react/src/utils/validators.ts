@@ -1,4 +1,22 @@
-import { isPhone, isEmail } from './regex';
+import { isPhone, isEmail, isUserAccount } from './regex';
+
+/**
+ * 用户登录账号校验
+ * @param _rule
+ * @param value
+ * @param callback
+ */
+export const userAccountValidator = (
+  _: unknown,
+  value: string,
+  callback: (message?: string) => void,
+) => {
+  if (value && !isUserAccount(value)) {
+    callback('请输入11位以内的英文数字');
+  } else {
+    callback();
+  }
+};
 
 /**
  * 手机号码校验

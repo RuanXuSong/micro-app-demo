@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Modal, Form, Spin, Input, message, DatePicker } from 'antd';
-import { isEmpty, isNil } from 'lodash-es';
+import { Modal, Form, Spin, Input, message, DatePicker, Select } from 'antd';
+import { isNil } from 'lodash-es';
 import 'antd/lib/form';
 import { Store } from 'antd/es/form/interface';
 import { useRequest } from 'ahooks';
@@ -16,6 +16,8 @@ import moment from 'moment';
 import { removeEmpty } from '@/utils/json';
 import { useModel } from 'umi';
 import { disabledDate } from '@/utils/getDisabledDate';
+import { enumToOptions } from '@/utils/array';
+import { ROLE_STATUS_MAP } from '@/constant';
 
 const formLayout = {
   labelCol: {
@@ -49,29 +51,37 @@ export default ({
   const { id } = formData;
   const { reloadCompanyData } = useModel('company');
 
-  useEffect(() => {
-    if (!isEmpty(formData)) {
-      form.setFieldsValue({
-        ...formData,
-        validBefore: formData.validBefore ? moment(formData.validBefore) : null,
-        logo: formData?.logo
-          ? [
-              {
-                uid: '1',
-                name: 'logo',
-                status: 'done',
-                url: formData?.logo,
-                size: 0,
-              },
-            ]
-          : [],
-      });
-    }
+  /** 企业详情 */
+  const { run: fetchDetail, loading: detailLoading } = useRequest(
+    API.platform.sysOrg.detail.fetch,
+    {
+      onSuccess: (response) => {
+        form.setFieldsValue({
+          ...response,
+          validBefore: response.validBefore ? moment(response.validBefore) : null,
+          logo: response?.logo
+            ? [
+                {
+                  uid: '1',
+                  name: 'logo',
+                  status: 'done',
+                  url: response?.logo,
+                  size: 0,
+                },
+              ]
+            : [],
+        });
+      },
+      manual: true,
+    },
+  );
 
+  useEffect(() => {
+    visible && id && fetchDetail({ id });
     return () => {
       form.resetFields();
     };
-  }, [formData]);
+  }, [id, visible]);
 
   const handleCancel = () => {
     toggleVisible();
@@ -120,7 +130,7 @@ export default ({
     manual: true,
   });
 
-  const loadingStatus = submitting || editLoading || addLoading;
+  const loadingStatus = detailLoading || submitting || editLoading || addLoading;
 
   return (
     <Modal
@@ -155,7 +165,7 @@ export default ({
               },
             ]}
           >
-            <Input placeholder="请输入" />
+            <Input disabled={!!id} placeholder="请输入" />
           </Form.Item>
           <Form.Item
             label="企业名称"
@@ -163,6 +173,9 @@ export default ({
             rules={[
               {
                 whitespace: true,
+              },
+              {
+                required: true,
               },
             ]}
           >
@@ -231,6 +244,23 @@ export default ({
           >
             <Input placeholder="请输入" />
           </Form.Item>
+
+          {!!id && (
+            <Form.Item
+              label="管理员账号"
+              name="directorUsername"
+              rules={[
+                {
+                  whitespace: true,
+                },
+                {
+                  validator: phoneValidator,
+                },
+              ]}
+            >
+              <Input disabled placeholder="请输入" />
+            </Form.Item>
+          )}
           <Form.Item
             label="有效期"
             name="validBefore"
@@ -242,6 +272,40 @@ export default ({
           >
             <DatePicker disabledDate={disabledDate} />
           </Form.Item>
+          {!!id && (
+            <>
+              <Form.Item
+                label="状态"
+                name="status"
+                rules={[
+                  {
+                    whitespace: true,
+                  },
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <Select options={enumToOptions(ROLE_STATUS_MAP)} placeholder="请选择" />
+              </Form.Item>
+
+              <Form.Item
+                label="当前用户数"
+                name="userNum"
+                rules={[
+                  {
+                    whitespace: true,
+                  },
+                  {
+                    validator: phoneValidator,
+                  },
+                ]}
+              >
+                <Input disabled placeholder="请输入" />
+              </Form.Item>
+            </>
+          )}
+
           <div className={classNames(styles.rowWrap, styles.description)}>
             <Form.Item
               label="描述"
