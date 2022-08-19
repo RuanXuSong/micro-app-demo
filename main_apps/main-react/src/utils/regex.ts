@@ -15,6 +15,14 @@ export const isUserAccount = (value: string) => {
 };
 
 /**
+ * 检验企业编码是否合规（以小写字母开头，且只包含小写英文字母和数字，并且长度在20以内）
+ */
+export const isOrgCode = (value: string) => {
+  const reg = /^[a-z]([0-9]|[a-z]|){0,18}$/;
+  return reg.test(value);
+};
+
+/**
  * 检验是否是座机
  */
 export const isTelephone = (value: string) => {

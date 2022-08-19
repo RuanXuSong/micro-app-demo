@@ -139,7 +139,7 @@ export default ({
               },
             ]}
           >
-            <Input placeholder="请输入" suffix={`@${orgCode ?? userOrgCode}`} />
+            <Input placeholder="请输入" addonAfter={`@${orgCode ?? userOrgCode}`} />
           </Form.Item>
           <Form.Item
             label="用户昵称"

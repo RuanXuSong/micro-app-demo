@@ -1,4 +1,4 @@
-import { isPhone, isEmail, isUserAccount } from './regex';
+import { isPhone, isEmail, isUserAccount, isOrgCode } from './regex';
 
 /**
  * 用户登录账号校验
@@ -13,6 +13,24 @@ export const userAccountValidator = (
 ) => {
   if (value && !isUserAccount(value)) {
     callback('请输入11位以内的英文数字');
+  } else {
+    callback();
+  }
+};
+
+/**
+ * 企业编码校验
+ * @param _rule
+ * @param value
+ * @param callback
+ */
+export const orgCodeValidator = (
+  _: unknown,
+  value: string,
+  callback: (message?: string) => void,
+) => {
+  if (value && !isOrgCode(value)) {
+    callback('以小写字母开头，且只包含小写英文字母和数字，并且长度在20以内');
   } else {
     callback();
   }

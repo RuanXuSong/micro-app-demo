@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Modal, Form, Spin, Input, message, DatePicker, Select } from 'antd';
+import { Modal, Form, Spin, Input, message, DatePicker, Select, notification } from 'antd';
 import { isNil } from 'lodash-es';
 import 'antd/lib/form';
 import { Store } from 'antd/es/form/interface';
@@ -10,7 +10,7 @@ import { FILE_TYPE_MAP } from '@/utils/upload';
 import PlusOutlined from '@ant-design/icons/lib/icons/PlusOutlined';
 import ExclamationCircleOutlined from '@ant-design/icons/lib/icons/ExclamationCircleOutlined';
 import styles from './index.module.less';
-import { phoneValidator } from '@/utils/validators';
+import { orgCodeValidator, phoneValidator } from '@/utils/validators';
 import classNames from 'classnames';
 import moment from 'moment';
 import { removeEmpty } from '@/utils/json';
@@ -89,7 +89,6 @@ export default ({
   };
 
   const handleSuccess = () => {
-    message.success('保存成功');
     form.resetFields();
     toggleVisible();
     reload?.();
@@ -100,14 +99,25 @@ export default ({
   const { run: handleOrgEdit, loading: editLoading } = useRequest(
     API.platform.sysOrg.update.fetch,
     {
-      onSuccess: handleSuccess,
+      onSuccess: () => {
+        handleSuccess();
+        message.success('保存成功');
+      },
       manual: true,
     },
   );
 
   /** 新建企业 */
   const { run: handleOrgAdd, loading: addLoading } = useRequest(API.platform.sysOrg.save.fetch, {
-    onSuccess: handleSuccess,
+    onSuccess: (secretCode) => {
+      handleSuccess();
+      secretCode &&
+        notification.success({
+          message: `租户新建成功`,
+          description: `密码为: ${secretCode}`,
+          duration: null,
+        });
+    },
     manual: true,
   });
 
@@ -162,6 +172,9 @@ export default ({
               },
               {
                 required: true,
+              },
+              {
+                validator: orgCodeValidator,
               },
             ]}
           >
