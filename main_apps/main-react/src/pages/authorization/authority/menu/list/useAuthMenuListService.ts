@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useImmer } from 'use-immer';
 import { message } from 'antd';
 import { useRequest } from 'ahooks';
@@ -53,6 +53,10 @@ export default () => {
       reload?.();
     },
   });
+
+  useEffect(() => {
+    reload?.();
+  }, [orgCode]);
 
   /**
    * 获取普通分页列表
