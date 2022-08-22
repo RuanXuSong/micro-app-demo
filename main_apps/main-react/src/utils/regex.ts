@@ -15,10 +15,10 @@ export const isUserAccount = (value: string) => {
 };
 
 /**
- * 检验企业编码是否合规（以小写字母开头，且只包含小写英文字母和数字，并且长度在20以内）
+ * 检验企业编码是否合规（20位以内的英文字母组成，区分大小写）
  */
 export const isOrgCode = (value: string) => {
-  const reg = /^[a-z]([0-9]|[a-z]|){0,18}$/;
+  const reg = /^([a-z]|[A-Z]){0,19}$/;
   return reg.test(value);
 };
 

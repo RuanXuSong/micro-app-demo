@@ -12,7 +12,11 @@ export const userAccountValidator = (
   callback: (message?: string) => void,
 ) => {
   if (value && !isUserAccount(value)) {
-    callback('请输入11位以内的英文数字');
+    callback('请输入11位以内的英文数字的组合');
+  } else if (/^\d*$/.test(value)) {
+    callback('密码必须包含英文');
+  } else if (/^[a-z]*$/i.test(value)) {
+    callback('密码必须包含数字');
   } else {
     callback();
   }
@@ -30,7 +34,7 @@ export const orgCodeValidator = (
   callback: (message?: string) => void,
 ) => {
   if (value && !isOrgCode(value)) {
-    callback('以小写字母开头，且只包含小写英文字母和数字，并且长度在20以内');
+    callback('20位以内的英文字母组成，区分大小写');
   } else {
     callback();
   }
