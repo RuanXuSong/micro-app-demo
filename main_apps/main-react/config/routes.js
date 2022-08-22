@@ -77,37 +77,37 @@ export default [
             routes: [
               {
                 path: '/smart-data',
-                name: '数融',
+                name: '数融平台',
                 customIcon: 'data-front',
                 component: './dataFront',
               },
               {
                 path: '/smart-data/*',
-                name: '数融',
+                name: '数融平台',
                 customIcon: 'data-front',
                 component: './dataFront',
               },
               {
                 path: '/smart-lowcode',
-                name: '快速开发',
+                name: '敏捷应用',
                 customIcon: 'bisheng',
                 component: './biSheng',
               },
               {
                 path: '/smart-lowcode/*',
-                name: '快速开发',
+                name: '敏捷应用',
                 customIcon: 'bisheng',
                 component: './biSheng',
               },
               {
                 path: '/smart-bi',
-                name: '大屏配置',
+                name: '数智平台',
                 customIcon: 'thunder-bi',
                 component: './thunderBi',
               },
               {
                 path: '/smart-bi/*',
-                name: '大屏配置',
+                name: '数智平台',
                 customIcon: 'thunder-bi',
                 component: './thunderBi',
               },

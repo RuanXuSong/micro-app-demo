@@ -37,6 +37,13 @@ const appsList: SectionProps[] = [
         link: '/smart-visualization',
         key: 'smart-visualization',
       },
+      {
+        title: '数智平台',
+        description: '雷数BI平台',
+        logo: 'thunder-bi',
+        link: '/smart-bi',
+        key: 'smart-bi',
+      },
     ],
   },
   {
@@ -49,13 +56,6 @@ const appsList: SectionProps[] = [
         logo: 'data-front',
         link: '/smart-data',
         key: 'smart-data',
-      },
-      {
-        title: '商业智能平台',
-        description: '雷数BI平台',
-        logo: 'thunder-bi',
-        link: '/smart-bi',
-        key: 'smart-bi',
       },
     ],
   },

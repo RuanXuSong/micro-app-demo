@@ -1,6 +1,6 @@
 {
-  "/umi.css": "/umi.be2ecce3.css",
-  "/umi.js": "/umi.a8b62eec.js",
+  "/umi.css": "/umi.d0513542.css",
+  "/umi.js": "/umi.082a489e.js",
   "/layouts__BlankLayout.css": "/layouts__BlankLayout.31d6cfe0.chunk.css",
   "/layouts__BlankLayout.js": "/layouts__BlankLayout.f3f62a0e.async.js",
   "/p__login__index.css": "/p__login__index.a927e66b.chunk.css",
@@ -11,7 +11,7 @@
   "/layouts__TabPanelLayout.css": "/layouts__TabPanelLayout.20201288.chunk.css",
   "/layouts__TabPanelLayout.js": "/layouts__TabPanelLayout.94a83e15.async.js",
   "/p__homepage.css": "/p__homepage.a6e3398e.chunk.css",
-  "/p__homepage.js": "/p__homepage.be83c868.async.js",
+  "/p__homepage.js": "/p__homepage.0530baea.async.js",
   "/p__homepage.png": "/static/swift-screen.7e5874bc.png",
   "/p__authorization__company__list.css": "/p__authorization__company__list.dbeb8ad5.chunk.css",
   "/p__authorization__user__list.css": "/p__authorization__user__list.c1b02f37.chunk.css",
@@ -74,10 +74,10 @@
   "/static/swift-screen.png": "/static/swift-screen.7e5874bc.png",
   "/static/iot-platform.png": "/static/iot-platform.54fb9da2.png",
   "/static/logo.svg": "/static/logo.8a22071b.svg",
-  "/static/iconfont.svg?t=1660189059448": "/static/iconfont.4335b928.svg",
-  "/static/iconfont.ttf?t=1660189059448": "/static/iconfont.0ed08f61.ttf",
-  "/static/iconfont.woff?t=1660189059448": "/static/iconfont.ddbdb71d.woff",
-  "/static/iconfont.woff2?t=1660189059448": "/static/iconfont.ba383176.woff2",
+  "/static/iconfont.svg?t=1661139421402": "/static/iconfont.4335b928.svg",
+  "/static/iconfont.ttf?t=1661139421402": "/static/iconfont.77cc60c1.ttf",
+  "/static/iconfont.woff?t=1661139421402": "/static/iconfont.ad375619.woff",
+  "/static/iconfont.woff2?t=1661139421402": "/static/iconfont.4361f0de.woff2",
   "/logo.svg": "/logo.svg",
   "/CNAME": "/CNAME"
 }
