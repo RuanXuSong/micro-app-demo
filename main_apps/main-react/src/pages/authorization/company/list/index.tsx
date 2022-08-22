@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-19 16:05:27
+ * @LastEditTime: 2022-08-22 10:58:07
  */
 import React from 'react';
 import { message, Button, Modal } from 'antd';
@@ -88,7 +88,7 @@ export default () => {
       dataIndex: 'validBefore',
       align: 'left',
       copyable: false,
-      valueType: 'dateTime',
+      valueType: 'date',
       hideInSearch: true,
     },
     {

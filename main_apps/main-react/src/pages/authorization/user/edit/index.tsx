@@ -148,6 +148,9 @@ export default ({
               {
                 whitespace: true,
               },
+              {
+                required: true,
+              },
             ]}
           >
             <Input placeholder="请输入" />

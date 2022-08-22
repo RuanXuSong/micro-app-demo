@@ -266,9 +266,6 @@ export default ({
                 {
                   whitespace: true,
                 },
-                {
-                  validator: phoneValidator,
-                },
               ]}
             >
               <Input disabled placeholder="请输入" />
@@ -292,9 +289,6 @@ export default ({
                 name="status"
                 rules={[
                   {
-                    whitespace: true,
-                  },
-                  {
                     required: true,
                   },
                 ]}
@@ -302,18 +296,7 @@ export default ({
                 <Select options={enumToOptions(ROLE_STATUS_MAP)} placeholder="请选择" />
               </Form.Item>
 
-              <Form.Item
-                label="当前用户数"
-                name="userNum"
-                rules={[
-                  {
-                    whitespace: true,
-                  },
-                  {
-                    validator: phoneValidator,
-                  },
-                ]}
-              >
+              <Form.Item label="当前用户数" name="userNum">
                 <Input disabled placeholder="请输入" />
               </Form.Item>
             </>

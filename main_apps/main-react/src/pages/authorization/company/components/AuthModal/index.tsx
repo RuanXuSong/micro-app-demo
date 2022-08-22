@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Modal, Form, Spin, message } from 'antd';
 import { isEmpty } from 'lodash-es';
 import 'antd/lib/form';
@@ -6,12 +6,12 @@ import { Store } from 'antd/es/form/interface';
 import { useRequest } from 'ahooks';
 import useSpinning from '@/hooks/useSpinning';
 import styles from './index.module.less';
-import { useModel } from 'umi';
 import { LOGIN_CONFIG, RESOURCE_TYPE_ENUM } from '@/constant';
 import { removeEmpty } from '@/utils/json';
 import { isNumber } from 'lodash';
 import TableItem from '@/components/TableItem';
 import { ProColumns } from '@ant-design/pro-table';
+import { getResourceList } from '@/utils/getResourceList';
 
 const formLayout = {
   labelCol: {
@@ -37,28 +37,44 @@ export default ({
 }) => {
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
-  const { directorRoleId } = formData;
-  const { resourceList } = useModel('resourceData');
+  const { id, directorRoleId, orgCode } = formData;
+
+  const { data: resourceList, loading: listLoading } = useRequest(
+    API.platform.sysUser.myResourceList.fetch,
+    {
+      refreshDeps: [orgCode],
+      ready: !!orgCode,
+    },
+  );
+
+  const modifiedResourceList = useMemo(() => getResourceList(resourceList), [resourceList]);
 
   const { run } = useRequest(
-    (directorRoleId) =>
-      API.authorization.resource.listUserResourceData.fetch({
-        clientKey: LOGIN_CONFIG.clientId,
-        roleId: directorRoleId,
+    (id) =>
+      API.platform.sysOrg.resourceList.fetch({
+        id,
       }),
     {
       manual: true,
       onSuccess: (resourceList) => {
         const newIds: number[] = [];
-        resourceList.forEach((item) => {
-          const { id, privilegeList = [] } = item;
-          newIds.push(id!);
-          if (!isEmpty(privilegeList)) {
-            privilegeList.forEach((child) => {
-              newIds.push(child.id!);
-            });
-          }
-        });
+        const loopData = (dataList: defs.platform.ResourceTreeObject[]) => {
+          dataList.forEach((item) => {
+            const { id, privilegeList = [], children } = item;
+            newIds.push(id!);
+
+            if (!isEmpty(privilegeList)) {
+              privilegeList.forEach((child) => {
+                newIds.push(child.id!);
+              });
+            }
+            if (!isEmpty(children)) {
+              loopData(children!);
+            }
+          });
+        };
+        loopData(resourceList);
+
         form.setFieldsValue({
           resourceIds: newIds,
         });
@@ -68,7 +84,7 @@ export default ({
 
   useEffect(() => {
     if (visible) {
-      run(directorRoleId);
+      run(id);
     }
   }, [visible]);
 
@@ -150,10 +166,15 @@ export default ({
       onCancel={handleCancel}
       confirmLoading={submitting}
     >
-      <Spin spinning={loading && submitting} tip={tip}>
+      <Spin spinning={listLoading || (loading && submitting)} tip={tip}>
         <Form form={form} onFinish={handleFinish} {...formLayout} className={styles.formWrap}>
           <Form.Item label="权限列表" name="resourceIds" noStyle>
-            <TableItem search={false} rowKey="id" columns={columns} dataSource={resourceList} />
+            <TableItem
+              search={false}
+              rowKey="id"
+              columns={columns}
+              dataSource={modifiedResourceList}
+            />
           </Form.Item>
         </Form>
       </Spin>
