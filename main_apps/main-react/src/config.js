@@ -3,6 +3,7 @@ let config = {
   dataFront: 'http://127.0.0.1:8000/',
   biSheng: 'http://localhost:3001/',
   swiftScreen: 'http://127.0.0.1:8000/',
+  iot: 'http://127.0.0.1:8000/',
 };
 const isEnvPro = process.env.NODE_ENV === 'production';
 
@@ -13,6 +14,7 @@ if (isEnvPro) {
     dataFront: 'http://data-sso.dev.thundersdata.com/smart-data',
     biSheng: 'http://lowcode.jxzk.thundersdata.com:38204',
     swiftScreen: 'http://smart-visualization.jxzk.thundersdata.com:38204/smart-visualization',
+    iot: 'http://smart-iot.jxzk.thundersdata.com:38204/smart-iot',
   };
 }
 

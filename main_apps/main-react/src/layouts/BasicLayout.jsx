@@ -49,6 +49,7 @@ const BasicLayout = (props) => {
     dispatch,
     children,
     settings,
+    headerCollapsed,
     location = {
       pathname: '/',
     },
@@ -104,6 +105,7 @@ const BasicLayout = (props) => {
   );
   return (
     <ProLayout
+      className={headerCollapsed ? styles.collapsedHeader : styles.header}
       logo={logo}
       {...props}
       {...settings}
@@ -149,5 +151,6 @@ const BasicLayout = (props) => {
 
 export default connect(({ global, settings }) => ({
   collapsed: global.collapsed,
+  headerCollapsed: global.headerCollapsed,
   settings,
 }))(BasicLayout);

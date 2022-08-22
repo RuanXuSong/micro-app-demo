@@ -88,12 +88,14 @@ export default ({
       avatar: values.avatar.map((item: Store) => item.url || item.response.data.url)[0],
     }) as defs.platform.TheUserInformation;
 
-    if (id) {
-      return API.platform.sysUser.update.fetch({
-        ...payload,
-      });
+    if (!id) {
+      payload.orgId = orgId;
     }
-    return API.platform.sysUser.save.fetch({ ...payload, orgId });
+
+    if (id) {
+      return API.platform.sysUser.update.fetch(payload);
+    }
+    return API.platform.sysUser.save.fetch(payload);
   };
 
   const { run: handleFinish, loading: submitting } = useRequest(submit, {

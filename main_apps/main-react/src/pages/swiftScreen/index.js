@@ -30,6 +30,12 @@ function SwiftScreen(props) {
       });
       userInfo = newPayload;
     }
+    if (type === 'changeHeaderCollapsed') {
+      dispatch({
+        type: 'global/changeHeaderCollapsed',
+        payload,
+      });
+    }
   }
 
   useEffect(() => {
@@ -63,6 +69,7 @@ function SwiftScreen(props) {
   );
 }
 
-export default connect(({ user }) => ({
+export default connect(({ user, global }) => ({
+  headerCollapsed: global.headerCollapsed,
   currentUser: user.currentUser,
 }))(SwiftScreen);

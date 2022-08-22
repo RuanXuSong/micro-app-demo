@@ -124,6 +124,18 @@ export default [
                 component: './swiftScreen',
               },
               {
+                path: '/smart-iot',
+                name: '物联网',
+                customIcon: 'data-front',
+                component: './iot',
+              },
+              {
+                path: '/smart-iot/*',
+                name: '物联网',
+                customIcon: 'data-front',
+                component: './iot',
+              },
+              {
                 component: './404',
               },
             ],

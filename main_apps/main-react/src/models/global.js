@@ -2,6 +2,7 @@ const GlobalModel = {
   namespace: 'global',
   state: {
     collapsed: false,
+    collapsedHeader: false,
   },
   effects: {},
   reducers: {
@@ -12,6 +13,14 @@ const GlobalModel = {
       { payload },
     ) {
       return { ...state, collapsed: payload };
+    },
+    changeHeaderCollapsed(
+      state = {
+        collapsed: true,
+      },
+      { payload },
+    ) {
+      return { ...state, headerCollapsed: payload };
     },
   },
 };

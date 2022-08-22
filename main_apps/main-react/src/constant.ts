@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-28 18:10:42
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-17 17:01:11
+ * @LastEditTime: 2022-08-22 14:01:07
  */
 /**
  * 初始化分页数据
@@ -89,6 +89,7 @@ export enum ROUTE_PATH {
   SWIFT_SCREEN = 'smart-visualization',
   DATA_FRONT = 'smart-data',
   BI_SHENG = 'smart-lowcode',
+  IOT = 'smart-iot',
 }
 
 export enum RESOURCE_TYPE_ENUM {
