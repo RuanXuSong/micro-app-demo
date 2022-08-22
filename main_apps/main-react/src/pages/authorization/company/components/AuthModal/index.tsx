@@ -39,13 +39,19 @@ export default ({
   const { tip, setTip } = useSpinning();
   const { id, directorRoleId, orgCode } = formData;
 
-  const { data: resourceList, loading: listLoading } = useRequest(
-    API.platform.sysUser.myResourceList.fetch,
-    {
-      refreshDeps: [orgCode],
-      ready: !!orgCode,
-    },
-  );
+  const {
+    run: fetchResourceList,
+    data: resourceList,
+    loading: listLoading,
+  } = useRequest(API.platform.sysUser.myResourceList.fetch, {
+    manual: true,
+  });
+
+  useEffect(() => {
+    if (visible && orgCode) {
+      fetchResourceList({ orgCode });
+    }
+  }, [visible, orgCode]);
 
   const modifiedResourceList = useMemo(() => getResourceList(resourceList), [resourceList]);
 
