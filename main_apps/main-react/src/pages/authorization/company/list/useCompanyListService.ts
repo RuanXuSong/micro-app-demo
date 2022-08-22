@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useImmer } from 'use-immer';
-import { message } from 'antd';
+import { message, notification } from 'antd';
 import { useRequest } from 'ahooks';
 import { ActionType } from '@ant-design/pro-table';
 import { initialPagination } from '@/constant';
@@ -34,9 +34,15 @@ export default () => {
    */
   const { run: handleResetPassword } = useRequest(API.platform.sysOrg.resetPassword.fetch, {
     manual: true,
-    onSuccess: () => {
+    onSuccess: (secretCode) => {
       message.success('重置成功');
       reload?.();
+      secretCode &&
+        notification.success({
+          message: `密码重置成功`,
+          description: `密码为: ${secretCode}`,
+          duration: null,
+        });
     },
   });
 

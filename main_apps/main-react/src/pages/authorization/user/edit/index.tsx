@@ -93,7 +93,7 @@ export default ({
         ...payload,
       });
     }
-    return API.platform.sysUser.save.fetch(payload);
+    return API.platform.sysUser.save.fetch({ ...payload, orgId });
   };
 
   const { run: handleFinish, loading: submitting } = useRequest(submit, {
