@@ -89,13 +89,13 @@ export default [
               },
               {
                 path: '/smart-lowcode',
-                name: '敏捷应用',
+                name: '敏捷应用',
                 customIcon: 'bisheng',
                 component: './biSheng',
               },
               {
                 path: '/smart-lowcode/*',
-                name: '敏捷应用',
+                name: '敏捷应用',
                 customIcon: 'bisheng',
                 component: './biSheng',
               },

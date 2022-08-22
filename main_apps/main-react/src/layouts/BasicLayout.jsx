@@ -9,6 +9,7 @@ import { Link, connect, history, useModel } from 'umi';
 import { GithubOutlined } from '@ant-design/icons';
 import { Result, Button, Menu } from 'antd';
 import Authorized from '@/utils/Authorized';
+import { checkTopMenu } from '../components/Authorized/CheckPermissions';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { getMatchMenu } from '@umijs/route-utils';
 import logo from '../assets/logo.svg';
@@ -31,20 +32,21 @@ const noMatch = (
   />
 );
 
-/** Use Authorized check all menu item */
-const menuDataRender = (menuList) =>
-  menuList.map((item) => {
-    if (item.hidden) return null;
-    const localItem = {
-      ...item,
-      children: item.children ? menuDataRender(item.children) : undefined,
-    };
-    return Authorized.check(item.authority, localItem, null);
-  });
-
 const BasicLayout = (props) => {
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
+  const { resourceList } = useModel('resourceData');
+  /** Use Authorized check all menu item */
+  const menuDataRender = (menuList) =>
+    menuList.map((item) => {
+      if (item.hidden) return null;
+      const localItem = {
+        ...item,
+        children: item.children ? menuDataRender(item.children) : undefined,
+      };
+      const resourceKeys = resourceList.map((item) => `/${item.resourceKey}`);
+      return resourceKeys.includes(localItem.key) ? localItem : null;
+    });
   const {
     dispatch,
     children,
