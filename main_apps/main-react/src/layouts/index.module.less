@@ -126,10 +126,18 @@
   }
 }
 
-.collapsedHeader {
-  :global {
+:global {
+  .collapsed-basic-layout {
     .ant-layout-header {
      display: none;
+    }
+
+    micro-app-body {
+      #root,
+      #application-root,
+      #app {
+        margin-top: 0px !important;
+      }
     }
   }
 }

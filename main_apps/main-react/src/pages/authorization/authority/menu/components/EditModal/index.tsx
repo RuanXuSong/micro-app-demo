@@ -6,7 +6,7 @@ import { Store } from 'antd/es/form/interface';
 import { useRequest } from 'ahooks';
 import useSpinning from '@/hooks/useSpinning';
 import { useModel } from 'umi';
-import { LOGIN_CONFIG, RESOURCE_TYPE_ENUM } from '@/constant';
+import { LOGIN_CONFIG, RESOURCE_TYPE_ENUM, SMART_DATA_CODE } from '@/constant';
 import styles from './index.module.less';
 import { getResourceIds } from '@/utils/getResourceIds';
 import { removeEmpty } from '@/utils/json';
@@ -63,6 +63,9 @@ const EditModal = ({
       const { resourceMap = {} } = formData || {};
 
       const resourceIds = getResourceIds(resourceMap);
+      if (!isEmpty(resourceMap['敏捷应用'])) {
+        resourceIds.push(SMART_DATA_CODE);
+      }
       form.setFieldsValue({
         ...formData,
         resourceIds,

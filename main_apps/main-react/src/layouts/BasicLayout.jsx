@@ -107,7 +107,7 @@ const BasicLayout = (props) => {
   );
   return (
     <ProLayout
-      className={headerCollapsed ? styles.collapsedHeader : styles.header}
+      className={headerCollapsed ? 'collapsed-basic-layout' : 'basic-layout'}
       logo={logo}
       {...props}
       {...settings}

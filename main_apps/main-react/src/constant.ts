@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-28 18:10:42
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-22 14:01:07
+ * @LastEditTime: 2022-08-22 18:29:16
  */
 /**
  * 初始化分页数据
@@ -96,3 +96,6 @@ export enum RESOURCE_TYPE_ENUM {
   路由级资源 = 0,
   页面级资源 = 1,
 }
+
+// 敏捷应用对应code
+export const SMART_DATA_CODE = 0;
