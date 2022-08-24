@@ -28,14 +28,12 @@ export default ({
   formData,
   reload,
   clientKey,
-  scopeMap = [],
 }: {
   visible: boolean;
   toggleVisible: () => void;
   formData: Store;
   reload?: () => void;
   clientKey: string;
-  scopeMap?: defs.authorization.DataRuleDTO[];
 }) => {
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
@@ -88,9 +86,7 @@ export default ({
       setRuleInfoObj(() => ruleInfoObj);
       setSelectedRowKeysObj(() => selectedKeysObj);
 
-      console.log('scopeList: ', scopeList);
       if (!isEmpty(scopeList)) {
-        console.log('scopeList: ', scopeList);
         setSelectedId(scopeList[0].id);
       }
     },
@@ -111,7 +107,8 @@ export default ({
 
   useEffect(() => {
     if (!visible) return;
-    const { originRuleInterface = '' } = scopeMap?.find((item) => item.id === selectedId) || {};
+    const { originRuleInterface = '' } =
+      dataRuleDTOList?.find((item: defs.authorization.DataRuleDTO) => item.id === selectedId) || {};
     originRuleInterface &&
       handleFetchList(
         originRuleInterface,
@@ -128,9 +125,11 @@ export default ({
 
   const submit = () => {
     setTip('数据保存中，请稍候...');
-    const selectedRule = scopeMap.find((item) => item.id === selectedId);
+    const selectedRule = dataRuleDTOList.find(
+      (item: defs.authorization.DataRuleDTO) => item.id === selectedId,
+    );
 
-    return API.authorization.data.saveRule.fetch({
+    return API.platform.sysRole.ruleDataSave.fetch({
       ...selectedRule,
       clientKey,
       id: selectedId,
@@ -201,7 +200,7 @@ export default ({
                     selectedId === item.id ? styles.selected : {},
                   )}
                   onClick={() => {
-                    if (!isEqual(selectedRowKeysObj[selectedId!], businessValues)) {
+                    if (!isEqual(selectedRowKeysObj[selectedId!] || [], businessValues)) {
                       message.error('请先保存再切换规则！');
                       return;
                     }
@@ -230,20 +229,24 @@ export default ({
 
 /** 请求范围右边列表 */
 const fetchList = async (url: string, params = {}) => {
-  const request = await initRequest();
-  const result = await request.get(url, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    params,
-  });
-  if (result) {
-    if (!result.success) {
-      throw new Error(JSON.stringify(result));
+  try {
+    const request = await initRequest();
+    const result = await request.get(url, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params,
+    });
+    if (result) {
+      if (!result.success) {
+        throw new Error(JSON.stringify(result));
+      } else {
+        return result.data || undefined;
+      }
     } else {
-      return result.data || undefined;
+      throw new Error(JSON.stringify({ message: '接口未响应' }));
     }
-  } else {
-    throw new Error(JSON.stringify({ message: '接口未响应' }));
+  } catch (err) {
+    message.error('列表接口请求失败！');
   }
 };

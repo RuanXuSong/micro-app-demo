@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-24 11:22:20
+ * @LastEditTime: 2022-08-24 15:22:50
  */
 import React, { useEffect } from 'react';
 import { message, Button, Row, Col, Select } from 'antd';
@@ -28,7 +28,6 @@ export default () => {
     setClientKey,
     businessValue,
     setBusinessValue,
-    scopeMap,
     scopeMapOptions,
     editModalConfig,
     fetchList,
@@ -206,7 +205,6 @@ export default () => {
         toggleVisible={() => handleModalHide('scope')}
         reload={reload}
         clientKey={clientKey}
-        scopeMap={scopeMap}
       />
     </>
   );

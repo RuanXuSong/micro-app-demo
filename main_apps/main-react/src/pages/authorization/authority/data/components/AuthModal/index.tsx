@@ -94,7 +94,7 @@ export default ({
   const submit = () => {
     setTip('数据保存中，请稍候...');
 
-    return API.authorization.dataRole.bindUserByRole.fetch({
+    return API.platform.sysRole.bindUserByRole.fetch({
       roleId: id,
       userIdList: checkedIds.map((item) => +item),
     });

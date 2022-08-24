@@ -86,8 +86,8 @@ const Central = (props: any) => {
               </div>
 
               <Form.Item
-                label="账号名称"
-                name="userName"
+                label="用户昵称"
+                name="name"
                 rules={[
                   {
                     whitespace: true,

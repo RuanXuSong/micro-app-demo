@@ -7422,6 +7422,41 @@
         "description": "角色信息接口",
         "interfaces": [
           {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "bindUserByRole",
+            "name": "bindUserByRole",
+            "method": "post",
+            "path": "/api/role/bindUserByRole",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "roleBindUserDTO",
+                "name": "roleBindUserDTO",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "RoleBindUserDTO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
             "description": "获取数据权限范围",
             "name": "listRule",
             "method": "get",
@@ -7514,6 +7549,63 @@
             ]
           },
           {
+            "description": "myRuleList",
+            "name": "myRuleList",
+            "method": "get",
+            "path": "/api/role/myRuleList",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "DataRuleDTO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "clientKey",
+                "name": "clientKey",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "description": "orgCode",
+                "name": "orgCode",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
             "consumes": [
               "application/json"
             ],
@@ -7585,6 +7677,71 @@
                   "typeArgs": [],
                   "typeName": "RoleDTO",
                   "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "ruleDataSave",
+            "name": "ruleDataSave",
+            "method": "post",
+            "path": "/api/role/rule/save",
+            "response": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "businessValue",
+                "name": "businessValue",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "body",
+                "description": "dataRuleDTO",
+                "name": "dataRuleDTO",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "DataRuleDTO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "description": "roleId",
+                "name": "roleId",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
                   "enum": [],
@@ -8300,6 +8457,19 @@
       {
         "name": "DataRuleDTO",
         "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "businessValue",
+            "required": false
+          },
           {
             "dataType": {
               "typeArgs": [
@@ -9038,6 +9208,48 @@
         "templateArgs": []
       },
       {
+        "name": "RoleBindUserDTO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "roleId",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "userIdList",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
         "name": "RoleDTO",
         "properties": [
           {
@@ -9365,6 +9577,20 @@
           {
             "dataType": {
               "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "dataRoleId",
+            "description": "管理员数据角色id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
               "typeName": "string",
               "isDefsType": false,
               "templateIndex": -1,
@@ -9599,6 +9825,20 @@
               "typeProperties": []
             },
             "name": "createTime",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "dataRoleId",
+            "description": "管理员数据角色id",
             "required": false
           },
           {

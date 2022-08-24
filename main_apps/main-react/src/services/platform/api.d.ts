@@ -75,6 +75,9 @@ declare namespace defs {
     }
 
     export class DataRuleDTO {
+      /** businessValue */
+      businessValue?: string;
+
       /** businessValueList */
       businessValueList?: Array<string>;
 
@@ -219,6 +222,14 @@ declare namespace defs {
       updatedAt?: string;
     }
 
+    export class RoleBindUserDTO {
+      /** roleId */
+      roleId?: number;
+
+      /** userIdList */
+      userIdList?: Array<number>;
+    }
+
     export class RoleDTO {
       /** 拓展字段值 */
       businessValue?: string;
@@ -287,6 +298,9 @@ declare namespace defs {
       /** createTime */
       createTime?: string;
 
+      /** 管理员数据角色id */
+      dataRoleId?: number;
+
       /** 描述 */
       description?: string;
 
@@ -339,6 +353,9 @@ declare namespace defs {
 
       /** createTime */
       createTime?: string;
+
+      /** 管理员数据角色id */
+      dataRoleId?: number;
 
       /** 描述 */
       description?: string;
@@ -857,6 +874,22 @@ declare namespace API {
      */
     export namespace sysRole {
       /**
+       * bindUserByRole
+       * /api/role/bindUserByRole
+       */
+      export namespace bindUserByRole {
+        export class Params {}
+
+        export type Response = any;
+
+        export const init: Response;
+
+        export function fetch(
+          bodyParams: defs.platform.RoleBindUserDTO,
+        ): Promise<Response>;
+      }
+
+      /**
        * 获取数据权限范围
        * /api/role/data/rule
        */
@@ -892,6 +925,25 @@ declare namespace API {
       }
 
       /**
+       * myRuleList
+       * /api/role/myRuleList
+       */
+      export namespace myRuleList {
+        export class Params {
+          /** clientKey */
+          clientKey?: string;
+          /** orgCode */
+          orgCode?: string;
+        }
+
+        export type Response = Array<defs.platform.DataRuleDTO>;
+
+        export const init: Response;
+
+        export function fetch(params?: Params): Promise<Response>;
+      }
+
+      /**
        * 查询所有角色（分页）
        * /api/role/page
        */
@@ -922,6 +974,28 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.platform.RoleDTO,
+        ): Promise<Response>;
+      }
+
+      /**
+       * ruleDataSave
+       * /api/role/rule/save
+       */
+      export namespace ruleDataSave {
+        export class Params {
+          /** businessValue */
+          businessValue?: string;
+          /** roleId */
+          roleId?: number;
+        }
+
+        export type Response = number;
+
+        export const init: Response;
+
+        export function fetch(
+          bodyParams: defs.platform.DataRuleDTO,
+          params?: Params,
         ): Promise<Response>;
       }
     }

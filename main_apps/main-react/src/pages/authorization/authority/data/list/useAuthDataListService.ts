@@ -40,8 +40,9 @@ export default () => {
 
   const { data: scopeMap } = useRequest<defs.authorization.DataRuleDTO[]>(
     () =>
-      API.authorization.data.listRule.fetch({
+      API.platform.sysRole.myRuleList.fetch({
         clientKey,
+        orgCode: businessValue || userInfo?.orgCode,
       }),
     {
       refreshDeps: [clientKey],

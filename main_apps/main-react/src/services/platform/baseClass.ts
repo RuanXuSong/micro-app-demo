@@ -62,6 +62,9 @@ class DataRoleInputDTO {
 }
 
 class DataRuleDTO {
+  /** businessValue */
+  businessValue = '';
+
   /** businessValueList */
   businessValueList = [];
 
@@ -206,6 +209,14 @@ class RightsManagementRoleDtoList {
   updatedAt = '';
 }
 
+class RoleBindUserDTO {
+  /** roleId */
+  roleId = undefined;
+
+  /** userIdList */
+  userIdList = [];
+}
+
 class RoleDTO {
   /** 拓展字段值 */
   businessValue = '';
@@ -274,6 +285,9 @@ class TenantInformation {
   /** createTime */
   createTime = '';
 
+  /** 管理员数据角色id */
+  dataRoleId = undefined;
+
   /** 描述 */
   description = '';
 
@@ -326,6 +340,9 @@ class TheTenantDetailsDto {
 
   /** createTime */
   createTime = '';
+
+  /** 管理员数据角色id */
+  dataRoleId = undefined;
 
   /** 描述 */
   description = '';
@@ -531,6 +548,7 @@ export const platform = {
   Page,
   ResourceTreeObject,
   RightsManagementRoleDtoList,
+  RoleBindUserDTO,
   RoleDTO,
   ScreeningRoleList,
   TenantInformation,

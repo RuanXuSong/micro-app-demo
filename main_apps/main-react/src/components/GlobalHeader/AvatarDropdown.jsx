@@ -64,10 +64,10 @@ class AvatarDropdown extends React.Component {
         {...(this.state.showDropDown ? {} : { visible: false })}
         overlay={menuHeaderDropdown}
       >
-        {currentUser && currentUser.userName ? (
+        {currentUser && currentUser.name ? (
           <span className={`${styles.action} ${styles.account}`}>
             <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
-            <span className={`${styles.name} anticon`}>{currentUser.userName}</span>
+            <span className={`${styles.name} anticon`}>{currentUser.name}</span>
           </span>
         ) : (
           <span>user</span>

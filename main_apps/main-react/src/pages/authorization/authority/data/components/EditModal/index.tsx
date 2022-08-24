@@ -56,7 +56,9 @@ export default ({
     if (!isEmpty(formData)) {
       const { dataRuleDTOList = [] } = formData || {};
 
-      const ruleIdList = dataRuleDTOList.map((item: defs.authorization.DataRuleDTO) => item.id);
+      const ruleIdList = dataRuleDTOList.map(
+        (item: defs.authorization.DataRuleDTO) => item.ruleKeyId,
+      );
       form.setFieldsValue({
         ...formData,
         ruleIdList,
