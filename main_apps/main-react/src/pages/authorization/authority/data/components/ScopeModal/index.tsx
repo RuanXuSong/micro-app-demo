@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Modal, Form, Spin, message, Table } from 'antd';
 import { isEmpty } from 'lodash-es';
 import 'antd/lib/form';
@@ -7,7 +7,6 @@ import { useRequest } from 'ahooks';
 import useSpinning from '@/hooks/useSpinning';
 import { ColumnsType } from 'antd/es/table/interface';
 import classNames from 'classnames';
-import { useImmer } from 'use-immer';
 import { isEqual } from 'lodash';
 import styles from './index.module.less';
 import { initRequest } from '@/common';
@@ -37,28 +36,16 @@ export default ({
 }) => {
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
-  const { businessValue, dataRuleDTOList = [] } = formData;
+  const { dataRuleDTOList = [] } = formData;
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
   const { orgCode } = userInfo || {};
-  const [selectedRowKeysObj, setSelectedRowKeysObj] = useImmer<Record<string, string[]>>({});
   const [selectedId, setSelectedId] = useState<number>();
-
-  const [ruleInfoObj, setRuleInfoObj] = useImmer<Record<string, { businessValues: string[] }>>({});
-
-  const { businessValues = [] } = ruleInfoObj[selectedId!] || {};
+  const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
+  const originKeysRef = useRef<string[]>();
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    setSelectedRowKeysObj((config) => {
-      if (selectedId) {
-        config[selectedId] = newSelectedRowKeys as string[];
-      }
-    });
-  };
-
-  const rowSelection = {
-    selectedRowKeys: selectedRowKeysObj[selectedId!] ?? [],
-    onChange: onSelectChange,
+    setSelectedRowKeys(newSelectedRowKeys as string[]);
   };
 
   useEffect(() => {
@@ -67,39 +54,23 @@ export default ({
     }
   }, [dataRuleDTOList]);
 
-  const { run: fetchListRule, loading } = useRequest(API.platform.sysRole.listRule.fetch, {
+  const { run: fetchListRule, loading } = useRequest(API.authorization.data.detail.fetch, {
     manual: true,
     onSuccess: (response) => {
-      const selectedKeysObj = {};
-      const ruleInfoObj = {};
-      response?.forEach((item) => {
-        const { id, businessValueList } = item;
+      const { businessValueList = [] } = response;
 
-        if (id) {
-          selectedKeysObj[id] = businessValueList || [];
-          ruleInfoObj[id] = {
-            businessValues: businessValueList,
-          };
-        }
-      });
-
-      setRuleInfoObj(() => ruleInfoObj);
-      setSelectedRowKeysObj(() => selectedKeysObj);
-
-      if (!isEmpty(scopeList)) {
-        setSelectedId(scopeList[0].id);
-      }
+      setSelectedRowKeys(businessValueList);
+      originKeysRef.current = businessValueList;
     },
   });
 
   useEffect(() => {
-    if (visible) {
+    if (visible && selectedId) {
       fetchListRule({
-        businessValue,
-        clientKey,
+        ruleId: selectedId,
       });
     }
-  }, [visible]);
+  }, [visible, selectedId]);
 
   const { data: scopeList, run: handleFetchList } = useRequest(fetchList, {
     manual: true,
@@ -133,14 +104,14 @@ export default ({
       ...selectedRule,
       clientKey,
       id: selectedId,
-      businessValueList: selectedRowKeysObj[selectedId!] ?? [],
+      businessValueList: selectedRowKeys ?? [],
     });
   };
 
   const { run: handleFinish, loading: submitting } = useRequest(submit, {
     manual: true,
     onSuccess: () => {
-      message.success('授权成功');
+      message.success('设置成功');
       form.resetFields();
       toggleVisible();
       reload?.();
@@ -163,9 +134,12 @@ export default ({
   ];
 
   const handleReset = () => {
-    setSelectedRowKeysObj((config) => {
-      config[selectedId!] = [];
-    });
+    setSelectedRowKeys([]);
+  };
+
+  const rowSelection = {
+    selectedRowKeys: selectedRowKeys ?? [],
+    onChange: onSelectChange,
   };
 
   return (
@@ -200,7 +174,7 @@ export default ({
                     selectedId === item.id ? styles.selected : {},
                   )}
                   onClick={() => {
-                    if (!isEqual(selectedRowKeysObj[selectedId!] || [], businessValues)) {
+                    if (!isEqual(selectedRowKeys || [], originKeysRef.current || [])) {
                       message.error('请先保存再切换规则！');
                       return;
                     }

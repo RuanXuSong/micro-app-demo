@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-24 15:22:50
+ * @LastEditTime: 2022-08-24 15:42:59
  */
 import React, { useEffect } from 'react';
 import { message, Button, Row, Col, Select } from 'antd';
@@ -124,7 +124,7 @@ export default () => {
       <div className={styles.searchWrap}>
         <Row>
           {showCompanySelect && (
-            <Col span="8" className={styles.formItemWrap}>
+            <Col span="6" className={styles.formItemWrap}>
               <div className={styles.label}>企业名称：</div>
               <div className={styles.inputWrap}>
                 <Select
