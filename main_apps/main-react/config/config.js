@@ -3,12 +3,16 @@ const openBrowser = require('react-dev-utils/openBrowser');
 import { defineConfig } from 'umi';
 import defaultSettings from './defaultSettings';
 import routes from './routes';
+import { PREFIX_CLASS } from '../src/constant';
 const path = require('path');
 
 const { REACT_APP_ENV } = process.env;
 export default defineConfig({
-  hash: true,
-  antd: {},
+  antd: {
+    config: {
+      prefixCls: PREFIX_CLASS,
+    },
+  },
   dva: {
     hmr: true,
   },
@@ -26,28 +30,15 @@ export default defineConfig({
     'primary-color': defaultSettings.primaryColor,
   },
   title: false,
-  ignoreMomentLocale: true,
   manifest: {
     basePath: '/',
+  },
+  lessLoader: {
+    modifyVars: {
+      '@ant-prefix': PREFIX_CLASS,
+    },
   },
   esbuild: {},
   outputPath: 'build',
   publicPath: '/',
-  chainWebpack(webpackConfig) {
-    if (process.env.NODE_ENV === 'development') {
-      webpackConfig.plugin('openBrowser').use({
-        apply(compiler) {
-          compiler.hooks.done.tap('openBrowser', () => {
-            if (!openBrowser.used) {
-              openBrowser.used = true;
-              setTimeout(() => {
-                openBrowser(`http://localhost:3000/`);
-              }, 1000);
-            }
-          });
-        },
-      });
-    }
-  },
-  mfsu: {},
 });

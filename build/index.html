@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta
       name="keywords"
-      content="antd,umi,umijs,ant design,脚手架,布局, Ant Design,项目,Pro,admin,控制台,主页,开箱即用,中后台,解决方案,组件库"
+      content="antd,umi,umijs,cloud design,脚手架,布局, cloud Design,项目,Pro,admin,控制台,主页,开箱即用,中后台,解决方案,组件库"
     />
     <meta
       name="description"
@@ -23,7 +23,7 @@
     />
     <title>雷数云平台</title>
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/umi.c77ec9fe.css" />
+    <link rel="stylesheet" href="/umi.css" />
     <script>
       window.routerBase = "/";
     </script>
@@ -32,7 +32,7 @@
     </script>
   </head>
   <body>
-    <noscript>Out-of-the-box mid-stage front/design solution!</noscript>
+    <noscript>雷数云平台</noscript>
     <div id="root">
       <style>
         html,
@@ -53,7 +53,7 @@
           justify-content: center;
           padding: 98px;
         }
-        .ant-spin {
+        .cloud-spin {
           position: absolute;
           display: none;
           -webkit-box-sizing: border-box;
@@ -79,13 +79,13 @@
           font-feature-settings: "tnum";
         }
 
-        .ant-spin-spinning {
+        .cloud-spin-spinning {
           position: static;
           display: inline-block;
           opacity: 1;
         }
 
-        .ant-spin-dot {
+        .cloud-spin-dot {
           position: relative;
           display: inline-block;
           width: 20px;
@@ -93,7 +93,7 @@
           font-size: 20px;
         }
 
-        .ant-spin-dot-item {
+        .cloud-spin-dot-item {
           position: absolute;
           display: block;
           width: 9px;
@@ -111,33 +111,33 @@
           animation: antSpinMove 1s infinite linear alternate;
         }
 
-        .ant-spin-dot-item:nth-child(1) {
+        .cloud-spin-dot-item:nth-child(1) {
           top: 0;
           left: 0;
         }
 
-        .ant-spin-dot-item:nth-child(2) {
+        .cloud-spin-dot-item:nth-child(2) {
           top: 0;
           right: 0;
           -webkit-animation-delay: 0.4s;
           animation-delay: 0.4s;
         }
 
-        .ant-spin-dot-item:nth-child(3) {
+        .cloud-spin-dot-item:nth-child(3) {
           right: 0;
           bottom: 0;
           -webkit-animation-delay: 0.8s;
           animation-delay: 0.8s;
         }
 
-        .ant-spin-dot-item:nth-child(4) {
+        .cloud-spin-dot-item:nth-child(4) {
           bottom: 0;
           left: 0;
           -webkit-animation-delay: 1.2s;
           animation-delay: 1.2s;
         }
 
-        .ant-spin-dot-spin {
+        .cloud-spin-dot-spin {
           -webkit-transform: rotate(45deg);
           -ms-transform: rotate(45deg);
           transform: rotate(45deg);
@@ -145,19 +145,19 @@
           animation: antRotate 1.2s infinite linear;
         }
 
-        .ant-spin-lg .ant-spin-dot {
+        .cloud-spin-lg .cloud-spin-dot {
           width: 32px;
           height: 32px;
           font-size: 32px;
         }
 
-        .ant-spin-lg .ant-spin-dot i {
+        .cloud-spin-lg .cloud-spin-dot i {
           width: 14px;
           height: 14px;
         }
 
         @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-          .ant-spin-blur {
+          .cloud-spin-blur {
             background: #fff;
             opacity: 0.5;
           }
@@ -201,10 +201,12 @@
       >
         <img src="/logo.svg" alt="logo" width="180" />
         <div class="page-loading-warp">
-          <div class="ant-spin ant-spin-lg ant-spin-spinning">
-            <span class="ant-spin-dot ant-spin-dot-spin"
-              ><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i
-              ><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i
+          <div class="cloud-spin cloud-spin-lg cloud-spin-spinning">
+            <span class="cloud-spin-dot cloud-spin-dot-spin"
+              ><i class="cloud-spin-dot-item"></i
+              ><i class="cloud-spin-dot-item"></i
+              ><i class="cloud-spin-dot-item"></i
+              ><i class="cloud-spin-dot-item"></i
             ></span>
           </div>
         </div>
@@ -221,6 +223,6 @@
       </div>
     </div>
 
-    <script src="/umi.a63b9aa9.js"></script>
+    <script src="/umi.js"></script>
   </body>
 </html>

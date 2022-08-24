@@ -4,8 +4,12 @@
  * @作者: 阮旭松
  * @Date: 2022-07-28 18:10:42
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-22 18:29:16
+ * @LastEditTime: 2022-08-24 17:03:47
  */
+
+/** 云平台 antd 样式前缀（防止子应用样式污染） */
+export const PREFIX_CLASS = 'cloud';
+
 /**
  * 初始化分页数据
  */

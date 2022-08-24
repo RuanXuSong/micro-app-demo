@@ -5,6 +5,7 @@ import zhCN from 'antd/es/locale/zh_CN';
 import 'moment/locale/zh-cn';
 import { UseRequestProvider } from 'ahooks';
 import { THROTTLE_INTERVAL } from '@/constant';
+import { PREFIX_CLASS } from '@/constant';
 
 const InspectorWrapper = process.env.NODE_ENV === 'development' ? Inspector : React.Fragment;
 
@@ -27,7 +28,7 @@ const Layout: React.FC = ({ children }) => {
         throttleInterval: THROTTLE_INTERVAL,
       }}
     >
-      <ConfigProvider locale={zhCN}>
+      <ConfigProvider locale={zhCN} prefixCls={PREFIX_CLASS}>
         <InspectorWrapper>{children}</InspectorWrapper>
       </ConfigProvider>
     </UseRequestProvider>
