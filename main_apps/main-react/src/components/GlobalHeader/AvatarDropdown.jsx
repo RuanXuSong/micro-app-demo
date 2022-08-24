@@ -70,7 +70,7 @@ class AvatarDropdown extends React.Component {
             <span className={`${styles.name} anticon`}>{currentUser.name}</span>
           </span>
         ) : (
-          <span>user</span>
+          <span className={styles.userText}>user</span>
         )}
       </HeaderDropdown>
     );

@@ -5,6 +5,7 @@ import * as bindUserByRole from './bindUserByRole';
 import * as listRule from './listRule';
 import * as roleDataSave from './roleDataSave';
 import * as myRuleList from './myRuleList';
+import * as myRuleListByRoleId from './myRuleListByRoleId';
 import * as pageList from './pageList';
 import * as resourceSave from './resourceSave';
 import * as ruleDataSave from './ruleDataSave';
@@ -14,6 +15,7 @@ export {
   listRule,
   roleDataSave,
   myRuleList,
+  myRuleListByRoleId,
   pageList,
   resourceSave,
   ruleDataSave,

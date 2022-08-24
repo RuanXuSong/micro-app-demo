@@ -4,9 +4,11 @@
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:18
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-17 18:37:41
+ * @LastEditTime: 2022-08-24 17:46:14
  */
 import { MenuDataItem } from '@ant-design/pro-layout';
+import { message } from 'antd';
+import { history } from 'umi';
 import arrayUtils, { deepFlatten } from '@/utils/array';
 import { PrivilegeResource } from './interfaces/common';
 import { LOGIN_CONFIG } from './constant';
@@ -28,7 +30,7 @@ export async function getInitialState() {
       })) as unknown as PrivilegeResource[];
 
       const routes: PrivilegeResource[] = arrayUtils.deepOrder({
-        data: source, // require('../mock/route').default['/resource'].data,
+        data: source,
         childKey: 'children',
         orderKey: 'orderValue',
         type: 'asc',
@@ -39,10 +41,10 @@ export async function getInitialState() {
       });
       menus = convertResourceToMenu(routes);
       /** 没有菜单权限时候应该调整到登录页面 */
-      // if (menus.length === 0) {
-      //   message.warn('您没有访问权限，请联系管理员！');
-      //   history.replace('/404');
-      // }
+      if (menus.length === 0) {
+        message.warn('您没有访问权限，请联系管理员！');
+        history.replace('/404');
+      }
     } catch (error) {
       console.error(error);
     }

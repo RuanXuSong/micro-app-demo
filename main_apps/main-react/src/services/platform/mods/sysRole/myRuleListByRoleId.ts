@@ -1,5 +1,5 @@
 /**
- * @description 用户id拿取数据规则
+ * @description myRuleListByRoleId
  */
 
 import serverConfig from '../../../../../../../server.config';
@@ -11,12 +11,15 @@ export const init = [];
 
 export async function fetch(params = {}) {
   const request = await initRequest();
-  const result = await request.get(backEndUrl + '/api/role/myRuleList', {
-    headers: {
-      'Content-Type': 'application/json',
+  const result = await request.get(
+    backEndUrl + '/api/role/myRuleListByRoleId',
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params,
     },
-    params,
-  });
+  );
   if (result) {
     if (!result.success) {
       throw new Error(JSON.stringify(result));

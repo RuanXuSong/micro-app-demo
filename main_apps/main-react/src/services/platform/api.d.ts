@@ -469,6 +469,9 @@ declare namespace defs {
       /** 所属租户编码 */
       orgId?: string;
 
+      /** orgLogo */
+      orgLogo?: string;
+
       /** 手机号 */
       phone?: string;
 
@@ -925,7 +928,7 @@ declare namespace API {
       }
 
       /**
-       * myRuleList
+       * 用户id拿取数据规则
        * /api/role/myRuleList
        */
       export namespace myRuleList {
@@ -934,6 +937,25 @@ declare namespace API {
           clientKey?: string;
           /** orgCode */
           orgCode?: string;
+        }
+
+        export type Response = Array<defs.platform.DataRuleDTO>;
+
+        export const init: Response;
+
+        export function fetch(params?: Params): Promise<Response>;
+      }
+
+      /**
+       * myRuleListByRoleId
+       * /api/role/myRuleListByRoleId
+       */
+      export namespace myRuleListByRoleId {
+        export class Params {
+          /** clientKey */
+          clientKey?: string;
+          /** roleId */
+          roleId?: number;
         }
 
         export type Response = Array<defs.platform.DataRuleDTO>;

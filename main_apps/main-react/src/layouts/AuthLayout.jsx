@@ -19,6 +19,7 @@ import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/ico
 import classNames from 'classnames';
 import { isEmpty } from 'lodash';
 import Iconfont from '@/components/Iconfont';
+import { LOGOUT_PATH } from '@/config';
 
 const { TabPane } = Tabs;
 
@@ -26,10 +27,10 @@ const noMatch = (
   <Result
     status={403}
     title="403"
-    subTitle="Sorry, you are not authorized to access this page."
+    subTitle="抱歉，您当前没有权限"
     extra={
       <Button type="primary">
-        <Link to="/user/login">Go Login</Link>
+        <Link to={LOGOUT_PATH}>重新登录</Link>
       </Button>
     }
   />
@@ -127,7 +128,7 @@ const AuthLayout = (props) => {
 
   return (
     <ProLayout
-      logo={logo}
+      logo={userInfo?.orgLogo ?? logo}
       {...props}
       {...settings}
       className="auth-layout"

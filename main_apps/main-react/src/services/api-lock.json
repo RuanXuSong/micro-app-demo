@@ -7549,7 +7549,7 @@
             ]
           },
           {
-            "description": "myRuleList",
+            "description": "用户id拿取数据规则",
             "name": "myRuleList",
             "method": "get",
             "path": "/api/role/myRuleList",
@@ -7596,6 +7596,63 @@
                 "dataType": {
                   "typeArgs": [],
                   "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "myRuleListByRoleId",
+            "name": "myRuleListByRoleId",
+            "method": "get",
+            "path": "/api/role/myRuleListByRoleId",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "DataRuleDTO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "clientKey",
+                "name": "clientKey",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "description": "roleId",
+                "name": "roleId",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
                   "isDefsType": false,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
@@ -10346,6 +10403,19 @@
             },
             "name": "orgId",
             "description": "所属租户编码",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "orgLogo",
             "required": false
           },
           {

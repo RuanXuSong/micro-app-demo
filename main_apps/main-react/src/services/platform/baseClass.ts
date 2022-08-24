@@ -456,6 +456,9 @@ class TheUserInformation {
   /** 所属租户编码 */
   orgId = '';
 
+  /** orgLogo */
+  orgLogo = '';
+
   /** 手机号 */
   phone = '';
 
