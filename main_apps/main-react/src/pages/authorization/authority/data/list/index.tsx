@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-19 16:56:23
+ * @LastEditTime: 2022-08-24 11:22:20
  */
 import React, { useEffect } from 'react';
 import { message, Button, Row, Col, Select } from 'antd';
@@ -191,6 +191,7 @@ export default () => {
         reload={reload}
         clientKey={clientKey}
         scopeMapOptions={scopeMapOptions}
+        orgCode={businessValue}
       />
       <AuthModal
         visible={authModalConfig.visible}

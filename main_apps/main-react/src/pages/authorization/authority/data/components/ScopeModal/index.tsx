@@ -58,16 +58,16 @@ export default ({
     });
   };
 
+  const rowSelection = {
+    selectedRowKeys: selectedRowKeysObj[selectedId!] ?? [],
+    onChange: onSelectChange,
+  };
+
   useEffect(() => {
     if (!isEmpty(dataRuleDTOList)) {
       setSelectedId(dataRuleDTOList[0].id);
     }
   }, [dataRuleDTOList]);
-
-  const rowSelection = {
-    selectedRowKeys: selectedRowKeysObj[selectedId!] ?? [],
-    onChange: onSelectChange,
-  };
 
   const { run: fetchListRule, loading } = useRequest(API.platform.sysRole.listRule.fetch, {
     manual: true,
@@ -87,6 +87,12 @@ export default ({
 
       setRuleInfoObj(() => ruleInfoObj);
       setSelectedRowKeysObj(() => selectedKeysObj);
+
+      console.log('scopeList: ', scopeList);
+      if (!isEmpty(scopeList)) {
+        console.log('scopeList: ', scopeList);
+        setSelectedId(scopeList[0].id);
+      }
     },
   });
 

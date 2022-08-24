@@ -56,7 +56,8 @@ export default ({ currentUser, dispatch }: any) => {
     const { avatar, ...rest } = values;
 
     if (values.avatar) {
-      rest.avatar = values.avatar?.file?.response?.data?.url;
+      rest.avatar =
+        avatar?.file?.response?.data?.url ?? avatar?.[0]?.response?.data?.url ?? avatar?.[0]?.url;
     }
 
     return API.platform.sysUser.update.fetch(rest);

@@ -1,3 +1,4 @@
+import { useModel } from 'umi';
 import { useRef, useState, useMemo } from 'react';
 import { useImmer } from 'use-immer';
 import { message } from 'antd';
@@ -9,6 +10,8 @@ export default () => {
   const actionRef = useRef<ActionType>();
   const [clientKey, setClientKey] = useState<string>('');
   const [businessValue, setBusinessValue] = useState<string>('');
+  const { initialState } = useModel('@@initialState');
+  const { userInfo } = initialState || {};
   const [editModalConfig, setEditModalConfig] = useImmer<{
     visible: boolean;
     formData: any;
@@ -88,7 +91,7 @@ export default () => {
         removeEmpty({
           ...params,
           clientKey,
-          businessValue,
+          businessValue: businessValue || userInfo?.orgCode,
         }),
       );
       return {

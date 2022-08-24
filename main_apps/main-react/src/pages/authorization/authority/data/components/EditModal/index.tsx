@@ -34,6 +34,7 @@ export default ({
   reload,
   clientKey,
   scopeMapOptions,
+  orgCode,
 }: {
   visible: boolean;
   toggleVisible: () => void;
@@ -42,13 +43,14 @@ export default ({
   reload?: () => void;
   clientKey: string;
   scopeMapOptions: any;
+  orgCode?: string;
 }) => {
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
   const { id } = formData;
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
-  const { orgCode } = userInfo || {};
+  const { orgCode: userOrgCode } = userInfo || {};
 
   useEffect(() => {
     if (!isEmpty(formData)) {
@@ -78,7 +80,7 @@ export default ({
       clientKey,
       id,
       ruleIdList: values.ruleIdList ?? [],
-      businessValue: orgCode,
+      businessValue: orgCode ?? userOrgCode,
     }) as defs.authorization.DataRoleInputDTO;
 
     return API.platform.sysRole.roleDataSave.fetch(payload);
