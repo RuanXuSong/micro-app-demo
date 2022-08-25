@@ -11,6 +11,7 @@ import { isEmpty } from 'lodash';
 import Iconfont from '@/components/Iconfont';
 import NoMatch from '@/components/NoMatch';
 import { BaseMenuProps } from '@ant-design/pro-layout/lib/components/SiderMenu/BaseMenu';
+import RightContent from '@/components/GlobalHeader/RightContent';
 
 const AuthLayout = (props: any) => {
   const { initialState } = useModel('@@initialState');
@@ -132,6 +133,7 @@ const AuthLayout = (props: any) => {
         return null;
       }}
       menuDataRender={menuDataRender}
+      rightContentRender={() => <RightContent />}
       postMenuData={(menuData) => {
         menuDataRef.current = menuData || [];
         return menuData || [];

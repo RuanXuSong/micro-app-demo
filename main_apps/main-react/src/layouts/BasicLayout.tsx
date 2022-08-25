@@ -9,6 +9,7 @@ import styles from './index.module.less';
 import classNames from 'classnames';
 import { isEmpty } from 'lodash';
 import { BaseMenuProps } from '@ant-design/pro-layout/lib/components/SiderMenu/BaseMenu';
+import RightContent from '@/components/GlobalHeader/RightContent';
 
 const BasicLayout = (props: any) => {
   const { initialState } = useModel('@@initialState');
@@ -112,6 +113,7 @@ const BasicLayout = (props: any) => {
         return null;
       }}
       menuDataRender={menuDataRender}
+      rightContentRender={() => <RightContent />}
       postMenuData={(menuData) => {
         if (!menuData) return [];
         // 筛选菜单为精准匹配路由
