@@ -2,7 +2,6 @@ import React from 'react';
 import { CURRENT } from './renderAuthorize'; // eslint-disable-next-line import/no-cycle
 
 import PromiseRender from './PromiseRender';
-import NoMatch from '../NoMatch';
 
 /**
  * 通用权限检查方法 Common check permissions method
@@ -14,7 +13,7 @@ import NoMatch from '../NoMatch';
 const checkPermissions = (authMenu, currentMenu, Exception) => {
   // 没有判定权限.默认查看所有
   if (!authMenu) {
-    return NoMatch;
+    return currentMenu;
   }
 
   if (currentMenu.key === '/cloud') {
