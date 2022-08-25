@@ -108,7 +108,7 @@ const BasicLayout = (props) => {
   return (
     <ProLayout
       className={headerCollapsed ? 'collapsed-basic-layout' : 'basic-layout'}
-      logo={logo}
+      logo={userInfo?.orgLogo ?? logo}
       {...props}
       {...settings}
       onCollapse={handleMenuCollapse}
