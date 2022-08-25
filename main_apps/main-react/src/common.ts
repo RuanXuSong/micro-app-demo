@@ -38,14 +38,6 @@ export function errorHandler(error: ResponseError) {
   throw error;
 }
 
-// const getToken = () =>
-//   new Promise((resolve) => {
-//     setTimeout(() => {
-//       const token = localStorage.getItem('accessToken');
-//       resolve(token);
-//     }, 0);
-//   });
-
 export const initRequest = async () => {
   // const token = await getToken();
   /** 这边可对接口请求做一些统一的封装 */

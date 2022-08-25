@@ -1,48 +1,26 @@
-/**
- * Ant Design Pro v4 use `@ant-design/pro-layout` to handle Layout.
- *
- * @see You can view component api by: https://github.com/ant-design/ant-design-pro-layout
- */
-import ProLayout, { DefaultFooter } from '@ant-design/pro-layout';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import ProLayout, { MenuDataItem } from '@ant-design/pro-layout';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { Link, connect, history, useModel } from 'umi';
-import { GithubOutlined } from '@ant-design/icons';
-import { Result, Button, Menu } from 'antd';
 import Authorized from '@/utils/Authorized';
-import { checkTopMenu } from '../components/Authorized/CheckPermissions';
-import RightContent from '@/components/GlobalHeader/RightContent';
+import NoMatch from '@/components/NoMatch';
 import { getMatchMenu } from '@umijs/route-utils';
-import logo from '../assets/logo.svg';
-import microApp, { removeDomScope } from '@micro-zoe/micro-app';
+import logo from '@/assets/logo.svg';
 import styles from './index.module.less';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
 import { isEmpty } from 'lodash';
+import { BaseMenuProps } from '@ant-design/pro-layout/lib/components/SiderMenu/BaseMenu';
 
-const noMatch = (
-  <Result
-    status={403}
-    title="403"
-    subTitle="Sorry, you are not authorized to access this page."
-    extra={
-      <Button type="primary">
-        <Link to="/user/login">Go Login</Link>
-      </Button>
-    }
-  />
-);
-
-const BasicLayout = (props) => {
+const BasicLayout = (props: any) => {
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
   const { resourceList } = useModel('resourceData');
-  /** Use Authorized check all menu item */
-  const menuDataRender = (menuList) =>
-    menuList.map((item) => {
+
+  const menuDataRender = (menuList: any) =>
+    menuList.map((item: any) => {
       if (item.hidden) return null;
       const localItem = {
         ...item,
-        children: item.children ? menuDataRender(item.children) : undefined,
+        children: item.children ? menuDataRender!(item.children) : undefined,
       };
       const resourceKeys = resourceList.map((item) => `/${item.resourceKey}`);
       return resourceKeys.includes(localItem.key) ? localItem : null;
@@ -56,9 +34,7 @@ const BasicLayout = (props) => {
       pathname: '/',
     },
   } = props;
-  const menuDataRef = useRef([]);
-  const [showSubMenu, setShowSubMenu] = useState(false);
-  const [subMenuCollapsed, setSubMenuCollapsed] = useState(false);
+  const menuDataRef = useRef<MenuDataItem[]>([]);
 
   useEffect(() => {
     if (dispatch) {
@@ -77,7 +53,7 @@ const BasicLayout = (props) => {
     }
   }, [props]);
 
-  const handleMenuCollapse = (payload) => {
+  const handleMenuCollapse = (payload: boolean) => {
     if (dispatch) {
       dispatch({
         type: 'global/changeLayoutCollapsed',
@@ -87,7 +63,7 @@ const BasicLayout = (props) => {
   };
 
   /** 渲染菜单元素 */
-  const renderMenuItem = (menuItemProps, defaultDom) => {
+  const renderMenuItem: BaseMenuProps['subMenuItemRender'] = (menuItemProps, defaultDom) => {
     const { customIcon, name, pro_layout_parentKeys = [] } = menuItemProps;
     const isChild = !isEmpty(pro_layout_parentKeys);
     return (
@@ -124,7 +100,7 @@ const BasicLayout = (props) => {
         return <Link to={menuItemProps.path}>{renderMenuItem(menuItemProps, defaultDom)}</Link>;
       }}
       splitMenus
-      itemRender={(route, params, routes, paths) => {
+      itemRender={(route, _params, routes, paths) => {
         const first = routes.indexOf(route) === 0;
         return first ? (
           <Link to={paths.join('/')}>{route.breadcrumbName}</Link>
@@ -136,22 +112,22 @@ const BasicLayout = (props) => {
         return null;
       }}
       menuDataRender={menuDataRender}
-      rightContentRender={() => <RightContent />}
       postMenuData={(menuData) => {
+        if (!menuData) return [];
         // 筛选菜单为精准匹配路由
-        const modifiedData = menuData.filter((item) => !(item.path.indexOf('/*') > -1));
+        const modifiedData = menuData.filter((item) => !(item.path!.indexOf('/*') > -1));
         menuDataRef.current = modifiedData || [];
         return modifiedData || [];
       }}
     >
-      <Authorized authority={authorized.authority} noMatch={noMatch}>
+      <Authorized authority={authorized.authority} noMatch={NoMatch}>
         {children}
       </Authorized>
     </ProLayout>
   );
 };
 
-export default connect(({ global, settings }) => ({
+export default connect(({ global, settings }: any) => ({
   collapsed: global.collapsed,
   headerCollapsed: global.headerCollapsed,
   settings,

@@ -8,7 +8,6 @@ let config = {
 const isEnvPro = process.env.NODE_ENV === 'production';
 
 if (isEnvPro) {
-  const locationOrigin = `${location.origin}/`;
   config = {
     thunderBi: 'http://smart-bi.jxzk.thundersdata.com:38204/smart-bi',
     dataFront: 'http://data-sso.dev.thundersdata.com/smart-data',

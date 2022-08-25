@@ -1,50 +1,26 @@
-/**
- * Ant Design Pro v4 use `@ant-design/pro-layout` to handle Layout.
- *
- * @see You can view component api by: https://github.com/ant-design/ant-design-pro-layout
- */
-import ProLayout, { DefaultFooter } from '@ant-design/pro-layout';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import ProLayout, { BasicLayoutProps, MenuDataItem } from '@ant-design/pro-layout';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { Link, connect, history, useModel } from 'umi';
-import { GithubOutlined } from '@ant-design/icons';
-import { Result, Button, Menu, Tabs } from 'antd';
 import Authorized from '@/utils/Authorized';
-import RightContent from '@/components/GlobalHeader/RightContent';
 import { getMatchMenu } from '@umijs/route-utils';
 import logo from '../assets/logo.svg';
-import microApp, { removeDomScope } from '@micro-zoe/micro-app';
-import initialState from '@/.umi/plugin-initial-state/models/initialState';
+import microApp from '@micro-zoe/micro-app';
 import styles from './index.module.less';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
 import { isEmpty } from 'lodash';
 import Iconfont from '@/components/Iconfont';
-import { LOGOUT_PATH } from '@/config';
+import NoMatch from '@/components/NoMatch';
+import { BaseMenuProps } from '@ant-design/pro-layout/lib/components/SiderMenu/BaseMenu';
 
-const { TabPane } = Tabs;
-
-const noMatch = (
-  <Result
-    status={403}
-    title="403"
-    subTitle="抱歉，您当前没有权限"
-    extra={
-      <Button type="primary">
-        <Link to={LOGOUT_PATH}>重新登录</Link>
-      </Button>
-    }
-  />
-);
-
-const AuthLayout = (props) => {
+const AuthLayout = (props: any) => {
   const { initialState } = useModel('@@initialState');
   const { menus = [], userInfo } = initialState || {};
-  const menuDataRender = (menuList) => {
+  const menuDataRender: BasicLayoutProps['menuDataRender'] = (menuList) => {
     return menuList.map((item) => {
       if (item.hidden) return null;
       const localItem = {
         ...item,
-        children: item.children ? menuDataRender(item.children) : undefined,
+        children: item.children ? menuDataRender!(item.children) : undefined,
       };
       return Authorized.check(menus, localItem);
     });
@@ -58,9 +34,7 @@ const AuthLayout = (props) => {
     },
     collapsed,
   } = props;
-  const menuDataRef = useRef([]);
-  const [showSubMenu, setShowSubMenu] = useState(false);
-  const [subMenuCollapsed, setSubMenuCollapsed] = useState(false);
+  const menuDataRef = useRef<MenuDataItem[]>([]);
   useEffect(() => {
     microApp.setGlobalData({ showDropDown: true });
 
@@ -86,7 +60,7 @@ const AuthLayout = (props) => {
     }
   }, [props]);
 
-  const handleMenuCollapse = (payload) => {
+  const handleMenuCollapse = (payload: boolean) => {
     if (dispatch) {
       dispatch({
         type: 'global/changeLayoutCollapsed',
@@ -96,7 +70,7 @@ const AuthLayout = (props) => {
   };
 
   /** 渲染菜单元素 */
-  const renderMenuItem = (menuItemProps, defaultDom) => {
+  const renderMenuItem: BaseMenuProps['subMenuItemRender'] = (menuItemProps, defaultDom) => {
     const { customIcon, fontIcon, name, pro_layout_parentKeys = [] } = menuItemProps;
     const isChild = !isEmpty(pro_layout_parentKeys);
     return isChild ? (
@@ -118,13 +92,13 @@ const AuthLayout = (props) => {
     ) : null;
   };
 
-  const authorized = useMemo(
-    () =>
-      getMatchMenu(location.pathname || '/', menuDataRef.current).pop() || {
-        authority: undefined,
-      },
-    [location.pathname],
-  );
+  const authorized = useMemo(() => {
+    const auth = getMatchMenu(location.pathname || '/', menuDataRef.current).pop() || {
+      authority: undefined,
+    };
+    console.log('auth: ', auth);
+    return auth;
+  }, [location.pathname]);
 
   return (
     <ProLayout
@@ -146,7 +120,7 @@ const AuthLayout = (props) => {
       }}
       subMenuItemRender={(menuItemProps, defaultDom) => renderMenuItem(menuItemProps, defaultDom)}
       splitMenus
-      itemRender={(route, params, routes, paths) => {
+      itemRender={(route, _params, routes, paths) => {
         const first = routes.indexOf(route) === 0;
         return first ? (
           <Link to={paths.join('/')}>{route.breadcrumbName}</Link>
@@ -158,20 +132,19 @@ const AuthLayout = (props) => {
         return null;
       }}
       menuDataRender={menuDataRender}
-      rightContentRender={() => <RightContent />}
       postMenuData={(menuData) => {
         menuDataRef.current = menuData || [];
         return menuData || [];
       }}
     >
-      <Authorized authority={authorized.authority} noMatch={noMatch}>
+      <Authorized authority={authorized.authority} noMatch={NoMatch}>
         {children}
       </Authorized>
     </ProLayout>
   );
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state: any) {
   const {
     router: { location },
     global,
