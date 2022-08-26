@@ -141,7 +141,11 @@ export default ({
               },
             ]}
           >
-            <Input placeholder="请输入" addonAfter={`@${orgCode ?? userOrgCode}`} />
+            <Input
+              disabled={!isNil(id)}
+              placeholder="请输入"
+              addonAfter={`@${orgCode ?? userOrgCode}`}
+            />
           </Form.Item>
           <Form.Item
             label="用户昵称"

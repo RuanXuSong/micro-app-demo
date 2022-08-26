@@ -4,7 +4,7 @@
  * @作者: 陈杰
  * @Date: 2020-05-18 12:00:35
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-07-13 15:46:51
+ * @LastEditTime: 2022-08-26 11:36:15
  */
 import { orderBy } from 'lodash-es';
 
@@ -106,7 +106,6 @@ export const deepFlatten = <T>(list: T[], key = 'children') => {
   const flatten = (arry: T[]) =>
     arry.forEach((item: T) => {
       const newItem = { ...item };
-      delete newItem[key];
       result.push(newItem);
       if (item[key] && Array.isArray(item[key])) {
         flatten(item[key]);

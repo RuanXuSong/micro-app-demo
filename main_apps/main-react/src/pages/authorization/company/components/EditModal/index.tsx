@@ -18,6 +18,7 @@ import { useModel } from 'umi';
 import { disabledDate } from '@/utils/getDisabledDate';
 import { enumToOptions } from '@/utils/array';
 import { ROLE_STATUS_MAP } from '@/constant';
+import { formatSearchDate } from '@/utils/date';
 
 const formLayout = {
   labelCol: {
@@ -122,12 +123,14 @@ export default ({
   });
 
   const submit = (values: Store) => {
+    const { logo, validBefore, ...rest } = values;
     setTip('数据保存中，请稍候...');
 
     const payload = removeEmpty({
       ...formData,
-      ...values,
+      ...rest,
       logo: values.logo.map((item: Store) => item.url || item.response.data.url)[0],
+      validBefore: formatSearchDate(validBefore),
     }) as defs.platform.TheUserInformation;
 
     if (id) {

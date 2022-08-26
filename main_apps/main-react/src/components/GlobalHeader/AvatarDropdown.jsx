@@ -60,10 +60,7 @@ class AvatarDropdown extends React.Component {
       </Menu>
     );
     return (
-      <HeaderDropdown
-        {...(this.state.showDropDown ? {} : { visible: false })}
-        overlay={menuHeaderDropdown}
-      >
+      <HeaderDropdown overlay={menuHeaderDropdown}>
         {currentUser && currentUser.name ? (
           <span className={`${styles.action} ${styles.account}`}>
             <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
