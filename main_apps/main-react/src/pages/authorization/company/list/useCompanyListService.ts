@@ -90,7 +90,7 @@ export default () => {
   };
 
   /** 编辑企业 */
-  const handleCompanyEdit = (row: defs.authorization.ResourceRole) => {
+  const handleCompanyEdit = (row: defs.platform.TenantInformation) => {
     setEditModalConfig((config) => {
       config.visible = true;
       config.loading = true;
@@ -107,7 +107,7 @@ export default () => {
   };
 
   /** 给企业授权 */
-  const handleAuthorize = (row: defs.authorization.ResourceRole) => {
+  const handleAuthorize = (row: defs.platform.TenantInformation) => {
     setAuthModalConfig((config) => {
       config.visible = true;
       config.loading = true;

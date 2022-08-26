@@ -1,6 +1,6 @@
+import { message } from 'antd';
 import { extend, ResponseError } from 'umi-request';
 import { LoginFailure } from './constant';
-import { LOGOUT_PATH } from './config';
 
 let controller = new AbortController();
 const codeMessage: { [key: number]: string } = {
@@ -68,9 +68,7 @@ export const initRequest = async () => {
         ) {
           controller.abort();
           controller = new AbortController();
-          // window.location.replace(LOGOUT_PATH);
-          // TODO: 联调好后改回来
-          console.log('LOGOUT_PATH: ', LOGOUT_PATH);
+          message.error(`${LoginFailure[res.code]},请重新登录`);
         }
       });
     return response;

@@ -1,4 +1,6 @@
-import React from 'react';
+/** @jsxRuntime classic */
+/** @jsx jsxCustomEvent */
+import jsxCustomEvent from '@micro-zoe/micro-app/polyfill/jsx-custom-event';
 import config, { LOGOUT_PATH } from '../../config';
 import { ROUTE_PATH } from '@/constant';
 

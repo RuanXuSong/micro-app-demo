@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-22 10:58:07
+ * @LastEditTime: 2022-08-26 15:24:17
  */
 import React from 'react';
 import { message, Button, Modal } from 'antd';
@@ -16,6 +16,8 @@ import LinkButtons from '@/components/LinkButtons';
 import EditModal from '../components/EditModal';
 import AuthModal from '../components/AuthModal';
 import useCompanyListService from './useCompanyListService';
+import { disabledDate } from '@/utils/getDisabledDate';
+import moment from 'moment';
 
 export default () => {
   const {
@@ -32,7 +34,7 @@ export default () => {
     handleAuthorize,
   } = useCompanyListService();
 
-  const columns: ProColumns<defs.authorization.ResourceRole>[] = [
+  const columns: ProColumns<defs.platform.TenantInformation>[] = [
     {
       title: '企业编码',
       dataIndex: 'orgCode',
@@ -130,12 +132,23 @@ export default () => {
               {
                 name: '启用',
                 key: 'enable',
-                onClick: async () =>
-                  row.id &&
-                  handleUpdateStatus({
-                    status: ROLE_STATUS_MAP.正常,
-                    id: `${row.id}`,
-                  }),
+                onClick: () => {
+                  if (!row.validBefore) {
+                    message.error('企业有效期缺失，无法启用');
+                    return;
+                  }
+                  // 如果已过期需要企业先编辑有效期
+                  if (disabledDate?.(moment(row.validBefore))) {
+                    message.warning('企业有效期已过期，请先重新编辑');
+                    handleCompanyEdit(row);
+                  } else {
+                    row.id &&
+                      handleUpdateStatus({
+                        status: ROLE_STATUS_MAP.正常,
+                        id: `${row?.id}`,
+                      });
+                  }
+                },
                 hidden: ROLE_STATUS_MAP.禁用 !== +row.status!,
               },
               {

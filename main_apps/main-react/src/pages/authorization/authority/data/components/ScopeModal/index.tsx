@@ -36,7 +36,7 @@ export default ({
 }) => {
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
-  const { dataRuleDTOList = [] } = formData;
+  const { dataRuleDTOList = [], id, businessValue } = formData;
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
   const { orgCode } = userInfo || {};
@@ -102,6 +102,8 @@ export default ({
 
     return API.platform.sysRole.ruleDataSave.fetch({
       ...selectedRule,
+      businessValue,
+      roleId: id,
       clientKey,
       id: selectedId,
       businessValueList: selectedRowKeys ?? [],
