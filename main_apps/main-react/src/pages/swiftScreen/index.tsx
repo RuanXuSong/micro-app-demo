@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import microApp from '@micro-zoe/micro-app';
 import { connect } from 'umi';
-import Loading from '@/components/Loading';
 import config, { LOGOUT_PATH } from '../../config';
 import { ROUTE_PATH } from '@/constant';
 
 function SwiftScreen(props: any) {
-  const [showLoading, setLoading] = useState(true);
-
   function handleData(data: any) {
     const { payload, type } = data || {};
     const { dispatch } = props;
@@ -29,13 +26,10 @@ function SwiftScreen(props: any) {
 
   return (
     <div style={{ height: '100%' }}>
-      <Loading loading={showLoading} />
       <micro-app
         name={ROUTE_PATH.SWIFT_SCREEN}
         baseRoute={`/${ROUTE_PATH.SWIFT_SCREEN}`}
         url={`${config.swiftScreen}`}
-        onMounted={() => setLoading(false)}
-        onAftershow={() => setLoading(false)}
         keep-alive
         data={{ logoutUrl: LOGOUT_PATH }}
       />
