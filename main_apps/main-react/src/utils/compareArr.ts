@@ -1,3 +1,4 @@
+import { isNil } from 'lodash-es';
 import { ReactText } from 'react';
 
 export default (beforeArr: ReactText[], afterArr: ReactText[]) => {
@@ -12,7 +13,7 @@ export default (beforeArr: ReactText[], afterArr: ReactText[]) => {
   }
   // 遍历第二个数组，查看其元素是否在 originObj 中
   for (let j = 0; j < afterArr.length; j++) {
-    if (!originObj[afterArr[j]]) {
+    if (isNil(originObj[afterArr[j]])) {
       resObj.add.push(afterArr[j]);
     } else {
       delete originObj[afterArr[j]];
