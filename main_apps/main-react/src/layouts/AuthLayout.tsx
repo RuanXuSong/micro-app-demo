@@ -97,7 +97,6 @@ const AuthLayout = (props: any) => {
     const auth = getMatchMenu(location.pathname || '/', menuDataRef.current).pop() || {
       authority: undefined,
     };
-    console.log('auth: ', auth);
     return auth;
   }, [location.pathname]);
 

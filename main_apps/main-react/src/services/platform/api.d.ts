@@ -102,6 +102,9 @@ declare namespace defs {
       /** originRuleInterface */
       originRuleInterface?: string;
 
+      /** roleId */
+      roleId?: number;
+
       /** ruleDataList */
       ruleDataList?: Array<object>;
 
@@ -223,6 +226,9 @@ declare namespace defs {
     }
 
     export class RoleBindUserDTO {
+      /** clientKey */
+      clientKey?: string;
+
       /** roleId */
       roleId?: number;
 
@@ -893,25 +899,6 @@ declare namespace API {
       }
 
       /**
-       * 获取数据权限范围
-       * /api/role/data/rule
-       */
-      export namespace listRule {
-        export class Params {
-          /** businessValue */
-          businessValue?: string;
-          /** clientKey */
-          clientKey?: string;
-        }
-
-        export type Response = Array<defs.platform.DataRuleDTO>;
-
-        export const init: Response;
-
-        export function fetch(params?: Params): Promise<Response>;
-      }
-
-      /**
        * roleDataSave
        * /api/role/data/save
        */
@@ -1004,12 +991,7 @@ declare namespace API {
        * /api/role/rule/save
        */
       export namespace ruleDataSave {
-        export class Params {
-          /** businessValue */
-          businessValue?: string;
-          /** roleId */
-          roleId?: number;
-        }
+        export class Params {}
 
         export type Response = number;
 
@@ -1017,7 +999,6 @@ declare namespace API {
 
         export function fetch(
           bodyParams: defs.platform.DataRuleDTO,
-          params?: Params,
         ): Promise<Response>;
       }
     }

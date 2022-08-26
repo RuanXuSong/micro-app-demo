@@ -7457,63 +7457,6 @@
             ]
           },
           {
-            "description": "获取数据权限范围",
-            "name": "listRule",
-            "method": "get",
-            "path": "/api/role/data/rule",
-            "response": {
-              "typeArgs": [
-                {
-                  "typeArgs": [],
-                  "typeName": "DataRuleDTO",
-                  "isDefsType": true,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              ],
-              "typeName": "Array",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "parameters": [
-              {
-                "in": "query",
-                "description": "businessValue",
-                "name": "businessValue",
-                "required": false,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "string",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "in": "query",
-                "description": "clientKey",
-                "name": "clientKey",
-                "required": false,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "string",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              }
-            ]
-          },
-          {
             "consumes": [
               "application/json"
             ],
@@ -7761,21 +7704,6 @@
             },
             "parameters": [
               {
-                "in": "query",
-                "description": "businessValue",
-                "name": "businessValue",
-                "required": false,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "string",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
                 "in": "body",
                 "description": "dataRuleDTO",
                 "name": "dataRuleDTO",
@@ -7784,21 +7712,6 @@
                   "typeArgs": [],
                   "typeName": "DataRuleDTO",
                   "isDefsType": true,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "in": "query",
-                "description": "roleId",
-                "name": "roleId",
-                "required": false,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "number",
-                  "isDefsType": false,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
                   "enum": [],
@@ -8643,6 +8556,19 @@
           },
           {
             "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "roleId",
+            "required": false
+          },
+          {
+            "dataType": {
               "typeArgs": [
                 {
                   "typeArgs": [],
@@ -9267,6 +9193,19 @@
       {
         "name": "RoleBindUserDTO",
         "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "clientKey",
+            "required": false
+          },
           {
             "dataType": {
               "typeArgs": [],

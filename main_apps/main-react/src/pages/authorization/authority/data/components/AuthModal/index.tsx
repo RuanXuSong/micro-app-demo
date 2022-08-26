@@ -9,6 +9,7 @@ import styles from './index.module.less';
 import { useImmer } from 'use-immer';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { useModel } from 'umi';
+import { removeEmpty } from '@/utils/json';
 
 /**
  * 初始化分页数据
@@ -33,12 +34,14 @@ export default ({
   formData,
   reload,
   orgId,
+  clientKey,
 }: {
   visible: boolean;
   toggleVisible: () => void;
   formData: Store;
   reload?: () => void;
   orgId?: string;
+  clientKey: string;
 }) => {
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
@@ -94,10 +97,13 @@ export default ({
   const submit = () => {
     setTip('数据保存中，请稍候...');
 
-    return API.platform.sysRole.bindUserByRole.fetch({
-      roleId: id,
-      userIdList: checkedIds.map((item) => +item),
-    });
+    return API.platform.sysRole.bindUserByRole.fetch(
+      removeEmpty({
+        roleId: id,
+        userIdList: checkedIds.map((item) => +item),
+        clientKey,
+      }),
+    );
   };
 
   const { run: handleFinish, loading: submitting } = useRequest(submit, {

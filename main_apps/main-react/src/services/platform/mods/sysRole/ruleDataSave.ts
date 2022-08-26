@@ -9,14 +9,13 @@ const backEndUrl = serverConfig()['platform'];
 
 export const init = undefined;
 
-export async function fetch(data = {}, params = {}) {
+export async function fetch(data = {}) {
   const request = await initRequest();
   const result = await request.post(backEndUrl + '/api/role/rule/save', {
     headers: {
       'Content-Type': 'application/json',
     },
     data,
-    params,
   });
   if (result) {
     if (!result.success) {

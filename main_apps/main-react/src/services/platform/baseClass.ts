@@ -89,6 +89,9 @@ class DataRuleDTO {
   /** originRuleInterface */
   originRuleInterface = '';
 
+  /** roleId */
+  roleId = undefined;
+
   /** ruleDataList */
   ruleDataList = [];
 
@@ -210,6 +213,9 @@ class RightsManagementRoleDtoList {
 }
 
 class RoleBindUserDTO {
+  /** clientKey */
+  clientKey = '';
+
   /** roleId */
   roleId = undefined;
 

@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-26 15:42:09
+ * @LastEditTime: 2022-08-26 16:48:24
  */
 import React, { useEffect } from 'react';
 import { message, Button, Row, Col, Select } from 'antd';
@@ -199,6 +199,7 @@ export default () => {
         formData={authModalConfig.formData}
         toggleVisible={() => handleModalHide('auth')}
         reload={reload}
+        clientKey={clientKey}
         orgId={companyMap?.find((item) => item.orgCode === businessValue)?.id}
       />
       <ScopeModal
