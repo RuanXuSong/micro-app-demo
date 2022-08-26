@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-26 15:24:17
+ * @LastEditTime: 2022-08-26 15:40:08
  */
 import React from 'react';
 import { message, Button, Modal } from 'antd';
@@ -21,6 +21,7 @@ import moment from 'moment';
 
 export default () => {
   const {
+    loading,
     actionRef,
     reload,
     editModalConfig,
@@ -174,6 +175,7 @@ export default () => {
   return (
     <>
       <ProTable
+        loading={loading}
         style={{ padding: '18px 22px' }}
         actionRef={actionRef}
         request={fetchList as any}

@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-19 17:21:00
+ * @LastEditTime: 2022-08-26 15:44:19
  */
 import React from 'react';
 import { message, Button, Modal, Select } from 'antd';
@@ -22,6 +22,7 @@ const UserList = () => {
   const { showCompanySelect } = useCompanySelect('cloud_user_list_company');
   const { companyIdMapOptions } = useModel('company');
   const {
+    loading,
     actionRef,
     reload,
     editModalConfig,
@@ -166,6 +167,7 @@ const UserList = () => {
   return (
     <>
       <ProTable
+        loading={loading}
         style={{ padding: '18px 22px' }}
         actionRef={actionRef}
         request={fetchList as any}

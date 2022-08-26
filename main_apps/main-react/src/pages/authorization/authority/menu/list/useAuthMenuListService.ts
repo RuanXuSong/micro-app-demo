@@ -34,25 +34,31 @@ export default () => {
   /**
    * 启用/禁用
    */
-  const { run: handleDisable } = useRequest(API.authorization.role.update.fetch, {
-    manual: true,
-    onSuccess: () => {
-      message.success('操作成功');
-      reload?.();
+  const { run: handleDisable, loading: updateLoading } = useRequest(
+    API.authorization.role.update.fetch,
+    {
+      manual: true,
+      onSuccess: () => {
+        message.success('操作成功');
+        reload?.();
+      },
     },
-  });
+  );
 
   /**
    * 角色删除
    * @param id
    */
-  const { run: handleDelete } = useRequest(API.authorization.resourceRole.resourceDelete.fetch, {
-    manual: true,
-    onSuccess: () => {
-      message.success('删除成功');
-      reload?.();
+  const { run: handleDelete, loading: deleteLoading } = useRequest(
+    API.authorization.resourceRole.resourceDelete.fetch,
+    {
+      manual: true,
+      onSuccess: () => {
+        message.success('删除成功');
+        reload?.();
+      },
     },
-  });
+  );
 
   useEffect(() => {
     reload?.();
@@ -119,7 +125,10 @@ export default () => {
     });
   };
 
+  const loading = updateLoading || deleteLoading;
+
   return {
+    loading,
     orgCode,
     setOrgCode,
     actionRef,

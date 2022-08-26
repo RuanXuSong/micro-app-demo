@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-19 16:55:21
+ * @LastEditTime: 2022-08-26 15:43:05
  */
 import React from 'react';
 import { message, Button, Select } from 'antd';
@@ -22,6 +22,7 @@ export default () => {
   const { companyMapOptions } = useModel('company');
   const { showCompanySelect } = useCompanySelect('cloud_authority_menu_company');
   const {
+    loading,
     orgCode,
     setOrgCode,
     actionRef,
@@ -123,6 +124,7 @@ export default () => {
   return (
     <>
       <ProTable
+        loading={loading}
         style={{ padding: '18px 22px' }}
         actionRef={actionRef}
         request={fetchList}

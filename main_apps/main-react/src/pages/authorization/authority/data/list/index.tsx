@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-24 15:42:59
+ * @LastEditTime: 2022-08-26 15:42:09
  */
 import React, { useEffect } from 'react';
 import { message, Button, Row, Col, Select } from 'antd';
@@ -22,6 +22,7 @@ import useCompanySelect from '@/hooks/useCompanySelect';
 
 export default () => {
   const {
+    loading,
     actionRef,
     reload,
     clientKey,
@@ -158,6 +159,7 @@ export default () => {
         </Row>
       </div>
       <ProTable
+        loading={loading}
         style={{ padding: '18px 22px' }}
         actionRef={actionRef}
         request={fetchList}
