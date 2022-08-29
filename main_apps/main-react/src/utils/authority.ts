@@ -23,7 +23,7 @@ export function getAuthority(key: 'cloud' | 'children' = 'cloud', str?: string) 
 export function setAuthority(authority: string[], key: 'cloud' | 'children' = 'cloud') {
   const cloudAuthority = typeof authority === 'string' ? [authority] : authority;
   const originAuthority = JSON.parse(localStorage.getItem('cloud-authority') || '{}');
-  originAuthority[key] = cloudAuthority;
+  originAuthority[key] = cloudAuthority.filter((item) => item !== '/cloud');
   localStorage.setItem('cloud-authority', JSON.stringify(originAuthority)); // auto reload
 
   reloadAuthorized();

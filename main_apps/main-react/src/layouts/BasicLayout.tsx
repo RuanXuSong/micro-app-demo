@@ -76,6 +76,13 @@ const BasicLayout = (props: any) => {
     );
   };
 
+  const checkIncludeAuth = (pathname: string) => {
+    for (let i = 0; i < authList.length; i++) {
+      if (pathname.startsWith(authList[i])) return true;
+    }
+    return false;
+  };
+
   return (
     <ProLayout
       className={headerCollapsed ? 'collapsed-basic-layout' : 'basic-layout'}
@@ -116,7 +123,7 @@ const BasicLayout = (props: any) => {
         return modifiedData || [];
       }}
     >
-      <Authorized authority={authList.includes(location.pathname)} noMatch={NoMatch}>
+      <Authorized authority={checkIncludeAuth(location.pathname)} noMatch={NoMatch}>
         {children}
       </Authorized>
     </ProLayout>

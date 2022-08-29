@@ -97,6 +97,13 @@ const AuthLayout = (props: any) => {
     ) : null;
   };
 
+  const checkIncludeAuth = (pathname: string) => {
+    for (let i = 0; i < authList.length; i++) {
+      if (pathname.startsWith(authList[i])) return true;
+    }
+    return false;
+  };
+
   return (
     <ProLayout
       logo={userInfo?.orgLogo ?? logo}
@@ -135,7 +142,7 @@ const AuthLayout = (props: any) => {
         return menuData || [];
       }}
     >
-      <Authorized authority={authList.includes(location.pathname)} noMatch={NoMatch}>
+      <Authorized authority={checkIncludeAuth(location.pathname)} noMatch={NoMatch}>
         {children}
       </Authorized>
     </ProLayout>
