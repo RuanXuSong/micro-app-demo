@@ -13,6 +13,7 @@ import * as save from './save';
 import * as deleteRule from './deleteRule';
 import * as detail from './detail';
 import * as listRule from './listRule';
+import * as listByUserId from './listByUserId';
 import * as saveRule from './saveRule';
 
 export {
@@ -28,5 +29,6 @@ export {
   deleteRule,
   detail,
   listRule,
+  listByUserId,
   saveRule,
 };

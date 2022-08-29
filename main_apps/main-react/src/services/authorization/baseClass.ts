@@ -160,6 +160,9 @@ class DataRoleVO {
 }
 
 class DataRuleDTO {
+  /** businessValue */
+  businessValue = '';
+
   /** businessValueList */
   businessValueList = [];
 

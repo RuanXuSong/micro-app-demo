@@ -89,8 +89,7 @@ const BasicLayout = (props: any) => {
       logo={userInfo?.orgLogo ?? logo}
       {...props}
       {...settings}
-      // TODO:
-      // title={userInfo?.orgCode}
+      title={userInfo?.orgName ?? '雷数云平台'}
       onCollapse={handleMenuCollapse}
       onMenuHeaderClick={() => history.push('/')}
       menuItemRender={(menuItemProps, defaultDom) => {

@@ -109,8 +109,7 @@ const AuthLayout = (props: any) => {
       logo={userInfo?.orgLogo ?? logo}
       {...props}
       {...settings}
-      // TODO:
-      // title={userInfo?.orgCode}
+      title={userInfo?.orgName ?? '雷数云平台'}
       className="auth-layout"
       onCollapse={handleMenuCollapse}
       onMenuHeaderClick={() => history.push('/')}
