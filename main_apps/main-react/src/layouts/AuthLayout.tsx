@@ -1,10 +1,10 @@
 import ProLayout, { BasicLayoutProps, MenuDataItem } from '@ant-design/pro-layout';
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link, connect, history, useModel } from 'umi';
 import Authorized from '@/utils/Authorized';
-import { getMatchMenu } from '@umijs/route-utils';
 import logo from '../assets/logo.svg';
 import microApp from '@micro-zoe/micro-app';
+import { getAuthority } from '@/utils/authority';
 import styles from './index.module.less';
 import classNames from 'classnames';
 import { isEmpty } from 'lodash';
@@ -16,15 +16,19 @@ import RightContent from '@/components/GlobalHeader/RightContent';
 const AuthLayout = (props: any) => {
   const { initialState } = useModel('@@initialState');
   const { menus = [], userInfo } = initialState || {};
+  const authList = getAuthority();
   const menuDataRender: BasicLayoutProps['menuDataRender'] = (menuList) => {
-    return menuList.map((item) => {
-      if (item.hidden) return null;
-      const localItem = {
-        ...item,
-        children: item.children ? menuDataRender!(item.children) : undefined,
-      };
-      return Authorized.check(menus, localItem);
-    });
+    const menuData = menuList
+      .map((item) => {
+        if (item.hidden) return null;
+        const localItem = {
+          ...item,
+          children: item.children ? menuDataRender!(item.children) : undefined,
+        };
+        return Authorized.check(menus, localItem);
+      })
+      .filter((item) => !!item);
+    return menuData;
   };
   const {
     dispatch,
@@ -93,13 +97,6 @@ const AuthLayout = (props: any) => {
     ) : null;
   };
 
-  const authorized = useMemo(() => {
-    const auth = getMatchMenu(location.pathname || '/', menuDataRef.current).pop() || {
-      authority: undefined,
-    };
-    return auth;
-  }, [location.pathname]);
-
   return (
     <ProLayout
       logo={userInfo?.orgLogo ?? logo}
@@ -138,7 +135,7 @@ const AuthLayout = (props: any) => {
         return menuData || [];
       }}
     >
-      <Authorized authority={authorized.authority} noMatch={NoMatch}>
+      <Authorized authority={authList.includes(location.pathname)} noMatch={NoMatch}>
         {children}
       </Authorized>
     </ProLayout>

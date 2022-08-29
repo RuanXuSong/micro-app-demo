@@ -4,7 +4,7 @@
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:18
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-24 17:46:14
+ * @LastEditTime: 2022-08-29 12:46:43
  */
 import { MenuDataItem } from '@ant-design/pro-layout';
 import { message } from 'antd';
@@ -13,6 +13,7 @@ import arrayUtils, { deepFlatten } from '@/utils/array';
 import { PrivilegeResource } from './interfaces/common';
 import { LOGIN_CONFIG } from './constant';
 import convertResourceToMenu from './utils/convertResourceToMenu';
+import { setAuthority } from './utils/authority';
 
 /** 初始化数据 */
 export async function getInitialState() {
@@ -39,6 +40,8 @@ export async function getInitialState() {
       flatRoutes.forEach((route) => {
         route.privilegeList && privileges.push(...route.privilegeList);
       });
+      const authPathList = flatRoutes.map((item) => item.apiUrl);
+      setAuthority(authPathList);
       menus = convertResourceToMenu(routes);
       /** 没有菜单权限时候应该调整到登录页面 */
       if (menus.length === 0) {

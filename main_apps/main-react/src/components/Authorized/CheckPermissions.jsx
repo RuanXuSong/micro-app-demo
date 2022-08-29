@@ -2,6 +2,7 @@ import React from 'react';
 import { CURRENT } from './renderAuthorize'; // eslint-disable-next-line import/no-cycle
 
 import PromiseRender from './PromiseRender';
+import NoMatch from '../NoMatch';
 
 /**
  * 通用权限检查方法 Common check permissions method
@@ -11,12 +12,12 @@ import PromiseRender from './PromiseRender';
  * @param { 未通过的组件 | no pass components } Exception
  */
 const checkPermissions = (authMenu, currentMenu, Exception) => {
-  // 没有判定权限.默认查看所有
+  // 没有判定权限,返回 403 页面
   if (!authMenu) {
-    return currentMenu;
+    return NoMatch;
   }
 
-  if (currentMenu.key === '/cloud') {
+  if (authMenu === true || currentMenu.key === '/cloud') {
     return currentMenu;
   }
   // 数组处理

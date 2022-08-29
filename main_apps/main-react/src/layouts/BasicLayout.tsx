@@ -1,20 +1,21 @@
 import ProLayout, { MenuDataItem } from '@ant-design/pro-layout';
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link, connect, history, useModel } from 'umi';
 import Authorized from '@/utils/Authorized';
 import NoMatch from '@/components/NoMatch';
-import { getMatchMenu } from '@umijs/route-utils';
 import logo from '@/assets/logo.svg';
 import styles from './index.module.less';
 import classNames from 'classnames';
 import { isEmpty } from 'lodash';
 import { BaseMenuProps } from '@ant-design/pro-layout/lib/components/SiderMenu/BaseMenu';
 import RightContent from '@/components/GlobalHeader/RightContent';
+import { getAuthority } from '@/utils/authority';
 
 const BasicLayout = (props: any) => {
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
   const { resourceList } = useModel('resourceData');
+  const authList = getAuthority('children');
 
   const menuDataRender = (menuList: any) =>
     menuList.map((item: any) => {
@@ -75,13 +76,6 @@ const BasicLayout = (props: any) => {
     );
   };
 
-  const authorized = useMemo(
-    () =>
-      getMatchMenu(location.pathname || '/', menuDataRef.current).pop() || {
-        authority: undefined,
-      },
-    [location.pathname],
-  );
   return (
     <ProLayout
       className={headerCollapsed ? 'collapsed-basic-layout' : 'basic-layout'}
@@ -122,7 +116,7 @@ const BasicLayout = (props: any) => {
         return modifiedData || [];
       }}
     >
-      <Authorized authority={authorized.authority} noMatch={NoMatch}>
+      <Authorized authority={authList.includes(location.pathname)} noMatch={NoMatch}>
         {children}
       </Authorized>
     </ProLayout>

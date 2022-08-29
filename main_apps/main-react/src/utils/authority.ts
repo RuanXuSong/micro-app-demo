@@ -1,6 +1,6 @@
 import { reloadAuthorized } from './Authorized'; // use localStorage to store the authority info, which might be sent from server in actual project.
 
-export function getAuthority(str?: string) {
+export function getAuthority(key: 'cloud' | 'children' = 'cloud', str?: string) {
   const authorityString =
     typeof str === 'undefined' && localStorage ? localStorage.getItem('cloud-authority') : str; // authorityString could be admin, "admin", ["admin"]
 
@@ -14,20 +14,17 @@ export function getAuthority(str?: string) {
     authority = authorityString;
   }
 
-  if (typeof authority === 'string') {
-    return [authority];
-  } // preview.pro.ant.design only do not use in your production.
-  // preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
-
   if (!authority) {
-    return ['admin'];
+    return [];
   }
 
-  return authority;
+  return Array.isArray(authority) ? authority : authority[key];
 }
-export function setAuthority(authority: string[]) {
-  const proAuthority = typeof authority === 'string' ? [authority] : authority;
-  localStorage.setItem('cloud-authority', JSON.stringify(proAuthority)); // auto reload
+export function setAuthority(authority: string[], key: 'cloud' | 'children' = 'cloud') {
+  const cloudAuthority = typeof authority === 'string' ? [authority] : authority;
+  const originAuthority = JSON.parse(localStorage.getItem('cloud-authority') || '{}');
+  originAuthority[key] = cloudAuthority;
+  localStorage.setItem('cloud-authority', JSON.stringify(originAuthority)); // auto reload
 
   reloadAuthorized();
 }
