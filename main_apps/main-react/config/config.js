@@ -41,4 +41,7 @@ export default defineConfig({
   esbuild: {},
   outputPath: 'build',
   publicPath: '/',
+  chainWebpack(config) {
+    config.module.rule('otf').test(/.otf$/).use('file-loader').loader('file-loader');
+  },
 });
