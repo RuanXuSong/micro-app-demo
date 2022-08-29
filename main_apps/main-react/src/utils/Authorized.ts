@@ -11,6 +11,6 @@ const reloadAuthorized = () => {
 };
 /** Hard code block need it。 */
 
-window.reloadAuthorized = reloadAuthorized;
+(window as any).reloadAuthorized = reloadAuthorized;
 export { reloadAuthorized };
 export default Authorized;

@@ -32,10 +32,7 @@ export default {
    * @returns {string} 最后一个裁剪字符后面的字符串
    */
   getLastSubstring(sourceStr = '', splitStr = '') {
-    return sourceStr.substring(
-      sourceStr.lastIndexOf(splitStr) + splitStr.length,
-      sourceStr.length,
-    );
+    return sourceStr.substring(sourceStr.lastIndexOf(splitStr) + splitStr.length, sourceStr.length);
   },
 
   /**
@@ -84,7 +81,7 @@ export default {
         canvas = null;
         resolve(dataURL);
       };
-      img.onerror = error => {
+      img.onerror = (error) => {
         reject(error);
       };
       img.src = url;
@@ -126,7 +123,7 @@ export const transformSecretName = (name?: string) => {
  */
 export const getPhoneGroupText = (val?: string) => {
   const arr = val?.split('-') ?? [];
-  if (arr.filter(str => !!str).length === 2) {
+  if (arr.filter((str) => !!str).length === 2) {
     return val;
   }
   return arr.join('');
@@ -139,10 +136,7 @@ export const getPhoneGroupText = (val?: string) => {
  * PayStatus===1 交易创建，等待买家付款  PayStatus===4 未付款交易超时关闭，或支付完成后全额退款
  */
 export const isManualQuery = (payType: number, payStatus: number) => {
-  if (
-    payType === payTypeOne &&
-    (payStatus === payStatusOne || payStatus === payStatusFour)
-  ) {
+  if (payType === payTypeOne && (payStatus === payStatusOne || payStatus === payStatusFour)) {
     return true;
   }
   return false;

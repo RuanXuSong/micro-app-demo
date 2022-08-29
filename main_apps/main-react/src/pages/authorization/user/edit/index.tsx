@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
-import { Modal, Form, Spin, Input, Select, message } from 'antd';
+import { Modal, Form, Spin, Input, Select, message, notification } from 'antd';
 import { isEmpty, isNil } from 'lodash-es';
 import 'antd/lib/form';
 import { Store } from 'antd/es/form/interface';
@@ -79,6 +79,36 @@ export default ({
     form.resetFields();
   };
 
+  const handleSuccess = () => {
+    message.success('保存成功');
+    form.resetFields();
+    toggleVisible();
+    reload?.();
+  };
+
+  /** 新增用户 */
+  const { run: handleUserAdd, loading: addLoading } = useRequest(API.platform.sysUser.save.fetch, {
+    onSuccess: (secretCode) => {
+      handleSuccess();
+      secretCode &&
+        notification.success({
+          message: `用户新增成功`,
+          description: `密码为: ${secretCode}`,
+          duration: null,
+        });
+    },
+    manual: true,
+  });
+
+  /** 编辑用户 */
+  const { run: handleUserEdit, loading: editLoading } = useRequest(
+    API.platform.sysUser.update.fetch,
+    {
+      onSuccess: () => handleSuccess(),
+      manual: true,
+    },
+  );
+
   const submit = (values: Store) => {
     setTip('数据保存中，请稍候...');
 
@@ -93,19 +123,13 @@ export default ({
     }
 
     if (id) {
-      return API.platform.sysUser.update.fetch(payload);
+      return handleUserEdit(payload);
     }
-    return API.platform.sysUser.save.fetch(payload);
+    return handleUserAdd(payload);
   };
 
   const { run: handleFinish, loading: submitting } = useRequest(submit, {
     manual: true,
-    onSuccess: () => {
-      message.success('保存成功');
-      form.resetFields();
-      toggleVisible();
-      reload?.();
-    },
   });
 
   return (
@@ -123,7 +147,7 @@ export default ({
       onCancel={handleCancel}
       confirmLoading={submitting}
     >
-      <Spin spinning={loading && submitting} tip={tip}>
+      <Spin spinning={(loading && submitting) || editLoading || addLoading} tip={tip}>
         <Form form={form} onFinish={handleFinish} {...formLayout} className={styles.formWrap}>
           <Form.Item
             label="登录账号"
