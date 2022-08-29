@@ -10,6 +10,13 @@ microApp.start({
   // disableScopecss: true,
   // disableSandbox: true,
   // macro: true,
+  excludeAssetFilter(assetUrl) {
+    console.log('assetUrl: ', assetUrl);
+    if (assetUrl.indexOf('otf')) {
+      return true; // 返回true则micro-app不会劫持处理当前文件
+    }
+    return false;
+  },
   lifeCycles: {
     created() {
       console.log('created 全局监听');
@@ -83,10 +90,7 @@ microApp.start({
    * @returns Promise<string>
    */
   fetch(url, options, appName) {
-    if (url === 'http://localhost:3001/error.js') {
-      return Promise.resolve('');
-    }
-
+    console.log('url: ', url);
     let config = null;
     if (process.env.NODE_ENV === 'production') {
       config = {
