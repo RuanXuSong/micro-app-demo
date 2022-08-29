@@ -167,7 +167,7 @@ export default ({
             name="orgCode"
             tooltip={{
               icon: <ExclamationCircleOutlined />,
-              title: '企业编码将作为企业下所有账号后缀\n需要输入20位以内字母，区分大小写',
+              title: '企业编码将作为企业下所有账号后缀\n需要输入20位以内小写英文字母',
             }}
             rules={[
               {
@@ -209,7 +209,7 @@ export default ({
                 listType: 'picture-card',
               }}
               required
-              requiredMessage="请上传"
+              requiredMessage="请上传企业 logo"
             >
               <PlusOutlined />
             </UploadFormItem>

@@ -49,9 +49,7 @@ class AvatarDropdown extends React.Component {
       <Menu
         className={styles.menu}
         selectedKeys={[]}
-        onClick={() => {
-          window.location.href = LOGOUT_PATH;
-        }}
+        onClick={() => (window.location.href = LOGOUT_PATH)}
       >
         <Menu.Item key="logout">
           <LogoutOutlined />

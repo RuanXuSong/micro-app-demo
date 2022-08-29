@@ -1,3 +1,4 @@
+import { useModel } from 'umi';
 import { removeEmpty } from './../../../../utils/json';
 import { useRef, useState, useEffect } from 'react';
 import { useImmer } from 'use-immer';
@@ -17,8 +18,16 @@ export default () => {
     formData: {},
     loading: false,
   });
+  const { initialState } = useModel('@@initialState');
+  const { userInfo } = initialState || {};
   const [orgId, setOrgId] = useState<string>('');
   const { reload } = actionRef.current || {};
+
+  useEffect(() => {
+    if (userInfo?.orgId) {
+      setOrgId(userInfo?.orgId);
+    }
+  }, [userInfo]);
 
   /**
    * 启用/禁用

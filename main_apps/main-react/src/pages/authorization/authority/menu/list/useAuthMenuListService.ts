@@ -7,8 +7,11 @@ import { initialPagination } from '@/constant';
 import { removeEmpty } from '@/utils/json';
 import { getResourceIds } from '@/utils/getResourceIds';
 import useResourceData from '@/hooks/useResourceData';
+import { useModel } from 'umi';
 
 export default () => {
+  const { initialState } = useModel('@@initialState');
+  const { userInfo } = initialState || {};
   const actionRef = useRef<ActionType>();
   const [orgCode, setOrgCode] = useState<string>();
   const [editModalConfig, setEditModalConfig] = useImmer<{
@@ -59,6 +62,12 @@ export default () => {
       },
     },
   );
+
+  useEffect(() => {
+    if (userInfo?.orgCode) {
+      setOrgCode(userInfo?.orgCode);
+    }
+  }, [userInfo]);
 
   useEffect(() => {
     reload?.();

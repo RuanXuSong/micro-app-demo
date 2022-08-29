@@ -172,7 +172,7 @@ export default ({
             />
           </Form.Item>
           <Form.Item
-            label="用户昵称"
+            label="用户名称"
             name="name"
             rules={[
               {

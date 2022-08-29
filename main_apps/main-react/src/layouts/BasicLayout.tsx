@@ -89,6 +89,8 @@ const BasicLayout = (props: any) => {
       logo={userInfo?.orgLogo ?? logo}
       {...props}
       {...settings}
+      // TODO:
+      // title={userInfo?.orgCode}
       onCollapse={handleMenuCollapse}
       onMenuHeaderClick={() => history.push('/')}
       menuItemRender={(menuItemProps, defaultDom) => {

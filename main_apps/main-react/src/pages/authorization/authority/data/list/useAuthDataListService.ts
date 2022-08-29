@@ -1,5 +1,5 @@
 import { useModel } from 'umi';
-import { useRef, useState, useMemo } from 'react';
+import { useRef, useState, useMemo, useEffect } from 'react';
 import { useImmer } from 'use-immer';
 import { message } from 'antd';
 import { useRequest } from 'ahooks';
@@ -37,6 +37,12 @@ export default () => {
   });
 
   const { reload } = actionRef.current || {};
+
+  useEffect(() => {
+    if (userInfo?.orgCode) {
+      setBusinessValue(userInfo?.orgCode);
+    }
+  }, [userInfo]);
 
   const { data: scopeMap } = useRequest<defs.authorization.DataRuleDTO[]>(
     () =>

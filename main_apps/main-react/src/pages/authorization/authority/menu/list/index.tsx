@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-26 15:43:05
+ * @LastEditTime: 2022-08-29 15:46:25
  */
 import React from 'react';
 import { message, Button, Select } from 'antd';
@@ -50,6 +50,7 @@ export default () => {
       hideInTable: true,
       renderFormItem: () => (
         <Select
+          value={orgCode}
           allowClear
           options={companyMapOptions}
           onChange={(value) => {

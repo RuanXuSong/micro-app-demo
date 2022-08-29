@@ -6,7 +6,7 @@ import { Store } from 'antd/es/form/interface';
 import { useRequest } from 'ahooks';
 import useSpinning from '@/hooks/useSpinning';
 import { useModel } from 'umi';
-import { LOGIN_CONFIG, RESOURCE_TYPE_ENUM, SMART_DATA_CODE } from '@/constant';
+import { LOGIN_CONFIG, SMART_DATA_CODE } from '@/constant';
 import styles from './index.module.less';
 import { getResourceIds } from '@/utils/getResourceIds';
 import { removeEmpty } from '@/utils/json';
@@ -114,21 +114,6 @@ const EditModal = ({
       align: 'left',
       copyable: false,
       valueType: 'text',
-    },
-    {
-      title: '资源标识',
-      dataIndex: 'resourceKey',
-      align: 'left',
-      copyable: false,
-      valueType: 'text',
-    },
-    {
-      title: '资源类型',
-      dataIndex: 'type',
-      align: 'left',
-      copyable: false,
-      valueType: 'text',
-      render: (type) => (type === RESOURCE_TYPE_ENUM.路由级资源 ? '路由级资源' : '页面级资源'),
     },
   ];
 

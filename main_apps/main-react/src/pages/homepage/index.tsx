@@ -123,8 +123,8 @@ const Homepage = () => {
         <div className={styles.logo}>
           <img src={require('@/assets/logo.png')} />
         </div>
-        <div className={styles.title}>雷数云平台</div>
-        <div className={styles.subTitle}>助力企业搭建高效平台</div>
+        <div className={styles.title}>雷数工业互联网</div>
+        <div className={styles.subTitle}>敏捷开发平台</div>
       </div>
       <div className={styles.contentWrap}>
         {checkPermissions(resourceList, appsList).map(renderSection)}

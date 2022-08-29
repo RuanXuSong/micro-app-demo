@@ -57,7 +57,7 @@ const UserList = () => {
       hideInSearch: false,
     },
     {
-      title: '用户昵称',
+      title: '用户名称',
       dataIndex: 'name',
       align: 'left',
       copyable: false,

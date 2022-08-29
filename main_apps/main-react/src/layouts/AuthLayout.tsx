@@ -109,6 +109,8 @@ const AuthLayout = (props: any) => {
       logo={userInfo?.orgLogo ?? logo}
       {...props}
       {...settings}
+      // TODO:
+      // title={userInfo?.orgCode}
       className="auth-layout"
       onCollapse={handleMenuCollapse}
       onMenuHeaderClick={() => history.push('/')}
