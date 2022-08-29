@@ -48,7 +48,7 @@
     ]
   },
   "dependencies": {
-    "@micro-zoe/micro-app": "latest"
+    "@micro-zoe/micro-app": "^0.8.1"
   },
   "devDependencies": {
     "@babel/core": "7.12.3",
