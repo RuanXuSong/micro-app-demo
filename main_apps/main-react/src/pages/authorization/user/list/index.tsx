@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-26 15:44:19
+ * @LastEditTime: 2022-08-30 15:55:42
  */
 import React from 'react';
 import { message, Button, Modal, Select } from 'antd';
@@ -25,6 +25,7 @@ const UserList = () => {
     loading,
     actionRef,
     reload,
+    disabledAction,
     editModalConfig,
     orgId,
     setOrgId,
@@ -144,7 +145,7 @@ const UserList = () => {
                         id: row.id,
                       }),
                   }),
-                hidden: ROLE_STATUS_MAP.禁用 === +row.status!,
+                hidden: disabledAction || ROLE_STATUS_MAP.禁用 === +row.status!,
               },
               {
                 name: '启用',
@@ -155,7 +156,7 @@ const UserList = () => {
                     status: ROLE_STATUS_MAP.正常,
                     id: row.id,
                   }),
-                hidden: ROLE_STATUS_MAP.禁用 !== +row.status!,
+                hidden: disabledAction || ROLE_STATUS_MAP.禁用 !== +row.status!,
               },
             ]}
           />
@@ -199,6 +200,7 @@ const UserList = () => {
         toggleVisible={handleModalHide}
         reload={reload}
         orgId={orgId}
+        disabledAction={disabledAction}
       />
     </>
   );

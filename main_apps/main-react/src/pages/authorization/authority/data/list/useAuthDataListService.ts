@@ -12,6 +12,8 @@ export default () => {
   const [businessValue, setBusinessValue] = useState<string>('');
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
+  const { orgCode: userOrgCode } = userInfo || {};
+  const disabledAction = businessValue !== userOrgCode;
   const [editModalConfig, setEditModalConfig] = useImmer<{
     visible: boolean;
     formData: any;
@@ -172,6 +174,7 @@ export default () => {
     loading,
     scopeMap,
     actionRef,
+    disabledAction,
     reload,
     clientKey,
     setClientKey,

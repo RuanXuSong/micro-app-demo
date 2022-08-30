@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-29 15:46:25
+ * @LastEditTime: 2022-08-30 16:01:13
  */
 import React from 'react';
 import { message, Button, Select } from 'antd';
@@ -25,6 +25,7 @@ export default () => {
     loading,
     orgCode,
     setOrgCode,
+    disabledAction,
     actionRef,
     reload,
     editModalConfig,
@@ -159,6 +160,7 @@ export default () => {
         resourceList={resourceList}
         resourceTreeData={resourceTreeData}
         orgCode={orgCode}
+        disabledAction={disabledAction}
       />
       <AuthModal
         visible={authModalConfig.visible}
@@ -166,6 +168,7 @@ export default () => {
         toggleVisible={() => handleModalHide('auth')}
         reload={reload}
         orgCode={orgCode}
+        disabledAction={disabledAction}
       />
     </>
   );

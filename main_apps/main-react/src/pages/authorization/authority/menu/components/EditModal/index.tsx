@@ -40,6 +40,7 @@ const EditModal = ({
   resourceList,
   resourceTreeData,
   orgCode,
+  disabledAction,
 }: {
   visible: boolean;
   toggleVisible: () => void;
@@ -49,10 +50,11 @@ const EditModal = ({
   resourceList: any;
   resourceTreeData: any;
   orgCode?: string;
+  disabledAction?: boolean;
 }) => {
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
-  const { id, businessValue } = formData;
+  const { id } = formData;
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
   const { orgCode: userOrgCode } = userInfo || {};
@@ -127,7 +129,7 @@ const EditModal = ({
         title={`${!isNil(id) ? '编辑' : '新建'}角色`}
         okButtonProps={{
           htmlType: 'submit',
-          disabled: businessValue !== userOrgCode,
+          disabled: disabledAction,
         }}
         width={800}
         onOk={() => form.submit()}
@@ -197,7 +199,7 @@ const EditModal = ({
       >
         <Form.Item label="拥有资源" name="modalResourceIds" noStyle>
           <TableItem
-            disabled={businessValue !== userOrgCode}
+            disabled={disabledAction}
             search={false}
             rowKey="id"
             columns={columns}

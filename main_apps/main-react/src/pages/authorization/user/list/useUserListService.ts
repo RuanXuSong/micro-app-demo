@@ -21,6 +21,7 @@ export default () => {
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
   const [orgId, setOrgId] = useState<string>('');
+  const disabledAction = orgId !== userInfo?.orgId;
   const { reload } = actionRef.current || {};
 
   useEffect(() => {
@@ -113,6 +114,7 @@ export default () => {
   return {
     loading,
     actionRef,
+    disabledAction,
     reload,
     editModalConfig,
     orgId,

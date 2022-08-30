@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-30 15:26:41
+ * @LastEditTime: 2022-08-30 16:04:22
  */
 import React, { useEffect } from 'react';
 import { message, Button, Row, Col, Select } from 'antd';
@@ -26,6 +26,7 @@ export default () => {
     actionRef,
     reload,
     clientKey,
+    disabledAction,
     setClientKey,
     businessValue,
     setBusinessValue,
@@ -193,6 +194,7 @@ export default () => {
         clientKey={clientKey}
         scopeMapOptions={scopeMapOptions}
         orgCode={businessValue}
+        disabledAction={disabledAction}
       />
       <AuthModal
         visible={authModalConfig.visible}
@@ -200,7 +202,7 @@ export default () => {
         toggleVisible={() => handleModalHide('auth')}
         reload={reload}
         clientKey={clientKey}
-        orgCode={businessValue}
+        disabledAction={disabledAction}
         orgId={companyMap?.find((item) => item.orgCode === businessValue)?.id}
       />
       <ScopeModal
@@ -209,6 +211,7 @@ export default () => {
         toggleVisible={() => handleModalHide('scope')}
         reload={reload}
         clientKey={clientKey}
+        disabledAction={disabledAction}
         orgCode={businessValue}
       />
     </>

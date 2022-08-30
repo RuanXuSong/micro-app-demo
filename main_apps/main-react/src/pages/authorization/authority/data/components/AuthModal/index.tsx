@@ -35,7 +35,7 @@ export default ({
   reload,
   orgId,
   clientKey,
-  orgCode,
+  disabledAction,
 }: {
   visible: boolean;
   toggleVisible: () => void;
@@ -43,11 +43,11 @@ export default ({
   reload?: () => void;
   orgId?: string;
   clientKey: string;
-  orgCode?: string;
+  disabledAction?: boolean;
 }) => {
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
-  const { orgId: userOrgId, orgCode: userOrgCode } = userInfo || {};
+  const { orgId: userOrgId } = userInfo || {};
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
   const { id } = formData;
@@ -148,7 +148,7 @@ export default ({
       title="用户授权"
       okButtonProps={{
         htmlType: 'submit',
-        disabled: orgCode !== userOrgCode,
+        disabled: disabledAction,
       }}
       width={442}
       onOk={() => form.submit()}

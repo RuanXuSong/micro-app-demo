@@ -31,6 +31,7 @@ export default ({
   loading,
   reload,
   orgId,
+  disabledAction,
 }: {
   visible: boolean;
   toggleVisible: () => void;
@@ -38,6 +39,7 @@ export default ({
   loading: boolean;
   reload?: () => void;
   orgId?: string;
+  disabledAction?: boolean;
 }) => {
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
@@ -141,6 +143,7 @@ export default ({
       title={`${!isNil(id) ? '编辑' : '新增'}用户`}
       okButtonProps={{
         htmlType: 'submit',
+        disabled: disabledAction,
       }}
       width={800}
       onOk={() => form.submit()}

@@ -12,8 +12,10 @@ import { useModel } from 'umi';
 export default () => {
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
+  const { orgCode: userOrgCode } = userInfo || {};
   const actionRef = useRef<ActionType>();
   const [orgCode, setOrgCode] = useState<string>();
+  const disabledAction = orgCode !== userOrgCode;
   const [editModalConfig, setEditModalConfig] = useImmer<{
     visible: boolean;
     formData: any;
@@ -139,6 +141,7 @@ export default () => {
   return {
     loading,
     orgCode,
+    disabledAction,
     setOrgCode,
     actionRef,
     reload,
