@@ -52,7 +52,7 @@ const EditModal = ({
 }) => {
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
-  const { id } = formData;
+  const { id, businessValue } = formData;
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
   const { orgCode: userOrgCode } = userInfo || {};
@@ -127,6 +127,7 @@ const EditModal = ({
         title={`${!isNil(id) ? '编辑' : '新建'}角色`}
         okButtonProps={{
           htmlType: 'submit',
+          disabled: businessValue !== userOrgCode,
         }}
         width={800}
         onOk={() => form.submit()}
@@ -195,7 +196,13 @@ const EditModal = ({
         confirmLoading={submitting}
       >
         <Form.Item label="拥有资源" name="modalResourceIds" noStyle>
-          <TableItem search={false} rowKey="id" columns={columns} dataSource={resourceList} />
+          <TableItem
+            disabled={businessValue !== userOrgCode}
+            search={false}
+            rowKey="id"
+            columns={columns}
+            dataSource={resourceList}
+          />
         </Form.Item>
       </Modal>
     </Form>

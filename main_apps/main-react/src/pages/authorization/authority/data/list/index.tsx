@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-26 16:48:24
+ * @LastEditTime: 2022-08-30 15:26:41
  */
 import React, { useEffect } from 'react';
 import { message, Button, Row, Col, Select } from 'antd';
@@ -200,6 +200,7 @@ export default () => {
         toggleVisible={() => handleModalHide('auth')}
         reload={reload}
         clientKey={clientKey}
+        orgCode={businessValue}
         orgId={companyMap?.find((item) => item.orgCode === businessValue)?.id}
       />
       <ScopeModal
@@ -208,6 +209,7 @@ export default () => {
         toggleVisible={() => handleModalHide('scope')}
         reload={reload}
         clientKey={clientKey}
+        orgCode={businessValue}
       />
     </>
   );

@@ -27,19 +27,21 @@ export default ({
   formData,
   reload,
   clientKey,
+  orgCode,
 }: {
   visible: boolean;
   toggleVisible: () => void;
   formData: Store;
   reload?: () => void;
   clientKey: string;
+  orgCode?: string;
 }) => {
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
   const { dataRuleDTOList = [], id, businessValue } = formData;
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
-  const { orgCode } = userInfo || {};
+  const { orgCode: userOrgCode } = userInfo || {};
   const [selectedId, setSelectedId] = useState<number>();
   const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
   const originKeysRef = useRef<string[]>();
@@ -153,6 +155,7 @@ export default ({
       title="设置范围"
       okButtonProps={{
         htmlType: 'submit',
+        disabled: orgCode !== userOrgCode,
       }}
       width={640}
       onOk={handleFinish}

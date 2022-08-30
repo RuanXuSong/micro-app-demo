@@ -107,6 +107,7 @@ export default ({
       title={`${!isNil(id) ? '编辑' : '新建'}角色`}
       okButtonProps={{
         htmlType: 'submit',
+        disabled: orgCode !== userOrgCode,
       }}
       width={800}
       onOk={() => form.submit()}

@@ -4,19 +4,31 @@ import { TableRowSelection } from 'antd/es/table/interface';
 import compareArr from '@/utils/compareArr';
 import { isEmpty } from 'lodash';
 import { deepFlatten } from '@/utils/array';
+import styles from './index.module.less';
 
 interface TableItemProps extends Omit<ProTableProps<any, any>, 'onChange'> {
   value?: Key[];
   onChange?: (value: Key[]) => void;
+  disabled?: boolean;
 }
 
-export default ({ value = [], onChange, rowKey, dataSource, ...props }: TableItemProps) => {
+export default ({
+  value = [],
+  onChange,
+  disabled,
+  rowKey,
+  dataSource,
+  ...props
+}: TableItemProps) => {
   let prevKeysArrRef = useRef<Key[]>([]);
   let prevRowsArrRef = useRef<any[]>([]);
   const [firstRendered, setFirstRendered] = useState(true);
   const rowSelection: TableRowSelection<defs.platform.ResourceTreeObject> = {
     selectedRowKeys: value,
     onChange: (selectedRowKeys, selectedRows) => {
+      if (disabled) {
+        return;
+      }
       let modifiedSelectedRowKeys = [...selectedRowKeys];
       const { add = [], del = [] } = compareArr(prevKeysArrRef.current, selectedRowKeys);
       const addRows = selectedRows.filter((item) => add.includes(item[rowKey as string]));
@@ -72,7 +84,8 @@ export default ({ value = [], onChange, rowKey, dataSource, ...props }: TableIte
 
   return (
     <ProTable
-      rowSelection={{ ...rowSelection, checkStrictly: true }}
+      className={disabled ? styles.disabled : {}}
+      rowSelection={{ ...rowSelection, checkStrictly: true, selections: false }}
       rowKey={rowKey}
       dataSource={dataSource}
       {...props}

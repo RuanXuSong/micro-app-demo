@@ -147,6 +147,7 @@ export default ({
       title="用户授权"
       okButtonProps={{
         htmlType: 'submit',
+        disabled: orgCode !== userOrgCode,
       }}
       width={442}
       onOk={() => form.submit()}
