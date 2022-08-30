@@ -22,8 +22,6 @@ export default () => {
 
   const checkAuth = (pathname: string, key: 'cloud' | 'children' = 'cloud') => {
     const authList = getAuthority(key);
-    console.log('ready: ', ready);
-    console.log('authList: ', authList);
     if (!ready) return true;
     if (!authList) return false;
     for (let i = 0; i < authList.length; i++) {

@@ -40,13 +40,6 @@ export default () => {
     },
   });
 
-  // useEffect(() => {
-  //   if (!isEmpty(authorityList)) {
-  //     console.log('authorityList: ', authorityList);
-  //     setAuthority(authorityList!);
-  //   }
-  // }, [authorityList]);
-
   return {
     resourceList: getResourceList(resourceList),
     resourceTreeData: convertSourceToTreeData(resourceList),
