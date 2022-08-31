@@ -30,13 +30,14 @@ class AvatarDropdown extends React.Component {
     const { key } = event;
 
     if (key === 'logout') {
-      const { dispatch } = this.props;
+      window.location.href = LOGOUT_PATH;
+      // const { dispatch } = this.props;
 
-      if (dispatch) {
-        dispatch({
-          type: 'login/logout',
-        });
-      }
+      // if (dispatch) {
+      //   dispatch({
+      //     type: 'login/logout',
+      //   });
+      // }
 
       return;
     }
