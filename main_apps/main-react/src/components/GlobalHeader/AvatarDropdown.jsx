@@ -63,7 +63,8 @@ class AvatarDropdown extends React.Component {
     microApp.addGlobalDataListener(this.handleGlobalDataForBaseApp);
 
     const dark = localStorage.getItem("dark");
-    this.setState({ dark: dark=="true" },()=>{
+    
+    this.setState({ dark: dark!="false" },()=>{
       this.changeTheme();
     });
 
