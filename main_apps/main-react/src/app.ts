@@ -4,7 +4,7 @@
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:18
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-30 11:49:15
+ * @LastEditTime: 2022-08-31 10:45:34
  */
 import { MenuDataItem } from '@ant-design/pro-layout';
 import { message } from 'antd';
@@ -41,6 +41,7 @@ export async function getInitialState() {
         route.privilegeList && privileges.push(...route.privilegeList);
       });
       authorityList = flatRoutes.map((item) => item.apiUrl);
+      console.log('authorityList: ', authorityList);
       menus = convertResourceToMenu(routes);
       /** 没有菜单权限时候应该调整到登录页面 */
       if (menus.length === 0) {
