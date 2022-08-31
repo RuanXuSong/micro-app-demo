@@ -77,7 +77,7 @@ export const checkPassword = (_: unknown, value: string, callback: (msg?: string
 };
 
 /**
- * 昵称校验
+ * 名称校验
  * @param firstPassword
  */
 export const checkNickName = (_: unknown, value: string, callback: (msg?: string) => void) => {

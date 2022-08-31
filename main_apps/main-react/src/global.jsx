@@ -83,10 +83,6 @@ microApp.start({
    * @returns Promise<string>
    */
   fetch(url, options, appName) {
-    if (url === 'http://localhost:3001/error.js') {
-      return Promise.resolve('');
-    }
-
     let config = null;
     if (process.env.NODE_ENV === 'production') {
       config = {

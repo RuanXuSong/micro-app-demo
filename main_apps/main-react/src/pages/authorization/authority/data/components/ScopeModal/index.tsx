@@ -11,7 +11,6 @@ import { isEqual } from 'lodash';
 import styles from './index.module.less';
 import { initRequest } from '@/common';
 import { removeEmpty } from '@/utils/json';
-import { useModel } from 'umi';
 
 /**
  * 初始化分页数据
@@ -27,19 +26,20 @@ export default ({
   formData,
   reload,
   clientKey,
+  orgCode,
+  disabledAction,
 }: {
   visible: boolean;
   toggleVisible: () => void;
   formData: Store;
   reload?: () => void;
   clientKey: string;
+  orgCode?: string;
+  disabledAction?: boolean;
 }) => {
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
   const { dataRuleDTOList = [], id, businessValue } = formData;
-  const { initialState } = useModel('@@initialState');
-  const { userInfo } = initialState || {};
-  const { orgCode } = userInfo || {};
   const [selectedId, setSelectedId] = useState<number>();
   const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
   const originKeysRef = useRef<string[]>();
@@ -153,6 +153,7 @@ export default ({
       title="设置范围"
       okButtonProps={{
         htmlType: 'submit',
+        disabled: disabledAction,
       }}
       width={640}
       onOk={handleFinish}

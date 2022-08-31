@@ -173,6 +173,9 @@ declare namespace defs {
     }
 
     export class DataRuleDTO {
+      /** businessValue */
+      businessValue?: string;
+
       /** businessValueList */
       businessValueList?: Array<string>;
 
@@ -1001,6 +1004,27 @@ declare namespace API {
           businessValue?: string;
           /** clientKey */
           clientKey?: string;
+        }
+
+        export type Response = Array<defs.authorization.DataRuleDTO>;
+
+        export const init: Response;
+
+        export function fetch(params?: Params): Promise<Response>;
+      }
+
+      /**
+       * listByUserId
+       * /data/rule/listByUserId
+       */
+      export namespace listByUserId {
+        export class Params {
+          /** businessValue */
+          businessValue?: string;
+          /** clientKey */
+          clientKey?: string;
+          /** userId */
+          userId?: number;
         }
 
         export type Response = Array<defs.authorization.DataRuleDTO>;

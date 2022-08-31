@@ -34,12 +34,14 @@ export default ({
   formData,
   reload,
   orgCode,
+  disabledAction,
 }: {
   visible: boolean;
   toggleVisible: () => void;
   formData: Store;
   reload?: () => void;
   orgCode?: string;
+  disabledAction?: boolean;
 }) => {
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
@@ -147,6 +149,7 @@ export default ({
       title="用户授权"
       okButtonProps={{
         htmlType: 'submit',
+        disabled: disabledAction,
       }}
       width={442}
       onOk={() => form.submit()}

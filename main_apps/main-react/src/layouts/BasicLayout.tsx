@@ -9,13 +9,12 @@ import classNames from 'classnames';
 import { isEmpty } from 'lodash';
 import { BaseMenuProps } from '@ant-design/pro-layout/lib/components/SiderMenu/BaseMenu';
 import RightContent from '@/components/GlobalHeader/RightContent';
-import { getAuthority } from '@/utils/authority';
 
 const BasicLayout = (props: any) => {
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
   const { resourceList } = useModel('resourceData');
-  const authList = getAuthority('children');
+  const { checkAuth } = useModel('authority');
 
   const menuDataRender = (menuList: any) =>
     menuList.map((item: any) => {
@@ -76,19 +75,13 @@ const BasicLayout = (props: any) => {
     );
   };
 
-  const checkIncludeAuth = (pathname: string) => {
-    for (let i = 0; i < authList.length; i++) {
-      if (pathname.startsWith(authList[i])) return true;
-    }
-    return false;
-  };
-
   return (
     <ProLayout
       className={headerCollapsed ? 'collapsed-basic-layout' : 'basic-layout'}
       logo={userInfo?.orgLogo ?? logo}
       {...props}
       {...settings}
+      title={userInfo?.orgName ?? '雷数云平台'}
       onCollapse={handleMenuCollapse}
       onMenuHeaderClick={() => history.push('/')}
       menuItemRender={(menuItemProps, defaultDom) => {
@@ -123,7 +116,7 @@ const BasicLayout = (props: any) => {
         return modifiedData || [];
       }}
     >
-      <Authorized authority={checkIncludeAuth(location.pathname)} noMatch={NoMatch}>
+      <Authorized authority={checkAuth(location.pathname, 'children')} noMatch={NoMatch}>
         {children}
       </Authorized>
     </ProLayout>

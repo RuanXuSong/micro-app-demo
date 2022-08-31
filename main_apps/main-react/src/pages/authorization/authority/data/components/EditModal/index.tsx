@@ -35,6 +35,7 @@ export default ({
   clientKey,
   scopeMapOptions,
   orgCode,
+  disabledAction,
 }: {
   visible: boolean;
   toggleVisible: () => void;
@@ -44,6 +45,7 @@ export default ({
   clientKey: string;
   scopeMapOptions: any;
   orgCode?: string;
+  disabledAction?: boolean;
 }) => {
   const [form] = Form.useForm();
   const { tip, setTip } = useSpinning();
@@ -107,6 +109,7 @@ export default ({
       title={`${!isNil(id) ? '编辑' : '新建'}角色`}
       okButtonProps={{
         htmlType: 'submit',
+        disabled: disabledAction,
       }}
       width={800}
       onOk={() => form.submit()}

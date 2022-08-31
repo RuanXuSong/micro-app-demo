@@ -4,7 +4,6 @@ import { Link, connect, history, useModel } from 'umi';
 import Authorized from '@/utils/Authorized';
 import logo from '../assets/logo.svg';
 import microApp from '@micro-zoe/micro-app';
-import { getAuthority } from '@/utils/authority';
 import styles from './index.module.less';
 import classNames from 'classnames';
 import { isEmpty } from 'lodash';
@@ -16,7 +15,7 @@ import RightContent from '@/components/GlobalHeader/RightContent';
 const AuthLayout = (props: any) => {
   const { initialState } = useModel('@@initialState');
   const { menus = [], userInfo } = initialState || {};
-  const authList = getAuthority();
+  const { checkAuth } = useModel('authority');
   const menuDataRender: BasicLayoutProps['menuDataRender'] = (menuList) => {
     const menuData = menuList
       .map((item) => {
@@ -97,18 +96,12 @@ const AuthLayout = (props: any) => {
     ) : null;
   };
 
-  const checkIncludeAuth = (pathname: string) => {
-    for (let i = 0; i < authList.length; i++) {
-      if (pathname.startsWith(authList[i])) return true;
-    }
-    return false;
-  };
-
   return (
     <ProLayout
       logo={userInfo?.orgLogo ?? logo}
       {...props}
       {...settings}
+      title={userInfo?.orgName ?? '雷数云平台'}
       className="auth-layout"
       onCollapse={handleMenuCollapse}
       onMenuHeaderClick={() => history.push('/')}
@@ -142,7 +135,7 @@ const AuthLayout = (props: any) => {
         return menuData || [];
       }}
     >
-      <Authorized authority={checkIncludeAuth(location.pathname)} noMatch={NoMatch}>
+      <Authorized authority={checkAuth(location.pathname)} noMatch={NoMatch}>
         {children}
       </Authorized>
     </ProLayout>

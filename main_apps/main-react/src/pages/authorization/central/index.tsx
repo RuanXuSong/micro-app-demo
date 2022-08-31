@@ -6,6 +6,7 @@ import { connect } from 'umi';
 import { AVATAR_URL } from '@/constant';
 import EditModal from './components/EditModal';
 import useCentralService from './useCentralService';
+import DetailValue from '@/components/DetailValue';
 
 const formLayout = {
   labelCol: {
@@ -86,7 +87,7 @@ const Central = (props: any) => {
               </div>
 
               <Form.Item
-                label="用户昵称"
+                label="用户名称"
                 name="name"
                 rules={[
                   {
@@ -94,7 +95,7 @@ const Central = (props: any) => {
                   },
                 ]}
               >
-                <Input placeholder="请输入" />
+                <DetailValue />
               </Form.Item>
               <Form.Item
                 label="账号密码"

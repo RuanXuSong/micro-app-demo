@@ -35,6 +35,7 @@ export default ({
   reload,
   orgId,
   clientKey,
+  disabledAction,
 }: {
   visible: boolean;
   toggleVisible: () => void;
@@ -42,6 +43,7 @@ export default ({
   reload?: () => void;
   orgId?: string;
   clientKey: string;
+  disabledAction?: boolean;
 }) => {
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
@@ -146,6 +148,7 @@ export default ({
       title="用户授权"
       okButtonProps={{
         htmlType: 'submit',
+        disabled: disabledAction,
       }}
       width={442}
       onOk={() => form.submit()}

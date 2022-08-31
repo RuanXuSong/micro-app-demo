@@ -2,7 +2,7 @@ let config = {
   thunderBi: 'http://bi-sso.dev.thundersdata.com:8181/',
   dataFront: 'http://127.0.0.1:8000/',
   biSheng: 'http://localhost:3001/',
-  swiftScreen: 'http://127.0.0.1:8000/',
+  swiftScreen: 'http://localhost:38204',
   iot: 'http://127.0.0.1:8000/',
 };
 const isEnvPro = process.env.NODE_ENV === 'production';

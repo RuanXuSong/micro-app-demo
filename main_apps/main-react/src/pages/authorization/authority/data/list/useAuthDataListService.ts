@@ -1,5 +1,5 @@
 import { useModel } from 'umi';
-import { useRef, useState, useMemo } from 'react';
+import { useRef, useState, useMemo, useEffect } from 'react';
 import { useImmer } from 'use-immer';
 import { message } from 'antd';
 import { useRequest } from 'ahooks';
@@ -12,6 +12,8 @@ export default () => {
   const [businessValue, setBusinessValue] = useState<string>('');
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
+  const { orgCode: userOrgCode } = userInfo || {};
+  const disabledAction = businessValue !== userOrgCode;
   const [editModalConfig, setEditModalConfig] = useImmer<{
     visible: boolean;
     formData: any;
@@ -37,6 +39,12 @@ export default () => {
   });
 
   const { reload } = actionRef.current || {};
+
+  useEffect(() => {
+    if (userInfo?.orgCode) {
+      setBusinessValue(userInfo?.orgCode);
+    }
+  }, [userInfo]);
 
   const { data: scopeMap } = useRequest<defs.authorization.DataRuleDTO[]>(
     () =>
@@ -166,6 +174,7 @@ export default () => {
     loading,
     scopeMap,
     actionRef,
+    disabledAction,
     reload,
     clientKey,
     setClientKey,
