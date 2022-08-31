@@ -6,14 +6,9 @@ import { useRequest } from 'ahooks';
 import { getResourceList } from '@/utils/getResourceList';
 
 export default () => {
-  const { initialState } = useModel('@@initialState');
-  const { authorityList } = initialState || {};
   const { setAuthority, setReady } = useModel('authority');
   const { data: resourceList } = useRequest(API.platform.sysUser.myResourceList.fetch, {
     onSuccess: (resourceArr) => {
-      if (!isEmpty(authorityList)) {
-        setAuthority(authorityList!);
-      }
       if (!isEmpty(resourceArr)) {
         setAuthority(
           resourceArr.map((item) => item.apiUrl!),
@@ -32,9 +27,6 @@ export default () => {
         }
       } catch (err) {
         message.error(err);
-      }
-      if (!isEmpty(authorityList)) {
-        setAuthority(authorityList!);
       }
       setReady(true);
     },
