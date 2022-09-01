@@ -119,6 +119,7 @@ const Homepage = () => {
   };
   return (
     <div className={styles.container}>
+      <img src={require('@/assets/home-bg.png')} className={styles.image} />
       <div className={styles.header}>
         <div className={styles.logo}>
           <img src={require('@/assets/logo.png')} />

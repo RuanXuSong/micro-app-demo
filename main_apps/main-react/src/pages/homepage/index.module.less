@@ -1,8 +1,18 @@
 .container {
+  position: relative;
   width: 100%;
   height: calc(100vh - 112px);
-  background: url('../../assets/home-bg.png') no-repeat;
-  background-size: cover;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.44), rgba(255, 255, 255, 0.44)),
+    linear-gradient(180deg, #c7dbfb 0%, #f0f2f5 55.15%);
+
+  .image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 536px;
+    height: 336px;
+    object-fit: cover;
+  }
 
   .header {
     display: flex;
