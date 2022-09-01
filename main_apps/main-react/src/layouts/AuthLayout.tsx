@@ -57,11 +57,11 @@ const AuthLayout = (props: any) => {
   }, [userInfo]);
 
   useEffect(() => {
-    const { pathname = '' } = props.location || {};
-    // 重定向到权限管理页
-    if (/^\/authorization\/?$/.test(pathname)) {
-      history.replace('/authorization/resource/list');
-    }
+    // const { pathname = '' } = props.location || {};
+    // // 重定向到权限管理页
+    // if (/^\/authorization\/?$/.test(pathname)) {
+    //   history.replace('/authorization/resource/list');
+    // }
   }, [props]);
 
   const handleMenuCollapse = (payload: boolean) => {

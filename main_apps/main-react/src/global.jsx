@@ -95,21 +95,3 @@ microApp.start({
     });
   },
 });
-
-// ----------------------分割线--测试全局方法--------------------- //
-// setTimeout(() => {
-//   unmountAllApps({
-//     destroy: true,
-//     clearAliveState: true,
-//   }).then(() => {
-//     console.log('unmountAllApps方法 -- 主动卸载所有应用成功')
-//   })
-// }, 10000)
-
-// 预加载子应用
-microApp.preFetch([
-  { name: 'dataFront', url: config.dataFront },
-  { name: 'biSheng', url: config.biSheng },
-  { name: 'thunderBi', url: config.thunderBi },
-  { name: 'swiftScreen', url: config.swiftScreen },
-]);

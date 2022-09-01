@@ -133,7 +133,7 @@ export default ({
     <List.Item>
       <Checkbox checked={checkedIds.includes(+item.userId!)} onChange={(e) => onChange(e, item)}>
         <div className={styles.userName}>
-          {item.userName}
+          {item.name}
           {item.phone ? `(${item.phone.slice(-4)})` : ''}
         </div>
       </Checkbox>
