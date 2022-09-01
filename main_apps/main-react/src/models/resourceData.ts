@@ -26,7 +26,7 @@ export default () => {
           message.error(err);
         }
       } catch (err) {
-        message.error(err);
+        message.error(err.message);
       }
       setReady(true);
     },

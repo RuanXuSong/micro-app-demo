@@ -9,12 +9,16 @@ import classNames from 'classnames';
 import { isEmpty } from 'lodash';
 import { BaseMenuProps } from '@ant-design/pro-layout/lib/components/SiderMenu/BaseMenu';
 import RightContent from '@/components/GlobalHeader/RightContent';
+import useAuth from '@/hooks/useAuth';
 
 const BasicLayout = (props: any) => {
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
   const { resourceList } = useModel('resourceData');
   const { checkAuth } = useModel('authority');
+
+  // 权限管理
+  useAuth();
 
   const menuDataRender = (menuList: any) =>
     menuList.map((item: any) => {

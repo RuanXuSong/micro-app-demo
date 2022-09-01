@@ -41,6 +41,7 @@ export default () => {
   };
 
   return {
+    ready,
     setReady,
     getAuthority,
     setAuthority,

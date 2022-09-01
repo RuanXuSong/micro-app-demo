@@ -11,11 +11,16 @@ import Iconfont from '@/components/Iconfont';
 import NoMatch from '@/components/NoMatch';
 import { BaseMenuProps } from '@ant-design/pro-layout/lib/components/SiderMenu/BaseMenu';
 import RightContent from '@/components/GlobalHeader/RightContent';
+import useAuth from '@/hooks/useAuth';
 
 const AuthLayout = (props: any) => {
   const { initialState } = useModel('@@initialState');
   const { menus = [], userInfo } = initialState || {};
   const { checkAuth } = useModel('authority');
+
+  // 权限管理
+  useAuth();
+
   const menuDataRender: BasicLayoutProps['menuDataRender'] = (menuList) => {
     const menuData = menuList
       .map((item) => {
@@ -55,14 +60,6 @@ const AuthLayout = (props: any) => {
       });
     }
   }, [userInfo]);
-
-  useEffect(() => {
-    // const { pathname = '' } = props.location || {};
-    // // 重定向到权限管理页
-    // if (/^\/authorization\/?$/.test(pathname)) {
-    //   history.replace('/authorization/resource/list');
-    // }
-  }, [props]);
 
   const handleMenuCollapse = (payload: boolean) => {
     if (dispatch) {

@@ -4,11 +4,9 @@
  * @作者: 陈杰
  * @Date: 2019-10-25 13:43:18
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-31 11:19:28
+ * @LastEditTime: 2022-09-01 17:39:51
  */
 import { MenuDataItem } from '@ant-design/pro-layout';
-import { message } from 'antd';
-import { history } from 'umi';
 import arrayUtils, { deepFlatten } from '@/utils/array';
 import { PrivilegeResource } from './interfaces/common';
 import { LOGIN_CONFIG } from './constant';
@@ -42,11 +40,6 @@ export async function getInitialState() {
       });
       authorityList = flatRoutes.map((item) => item.apiUrl);
       menus = convertResourceToMenu(routes);
-      /** 没有菜单权限时候应该调整到登录页面 */
-      if (menus.length === 0) {
-        message.warn('您没有访问权限，请联系管理员！');
-        history.replace('/404');
-      }
     } catch (error) {
       console.error(error);
     }
