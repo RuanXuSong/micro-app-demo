@@ -29,10 +29,8 @@ export default defineConfig({
       href: '//at.alicdn.com/t/font_1269694_ssyauvyyv8j.css',
     },
   ],
-  // umi routes: https://umijs.org/docs/routing
   routes,
   base: '/',
-  // Theme for antd: https://ant.design/docs/react/customize-theme-cn
   theme: {
     'primary-color': defaultSettings.primaryColor,
   },

@@ -6,7 +6,7 @@ import { Store } from 'antd/es/form/interface';
 import { useRequest } from 'ahooks';
 import useSpinning from '@/hooks/useSpinning';
 import styles from './index.module.less';
-import { LOGIN_CONFIG, RESOURCE_TYPE_ENUM } from '@/constant';
+import { LOGIN_CONFIG } from '@/constant';
 import { removeEmpty } from '@/utils/json';
 import { isNumber } from 'lodash';
 import TableItem from '@/components/TableItem';
@@ -139,21 +139,6 @@ export default ({
       align: 'left',
       copyable: false,
       valueType: 'text',
-    },
-    {
-      title: '资源标识',
-      dataIndex: 'resourceKey',
-      align: 'left',
-      copyable: false,
-      valueType: 'text',
-    },
-    {
-      title: '资源类型',
-      dataIndex: 'type',
-      align: 'left',
-      copyable: false,
-      valueType: 'text',
-      render: (type) => (type === RESOURCE_TYPE_ENUM.路由级资源 ? '路由级资源' : '页面级资源'),
     },
   ];
 

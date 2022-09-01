@@ -59,23 +59,6 @@ const appsList: SectionProps[] = [
       },
     ],
   },
-  {
-    title: '数字孪生',
-    logo: 'digital-twin',
-    cardsList: [
-      {
-        title: '物联网',
-        description: '雷数IOT平台',
-        logo: 'iot-platform',
-        link: '/smart-iot',
-        key: 'smart-iot',
-      },
-    ],
-  },
-  {
-    title: 'AI算法平台',
-    logo: 'ai-algorithm',
-  },
 ];
 
 const Homepage = () => {
