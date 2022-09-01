@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-28 18:10:42
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-24 17:03:47
+ * @LastEditTime: 2022-09-01 19:31:01
  */
 
 /** 云平台 antd 样式前缀（防止子应用样式污染） */
@@ -103,3 +103,6 @@ export enum RESOURCE_TYPE_ENUM {
 
 // 敏捷应用对应code
 export const SMART_DATA_CODE = 0;
+
+// 初始路径
+export const INITIAL_PATH = '/cloud/homepage';

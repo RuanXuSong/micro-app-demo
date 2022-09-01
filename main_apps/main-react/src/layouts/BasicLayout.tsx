@@ -9,16 +9,14 @@ import classNames from 'classnames';
 import { isEmpty } from 'lodash';
 import { BaseMenuProps } from '@ant-design/pro-layout/lib/components/SiderMenu/BaseMenu';
 import RightContent from '@/components/GlobalHeader/RightContent';
-import useAuth from '@/hooks/useAuth';
+import useInitialRoute from '@/hooks/useInitialRoute';
 
 const BasicLayout = (props: any) => {
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
   const { resourceList } = useModel('resourceData');
   const { checkAuth } = useModel('authority');
-
-  // 权限管理
-  useAuth();
+  const { initialRoute } = useInitialRoute();
 
   const menuDataRender = (menuList: any) =>
     menuList.map((item: any) => {
@@ -87,7 +85,7 @@ const BasicLayout = (props: any) => {
       {...settings}
       title={userInfo?.orgName ?? '雷数云平台'}
       onCollapse={handleMenuCollapse}
-      onMenuHeaderClick={() => history.push('/')}
+      onMenuHeaderClick={() => history.push(initialRoute)}
       menuItemRender={(menuItemProps, defaultDom) => {
         if (
           menuItemProps.isUrl ||

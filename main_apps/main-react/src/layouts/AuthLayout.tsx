@@ -11,15 +11,13 @@ import Iconfont from '@/components/Iconfont';
 import NoMatch from '@/components/NoMatch';
 import { BaseMenuProps } from '@ant-design/pro-layout/lib/components/SiderMenu/BaseMenu';
 import RightContent from '@/components/GlobalHeader/RightContent';
-import useAuth from '@/hooks/useAuth';
+import useInitialRoute from '@/hooks/useInitialRoute';
 
 const AuthLayout = (props: any) => {
   const { initialState } = useModel('@@initialState');
   const { menus = [], userInfo } = initialState || {};
   const { checkAuth } = useModel('authority');
-
-  // 权限管理
-  useAuth();
+  const { initialRoute } = useInitialRoute();
 
   const menuDataRender: BasicLayoutProps['menuDataRender'] = (menuList) => {
     const menuData = menuList
@@ -101,7 +99,7 @@ const AuthLayout = (props: any) => {
       title={userInfo?.orgName ?? '雷数云平台'}
       className="auth-layout"
       onCollapse={handleMenuCollapse}
-      onMenuHeaderClick={() => history.push('/')}
+      onMenuHeaderClick={() => history.push(initialRoute)}
       menuItemRender={(menuItemProps, defaultDom) => {
         if (
           menuItemProps.isUrl ||

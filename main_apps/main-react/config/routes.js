@@ -7,10 +7,6 @@ export default [
         path: '/',
         routes: [
           {
-            path: '/',
-            redirect: '/cloud/homepage',
-          },
-          {
             path: '/login',
             component: './login/index',
           },

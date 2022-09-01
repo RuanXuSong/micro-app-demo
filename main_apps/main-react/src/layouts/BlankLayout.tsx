@@ -6,10 +6,13 @@ import 'moment/locale/zh-cn';
 import { UseRequestProvider } from 'ahooks';
 import { THROTTLE_INTERVAL } from '@/constant';
 import { PREFIX_CLASS } from '@/constant';
+import useAuth from '@/hooks/useAuth';
 
 const InspectorWrapper = process.env.NODE_ENV === 'development' ? Inspector : React.Fragment;
 
-const Layout: React.FC = ({ children }) => {
+const Layout: React.FC<any> = ({ children, location }) => {
+  // 权限管理
+  useAuth(location.pathname);
   return (
     <UseRequestProvider
       value={{
