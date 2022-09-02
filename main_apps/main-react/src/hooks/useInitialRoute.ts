@@ -11,7 +11,7 @@ export default function useInitialRoute() {
   const getInitialRoute = () => {
     if (isEmpty(menus)) {
       const routes = getAuthority('children');
-      return routes[0] ?? '/';
+      return routes?.[0] ?? '/';
     }
     return INITIAL_PATH;
   };
