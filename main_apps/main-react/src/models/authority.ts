@@ -25,6 +25,7 @@ export default () => {
   };
 
   const checkAuth = (pathname: string, key: 'cloud' | 'children' = 'cloud') => {
+    if (!ready) return true;
     let authList = getAuthority(key);
     if (key === 'cloud' && isEmpty(authList)) {
       if (!isEmpty(authorityList)) {
@@ -32,7 +33,6 @@ export default () => {
       }
       authList = authorityList || [];
     }
-    if (!ready) return true;
     if (!authList) return false;
     for (let i = 0; i < authList.length; i++) {
       if (pathname.startsWith(authList[i])) return true;

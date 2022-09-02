@@ -7,10 +7,12 @@ import { UseRequestProvider } from 'ahooks';
 import { THROTTLE_INTERVAL } from '@/constant';
 import { PREFIX_CLASS } from '@/constant';
 import useAuth from '@/hooks/useAuth';
+import { useModel } from 'umi';
 
 const InspectorWrapper = process.env.NODE_ENV === 'development' ? Inspector : React.Fragment;
 
 const Layout: React.FC<any> = ({ children, location }) => {
+  const { ready } = useModel('authority');
   // 权限管理
   useAuth(location.pathname);
   return (
@@ -32,7 +34,7 @@ const Layout: React.FC<any> = ({ children, location }) => {
       }}
     >
       <ConfigProvider locale={zhCN} prefixCls={PREFIX_CLASS}>
-        <InspectorWrapper>{children}</InspectorWrapper>
+        <InspectorWrapper>{ready && children}</InspectorWrapper>
       </ConfigProvider>
     </UseRequestProvider>
   );
