@@ -17,7 +17,6 @@ export default function useAuth(pathname: string) {
       history.replace(routes[0]);
     } else {
       message.warn('您没有访问权限，请联系管理员！');
-      history.replace('/404');
     }
   };
 
