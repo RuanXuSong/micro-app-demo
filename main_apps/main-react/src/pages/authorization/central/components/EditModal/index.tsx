@@ -6,6 +6,7 @@ import { Store } from 'antd/es/form/interface';
 import { useRequest } from 'ahooks';
 import useSpinning from '@/hooks/useSpinning';
 import { compareToFirstPassword } from '@/utils/validators';
+import { LOGOUT_PATH } from '@/config';
 
 const formLayout = {
   labelCol: {
@@ -60,9 +61,12 @@ export default ({
   const { run: handleFinish, loading: submitting } = useRequest(submit, {
     manual: true,
     onSuccess: () => {
-      message.success('修改成功');
+      message.success('修改成功，请重新登陆');
       form.resetFields();
       toggleVisible();
+      setTimeout(() => {
+        window.location.href = LOGOUT_PATH;
+      }, 1000);
     },
   });
 
