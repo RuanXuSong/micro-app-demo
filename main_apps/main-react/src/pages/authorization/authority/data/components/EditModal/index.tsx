@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Modal, Form, Spin, Input, message, Select } from 'antd';
 import { isEmpty, isNil } from 'lodash-es';
 import 'antd/lib/form';
@@ -33,6 +33,7 @@ export default ({
   loading,
   reload,
   clientKey,
+  scopeMap,
   scopeMapOptions,
   orgCode,
   disabledAction,
@@ -43,7 +44,8 @@ export default ({
   loading: boolean;
   reload?: () => void;
   clientKey: string;
-  scopeMapOptions: any;
+  scopeMap?: defs.platform.DataRuleDTO[];
+  scopeMapOptions: any[];
   orgCode?: string;
   disabledAction?: boolean;
 }) => {
@@ -61,9 +63,10 @@ export default ({
       const ruleIdList = dataRuleDTOList.map(
         (item: defs.authorization.DataRuleDTO) => item.ruleKeyId,
       );
+
       form.setFieldsValue({
         ...formData,
-        ruleIdList,
+        ruleIdList: ruleIdList,
       });
     }
     return () => {
@@ -76,6 +79,19 @@ export default ({
     form.resetFields();
   };
 
+  // 获得 id 与 ruleKeyId 映射（后端保存 ruleIdList 需要 id，回填需要 ruleKeyId）
+  const modifiedIdMap = useMemo(() => {
+    const newObj = {};
+    if (!scopeMap) return newObj;
+    scopeMap.forEach((item) => {
+      const { id, ruleKeyId } = item;
+      if (!isNil(ruleKeyId)) {
+        newObj[ruleKeyId] = id;
+      }
+    });
+    return newObj;
+  }, [scopeMap]);
+
   const submit = (values: Store) => {
     setTip('数据保存中，请稍候...');
 
@@ -83,7 +99,7 @@ export default ({
       ...values,
       clientKey,
       id,
-      ruleIdList: values.ruleIdList ?? [],
+      ruleIdList: values?.ruleIdList?.map((item: string) => modifiedIdMap[item]) ?? [],
       businessValue: orgCode ?? userOrgCode,
     }) as defs.authorization.DataRoleInputDTO;
 
