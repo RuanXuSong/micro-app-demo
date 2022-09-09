@@ -25,7 +25,7 @@ const appsList: SectionProps[] = [
     cardsList: [
       {
         title: '敏捷应用',
-        description: '快速构建web应用',
+        description: '快速构建智能应用',
         logo: 'web-app',
         link: '/smart-lowcode/dashboard/analysis',
         key: 'smart-lowcode',
