@@ -61,7 +61,7 @@ export default ({
   const { run: handleFinish, loading: submitting } = useRequest(submit, {
     manual: true,
     onSuccess: () => {
-      message.success('修改成功，请重新登陆');
+      message.success('修改成功，请重新登录');
       form.resetFields();
       toggleVisible();
       setTimeout(() => {
