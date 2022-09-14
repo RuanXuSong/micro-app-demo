@@ -39,7 +39,7 @@ const appsList: SectionProps[] = [
       },
       {
         title: '数智平台',
-        description: '雷数BI平台',
+        description: '多维数据可视化分析工具',
         logo: 'thunder-bi',
         link: '/smart-bi',
         key: 'smart-bi',
@@ -52,7 +52,7 @@ const appsList: SectionProps[] = [
     cardsList: [
       {
         title: '数融平台',
-        description: '雷数大数据开发平台',
+        description: '数据融合治理开发平台',
         logo: 'data-front',
         link: '/smart-data',
         key: 'smart-data',
@@ -107,8 +107,8 @@ const Homepage = () => {
         <div className={styles.logo}>
           <img src={require('@/assets/logo.png')} />
         </div>
-        <div className={styles.title}>雷数工业互联网</div>
-        <div className={styles.subTitle}>敏捷开发平台</div>
+        <div className={styles.title}>面前中小企业的工业互联网敏捷开发平台</div>
+        <div className={styles.subTitle}>敏捷为中小企业提供数字化升级改造工具箱开发平台</div>
       </div>
       <div className={styles.contentWrap}>
         {checkPermissions(resourceList, appsList).map(renderSection)}
