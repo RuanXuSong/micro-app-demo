@@ -108,7 +108,7 @@ const Homepage = () => {
           <img src={require('@/assets/logo.png')} />
         </div>
         <div className={styles.title}>面前中小企业的工业互联网敏捷开发平台</div>
-        <div className={styles.subTitle}>敏捷为中小企业提供数字化升级改造工具箱开发平台</div>
+        <div className={styles.subTitle}>为中小企业提供数字化升级改造工具箱</div>
       </div>
       <div className={styles.contentWrap}>
         {checkPermissions(resourceList, appsList).map(renderSection)}
