@@ -29,6 +29,12 @@ export default defineConfig({
       href: '//at.alicdn.com/t/font_1269694_ssyauvyyv8j.css',
     },
   ],
+  scripts: [
+    {
+      src: 'https://webapi.amap.com/maps?callback=___onAPILoaded&v=1.4.15&key=996c744763dcf3cf93bccb07c9261975&plugin=AMap.Autocomplete,AMap.PlaceSearch,AMap.DistrictSearch,AMap.CitySearch,AMap.Geocoder',
+      global: true,
+    },
+  ],
   routes,
   base: '/',
   theme: {
