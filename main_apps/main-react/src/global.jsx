@@ -94,4 +94,9 @@ microApp.start({
       return res.text();
     });
   },
+  globalAssets: {
+    js: [
+      'https://webapi.amap.com/maps?callback=___onAPILoaded&v=1.4.15&key=996c744763dcf3cf93bccb07c9261975&plugin=AMap.Autocomplete,AMap.PlaceSearch,AMap.DistrictSearch,AMap.CitySearch,AMap.Geocoder',
+    ],
+  },
 });
