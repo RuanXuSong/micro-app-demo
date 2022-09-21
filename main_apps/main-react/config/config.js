@@ -34,7 +34,7 @@ export default defineConfig({
       src: '/amapSecurityConfig.js',
     },
     {
-      src: 'https://webapi.amap.com/maps?v=1.4.15&key=996c744763dcf3cf93bccb07c9261975&plugin=AMap.Autocomplete,AMap.PlaceSearch,AMap.DistrictSearch,AMap.CitySearch,AMap.Geocoder',
+      src: 'https://webapi.amap.com/loader.js',
     },
     {
       src: '/amap.js',
