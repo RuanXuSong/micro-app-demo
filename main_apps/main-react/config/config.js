@@ -31,12 +31,13 @@ export default defineConfig({
   ],
   scripts: [
     {
-      src: '/amap.js',
-      global: true,
+      src: '/amapSecurityConfig.js',
     },
     {
       src: 'https://webapi.amap.com/maps?v=1.4.15&key=996c744763dcf3cf93bccb07c9261975&plugin=AMap.Autocomplete,AMap.PlaceSearch,AMap.DistrictSearch,AMap.CitySearch,AMap.Geocoder',
-      global: true,
+    },
+    {
+      src: '/amap.js',
     },
   ],
   routes,
