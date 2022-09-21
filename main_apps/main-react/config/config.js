@@ -29,7 +29,7 @@ export default defineConfig({
       href: '//at.alicdn.com/t/font_1269694_ssyauvyyv8j.css',
     },
   ],
-  scripts: [
+  headScripts: [
     {
       src: '/amapSecurityConfig.js',
     },
