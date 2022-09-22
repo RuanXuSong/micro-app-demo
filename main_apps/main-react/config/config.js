@@ -22,6 +22,7 @@ export default defineConfig({
   targets: {
     ie: 11,
   },
+  // 数融子平台的 iconfont 地址
   links: [
     {
       type: 'text/css',
@@ -29,6 +30,7 @@ export default defineConfig({
       href: '//at.alicdn.com/t/font_1269694_ssyauvyyv8j.css',
     },
   ],
+  // 低代码子平台高德地图服务
   headScripts: [
     {
       src: '/amapSecurityConfig.js',
