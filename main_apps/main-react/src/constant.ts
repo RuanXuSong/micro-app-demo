@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 阮旭松
  * @Date: 2022-07-28 18:10:42
- * @LastEditors: 阮旭松
- * @LastEditTime: 2022-09-01 19:31:01
+ * @LastEditors: 仇艳
+ * @LastEditTime: 2022-09-23 10:56:58
  */
 
 /** 云平台 antd 样式前缀（防止子应用样式污染） */
@@ -57,6 +57,26 @@ export const LOGIN_CONFIG = Object.freeze({
 export enum ROLE_STATUS_MAP {
   禁用 = 0,
   正常 = 1,
+}
+
+/** 模板创建状态枚举 */
+export enum TEMPLATE_STATUS_MAP {
+  未创建 = 1,
+  创建中 = 0,
+}
+
+/** 模板状态颜色枚举 */
+export enum TEMPLATE_STATUS_COLOR_MAP {
+  '#0085FF' = 0,
+  '#45D96E' = 1,
+  '#FF0000' = 2,
+}
+
+/** 模板历史状态枚举 */
+export enum HISTORY_STATUS_MAP {
+  创建中 = 0,
+  成功 = 1,
+  失败 = 2,
 }
 
 /** 性别枚举 */

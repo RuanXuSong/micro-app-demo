@@ -37,7 +37,16 @@ const CentralList = Loadable({
   loading: Loading,
   delay: 150,
 });
-
+const TemplatePackageList = Loadable({
+  loader: () => import('../pages/authorization/template/package/list'),
+  loading: Loading,
+  delay: 150,
+});
+const TemplateHistoryList = Loadable({
+  loader: () => import('../pages/authorization/template/history/list'),
+  loading: Loading,
+  delay: 150,
+});
 export interface TabModel {
   title: string;
   tabKey?: string;
@@ -68,6 +77,14 @@ const TABS_CONFIG = {
   '/central': {
     title: '个人中心',
     component: <CentralList />,
+  },
+  '/template/package': {
+    title: '模板套餐',
+    component: <TemplatePackageList />,
+  },
+  '/template/history': {
+    title: '模板历史',
+    component: <TemplateHistoryList />,
   },
 };
 

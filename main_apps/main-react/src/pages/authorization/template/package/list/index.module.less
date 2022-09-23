@@ -1,0 +1,122 @@
+.proForm {
+  padding: 24px;
+  :global {
+    .cloud-form-item {
+     margin-bottom: 15px;
+    }
+  }
+
+  .fromBtnList {
+    width: 100%;
+    position: relative;
+    bottom: 47px;
+    display: flex;
+    justify-content: end;
+  }
+}
+
+.content {
+  margin-left: 24px;
+  margin-right: 24px;
+  padding: 24px;
+  background-color: white;
+
+  .title {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .item {
+    margin-top: 19px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    .card {
+      width: 316px;
+      height: 298px;
+      margin-bottom: 20px;
+      padding: 8px;
+      background: #253157;
+      border-radius: 4px;
+      margin-right: 5%;
+      
+
+      .imageDiv {
+        width: 300px;
+        height: 167px;
+        border-radius: 4px;
+        position: relative;
+        margin-bottom: 8px;
+      }
+
+      .image {
+        width: 300px;
+        height: 167px;
+        border-radius: 4px;
+      }
+
+      .guide {
+        position:absolute;
+        z-index:2;
+        top: 8px;
+        right: 12px;
+        text-decoration:underline;
+
+        span {
+          margin-right: 5px;
+        }
+      }
+
+      .optBtn {
+        position:absolute;
+        z-index:2;
+        text-align:center;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+      }
+
+      .cardHeader {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+
+        .cardTitle {
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 22px;
+          color: #FFFFFF;
+        }
+
+        .status {
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 22px;
+        }
+      }
+
+      .desc {
+        font-size: 12px;
+        line-height: 17px;
+        color: #CBCBCB;
+        margin-bottom: 8px;
+        overflow: hidden ;
+        white-space: nowrap ;
+        text-overflow: ellipsis;
+      }
+
+      .systemTag {
+        margin-bottom: 8px;
+      }
+
+      .featureTag {
+        color: #1890FF;
+        border-color: #1890FF;
+        background-color: transparent;
+      }
+      
+    
+    }
+  }
+}

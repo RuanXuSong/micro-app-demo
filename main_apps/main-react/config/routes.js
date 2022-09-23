@@ -63,6 +63,25 @@ export default [
                     component: './authorization/central',
                     fontIcon: 'icon-person',
                   },
+                  {
+                    path: '/cloud/template',
+                    name: '模板中心',
+                    fontIcon: 'icon-template',
+                    routes: [
+                      {
+                        path: '/cloud/template/package',
+                        name: '模板套餐',
+                        component: './authorization/template/package/list',
+                        fontIcon: 'icon-package',
+                      },
+                      {
+                        path: '/cloud/template/history',
+                        name: '模板历史',
+                        component: './authorization/template/history/list',
+                        fontIcon: 'icon-history',
+                      },
+                    ],
+                  },
                 ],
               },
             ],
