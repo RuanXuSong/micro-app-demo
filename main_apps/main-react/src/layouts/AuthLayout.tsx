@@ -120,9 +120,6 @@ const AuthLayout = (props: any) => {
           <span>{route.breadcrumbName}</span>
         );
       }}
-      footerRender={() => {
-        return null;
-      }}
       menuDataRender={menuDataRender}
       rightContentRender={() => <RightContent />}
       postMenuData={(menuData) => {
@@ -131,7 +128,7 @@ const AuthLayout = (props: any) => {
       }}
     >
       <Authorized authority={checkAuth(location.pathname)} noMatch={NoMatch}>
-        {children}
+        <div>{children}</div>
       </Authorized>
     </ProLayout>
   );
