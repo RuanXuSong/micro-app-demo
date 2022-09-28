@@ -5,6 +5,7 @@ import { history } from 'umi';
 import { getTabsComponent } from '@/utils/tabsConfig';
 import { TabCloseType } from '@/constant';
 import styles from './index.module.less';
+import Footer from '@/components/Footer';
 
 const { TabPane } = Tabs;
 // @ts-ignore
@@ -56,7 +57,10 @@ class SwitchTabs extends Component<any, any> {
             return (
               tabComponent && (
                 <TabPane tab={panel.title} key={panel.tabKey}>
-                  <div className={styles.tabPaneContainer}>{tabComponent.component}</div>
+                  <div className={styles.tabPaneContainer}>
+                    <div className={styles.comWrap}>{tabComponent.component}</div>
+                    <Footer />
+                  </div>
                 </TabPane>
               )
             );

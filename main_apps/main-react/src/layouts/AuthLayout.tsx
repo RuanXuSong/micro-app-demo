@@ -12,7 +12,6 @@ import NoMatch from '@/components/NoMatch';
 import { BaseMenuProps } from '@ant-design/pro-layout/lib/components/SiderMenu/BaseMenu';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import useInitialRoute from '@/hooks/useInitialRoute';
-import Footer from '@/components/Footer';
 
 const AuthLayout = (props: any) => {
   const { initialState } = useModel('@@initialState');
@@ -121,7 +120,6 @@ const AuthLayout = (props: any) => {
           <span>{route.breadcrumbName}</span>
         );
       }}
-      footerRender={() => <Footer />}
       menuDataRender={menuDataRender}
       rightContentRender={() => <RightContent />}
       postMenuData={(menuData) => {

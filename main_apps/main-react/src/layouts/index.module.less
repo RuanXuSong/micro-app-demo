@@ -100,6 +100,8 @@
 }
 
 .tabPaneContainer {
+  display: flex;
+  flex-direction: column;
   height: calc(100vh - 112px);
   overflow: auto;
   scrollbar-width: none;
@@ -109,9 +111,16 @@
     display: none;
   }
 
+  .comWrap {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
   :global {
     .cloud-pro-table {
       display: flex;
+      flex: 1;
       flex-direction: column;
       height: 100%;
     }
