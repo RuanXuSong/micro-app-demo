@@ -4,6 +4,7 @@ import * as healthCheck from './healthCheck';
 import * as sysOrg from './sysOrg';
 import * as sysRole from './sysRole';
 import * as sysUser from './sysUser';
+import * as template from './template';
 
 export const platform = {
   authorization,
@@ -12,4 +13,5 @@ export const platform = {
   sysOrg,
   sysRole,
   sysUser,
+  template,
 };

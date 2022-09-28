@@ -32,6 +32,17 @@ class CookieItemVO {
   value = '';
 }
 
+class DataNotifyDTO {
+  /** reason */
+  reason = '';
+
+  /** success */
+  success = false;
+
+  /** templateHistoryId */
+  templateHistoryId = '';
+}
+
 class DataRoleInputDTO {
   /** businessValue */
   businessValue = '';
@@ -47,6 +58,9 @@ class DataRoleInputDTO {
 
   /** id */
   id = undefined;
+
+  /** init */
+  init = false;
 
   /** isDeleted */
   isDeleted = false;
@@ -251,6 +265,9 @@ class RoleDTO {
   /** 企业id */
   orgId = '';
 
+  /** 企业名称 */
+  orgName = '';
+
   /** 资源id列表 */
   resourceIds = [];
 
@@ -282,6 +299,198 @@ class ScreeningRoleList {
 
   /** 角色名称 */
   role = '';
+}
+
+class TemExeSqlDTO {
+  /** stmt */
+  stmt = '';
+
+  /** tenantCode */
+  tenantCode = '';
+
+  /** type */
+  type = undefined;
+}
+
+class TemListDTO {
+  /** 子系统 */
+  clientKey = '';
+
+  /** 创建时间 */
+  createTime = '';
+
+  /** 租户模板id */
+  orgTemplateId = '';
+
+  /** 套餐名称 */
+  packageName = '';
+
+  /** 套餐标签 */
+  packageTags = '';
+
+  /** 状态 */
+  status = undefined;
+
+  /** 模板名称 */
+  templateName = '';
+
+  /** 模板缩略图 */
+  templatePicture = '';
+
+  /** 模板标签 */
+  templateTags = '';
+}
+
+class TemListQueryDTO {
+  /** 子系统 */
+  clientKey = '';
+
+  /** 关键字 */
+  keyword = '';
+
+  /** offset */
+  offset = undefined;
+
+  /** 套餐id */
+  packageId = '';
+
+  /** 页码 */
+  page = undefined;
+
+  /** 页容量 */
+  pageSize = undefined;
+
+  /** 模板状态 */
+  status = undefined;
+
+  /** tenantCode */
+  tenantCode = '';
+}
+
+class TemOpeDTO {
+  /** 租户模板id */
+  orgTemplateId = '';
+}
+
+class TemPackageDTO {
+  /** 子系统key */
+  clientKeyList = [];
+
+  /** 套餐描述 */
+  description = '';
+
+  /** 是否失效 */
+  disabled = undefined;
+
+  /** 用户指南 */
+  guideUrl = '';
+
+  /** 套餐id */
+  id = '';
+
+  /** 套餐名称 */
+  name = '';
+
+  /** 套餐封面图 */
+  picture = '';
+
+  /** 状态 */
+  status = undefined;
+
+  /** 套餐标签 */
+  tags = '';
+}
+
+class TemPackageDetailDTO {
+  /** 套餐描述 */
+  description = '';
+
+  /** 是否失效 */
+  disabled = undefined;
+
+  /** 指南 */
+  guideUrl = '';
+
+  /** 模板套餐id */
+  id = '';
+
+  /** 套餐名称 */
+  name = '';
+
+  /** 套餐封面图 */
+  picture = '';
+
+  /** 套餐标签 */
+  tags = '';
+
+  /** 套餐列表 */
+  templateList = [];
+}
+
+class TemPackageListQueryDTO {
+  /** 子系统 */
+  clientKey = '';
+
+  /** 关键字 */
+  keyword = '';
+
+  /** offset */
+  offset = undefined;
+
+  /** packageIds */
+  packageIds = [];
+
+  /** 页码 */
+  page = undefined;
+
+  /** 页容量 */
+  pageSize = undefined;
+
+  /** 状态 */
+  status = '';
+
+  /** tenantCode */
+  tenantCode = '';
+}
+
+class TemPackageOpeDTO {
+  /** 套餐id */
+  packageId = '';
+}
+
+class TemTemplateDTO {
+  /** 子系统 */
+  clientKey = '';
+
+  /** 模板描述 */
+  description = '';
+
+  /** 模板id */
+  id = '';
+
+  /** 模板名称 */
+  name = '';
+
+  /** 租户 */
+  orgTemplateId = '';
+
+  /** 密码 */
+  password = '';
+
+  /** 模板封面 */
+  picture = '';
+
+  /** 跳转url */
+  redirectUrl = '';
+
+  /** 状态 */
+  status = undefined;
+
+  /** 模板标签 */
+  tags = '';
+
+  /** 用户名 */
+  username = '';
 }
 
 class TenantInformation {
@@ -326,6 +535,9 @@ class TenantInformation {
 
   /** 负责人手机号（默认绑定租户管理员） */
   phone = '';
+
+  /** 企业资源id */
+  resourceId = undefined;
 
   /** 帐号状态 0 禁用/1 启用 */
   status = undefined;
@@ -385,6 +597,9 @@ class TheTenantDetailsDto {
 
   /** 负责人手机号（默认绑定租户管理员） */
   phone = '';
+
+  /** 企业资源id */
+  resourceId = undefined;
 
   /** 帐号状态 0 禁用/1 启用 */
   status = undefined;
@@ -464,6 +679,9 @@ class TheUserInformation {
 
   /** orgLogo */
   orgLogo = '';
+
+  /** orgName */
+  orgName = '';
 
   /** 手机号 */
   phone = '';
@@ -551,6 +769,7 @@ class UserLoginDTO {
 export const platform = {
   ClientKey,
   CookieItemVO,
+  DataNotifyDTO,
   DataRoleInputDTO,
   DataRuleDTO,
   LoginResultVO,
@@ -560,6 +779,15 @@ export const platform = {
   RoleBindUserDTO,
   RoleDTO,
   ScreeningRoleList,
+  TemExeSqlDTO,
+  TemListDTO,
+  TemListQueryDTO,
+  TemOpeDTO,
+  TemPackageDTO,
+  TemPackageDetailDTO,
+  TemPackageListQueryDTO,
+  TemPackageOpeDTO,
+  TemTemplateDTO,
   TenantInformation,
   TheTenantDetailsDto,
   TheTenantListPageFilter,

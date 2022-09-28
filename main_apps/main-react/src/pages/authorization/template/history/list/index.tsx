@@ -4,60 +4,83 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 仇艳
- * @LastEditTime: 2022-09-22 16:38:20
+ * @LastEditTime: 2022-09-28 15:22:06
  */
 import React from 'react';
 import { message, Select } from 'antd';
 import ProTable, { ProColumns } from '@ant-design/pro-table';
-import { HISTORY_STATUS_MAP } from '@/constant';
+import { HISTORY_STATUS_MAP, TEMPLATE_CLIENT_ENUM } from '@/constant';
 import LinkButtons from '@/components/LinkButtons';
 import useTemplateHistoryListService from './useTemplateHistoryListService';
+import { enumToValueEnum } from '@/utils/array';
 
 export default () => {
-  const { loading, actionRef, fetchList, handleTemplateRetry } = useTemplateHistoryListService();
+  const { loading, actionRef, templatePackageList, fetchList, handleTemplateRetry } =
+    useTemplateHistoryListService();
 
-  const columns: ProColumns<defs.platform.TenantInformation>[] = [
+  const columns: ProColumns<defs.platform.TemListDTO>[] = [
     {
       title: (_, type) => (type === 'form' ? '关键字' : '模板缩略图'),
-      dataIndex: 'orgCode',
+      dataIndex: 'keyword',
       align: 'left',
       copyable: false,
       valueType: 'text',
       hideInSearch: false,
       order: 3,
-      render: (_, row) => <img alt="模板缩略图" src={row.orgCode} width={72} />,
+      render: (_, row) => <img alt="模板缩略图" src={row.templatePicture} width={72} />,
     },
     {
-      title: (_, type) => (type === 'form' ? '套餐' : '模板套餐名称'),
-      dataIndex: 'orgName',
-      align: 'left',
-      copyable: false,
-      valueType: 'text',
-      hideInSearch: false,
-      order: 1,
-      renderFormItem: () => <Select allowClear></Select>,
-    },
-    {
-      title: (_, type) => (type === 'form' ? '子系统' : '所属子系统'),
-      dataIndex: 'director',
-      align: 'left',
-      copyable: false,
-      valueType: 'text',
-      hideInSearch: false,
-      order: 2,
-      renderFormItem: () => <Select allowClear></Select>,
-    },
-    {
-      title: '标签',
-      dataIndex: 'phone',
+      title: '模板套餐名称',
+      dataIndex: 'packageName',
       align: 'left',
       copyable: false,
       valueType: 'text',
       hideInSearch: true,
     },
     {
+      title: '套餐',
+      dataIndex: 'packageId',
+      align: 'left',
+      copyable: false,
+      valueType: 'text',
+      hideInSearch: false,
+      hideInTable: true,
+      order: 1,
+      renderFormItem: () => (
+        <Select allowClear>
+          {templatePackageList?.map((item) => (
+            <Select.Option value={item?.id!} key={item?.id}>
+              {item?.name}
+            </Select.Option>
+          ))}
+        </Select>
+      ),
+    },
+    {
+      title: (_, type) => (type === 'form' ? '子系统' : '所属子系统'),
+      dataIndex: 'clientKey',
+      align: 'left',
+      copyable: false,
+      valueType: 'text',
+      hideInSearch: false,
+      order: 2,
+      valueEnum: enumToValueEnum(TEMPLATE_CLIENT_ENUM),
+    },
+    {
+      title: '标签',
+      dataIndex: 'templateTags',
+      align: 'left',
+      copyable: false,
+      valueType: 'text',
+      hideInSearch: true,
+      render: (_, row) => {
+        const tags = JSON.parse(row?.templateTags || '[]');
+        return tags.join('、');
+      },
+    },
+    {
       title: '创建时间',
-      dataIndex: 'phone',
+      dataIndex: 'createTime',
       align: 'left',
       copyable: false,
       valueType: 'text',
@@ -78,10 +101,13 @@ export default () => {
         [HISTORY_STATUS_MAP.成功]: {
           text: '成功',
           status: 'Success',
-          disabled: true,
         },
         [HISTORY_STATUS_MAP.创建中]: {
           text: '创建中',
+          status: 'Processing',
+        },
+        [HISTORY_STATUS_MAP.未创建]: {
+          text: '未创建',
           status: 'Processing',
         },
       },
@@ -95,15 +121,17 @@ export default () => {
       hideInSearch: true,
       render: (_, row) => {
         return (
-          <LinkButtons
-            buttons={[
-              {
-                name: '重试',
-                key: 'retry',
-                onClick: () => handleTemplateRetry({ id: row?.id!, status: row?.status! }),
-              },
-            ]}
-          />
+          row.status === HISTORY_STATUS_MAP.失败 && (
+            <LinkButtons
+              buttons={[
+                {
+                  name: '重试',
+                  key: 'retry',
+                  onClick: () => handleTemplateRetry({ orgTemplateId: row?.orgTemplateId }),
+                },
+              ]}
+            />
+          )
         );
       },
     },
@@ -122,7 +150,7 @@ export default () => {
         }}
         columns={columns}
         bordered
-        rowKey="id"
+        rowKey="orgTemplateId"
         pagination={{
           size: 'default',
         }}

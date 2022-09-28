@@ -11,17 +11,22 @@ import { SyncOutlined } from '@ant-design/icons';
 
 export default ({
   visible,
+  loading,
   toggleVisible,
   data,
+  handleTemplateRetry,
   reload,
 }: {
   visible: boolean;
+  loading: boolean;
   toggleVisible: () => void;
   data: Store;
+  handleTemplateRetry: ({ orgTemplateId }: { orgTemplateId: string }) => void;
   reload?: () => void;
 }) => {
-  const loadingStatus = false;
-
+  const modalStatus = data?.templateList?.every(
+    (item: { status: HISTORY_STATUS_MAP }) => item.status === HISTORY_STATUS_MAP.成功,
+  );
   return (
     <Modal
       centered
@@ -30,10 +35,20 @@ export default ({
       maskClosable={false}
       title={
         <div>
-          <SyncOutlined spin />
-          &nbsp;&nbsp;企业敏捷应用模板&nbsp;&nbsp;
-          <Badge color="#108ee9" />
-          <span className={styles.title}>创建中</span>
+          {!modalStatus ? (
+            <>
+              <SyncOutlined spin />
+              &nbsp;&nbsp;{data.name}&nbsp;&nbsp;
+              <Badge color="#108ee9" />
+              <span className={styles.readyTitle}>创建中</span>
+            </>
+          ) : (
+            <>
+              &nbsp;&nbsp;{data.name}&nbsp;&nbsp;
+              <Badge color="#17F9AD" />
+              <span className={styles.successTitle}>已完成</span>
+            </>
+          )}
         </div>
       }
       okButtonProps={{
@@ -41,12 +56,10 @@ export default ({
       }}
       width={537}
       onCancel={toggleVisible}
-      confirmLoading={loadingStatus}
       footer={[
         <Button
           key="submit"
           type="primary"
-          loading={loadingStatus}
           onClick={() => {
             toggleVisible();
             reload && reload();
@@ -56,22 +69,41 @@ export default ({
         </Button>,
       ]}
     >
-      <Spin spinning={loadingStatus}>
+      <Spin spinning={loading}>
         <List
           className="demo-loadmore-list"
-          loading={loadingStatus}
+          loading={loading}
           itemLayout="horizontal"
-          dataSource={data.systemList}
+          dataSource={data.templateList}
           size="small"
           renderItem={(item: any) => (
             <List.Item
               actions={[
-                item?.status! === HISTORY_STATUS_MAP.失败 ? <span>重试</span> : <a>查看</a>,
+                item?.status! === HISTORY_STATUS_MAP.失败 ? (
+                  <span
+                    className={styles.action}
+                    onClick={() => handleTemplateRetry({ orgTemplateId: item?.orgTemplateId! })}
+                    tabIndex={1}
+                  >
+                    重试
+                  </span>
+                ) : (
+                  item?.redirectUrl && (
+                    <a
+                      className={styles.action}
+                      href={item.redirectUrl}
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      查看
+                    </a>
+                  )
+                ),
               ]}
             >
               <List.Item.Meta
                 avatar={
-                  <Image src={item.image ?? img} className={styles.preview} preview={false} />
+                  <Image src={item.picture ?? img} className={styles.preview} preview={false} />
                 }
                 title={item?.name}
                 description={

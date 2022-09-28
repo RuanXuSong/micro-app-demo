@@ -8,6 +8,7 @@ import * as resetPassword from './resetPassword';
 import * as resourceList from './resourceList';
 import * as save from './save';
 import * as scheduleStatus from './scheduleStatus';
+import * as test from './test';
 import * as update from './update';
 import * as updateStatus from './updateStatus';
 
@@ -19,6 +20,7 @@ export {
   resourceList,
   save,
   scheduleStatus,
+  test,
   update,
   updateStatus,
 };

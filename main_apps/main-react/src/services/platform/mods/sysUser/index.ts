@@ -2,6 +2,7 @@
  * @description TheUserInformation接口
  */
 import * as detail from './detail';
+import * as flushUserAccessToken from './flushUserAccessToken';
 import * as info from './info';
 import * as list from './list';
 import * as myResourceList from './myResourceList';
@@ -15,6 +16,7 @@ import * as updateStatus from './updateStatus';
 
 export {
   detail,
+  flushUserAccessToken,
   info,
   list,
   myResourceList,

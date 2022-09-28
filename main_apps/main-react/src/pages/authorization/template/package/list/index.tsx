@@ -4,247 +4,38 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 仇艳
- * @LastEditTime: 2022-09-23 15:10:19
+ * @LastEditTime: 2022-09-28 17:36:40
  */
-import React from 'react';
+import React, { useRef } from 'react';
 import { Tag, Image, Button, Spin } from 'antd';
 import ProForm, { ProFormSelect, ProFormText } from '@ant-design/pro-form';
-import { TEMPLATE_STATUS_COLOR_MAP, TEMPLATE_STATUS_MAP } from '@/constant';
+import { TEMPLATE_CLIENT_ENUM, TEMPLATE_STATUS_COLOR_MAP, TEMPLATE_STATUS_MAP } from '@/constant';
 import styles from './index.module.less';
-import templateImage from '../assets/template.png';
 import useTemplatePackageListService from './useTemplatePackageListService';
 import CreateModal from '../components/CreateModal';
 import PreviewModal from '../components/PreviewModal';
 import { QuestionCircleOutlined } from '@ant-design/icons';
-
-const list = [
-  {
-    id: 1,
-    image: templateImage,
-    title: '企业敏捷开发模板',
-    status: 1,
-    description:
-      '企业敏捷应用模板提供了专业便捷的业务应用构企业敏捷应用模板提供了专业便捷的业务应用构',
-    systemList: [
-      {
-        name: '敏捷大屏',
-        status: 0,
-        tags: ['数融', '数据治理'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-      {
-        name: '敏捷应用',
-        status: 1,
-        tags: ['数融', '数据治理', '零代码'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-      {
-        name: '数智平台',
-        status: 2,
-        tags: ['数融', '数据治理', '零代码'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-      {
-        name: '数融平台',
-        status: 1,
-        tags: ['数融', '数据治理'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-    ],
-    tags: ['数融', '数据治理', '零代码'],
-  },
-  {
-    id: 2,
-    image: templateImage,
-    title: '企业敏捷开发模板',
-    status: 0,
-    description:
-      '企业敏捷应用模板提供了专业便捷的业务应用构企业敏捷应用模板提供了专业便捷的业务应用构',
-    systemList: [
-      {
-        name: '敏捷大屏',
-        status: 0,
-        tags: ['数融', '数据治理'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-      {
-        name: '敏捷应用',
-        status: 1,
-        tags: ['数融', '数据治理', '零代码'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-      {
-        name: '数智平台',
-        status: 2,
-        tags: ['数融', '数据治理', '零代码'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-      {
-        name: '数融平台',
-        status: 1,
-        tags: ['数融', '数据治理'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-    ],
-    tags: ['数融', '数据治理', '零代码'],
-  },
-  {
-    id: 3,
-    image: templateImage,
-    title: '企业敏捷开发模板',
-    status: 0,
-    description:
-      '企业敏捷应用模板提供了专业便捷的业务应用构企业敏捷应用模板提供了专业便捷的业务应用构',
-    systemList: [
-      {
-        name: '敏捷大屏',
-        status: 0,
-        tags: ['数融', '数据治理'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-      {
-        name: '敏捷应用',
-        status: 1,
-        tags: ['数融', '数据治理', '零代码'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-      {
-        name: '数智平台',
-        status: 2,
-        tags: ['数融', '数据治理', '零代码'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-      {
-        name: '数融平台',
-        status: 1,
-        tags: ['数融', '数据治理'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-    ],
-    tags: ['数融', '数据治理', '零代码'],
-  },
-  {
-    id: 4,
-    image: templateImage,
-    title: '企业敏捷开发模板',
-    status: 1,
-    description:
-      '企业敏捷应用模板提供了专业便捷的业务应用构企业敏捷应用模板提供了专业便捷的业务应用构',
-    systemList: [
-      {
-        name: '敏捷大屏',
-        status: 0,
-        tags: ['数融', '数据治理'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-      {
-        name: '敏捷应用',
-        status: 1,
-        tags: ['数融', '数据治理', '零代码'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-      {
-        name: '数智平台',
-        status: 2,
-        tags: ['数融', '数据治理', '零代码'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-      {
-        name: '数融平台',
-        status: 1,
-        tags: ['数融', '数据治理'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-    ],
-    tags: ['数融', '数据治理', '零代码'],
-  },
-  {
-    id: 5,
-    image: templateImage,
-    title: '企业敏捷开发模板',
-    status: 0,
-    description:
-      '企业敏捷应用模板提供了专业便捷的业务应用构企业敏捷应用模板提供了专业便捷的业务应用构',
-    systemList: [
-      {
-        name: '敏捷大屏',
-        status: 0,
-        tags: ['数融', '数据治理'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-      {
-        name: '敏捷应用',
-        status: 1,
-        tags: ['数融', '数据治理', '零代码'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-      {
-        name: '数智平台',
-        status: 2,
-        tags: ['数融', '数据治理', '零代码'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-      {
-        name: '数融平台',
-        status: 1,
-        tags: ['数融', '数据治理'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-    ],
-    tags: ['数融', '数据治理', '零代码'],
-  },
-  {
-    id: 6,
-    image: templateImage,
-    title: '企业敏捷开发模板',
-    status: 0,
-    description:
-      '企业敏捷应用模板提供了专业便捷的业务应用构企业敏捷应用模板提供了专业便捷的业务应用构',
-    systemList: [
-      {
-        name: '敏捷大屏',
-        status: 0,
-        tags: ['数融', '数据治理'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-      {
-        name: '敏捷应用',
-        status: 1,
-        tags: ['数融', '数据治理', '零代码'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-      {
-        name: '数智平台',
-        status: 2,
-        tags: ['数融', '数据治理', '零代码'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-      {
-        name: '数融平台',
-        status: 1,
-        tags: ['数融', '数据治理'],
-        description: '企业敏捷应用模板提供了专业便捷的业务应用构建',
-      },
-    ],
-    tags: ['数融', '数据治理', '零代码'],
-  },
-];
+import { enumToValueEnum } from '@/utils/array';
+import { FormInstance } from 'antd/es/form';
 
 export default () => {
+  const formRef = useRef<FormInstance>();
   const {
     loading,
     selectedItem,
-    reload,
+    list,
     createModalConfig,
     previewModalConfig,
+    fetchList,
     handleModalHide,
     setSelected,
     handleCreateTemplate,
     handlePreviewTemplate,
+    handleTemplateRetry,
   } = useTemplatePackageListService();
 
   return (
-    <>
+    <div className={styles.container}>
       <div
         style={{
           margin: 24,
@@ -253,26 +44,35 @@ export default () => {
       >
         <ProForm
           className={styles.proForm}
-          onFinish={async (values) => {
-            console.log(values.name);
-          }}
+          formRef={formRef}
+          onFinish={fetchList}
           layout="inline"
           submitter={{
             render: () => (
               <div className={styles.fromBtnList}>
-                <Button style={{ marginRight: 10 }}>重置</Button>
-                <Button type="primary">查询</Button>
+                <Button style={{ marginRight: 10 }} htmlType="reset" onClick={() => fetchList({})}>
+                  重置
+                </Button>
+                <Button type="primary" htmlType="submit">
+                  查询
+                </Button>
               </div>
             ),
           }}
         >
-          <ProFormText name="creater" label="关键字" width="md" />
-          <ProFormSelect name="sex" label="子系统" showSearch valueEnum={{}} width="md" />
+          <ProFormText name="keyword" label="关键字" width="md" />
           <ProFormSelect
-            name="sex"
+            name="clientKey"
+            label="子系统"
+            showSearch
+            valueEnum={enumToValueEnum(TEMPLATE_CLIENT_ENUM)}
+            width="md"
+          />
+          <ProFormSelect
+            name="status"
             label="状态"
             showSearch
-            valueEnum={TEMPLATE_STATUS_MAP}
+            valueEnum={enumToValueEnum(TEMPLATE_STATUS_MAP)}
             width="md"
           />
         </ProForm>
@@ -286,13 +86,13 @@ export default () => {
                 className={styles.card}
                 key={index}
                 tabIndex={index}
-                onMouseMove={() => setSelected(item.id)}
+                onMouseMove={() => setSelected(item?.id!)}
               >
                 <div className={styles.imageDiv}>
                   <Image
                     className={styles.image}
                     preview={false}
-                    src={item.image}
+                    src={item.picture}
                     key={index}
                     style={
                       selectedItem === item.id
@@ -303,53 +103,62 @@ export default () => {
 
                   {selectedItem === item.id && (
                     <div>
-                      <div className={styles.guide}>
+                      <a
+                        className={styles.guide}
+                        href={item.guideUrl}
+                        target="_blank"
+                        rel="noopener"
+                      >
                         <QuestionCircleOutlined />
                         模板指南
-                      </div>
+                      </a>
 
                       <div className={styles.optBtn}>
                         <Button
                           type="primary"
                           style={{ marginRight: 10 }}
                           ghost={item.status === TEMPLATE_STATUS_MAP.未创建}
-                          onClick={() => handlePreviewTemplate(item)}
+                          onClick={() => handlePreviewTemplate({ packageId: item.id })}
                         >
                           预览
                         </Button>
-                        {item.status === TEMPLATE_STATUS_MAP.未创建 && (
-                          <Button type="primary" onClick={() => handleCreateTemplate(item)}>
-                            创建
-                          </Button>
-                        )}
+                        {/* {item.status === TEMPLATE_STATUS_MAP.未创建 && ( */}
+                        <Button
+                          type="primary"
+                          onClick={() => handleCreateTemplate({ packageId: item.id })}
+                        >
+                          创建
+                        </Button>
+                        {/* )} */}
                       </div>
                     </div>
                   )}
                 </div>
 
                 <div className={styles.cardHeader}>
-                  <div className={styles.cardTitle}>{item.title}</div>
+                  <div className={styles.cardTitle}>{item.name}</div>
                   <div
                     className={styles.status}
-                    style={{ color: TEMPLATE_STATUS_COLOR_MAP[item.status] }}
+                    style={{ color: TEMPLATE_STATUS_COLOR_MAP[item?.status!] }}
                   >
-                    {TEMPLATE_STATUS_MAP[item.status]}
+                    {TEMPLATE_STATUS_MAP[item?.status!]}
                   </div>
                 </div>
                 <div className={styles.desc}>{item.description}</div>
                 <div className={styles.systemTag}>
-                  {item?.systemList?.map((term: any) => (
-                    <Tag color="#33457A" key={term.name}>
-                      {term.name}
+                  {item?.clientKeyList?.map((term: any) => (
+                    <Tag color="#33457A" key={term}>
+                      {enumToValueEnum(TEMPLATE_CLIENT_ENUM)[term]?.text}
                     </Tag>
                   ))}
                 </div>
                 <div>
-                  {item?.tags?.map((term) => (
-                    <Tag className={styles.featureTag} key={term}>
-                      {term}
-                    </Tag>
-                  ))}
+                  {item?.tags &&
+                    JSON.parse(item?.tags || '[]')?.map((term: string) => (
+                      <Tag className={styles.featureTag} key={term}>
+                        {term}
+                      </Tag>
+                    ))}
                 </div>
               </div>
             ))}
@@ -358,16 +167,17 @@ export default () => {
         <CreateModal
           visible={createModalConfig.visible}
           data={createModalConfig.data}
+          loading={createModalConfig.loading}
           toggleVisible={() => handleModalHide('create')}
-          reload={reload}
+          reload={() => fetchList(formRef?.current?.getFieldsValue())}
+          handleTemplateRetry={handleTemplateRetry}
         />
         <PreviewModal
           visible={previewModalConfig.visible}
           data={previewModalConfig.data}
           toggleVisible={() => handleModalHide('preview')}
-          reload={reload}
         />
       </Spin>
-    </>
+    </div>
   );
 };

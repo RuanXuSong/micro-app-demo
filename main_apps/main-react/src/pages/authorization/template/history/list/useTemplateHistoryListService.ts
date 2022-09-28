@@ -11,11 +11,20 @@ export default () => {
   const { reload } = actionRef.current || {};
 
   /**
+   * 获取模板套餐列表
+   * @param params
+   */
+
+  const { data: templatePackageList = [] } = useRequest<defs.platform.TemPackageDTO[]>(
+    API.platform.template.listAllTemplatePackage.fetch,
+  );
+
+  /**
    * 获取普通分页列表
    * @param params
    */
   const fetchList = async (params?: { pageSize?: number; current?: number }) => {
-    const { list, page, total } = await API.platform.sysOrg.pageList.fetch(
+    const { list, page, total } = await API.platform.template.listTemplate.fetch(
       removeEmpty({
         ...params,
         page: params?.current || initialPagination.page,
@@ -31,13 +40,16 @@ export default () => {
   };
 
   /** 重试 */
-  const { run: handleTemplateRetry, loading } = useRequest(API.platform.sysOrg.updateStatus.fetch, {
-    manual: true,
-    onSuccess: () => {
-      message.success('删除成功');
-      reload?.();
+  const { run: handleTemplateRetry, loading } = useRequest(
+    API.platform.template.createTemplate.fetch,
+    {
+      manual: true,
+      onSuccess: () => {
+        message.success('操作成功');
+        reload?.();
+      },
     },
-  });
+  );
 
   return {
     loading,
@@ -45,5 +57,6 @@ export default () => {
     reload,
     handleTemplateRetry,
     fetchList,
+    templatePackageList,
   };
 };

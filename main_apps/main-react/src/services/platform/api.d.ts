@@ -45,6 +45,17 @@ declare namespace defs {
       value?: string;
     }
 
+    export class DataNotifyDTO {
+      /** reason */
+      reason?: string;
+
+      /** success */
+      success?: boolean;
+
+      /** templateHistoryId */
+      templateHistoryId?: string;
+    }
+
     export class DataRoleInputDTO {
       /** businessValue */
       businessValue?: string;
@@ -60,6 +71,9 @@ declare namespace defs {
 
       /** id */
       id?: number;
+
+      /** init */
+      init?: boolean;
 
       /** isDeleted */
       isDeleted?: boolean;
@@ -264,6 +278,9 @@ declare namespace defs {
       /** 企业id */
       orgId?: string;
 
+      /** 企业名称 */
+      orgName?: string;
+
       /** 资源id列表 */
       resourceIds?: Array<number>;
 
@@ -295,6 +312,198 @@ declare namespace defs {
 
       /** 角色名称 */
       role?: string;
+    }
+
+    export class TemExeSqlDTO {
+      /** stmt */
+      stmt?: string;
+
+      /** tenantCode */
+      tenantCode?: string;
+
+      /** type */
+      type?: number;
+    }
+
+    export class TemListDTO {
+      /** 子系统 */
+      clientKey?: string;
+
+      /** 创建时间 */
+      createTime?: string;
+
+      /** 租户模板id */
+      orgTemplateId?: string;
+
+      /** 套餐名称 */
+      packageName?: string;
+
+      /** 套餐标签 */
+      packageTags?: string;
+
+      /** 状态 */
+      status?: number;
+
+      /** 模板名称 */
+      templateName?: string;
+
+      /** 模板缩略图 */
+      templatePicture?: string;
+
+      /** 模板标签 */
+      templateTags?: string;
+    }
+
+    export class TemListQueryDTO {
+      /** 子系统 */
+      clientKey?: string;
+
+      /** 关键字 */
+      keyword?: string;
+
+      /** offset */
+      offset?: number;
+
+      /** 套餐id */
+      packageId?: string;
+
+      /** 页码 */
+      page?: number;
+
+      /** 页容量 */
+      pageSize?: number;
+
+      /** 模板状态 */
+      status?: number;
+
+      /** tenantCode */
+      tenantCode?: string;
+    }
+
+    export class TemOpeDTO {
+      /** 租户模板id */
+      orgTemplateId?: string;
+    }
+
+    export class TemPackageDTO {
+      /** 子系统key */
+      clientKeyList?: Array<string>;
+
+      /** 套餐描述 */
+      description?: string;
+
+      /** 是否失效 */
+      disabled?: number;
+
+      /** 用户指南 */
+      guideUrl?: string;
+
+      /** 套餐id */
+      id?: string;
+
+      /** 套餐名称 */
+      name?: string;
+
+      /** 套餐封面图 */
+      picture?: string;
+
+      /** 状态 */
+      status?: number;
+
+      /** 套餐标签 */
+      tags?: string;
+    }
+
+    export class TemPackageDetailDTO {
+      /** 套餐描述 */
+      description?: string;
+
+      /** 是否失效 */
+      disabled?: number;
+
+      /** 指南 */
+      guideUrl?: string;
+
+      /** 模板套餐id */
+      id?: string;
+
+      /** 套餐名称 */
+      name?: string;
+
+      /** 套餐封面图 */
+      picture?: string;
+
+      /** 套餐标签 */
+      tags?: string;
+
+      /** 套餐列表 */
+      templateList?: Array<defs.platform.TemTemplateDTO>;
+    }
+
+    export class TemPackageListQueryDTO {
+      /** 子系统 */
+      clientKey?: string;
+
+      /** 关键字 */
+      keyword?: string;
+
+      /** offset */
+      offset?: number;
+
+      /** packageIds */
+      packageIds?: Array<string>;
+
+      /** 页码 */
+      page?: number;
+
+      /** 页容量 */
+      pageSize?: number;
+
+      /** 状态 */
+      status?: string;
+
+      /** tenantCode */
+      tenantCode?: string;
+    }
+
+    export class TemPackageOpeDTO {
+      /** 套餐id */
+      packageId?: string;
+    }
+
+    export class TemTemplateDTO {
+      /** 子系统 */
+      clientKey?: string;
+
+      /** 模板描述 */
+      description?: string;
+
+      /** 模板id */
+      id?: string;
+
+      /** 模板名称 */
+      name?: string;
+
+      /** 租户 */
+      orgTemplateId?: string;
+
+      /** 密码 */
+      password?: string;
+
+      /** 模板封面 */
+      picture?: string;
+
+      /** 跳转url */
+      redirectUrl?: string;
+
+      /** 状态 */
+      status?: number;
+
+      /** 模板标签 */
+      tags?: string;
+
+      /** 用户名 */
+      username?: string;
     }
 
     export class TenantInformation {
@@ -339,6 +548,9 @@ declare namespace defs {
 
       /** 负责人手机号（默认绑定租户管理员） */
       phone?: string;
+
+      /** 企业资源id */
+      resourceId?: number;
 
       /** 帐号状态 0 禁用/1 启用 */
       status?: number;
@@ -399,6 +611,9 @@ declare namespace defs {
       /** 负责人手机号（默认绑定租户管理员） */
       phone?: string;
 
+      /** 企业资源id */
+      resourceId?: number;
+
       /** 帐号状态 0 禁用/1 启用 */
       status?: number;
 
@@ -445,9 +660,6 @@ declare namespace defs {
     }
 
     export class TheUserInformation {
-      /** 企业名称 */
-      orgName?: string;
-
       /** 校验用token */
       accessToken?: string;
 
@@ -480,6 +692,9 @@ declare namespace defs {
 
       /** orgLogo */
       orgLogo?: string;
+
+      /** orgName */
+      orgName?: string;
 
       /** 手机号 */
       phone?: string;
@@ -583,7 +798,9 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(bodyParams: defs.platform.UserLoginDTO): Promise<Response>;
+        export function fetch(
+          bodyParams: defs.platform.UserLoginDTO,
+        ): Promise<Response>;
       }
 
       /**
@@ -768,11 +985,15 @@ declare namespace API {
       export namespace pageList {
         export class Params {}
 
-        export type Response = defs.platform.Page<defs.platform.TenantInformation>;
+        export type Response = defs.platform.Page<
+          defs.platform.TenantInformation
+        >;
 
         export const init: Response;
 
-        export function fetch(bodyParams: defs.platform.TheTenantListPageFilter): Promise<Response>;
+        export function fetch(
+          bodyParams: defs.platform.TheTenantListPageFilter,
+        ): Promise<Response>;
       }
 
       /**
@@ -820,7 +1041,9 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(bodyParams: defs.platform.TenantInformation): Promise<Response>;
+        export function fetch(
+          bodyParams: defs.platform.TenantInformation,
+        ): Promise<Response>;
       }
 
       /**
@@ -838,6 +1061,22 @@ declare namespace API {
       }
 
       /**
+       * test
+       * /api/org/test
+       */
+      export namespace test {
+        export class Params {}
+
+        export type Response = any;
+
+        export const init: Response;
+
+        export function fetch(
+          bodyParams: defs.platform.TenantInformation,
+        ): Promise<Response>;
+      }
+
+      /**
        * 更改租户
        * /api/org/update
        */
@@ -848,7 +1087,9 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(bodyParams: defs.platform.TenantInformation): Promise<Response>;
+        export function fetch(
+          bodyParams: defs.platform.TenantInformation,
+        ): Promise<Response>;
       }
 
       /**
@@ -886,7 +1127,9 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(bodyParams: defs.platform.RoleBindUserDTO): Promise<Response>;
+        export function fetch(
+          bodyParams: defs.platform.RoleBindUserDTO,
+        ): Promise<Response>;
       }
 
       /**
@@ -900,7 +1143,9 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(bodyParams: defs.platform.DataRoleInputDTO): Promise<Response>;
+        export function fetch(
+          bodyParams: defs.platform.DataRoleInputDTO,
+        ): Promise<Response>;
       }
 
       /**
@@ -948,11 +1193,15 @@ declare namespace API {
       export namespace pageList {
         export class Params {}
 
-        export type Response = defs.platform.Page<defs.platform.RightsManagementRoleDtoList>;
+        export type Response = defs.platform.Page<
+          defs.platform.RightsManagementRoleDtoList
+        >;
 
         export const init: Response;
 
-        export function fetch(bodyParams: defs.platform.ScreeningRoleList): Promise<Response>;
+        export function fetch(
+          bodyParams: defs.platform.ScreeningRoleList,
+        ): Promise<Response>;
       }
 
       /**
@@ -966,7 +1215,9 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(bodyParams: defs.platform.RoleDTO): Promise<Response>;
+        export function fetch(
+          bodyParams: defs.platform.RoleDTO,
+        ): Promise<Response>;
       }
 
       /**
@@ -980,7 +1231,9 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(bodyParams: defs.platform.DataRuleDTO): Promise<Response>;
+        export function fetch(
+          bodyParams: defs.platform.DataRuleDTO,
+        ): Promise<Response>;
       }
     }
 
@@ -1003,6 +1256,20 @@ declare namespace API {
         export const init: Response;
 
         export function fetch(params?: Params): Promise<Response>;
+      }
+
+      /**
+       * flushUserAccessToken
+       * /api/user/flushUserAccessToken
+       */
+      export namespace flushUserAccessToken {
+        export class Params {}
+
+        export type Response = any;
+
+        export const init: Response;
+
+        export function fetch(): Promise<Response>;
       }
 
       /**
@@ -1033,7 +1300,9 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(bodyParams: defs.platform.UserListPageFilter): Promise<Response>;
+        export function fetch(
+          bodyParams: defs.platform.UserListPageFilter,
+        ): Promise<Response>;
       }
 
       /**
@@ -1074,11 +1343,15 @@ declare namespace API {
       export namespace pageList {
         export class Params {}
 
-        export type Response = defs.platform.Page<defs.platform.TheUserInformation>;
+        export type Response = defs.platform.Page<
+          defs.platform.TheUserInformation
+        >;
 
         export const init: Response;
 
-        export function fetch(bodyParams: defs.platform.UserListPageFilter): Promise<Response>;
+        export function fetch(
+          bodyParams: defs.platform.UserListPageFilter,
+        ): Promise<Response>;
       }
 
       /**
@@ -1109,7 +1382,9 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(bodyParams: defs.platform.TheUserInformation): Promise<Response>;
+        export function fetch(
+          bodyParams: defs.platform.TheUserInformation,
+        ): Promise<Response>;
       }
 
       /**
@@ -1123,7 +1398,9 @@ declare namespace API {
 
         export const init: Response;
 
-        export function fetch(bodyParams: defs.platform.TheUserInformation): Promise<Response>;
+        export function fetch(
+          bodyParams: defs.platform.TheUserInformation,
+        ): Promise<Response>;
       }
 
       /**
@@ -1162,6 +1439,171 @@ declare namespace API {
         export const init: Response;
 
         export function fetch(params?: Params): Promise<Response>;
+      }
+    }
+
+    /**
+     * Template Controller
+     */
+    export namespace template {
+      /**
+       * 数融创建模板之后回调接口
+       * /api/template_module/data/notify
+       */
+      export namespace dataNotify {
+        export class Params {}
+
+        export type Response = any;
+
+        export const init: Response;
+
+        export function fetch(
+          bodyParams: defs.platform.DataNotifyDTO,
+        ): Promise<Response>;
+      }
+
+      /**
+       * 执行sql
+       * /api/template_module/executeSql
+       */
+      export namespace executeSql {
+        export class Params {}
+
+        export type Response = any;
+
+        export const init: Response;
+
+        export function fetch(
+          bodyParams: defs.platform.TemExeSqlDTO,
+        ): Promise<Response>;
+      }
+
+      /**
+       * 创建模板套餐
+       * /api/template_module/package/create
+       */
+      export namespace createTemplatePackage {
+        export class Params {}
+
+        export type Response = defs.platform.TemPackageDetailDTO;
+
+        export const init: Response;
+
+        export function fetch(
+          bodyParams: defs.platform.TemPackageOpeDTO,
+        ): Promise<Response>;
+      }
+
+      /**
+       * 模板套餐预览
+       * /api/template_module/package/detail
+       */
+      export namespace detailTemplatePackage {
+        export class Params {
+          /** 模板套餐id */
+          packageId?: string;
+        }
+
+        export type Response = defs.platform.TemPackageDetailDTO;
+
+        export const init: Response;
+
+        export function fetch(params?: Params): Promise<Response>;
+      }
+
+      /**
+       * 模板套餐列表
+       * /api/template_module/package/list
+       */
+      export namespace listTemplatePackage {
+        export class Params {}
+
+        export type Response = defs.platform.Page<defs.platform.TemPackageDTO>;
+
+        export const init: Response;
+
+        export function fetch(
+          bodyParams: defs.platform.TemPackageListQueryDTO,
+        ): Promise<Response>;
+      }
+
+      /**
+       * 模板套餐列表——查询
+       * /api/template_module/package/listAll
+       */
+      export namespace listAllTemplatePackage {
+        export class Params {}
+
+        export type Response = Array<defs.platform.TemPackageDTO>;
+
+        export const init: Response;
+
+        export function fetch(): Promise<Response>;
+      }
+
+      /**
+       * sync
+       * /api/template_module/sync
+       */
+      export namespace sync {
+        export class Params {}
+
+        export type Response = any;
+
+        export const init: Response;
+
+        export function fetch(
+          bodyParams: defs.platform.TenantInformation,
+        ): Promise<Response>;
+      }
+
+      /**
+       * 创建模板或者重试
+       * /api/template_module/template/create
+       */
+      export namespace createTemplate {
+        export class Params {}
+
+        export type Response = defs.platform.TemTemplateDTO;
+
+        export const init: Response;
+
+        export function fetch(
+          bodyParams: defs.platform.TemOpeDTO,
+        ): Promise<Response>;
+      }
+
+      /**
+       * 模板历史详情
+       * /api/template_module/template/detail
+       */
+      export namespace detailTemplate {
+        export class Params {
+          /** 模板历史id */
+          orgTemplateId?: string;
+        }
+
+        export type Response = defs.platform.TemTemplateDTO;
+
+        export const init: Response;
+
+        export function fetch(params?: Params): Promise<Response>;
+      }
+
+      /**
+       * 模板列表
+       * /api/template_module/template/list
+       */
+      export namespace listTemplate {
+        export class Params {}
+
+        export type Response = defs.platform.Page<defs.platform.TemListDTO>;
+
+        export const init: Response;
+
+        export function fetch(
+          bodyParams: defs.platform.TemListQueryDTO,
+        ): Promise<Response>;
       }
     }
   }

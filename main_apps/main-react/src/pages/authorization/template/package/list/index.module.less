@@ -1,8 +1,14 @@
+.container {
+  min-width: 1044px;
+  overflow-x: auto;
+}
+
 .proForm {
   padding: 24px;
   :global {
     .cloud-form-item {
      margin-bottom: 15px;
+     z-index: 99;
     }
   }
 
@@ -28,9 +34,11 @@
 
   .item {
     margin-top: 19px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    // display: flex;
+    // flex-wrap: wrap;
+    // justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 
     .card {
       width: 316px;
@@ -39,7 +47,7 @@
       padding: 8px;
       background: #253157;
       border-radius: 4px;
-      margin-right: 5%;
+      // margin-right: 8%;
       
 
       .imageDiv {
@@ -62,6 +70,8 @@
         top: 8px;
         right: 12px;
         text-decoration:underline;
+        color: white;
+        cursor: pointer;
 
         span {
           margin-right: 5px;

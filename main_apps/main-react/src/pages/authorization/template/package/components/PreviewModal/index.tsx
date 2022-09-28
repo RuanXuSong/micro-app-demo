@@ -6,17 +6,17 @@ import { Store } from 'antd/es/form/interface';
 
 import img from '../../assets/preview.png';
 import styles from './index.module.less';
+import { enumToValueEnum } from '@/utils/array';
+import { TEMPLATE_CLIENT_ENUM } from '@/constant';
 
 export default ({
   visible,
   toggleVisible,
   data,
-  reload,
 }: {
   visible: boolean;
   toggleVisible: () => void;
   data: Store;
-  reload?: () => void;
 }) => {
   const loadingStatus = false;
 
@@ -26,11 +26,11 @@ export default ({
       visible={visible}
       forceRender
       maskClosable={false}
-      title="企业敏捷应用模板"
+      title={data.name}
       okButtonProps={{
         htmlType: 'submit',
       }}
-      width={537}
+      width={600}
       onCancel={toggleVisible}
       confirmLoading={loadingStatus}
       footer={[
@@ -40,7 +40,6 @@ export default ({
           loading={loadingStatus}
           onClick={() => {
             toggleVisible();
-            reload && reload();
           }}
         >
           确定
@@ -52,22 +51,32 @@ export default ({
           className="demo-loadmore-list"
           loading={loadingStatus}
           itemLayout="horizontal"
-          dataSource={data.systemList}
+          dataSource={data.templateList}
           size="small"
           renderItem={(item: any) => (
-            <List.Item actions={[<a>预览</a>]}>
+            <List.Item
+              actions={
+                item?.redirectUrl && [
+                  <a href={item.templateRedirectUrl} target="_blank" rel="noopener">
+                    预览
+                  </a>,
+                ]
+              }
+            >
               <List.Item.Meta
                 avatar={
-                  <Image src={item.image ?? img} className={styles.preview} preview={false} />
+                  <Image src={item.picture ?? img} className={styles.preview} preview={false} />
                 }
                 title={
                   <div>
-                    {item?.name}&nbsp;&nbsp;
-                    {item?.tags?.map((term: string) => (
-                      <Tag className={styles.featureTag} key={term}>
-                        {term}
-                      </Tag>
-                    ))}
+                    {enumToValueEnum(TEMPLATE_CLIENT_ENUM)[item.clientKey]?.text}-{item?.name}
+                    &nbsp;&nbsp;
+                    {item?.tags &&
+                      JSON.parse(item?.tags || '[]')?.map((term: string) => (
+                        <Tag className={styles.featureTag} key={term}>
+                          {term}
+                        </Tag>
+                      ))}
                   </div>
                 }
                 description={<div className={styles.description}>{item.description}</div>}

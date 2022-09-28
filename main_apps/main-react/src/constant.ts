@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-28 18:10:42
  * @LastEditors: 仇艳
- * @LastEditTime: 2022-09-23 10:56:58
+ * @LastEditTime: 2022-09-28 17:26:35
  */
 
 /** 云平台 antd 样式前缀（防止子应用样式污染） */
@@ -16,6 +16,7 @@ export const PREFIX_CLASS = 'cloud';
 export const initialPagination = {
   page: 1,
   pageSize: 10,
+  packagePageSize: 100,
 };
 
 export const THROTTLE_INTERVAL = 500;
@@ -61,22 +62,32 @@ export enum ROLE_STATUS_MAP {
 
 /** 模板创建状态枚举 */
 export enum TEMPLATE_STATUS_MAP {
-  未创建 = 1,
-  创建中 = 0,
+  未创建 = 0,
+  创建中 = 1,
 }
 
 /** 模板状态颜色枚举 */
 export enum TEMPLATE_STATUS_COLOR_MAP {
-  '#0085FF' = 0,
-  '#45D96E' = 1,
-  '#FF0000' = 2,
+  '#45D96E' = 0,
+  '#0085FF' = 1,
+  '#17F9AD' = 2,
+  '#FF0000' = 3,
 }
 
 /** 模板历史状态枚举 */
 export enum HISTORY_STATUS_MAP {
-  创建中 = 0,
-  成功 = 1,
-  失败 = 2,
+  未创建 = 0,
+  创建中 = 1,
+  成功 = 2,
+  失败 = 3,
+}
+
+/** 模板子系统枚举 */
+export enum TEMPLATE_CLIENT_ENUM {
+  数智平台 = 'td-bi',
+  敏捷大屏 = 'td-bigscreen',
+  敏捷应用 = 'lowcode',
+  数融平台 = 'td-data',
 }
 
 /** 性别枚举 */

@@ -1,14 +1,20 @@
-import { useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { message } from 'antd';
 import { useRequest } from 'ahooks';
-import { ActionType } from '@ant-design/pro-table';
 import { useImmer } from 'use-immer';
+import { removeEmpty } from '@/utils/json';
+import { initialPagination, TEMPLATE_STATUS_MAP } from '@/constant';
 
 export default () => {
-  const actionRef = useRef<ActionType>();
-  const [selectedItem, setSelected] = useState(0);
+  const [selectedItem, setSelected] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [taskIds, setTaskIds] = useState<string[]>([]);
 
-  const { reload } = actionRef.current || {};
+  const [result, setResult] = useState<defs.platform.Page<defs.platform.TemPackageDTO>>({
+    list: [],
+    page: 1,
+    total: 0,
+  });
 
   const [createModalConfig, setCreateModalConfig] = useImmer<{
     visible: boolean;
@@ -35,50 +41,130 @@ export default () => {
    * @param params
    */
   const fetchList = async (params?: { pageSize?: number; current?: number }) => {
-    // const { list, page, total } = await API.platform.sysOrg.pageList.fetch(
-    //   removeEmpty({
-    //     ...params,
-    //     page: params?.current || initialPagination.page,
-    //     pageSize: params?.pageSize || initialPagination.pageSize,
-    //   }),
-    // );
-    console.log(params);
-
-    return {
-      // data: list || [],
-      data: [],
-      page: 1,
-      success: true,
-      total: 12,
-    };
+    setLoading(true);
+    const {
+      list = [],
+      page = 1,
+      total = 0,
+    } = await API.platform.template.listTemplatePackage.fetch(
+      removeEmpty({
+        ...params,
+        page: params?.current || initialPagination.page,
+        pageSize: params?.pageSize || initialPagination.packagePageSize,
+      }),
+    );
+    setLoading(false);
+    setResult({
+      list,
+      page,
+      total,
+    });
   };
+
+  /** 进入页面第一次请求 */
+  useEffect(() => {
+    fetchList();
+  }, []);
 
   /** 创建模板 */
-  const handleCreateTemplate = (row: any) => {
-    setCreateModalConfig((config) => {
-      config.visible = true;
-      config.loading = true;
-      config.data = row;
-    });
-  };
+  const { run: handleCreateTemplate } = useRequest(
+    API.platform.template.createTemplatePackage.fetch,
+    {
+      manual: true,
+      onSuccess: (data) => {
+        setCreateModalConfig((config) => {
+          config.visible = true;
+          config.loading = true;
+          config.data = data;
+        });
+        if (data?.templateList?.length) {
+          // 每个子系统需要调用接口去创建
+          data?.templateList?.map((template) =>
+            handleTemplateRetry({ orgTemplateId: template.orgTemplateId }),
+          );
+        }
+      },
+    },
+  );
 
   /** 预览模板 */
-  const handlePreviewTemplate = (row: any) => {
-    setPreviewModalConfig((config) => {
-      config.visible = true;
-      config.loading = true;
-      config.data = row;
-    });
-  };
+  const { run: handlePreviewTemplate } = useRequest(
+    API.platform.template.detailTemplatePackage.fetch,
+    {
+      manual: true,
+      onSuccess: (data) => {
+        setPreviewModalConfig((config) => {
+          config.visible = true;
+          config.loading = true;
+          config.data = data;
+        });
+      },
+    },
+  );
 
-  /** 重试 */
-  const { run: handleTemplateRetry, loading } = useRequest(API.platform.sysOrg.updateStatus.fetch, {
+  /** 创建或者重试 */
+  const { run: handleTemplateRetry } = useRequest(API.platform.template.createTemplate.fetch, {
     manual: true,
-    onSuccess: () => {
-      message.success('删除成功');
-      reload?.();
+    onSuccess: (data) => {
+      if (createModalConfig?.visible) {
+        const newData = createModalConfig?.data;
+        const templateList = createModalConfig?.data?.templateList.filter(
+          (item: { orgTemplateId: string | undefined }) =>
+            item.orgTemplateId !== data.orgTemplateId,
+        );
+        const newTemplateList = [...templateList, data];
+        setCreateModalConfig((config) => {
+          config.loading = false;
+          config.data = { ...newData, templateList: newTemplateList };
+        });
+        // 获取异步接口的子系统，加入定时任务中
+        if (data.status === TEMPLATE_STATUS_MAP.创建中) {
+          setTaskIds([...taskIds, data?.orgTemplateId!]);
+        }
+      } else {
+        message.success('操作成功');
+      }
     },
   });
+
+  /** 定时获取子系统创建的任务详情 */
+  const { run: runTask, cancel: cancelTask } = useRequest(
+    API.platform.template.detailTemplate.fetch,
+    {
+      manual: true,
+      ready: createModalConfig.visible,
+      // refreshDeps: [taskIds.length],
+      pollingInterval: 10000,
+      pollingWhenHidden: true,
+      onSuccess: (data) => {
+        const newData = createModalConfig?.data;
+        const templateList = createModalConfig?.data?.templateList.filter(
+          (item: { orgTemplateId: string | undefined }) =>
+            item.orgTemplateId !== data.orgTemplateId,
+        );
+        const newTemplateList = [...templateList, data];
+        setCreateModalConfig((config) => {
+          config.data = { ...newData, templateList: newTemplateList };
+        });
+        // 异步接口返回结果，取消定时任务
+        if (data.status !== TEMPLATE_STATUS_MAP.创建中 && taskIds.includes(data?.orgTemplateId!)) {
+          cancelTask();
+          setTaskIds(taskIds.filter((id) => id !== data.orgTemplateId));
+        }
+      },
+    },
+  );
+
+  useEffect(() => {
+    if (taskIds?.length) {
+      taskIds.forEach((id) => runTask({ orgTemplateId: id }));
+    } else {
+      cancelTask();
+    }
+    if (!createModalConfig.visible) {
+      cancelTask();
+    }
+  }, [taskIds]);
 
   /** 隐藏弹窗 */
   const handleModalHide = (type: 'create' | 'preview') => {
@@ -94,15 +180,14 @@ export default () => {
   };
 
   return {
-    loading: loading,
-    actionRef,
+    ...result,
+    loading,
     selectedItem,
     createModalConfig,
     previewModalConfig,
     handleModalHide,
     setCreateModalConfig,
     setSelected,
-    reload,
     handleTemplateRetry,
     fetchList,
     handleCreateTemplate,

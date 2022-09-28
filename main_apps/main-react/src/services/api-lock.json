@@ -3,6 +3,7 @@
     "mods": [
       {
         "description": "新的资源管理接口",
+        "name": "authResource",
         "interfaces": [
           {
             "consumes": [
@@ -94,11 +95,11 @@
               }
             ]
           }
-        ],
-        "name": "authResource"
+        ]
       },
       {
         "description": "新的ResourceRole管理接口",
+        "name": "authResourceRole",
         "interfaces": [
           {
             "description": "校验用户是否已经绑定该角色",
@@ -162,11 +163,11 @@
               }
             ]
           }
-        ],
-        "name": "authResourceRole"
+        ]
       },
       {
         "description": "客户端管理",
+        "name": "client",
         "interfaces": [
           {
             "description": "delete",
@@ -362,11 +363,11 @@
               }
             ]
           }
-        ],
-        "name": "client"
+        ]
       },
       {
         "description": "数据管理",
+        "name": "data",
         "interfaces": [
           {
             "consumes": [
@@ -958,11 +959,11 @@
               }
             ]
           }
-        ],
-        "name": "data"
+        ]
       },
       {
         "description": "数据角色管理",
+        "name": "dataRole",
         "interfaces": [
           {
             "consumes": [
@@ -1365,11 +1366,11 @@
               }
             ]
           }
-        ],
-        "name": "dataRole"
+        ]
       },
       {
         "description": "部署权限控制中心接口",
+        "name": "deploymentAuthz",
         "interfaces": [
           {
             "description": "获取角色访问businessValue列表",
@@ -1601,11 +1602,11 @@
               }
             ]
           }
-        ],
-        "name": "deploymentAuthz"
+        ]
       },
       {
         "description": "Health Check Controller",
+        "name": "healthCheck",
         "interfaces": [
           {
             "description": "healthCheck",
@@ -1734,11 +1735,11 @@
             },
             "parameters": []
           }
-        ],
-        "name": "healthCheck"
+        ]
       },
       {
         "description": "资源管理",
+        "name": "resource",
         "interfaces": [
           {
             "consumes": [
@@ -2647,11 +2648,11 @@
               }
             ]
           }
-        ],
-        "name": "resource"
+        ]
       },
       {
         "description": "ResourceRole管理",
+        "name": "resourceRole",
         "interfaces": [
           {
             "consumes": [
@@ -3799,11 +3800,11 @@
               }
             ]
           }
-        ],
-        "name": "resourceRole"
+        ]
       },
       {
         "description": "角色管理",
+        "name": "role",
         "interfaces": [
           {
             "consumes": [
@@ -3840,14 +3841,14 @@
               }
             ]
           }
-        ],
-        "name": "role"
+        ]
       }
     ],
     "name": "authorization",
     "baseClasses": [
       {
         "name": "BindUserDTO",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3901,11 +3902,11 @@
             "description": "用户id",
             "required": true
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "BusinessQueryDTO",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3987,11 +3988,11 @@
             "description": "角色名称",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "ClientConfig",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -4101,11 +4102,11 @@
             "name": "updatedAt",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "DataModule",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -4198,11 +4199,11 @@
             "name": "updatedAt",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "DataRole",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -4308,11 +4309,11 @@
             "name": "updatedAt",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "DataRoleInputDTO",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -4441,11 +4442,11 @@
             "name": "updatedAt",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "DataRoleVO",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -4574,11 +4575,11 @@
             "name": "updatedAt",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "DataRuleDTO",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -4759,11 +4760,11 @@
             "name": "updatedAt",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "DataRuleDefinition",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -4934,11 +4935,11 @@
             "name": "updatedAt",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "DataScopeDTO",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -5015,11 +5016,11 @@
             "name": "userId",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "DataScopeResultDTO",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -5070,11 +5071,11 @@
             "name": "ruleKey",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "OrgTreeDTO",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -5194,11 +5195,21 @@
             "description": "人员列表",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "PagingEntity",
+        "templateArgs": [
+          {
+            "typeArgs": [],
+            "typeName": "DataRoleVO",
+            "isDefsType": true,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": [],
+            "typeProperties": []
+          }
+        ],
         "properties": [
           {
             "dataType": {
@@ -5266,21 +5277,11 @@
             "description": "total",
             "required": true
           }
-        ],
-        "templateArgs": [
-          {
-            "typeArgs": [],
-            "typeName": "DataRoleVO",
-            "isDefsType": true,
-            "templateIndex": -1,
-            "compileTemplateKeyword": "#/definitions/",
-            "enum": [],
-            "typeProperties": []
-          }
         ]
       },
       {
         "name": "PersonListDTO",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -5490,11 +5491,11 @@
             "description": "用户id",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "QueryRoleDTO",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -5601,11 +5602,11 @@
             "name": "userId",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "ResourceObjects",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -5830,11 +5831,11 @@
             "description": "更新时间",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "ResourcePageObject",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -6023,11 +6024,11 @@
             "description": "用户id列表",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "ResourceRole",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -6168,11 +6169,11 @@
             "description": "更新时间",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "ResourceTreeObject",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -6376,11 +6377,11 @@
             "description": "类型",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "ResourcesForDetails",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -6619,11 +6620,11 @@
             "description": "更新时间",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "RoleBindUserDTO",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -6661,11 +6662,11 @@
             "name": "userIdList",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "RoleDTO",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -6854,11 +6855,11 @@
             "description": "用户id列表",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "UserQueryDTO",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -6898,11 +6899,11 @@
             "description": "用户id列表",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "UserReduceRoleDTO",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -6942,8 +6943,7 @@
             "description": "用户id",
             "required": true
           }
-        ],
-        "templateArgs": []
+        ]
       }
     ]
   },
@@ -6951,7 +6951,6 @@
     "mods": [
       {
         "description": "登录接口",
-        "name": "authorization",
         "interfaces": [
           {
             "consumes": [
@@ -7020,11 +7019,11 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "authorization"
       },
       {
         "description": "Client Key Controller",
-        "name": "clientKey",
         "interfaces": [
           {
             "description": "list",
@@ -7052,11 +7051,11 @@
             },
             "parameters": []
           }
-        ]
+        ],
+        "name": "clientKey"
       },
       {
         "description": "Health Check Controller",
-        "name": "healthCheck",
         "interfaces": [
           {
             "description": "healthCheck",
@@ -7185,11 +7184,11 @@
             },
             "parameters": []
           }
-        ]
+        ],
+        "name": "healthCheck"
       },
       {
         "description": "TenantInformation接口",
-        "name": "sysOrg",
         "interfaces": [
           {
             "description": "租户详情",
@@ -7423,6 +7422,41 @@
             "consumes": [
               "application/json"
             ],
+            "description": "test",
+            "name": "test",
+            "method": "post",
+            "path": "/api/org/test",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "sysOrg",
+                "name": "sysOrg",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "TenantInformation",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
             "description": "更改租户",
             "name": "update",
             "method": "post",
@@ -7501,11 +7535,11 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "sysOrg"
       },
       {
         "description": "角色信息接口",
-        "name": "sysRole",
         "interfaces": [
           {
             "consumes": [
@@ -7806,11 +7840,11 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "sysRole"
       },
       {
         "description": "TheUserInformation接口",
-        "name": "sysUser",
         "interfaces": [
           {
             "description": "用户详情",
@@ -7843,6 +7877,22 @@
                 }
               }
             ]
+          },
+          {
+            "description": "flushUserAccessToken",
+            "name": "flushUserAccessToken",
+            "method": "get",
+            "path": "/api/user/flushUserAccessToken",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": []
           },
           {
             "description": "个人信息",
@@ -8220,14 +8270,375 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "sysUser"
+      },
+      {
+        "description": "Template Controller",
+        "interfaces": [
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "数融创建模板之后回调接口",
+            "name": "dataNotify",
+            "method": "post",
+            "path": "/api/template_module/data/notify",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "dataNotifyDTO",
+                "name": "dataNotifyDTO",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "DataNotifyDTO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "执行sql",
+            "name": "executeSql",
+            "method": "post",
+            "path": "/api/template_module/executeSql",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "temExeSqlDTO",
+                "name": "temExeSqlDTO",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "TemExeSqlDTO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "创建模板套餐",
+            "name": "createTemplatePackage",
+            "method": "post",
+            "path": "/api/template_module/package/create",
+            "response": {
+              "typeArgs": [],
+              "typeName": "TemPackageDetailDTO",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "operationDTO",
+                "name": "operationDTO",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "TemPackageOpeDTO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "模板套餐预览",
+            "name": "detailTemplatePackage",
+            "method": "get",
+            "path": "/api/template_module/package/detail",
+            "response": {
+              "typeArgs": [],
+              "typeName": "TemPackageDetailDTO",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "模板套餐id",
+                "name": "packageId",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "模板套餐列表",
+            "name": "listTemplatePackage",
+            "method": "post",
+            "path": "/api/template_module/package/list",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "TemPackageDTO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Page",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "queryDTO",
+                "name": "queryDTO",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "TemPackageListQueryDTO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "模板套餐列表——查询",
+            "name": "listAllTemplatePackage",
+            "method": "get",
+            "path": "/api/template_module/package/listAll",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "TemPackageDTO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": []
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "sync",
+            "name": "sync",
+            "method": "post",
+            "path": "/api/template_module/sync",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "sysOrg",
+                "name": "sysOrg",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "TenantInformation",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "创建模板或者重试",
+            "name": "createTemplate",
+            "method": "post",
+            "path": "/api/template_module/template/create",
+            "response": {
+              "typeArgs": [],
+              "typeName": "TemTemplateDTO",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "operationDTO",
+                "name": "operationDTO",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "TemOpeDTO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "模板历史详情",
+            "name": "detailTemplate",
+            "method": "get",
+            "path": "/api/template_module/template/detail",
+            "response": {
+              "typeArgs": [],
+              "typeName": "TemTemplateDTO",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "模板历史id",
+                "name": "orgTemplateId",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "模板列表",
+            "name": "listTemplate",
+            "method": "post",
+            "path": "/api/template_module/template/list",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "TemListDTO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Page",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "queryDTO",
+                "name": "queryDTO",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "TemListQueryDTO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          }
+        ],
+        "name": "template"
       }
     ],
     "name": "platform",
     "baseClasses": [
       {
         "name": "ClientKey",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -8270,11 +8681,11 @@
             "name": "id",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "CookieItemVO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -8374,11 +8785,56 @@
             "description": "value",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "DataNotifyDTO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "reason",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "boolean",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "success",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "templateHistoryId",
+            "required": false
+          }
+        ],
+        "templateArgs": []
       },
       {
         "name": "DataRoleInputDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -8455,6 +8911,19 @@
               "enum": [],
               "typeProperties": []
             },
+            "name": "init",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "boolean",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
             "name": "isDeleted",
             "required": false
           },
@@ -8507,11 +8976,11 @@
             "name": "updatedAt",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "DataRuleDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -8728,11 +9197,11 @@
             "name": "updatedAt",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "LoginResultVO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -8786,28 +9255,18 @@
             "description": "跳转url",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "Page",
-        "templateArgs": [
-          {
-            "typeArgs": [],
-            "typeName": "RightsManagementRoleDtoList",
-            "isDefsType": true,
-            "templateIndex": -1,
-            "compileTemplateKeyword": "#/definitions/",
-            "enum": [],
-            "typeProperties": []
-          }
-        ],
         "properties": [
           {
             "dataType": {
               "typeArgs": [
                 {
                   "typeArgs": [],
-                  "typeName": "RightsManagementRoleDtoList",
+                  "typeName": "TemListDTO",
                   "isDefsType": true,
                   "templateIndex": 0,
                   "compileTemplateKeyword": "#/definitions/",
@@ -8877,11 +9336,21 @@
             "name": "totalPage",
             "required": false
           }
+        ],
+        "templateArgs": [
+          {
+            "typeArgs": [],
+            "typeName": "TemListDTO",
+            "isDefsType": true,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": [],
+            "typeProperties": []
+          }
         ]
       },
       {
         "name": "ResourceTreeObject",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -9085,11 +9554,11 @@
             "description": "类型",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "RightsManagementRoleDtoList",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -9273,11 +9742,11 @@
             "description": "更新时间",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "RoleBindUserDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -9328,11 +9797,11 @@
             "name": "userIdList",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "RoleDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -9461,6 +9930,20 @@
           },
           {
             "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "orgName",
+            "description": "企业名称",
+            "required": false
+          },
+          {
+            "dataType": {
               "typeArgs": [
                 {
                   "typeArgs": [],
@@ -9549,11 +10032,11 @@
             "description": "用户id列表",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "ScreeningRoleList",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -9624,11 +10107,899 @@
             "description": "角色名称",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "TemExeSqlDTO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "stmt",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "tenantCode",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "type",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "TemListDTO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "clientKey",
+            "description": "子系统",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "createTime",
+            "description": "创建时间",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "orgTemplateId",
+            "description": "租户模板id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "packageName",
+            "description": "套餐名称",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "packageTags",
+            "description": "套餐标签",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "status",
+            "description": "状态",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "templateName",
+            "description": "模板名称",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "templatePicture",
+            "description": "模板缩略图",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "templateTags",
+            "description": "模板标签",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "TemListQueryDTO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "clientKey",
+            "description": "子系统",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "keyword",
+            "description": "关键字",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "offset",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "packageId",
+            "description": "套餐id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "page",
+            "description": "页码",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "pageSize",
+            "description": "页容量",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "status",
+            "description": "模板状态",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "tenantCode",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "TemOpeDTO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "orgTemplateId",
+            "description": "租户模板id",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "TemPackageDTO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "clientKeyList",
+            "description": "子系统key",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "description",
+            "description": "套餐描述",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "disabled",
+            "description": "是否失效",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "guideUrl",
+            "description": "用户指南",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "id",
+            "description": "套餐id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "name",
+            "description": "套餐名称",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "picture",
+            "description": "套餐封面图",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "status",
+            "description": "状态",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "tags",
+            "description": "套餐标签",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "TemPackageDetailDTO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "description",
+            "description": "套餐描述",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "disabled",
+            "description": "是否失效",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "guideUrl",
+            "description": "指南",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "id",
+            "description": "模板套餐id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "name",
+            "description": "套餐名称",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "picture",
+            "description": "套餐封面图",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "tags",
+            "description": "套餐标签",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "TemTemplateDTO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "templateList",
+            "description": "套餐列表",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "TemPackageListQueryDTO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "clientKey",
+            "description": "子系统",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "keyword",
+            "description": "关键字",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "offset",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "packageIds",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "page",
+            "description": "页码",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "pageSize",
+            "description": "页容量",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "status",
+            "description": "状态",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "tenantCode",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "TemPackageOpeDTO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "packageId",
+            "description": "套餐id",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "TemTemplateDTO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "clientKey",
+            "description": "子系统",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "description",
+            "description": "模板描述",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "id",
+            "description": "模板id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "name",
+            "description": "模板名称",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "orgTemplateId",
+            "description": "租户",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "password",
+            "description": "密码",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "picture",
+            "description": "模板封面",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "redirectUrl",
+            "description": "跳转url",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "status",
+            "description": "状态",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "tags",
+            "description": "模板标签",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "username",
+            "description": "用户名",
+            "required": false
+          }
+        ],
+        "templateArgs": []
       },
       {
         "name": "TenantInformation",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -9833,6 +11204,20 @@
               "enum": [],
               "typeProperties": []
             },
+            "name": "resourceId",
+            "description": "企业资源id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
             "name": "status",
             "description": "帐号状态 0 禁用/1 启用",
             "required": false
@@ -9877,11 +11262,11 @@
             "description": "有效期",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "TheTenantDetailsDto",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -10100,6 +11485,20 @@
               "enum": [],
               "typeProperties": []
             },
+            "name": "resourceId",
+            "description": "企业资源id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
             "name": "status",
             "description": "帐号状态 0 禁用/1 启用",
             "required": false
@@ -10158,11 +11557,11 @@
             "description": "有效期",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "TheTenantListPageFilter",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -10289,11 +11688,11 @@
             "description": "有效期",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "TheUserInformation",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -10453,6 +11852,19 @@
               "enum": [],
               "typeProperties": []
             },
+            "name": "orgName",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
             "name": "phone",
             "description": "手机号",
             "required": false
@@ -10561,11 +11973,11 @@
             "description": "登录账号",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "UserListPageFilter",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -10744,11 +12156,11 @@
             "description": "登录账号",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "UserLoginDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -10834,7 +12246,8 @@
             "description": "跳转url",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       }
     ]
   }
