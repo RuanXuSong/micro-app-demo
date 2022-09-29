@@ -186,6 +186,7 @@ export default () => {
   const getRef = (dom: HTMLDivElement) => {
     if (!dom) return;
     const totalWidth = dom.clientWidth;
+    if (!totalWidth) return;
     // 一行几个
     const count = Math.floor(totalWidth / CARD_WIDTH) - 1;
     // 根据余下的宽度算出每个的左右边距
