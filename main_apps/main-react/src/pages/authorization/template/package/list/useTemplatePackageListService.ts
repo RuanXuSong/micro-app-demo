@@ -5,10 +5,14 @@ import { useImmer } from 'use-immer';
 import { removeEmpty } from '@/utils/json';
 import { initialPagination, TEMPLATE_STATUS_MAP } from '@/constant';
 
+// 卡片宽度
+const CARD_WIDTH = 316;
+
 export default () => {
   const [selectedItem, setSelected] = useState('');
   const [loading, setLoading] = useState(false);
   const [taskIds, setTaskIds] = useState<string[]>([]);
+  const [margin, setMargin] = useState(0);
 
   const [result, setResult] = useState<defs.platform.Page<defs.platform.TemPackageDTO>>({
     list: [],
@@ -178,9 +182,20 @@ export default () => {
       config.data = {};
     });
   };
+  /** ref 函数 */
+  const getRef = (dom: HTMLDivElement) => {
+    if (!dom) return;
+    const totalWidth = dom.clientWidth;
+    // 一行几个
+    const count = Math.floor(totalWidth / CARD_WIDTH) - 1;
+    // 根据余下的宽度算出每个的左右边距
+    const margin = Math.floor((totalWidth - count * CARD_WIDTH) / count / 2);
+    setMargin(margin);
+  };
 
   return {
     ...result,
+    margin,
     loading,
     selectedItem,
     createModalConfig,
@@ -192,5 +207,6 @@ export default () => {
     fetchList,
     handleCreateTemplate,
     handlePreviewTemplate,
+    getRef,
   };
 };

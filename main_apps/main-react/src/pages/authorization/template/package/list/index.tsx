@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
- * @LastEditors: 仇艳
- * @LastEditTime: 2022-09-28 17:36:40
+ * @LastEditors: 阮旭松
+ * @LastEditTime: 2022-09-29 11:56:28
  */
 import React, { useRef } from 'react';
 import { Tag, Image, Button, Spin } from 'antd';
@@ -21,6 +21,7 @@ import { FormInstance } from 'antd/es/form';
 export default () => {
   const formRef = useRef<FormInstance>();
   const {
+    margin,
     loading,
     selectedItem,
     list,
@@ -32,6 +33,7 @@ export default () => {
     handleCreateTemplate,
     handlePreviewTemplate,
     handleTemplateRetry,
+    getRef,
   } = useTemplatePackageListService();
 
   return (
@@ -80,13 +82,14 @@ export default () => {
       <Spin spinning={loading}>
         <div className={styles.content}>
           <div className={styles.title}>模板套餐</div>
-          <div className={styles.item}>
+          <div className={styles.item} ref={getRef}>
             {list?.map((item, index) => (
               <div
                 className={styles.card}
                 key={index}
                 tabIndex={index}
                 onMouseMove={() => setSelected(item?.id!)}
+                style={{ marginRight: margin, marginLeft: margin }}
               >
                 <div className={styles.imageDiv}>
                   <Image
