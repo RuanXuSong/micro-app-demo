@@ -1,8 +1,6 @@
 import React from 'react';
 import { Modal, Spin, Button } from 'antd';
-import Editor from 'react-markdown-editor-lite';
 import ReactMarkdown from 'react-markdown';
-import 'react-markdown-editor-lite/lib/index.css';
 
 import 'antd/lib/form';
 
@@ -15,7 +13,6 @@ export default ({
   data: string;
   toggleVisible: () => void;
 }) => {
-  const mdEditor = React.useRef(null);
   const loadingStatus = false;
 
   return (
@@ -45,15 +42,7 @@ export default ({
       ]}
     >
       <Spin spinning={loadingStatus}>
-        <Editor
-          ref={mdEditor}
-          value={data}
-          style={{
-            height: '500px',
-          }}
-          view={{ menu: false, md: false, html: true }}
-          renderHTML={(text) => <ReactMarkdown source={text} />}
-        />
+        <ReactMarkdown source={data} />
       </Spin>
     </Modal>
   );
