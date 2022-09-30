@@ -160,7 +160,6 @@ export default () => {
     {
       manual: true,
       ready: createModalConfig.visible,
-      // refreshDeps: [taskIds.length],
       pollingInterval: 10000,
       pollingWhenHidden: true,
       onSuccess: (data) => {
@@ -206,6 +205,7 @@ export default () => {
       config.data = type === 'markdown' ? '' : {};
     });
   };
+
   /** ref 函数 */
   const getRef = (dom: HTMLDivElement) => {
     if (!dom) return;

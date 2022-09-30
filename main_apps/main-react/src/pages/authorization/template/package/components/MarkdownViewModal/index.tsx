@@ -1,8 +1,6 @@
 import React from 'react';
-import { Modal, Spin, Button } from 'antd';
+import { Modal, Button } from 'antd';
 import ReactMarkdown from 'react-markdown';
-
-import 'antd/lib/form';
 
 export default ({
   visible,
@@ -13,8 +11,6 @@ export default ({
   data: string;
   toggleVisible: () => void;
 }) => {
-  const loadingStatus = false;
-
   return (
     <Modal
       centered
@@ -27,12 +23,10 @@ export default ({
       }}
       width={600}
       onCancel={toggleVisible}
-      confirmLoading={loadingStatus}
       footer={[
         <Button
           key="submit"
           type="primary"
-          loading={loadingStatus}
           onClick={() => {
             toggleVisible();
           }}
@@ -41,9 +35,7 @@ export default ({
         </Button>,
       ]}
     >
-      <Spin spinning={loadingStatus}>
-        <ReactMarkdown source={data} />
-      </Spin>
+      <ReactMarkdown source={data} />
     </Modal>
   );
 };

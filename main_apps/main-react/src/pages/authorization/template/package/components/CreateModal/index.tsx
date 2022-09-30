@@ -1,7 +1,6 @@
 import React from 'react';
 import { Modal, Spin, Image, Badge, List, Button } from 'antd';
 
-import 'antd/lib/form';
 import { Store } from 'antd/es/form/interface';
 import { HISTORY_STATUS_MAP, TEMPLATE_STATUS_COLOR_MAP, TEMPLATE_STATUS_MAP } from '@/constant';
 
