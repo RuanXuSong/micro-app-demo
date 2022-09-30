@@ -41,6 +41,16 @@ export default () => {
     loading: false,
   });
 
+  const [markDownConfig, setMarkDownConfig] = useImmer<{
+    visible: boolean;
+    data: any;
+    loading: boolean;
+  }>({
+    visible: false,
+    data: '',
+    loading: false,
+  });
+
   const { templateAuthMap } = useTemplateAuth();
 
   /**
@@ -109,6 +119,16 @@ export default () => {
     },
   );
 
+  /** 查看模板指南 */
+  const handleViewMarkDown = async (fileUrl: string) => {
+    const result = await fetch(fileUrl);
+    const data = await result.text();
+    setMarkDownConfig((config) => {
+      config.visible = true;
+      config.data = data;
+    });
+  };
+
   /** 创建或者重试 */
   const { run: handleTemplateRetry } = useRequest(API.platform.template.createTemplate.fetch, {
     manual: true,
@@ -174,15 +194,16 @@ export default () => {
   }, [taskIds]);
 
   /** 隐藏弹窗 */
-  const handleModalHide = (type: 'create' | 'preview') => {
+  const handleModalHide = (type: 'create' | 'preview' | 'markdown') => {
     const methodsObj = {
       create: setCreateModalConfig,
       preview: setPreviewModalConfig,
+      markdown: setMarkDownConfig,
     };
     methodsObj[type]((config) => {
       config.visible = false;
       config.loading = false;
-      config.data = {};
+      config.data = type === 'markdown' ? '' : {};
     });
   };
   /** ref 函数 */
@@ -204,8 +225,9 @@ export default () => {
     selectedItem,
     createModalConfig,
     previewModalConfig,
+    markDownConfig,
+    handleViewMarkDown,
     handleModalHide,
-    setCreateModalConfig,
     setSelected,
     handleTemplateRetry,
     fetchList,

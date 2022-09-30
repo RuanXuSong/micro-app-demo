@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 仇艳
- * @LastEditTime: 2022-09-30 10:21:38
+ * @LastEditTime: 2022-09-30 11:46:14
  */
 import React, { useRef } from 'react';
 import { Tag, Image, Button, Spin } from 'antd';
@@ -17,6 +17,7 @@ import PreviewModal from '../components/PreviewModal';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { enumToValueEnum } from '@/utils/array';
 import { FormInstance } from 'antd/es/form';
+import MarkdownViewModal from '../components/MarkdownViewModal';
 
 export default () => {
   const formRef = useRef<FormInstance>();
@@ -28,11 +29,13 @@ export default () => {
     createModalConfig,
     previewModalConfig,
     templateAuthMap,
+    markDownConfig,
     fetchList,
     handleModalHide,
     setSelected,
     handleCreateTemplate,
     handlePreviewTemplate,
+    handleViewMarkDown,
     handleTemplateRetry,
     getRef,
   } = useTemplatePackageListService();
@@ -107,15 +110,13 @@ export default () => {
 
                   {selectedItem === item.id && (
                     <div>
-                      <a
+                      <span
                         className={styles.guide}
-                        href={item.guideUrl}
-                        target="_blank"
-                        rel="noopener"
+                        onClick={() => handleViewMarkDown(item?.guideUrl!)}
                       >
                         <QuestionCircleOutlined />
                         模板指南
-                      </a>
+                      </span>
 
                       <div className={styles.optBtn}>
                         {templateAuthMap['模板预览'] && (
@@ -184,6 +185,11 @@ export default () => {
           data={previewModalConfig.data}
           toggleVisible={() => handleModalHide('preview')}
           templateAuthMap={templateAuthMap}
+        />
+        <MarkdownViewModal
+          visible={markDownConfig.visible}
+          data={markDownConfig.data}
+          toggleVisible={() => handleModalHide('markdown')}
         />
       </Spin>
     </div>
