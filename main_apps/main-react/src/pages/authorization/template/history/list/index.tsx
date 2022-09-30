@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 仇艳
- * @LastEditTime: 2022-09-30 10:05:41
+ * @LastEditTime: 2022-09-30 14:26:03
  */
 import React from 'react';
 import { message, Select } from 'antd';
@@ -127,17 +127,16 @@ export default () => {
       hideInSearch: true,
       render: (_, row) => {
         return (
-          row.status === HISTORY_STATUS_MAP.失败 && (
+          row.status === HISTORY_STATUS_MAP.失败 &&
+          templateAuthMap['模板重试'] && (
             <LinkButtons
-              buttons={
-                templateAuthMap['模板重试'] && [
-                  {
-                    name: '重试',
-                    key: 'retry',
-                    onClick: () => handleTemplateRetry({ orgTemplateId: row?.orgTemplateId }),
-                  },
-                ]
-              }
+              buttons={[
+                {
+                  name: '重试',
+                  key: 'retry',
+                  onClick: () => handleTemplateRetry({ orgTemplateId: row?.orgTemplateId }),
+                },
+              ]}
             />
           )
         );

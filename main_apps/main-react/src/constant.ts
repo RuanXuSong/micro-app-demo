@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-28 18:10:42
  * @LastEditors: 仇艳
- * @LastEditTime: 2022-09-30 10:23:41
+ * @LastEditTime: 2022-09-30 16:26:31
  */
 
 /** 云平台 antd 样式前缀（防止子应用样式污染） */
@@ -157,3 +157,6 @@ export const AUTH_KEY_LIST = [
   { name: '数融平台重试', key: 'cloud_template_package_retry_data' },
   { name: '敏捷大屏重试', key: 'cloud_template_package_retry_visualization' },
 ];
+
+/** 模板异步获取结果的轮询时间: 10秒 */
+export const TEMPLATE_INTERVAL_TIME = 10000;

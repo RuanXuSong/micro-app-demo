@@ -3,7 +3,12 @@ import { message } from 'antd';
 import { useRequest } from 'ahooks';
 import { useImmer } from 'use-immer';
 import { removeEmpty } from '@/utils/json';
-import { initialPagination, PACKAGE_PAGE_SIZE, TEMPLATE_STATUS_MAP } from '@/constant';
+import {
+  initialPagination,
+  PACKAGE_PAGE_SIZE,
+  TEMPLATE_INTERVAL_TIME,
+  TEMPLATE_STATUS_MAP,
+} from '@/constant';
 import useTemplateAuth from '@/hooks/useTemplateAuth';
 
 // 卡片宽度
@@ -12,8 +17,8 @@ const CARD_WIDTH = 316;
 export default () => {
   const [selectedItem, setSelected] = useState('');
   const [loading, setLoading] = useState(false);
-  const [taskIds, setTaskIds] = useState<string[]>([]);
   const [margin, setMargin] = useState(0);
+  const [taskClearMap, setTaskClearMap] = useState({});
 
   const [result, setResult] = useState<defs.platform.Page<defs.platform.TemPackageDTO>>({
     list: [],
@@ -96,9 +101,9 @@ export default () => {
         });
         if (data?.templateList?.length) {
           // 每个子系统需要调用接口去创建
-          data?.templateList?.map((template) =>
-            handleTemplateRetry({ orgTemplateId: template.orgTemplateId }),
-          );
+          data?.templateList?.forEach((template) => {
+            handleTemplateRetry({ orgTemplateId: template.orgTemplateId });
+          });
         }
       },
     },
@@ -146,7 +151,13 @@ export default () => {
         });
         // 获取异步接口的子系统，加入定时任务中
         if (data.status === TEMPLATE_STATUS_MAP.创建中) {
-          setTaskIds([...taskIds, data?.orgTemplateId!]);
+          const clear = setInterval(() => {
+            runTask({ orgTemplateId: data?.orgTemplateId! });
+          }, TEMPLATE_INTERVAL_TIME);
+          setTaskClearMap((clearMap) => {
+            clearMap[data?.orgTemplateId!] = clear;
+            return clearMap;
+          });
         }
       } else {
         message.success('操作成功');
@@ -155,42 +166,38 @@ export default () => {
   });
 
   /** 定时获取子系统创建的任务详情 */
-  const { run: runTask, cancel: cancelTask } = useRequest(
-    API.platform.template.detailTemplate.fetch,
-    {
-      manual: true,
-      ready: createModalConfig.visible,
-      pollingInterval: 10000,
-      pollingWhenHidden: true,
-      onSuccess: (data) => {
-        const newData = createModalConfig?.data;
-        const templateList = createModalConfig?.data?.templateList.filter(
-          (item: { orgTemplateId: string | undefined }) =>
-            item.orgTemplateId !== data.orgTemplateId,
-        );
-        const newTemplateList = [...templateList, data];
-        setCreateModalConfig((config) => {
-          config.data = { ...newData, templateList: newTemplateList };
-        });
-        // 异步接口返回结果，取消定时任务
-        if (data.status !== TEMPLATE_STATUS_MAP.创建中 && taskIds.includes(data?.orgTemplateId!)) {
-          cancelTask();
-          setTaskIds(taskIds.filter((id) => id !== data.orgTemplateId));
-        }
-      },
+  const { run: runTask } = useRequest(API.platform.template.detailTemplate.fetch, {
+    manual: true,
+    onSuccess: (data) => {
+      const newData = createModalConfig?.data;
+      const templateList = createModalConfig?.data?.templateList?.filter(
+        (item: { orgTemplateId: string | undefined }) => item.orgTemplateId !== data.orgTemplateId,
+      );
+      const newTemplateList = [...templateList, data];
+      setCreateModalConfig((config) => {
+        config.data = { ...newData, templateList: newTemplateList };
+      });
+      // 异步接口返回结果，取消定时任务
+      if (
+        data.status !== TEMPLATE_STATUS_MAP.创建中 &&
+        Object.keys(taskClearMap)?.includes(data?.orgTemplateId!)
+      ) {
+        clearInterval(taskClearMap[data?.orgTemplateId!]);
+      }
     },
-  );
+  });
 
   useEffect(() => {
-    if (taskIds?.length) {
-      taskIds.forEach((id) => runTask({ orgTemplateId: id }));
-    } else {
-      cancelTask();
-    }
+    const clearAll = () => {
+      Object.keys(taskClearMap).forEach((key) => {
+        clearInterval(taskClearMap[key]);
+      });
+    };
     if (!createModalConfig.visible) {
-      cancelTask();
+      clearAll();
     }
-  }, [taskIds]);
+    return () => clearAll();
+  }, [createModalConfig.visible]);
 
   /** 隐藏弹窗 */
   const handleModalHide = (type: 'create' | 'preview' | 'markdown') => {
