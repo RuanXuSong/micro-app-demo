@@ -4,11 +4,14 @@ import { useRequest } from 'ahooks';
 import { ActionType } from '@ant-design/pro-table';
 import { initialPagination } from '@/constant';
 import { removeEmpty } from '@/utils/json';
+import useTemplateAuth from '@/hooks/useTemplateAuth';
 
 export default () => {
   const actionRef = useRef<ActionType>();
 
   const { reload } = actionRef.current || {};
+
+  const { templateAuthMap } = useTemplateAuth();
 
   /**
    * 获取模板套餐列表
@@ -58,5 +61,6 @@ export default () => {
     handleTemplateRetry,
     fetchList,
     templatePackageList,
+    templateAuthMap,
   };
 };

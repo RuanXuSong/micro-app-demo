@@ -3,7 +3,8 @@ import { message } from 'antd';
 import { useRequest } from 'ahooks';
 import { useImmer } from 'use-immer';
 import { removeEmpty } from '@/utils/json';
-import { initialPagination, TEMPLATE_STATUS_MAP } from '@/constant';
+import { initialPagination, PACKAGE_PAGE_SIZE, TEMPLATE_STATUS_MAP } from '@/constant';
+import useTemplateAuth from '@/hooks/useTemplateAuth';
 
 // 卡片宽度
 const CARD_WIDTH = 316;
@@ -40,6 +41,8 @@ export default () => {
     loading: false,
   });
 
+  const { templateAuthMap } = useTemplateAuth();
+
   /**
    * 获取普通分页列表
    * @param params
@@ -54,7 +57,7 @@ export default () => {
       removeEmpty({
         ...params,
         page: params?.current || initialPagination.page,
-        pageSize: params?.pageSize || initialPagination.packagePageSize,
+        pageSize: params?.pageSize || PACKAGE_PAGE_SIZE,
       }),
     );
     setLoading(false);
@@ -209,5 +212,6 @@ export default () => {
     handleCreateTemplate,
     handlePreviewTemplate,
     getRef,
+    templateAuthMap,
   };
 };

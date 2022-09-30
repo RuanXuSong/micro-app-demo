@@ -16,6 +16,7 @@ export default ({
   data,
   handleTemplateRetry,
   reload,
+  templateAuthMap,
 }: {
   visible: boolean;
   loading: boolean;
@@ -23,6 +24,7 @@ export default ({
   data: Store;
   handleTemplateRetry: ({ orgTemplateId }: { orgTemplateId: string }) => void;
   reload?: () => void;
+  templateAuthMap: Object;
 }) => {
   const modalStatus = data?.templateList?.every(
     (item: { status: HISTORY_STATUS_MAP }) => item.status === HISTORY_STATUS_MAP.成功,
@@ -79,26 +81,27 @@ export default ({
           renderItem={(item: any) => (
             <List.Item
               actions={[
-                item?.status! === HISTORY_STATUS_MAP.失败 ? (
-                  <span
-                    className={styles.action}
-                    onClick={() => handleTemplateRetry({ orgTemplateId: item?.orgTemplateId! })}
-                    tabIndex={1}
-                  >
-                    重试
-                  </span>
-                ) : (
-                  item?.redirectUrl && (
-                    <a
-                      className={styles.action}
-                      href={item.redirectUrl}
-                      target="_blank"
-                      rel="noopener"
-                    >
-                      查看
-                    </a>
-                  )
-                ),
+                item?.status! === HISTORY_STATUS_MAP.失败
+                  ? templateAuthMap[`${item.name}重试`] && (
+                      <span
+                        className={styles.action}
+                        onClick={() => handleTemplateRetry({ orgTemplateId: item?.orgTemplateId! })}
+                        tabIndex={1}
+                      >
+                        重试
+                      </span>
+                    )
+                  : item?.redirectUrl &&
+                    templateAuthMap[`${item.name}查看`] && (
+                      <a
+                        className={styles.action}
+                        href={item.redirectUrl}
+                        target="_blank"
+                        rel="noopener"
+                      >
+                        查看
+                      </a>
+                    ),
               ]}
             >
               <List.Item.Meta

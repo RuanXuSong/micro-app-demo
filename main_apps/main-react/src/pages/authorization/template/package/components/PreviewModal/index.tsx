@@ -13,10 +13,12 @@ export default ({
   visible,
   toggleVisible,
   data,
+  templateAuthMap,
 }: {
   visible: boolean;
   toggleVisible: () => void;
   data: Store;
+  templateAuthMap: Object;
 }) => {
   const loadingStatus = false;
 
@@ -56,7 +58,8 @@ export default ({
           renderItem={(item: any) => (
             <List.Item
               actions={
-                item?.redirectUrl && [
+                item?.redirectUrl &&
+                templateAuthMap[`${item.name}预览`] && [
                   <a href={item.templateRedirectUrl} target="_blank" rel="noopener">
                     预览
                   </a>,

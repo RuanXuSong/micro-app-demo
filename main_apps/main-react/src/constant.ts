@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-28 18:10:42
  * @LastEditors: 仇艳
- * @LastEditTime: 2022-09-28 17:26:35
+ * @LastEditTime: 2022-09-30 10:23:41
  */
 
 /** 云平台 antd 样式前缀（防止子应用样式污染） */
@@ -16,8 +16,10 @@ export const PREFIX_CLASS = 'cloud';
 export const initialPagination = {
   page: 1,
   pageSize: 10,
-  packagePageSize: 100,
 };
+
+/** 模板套餐pageSize */
+export const PACKAGE_PAGE_SIZE = 100;
 
 export const THROTTLE_INTERVAL = 500;
 
@@ -137,3 +139,21 @@ export const SMART_DATA_CODE = 0;
 
 // 初始路径
 export const INITIAL_PATH = '/cloud/homepage';
+
+// 模板中心的所有权限资源
+export const AUTH_KEY_LIST = [
+  { name: '模板创建', key: 'cloud_template_package_create' },
+  { name: '模板预览', key: 'cloud_template_package_preview' },
+  { name: '数智平台预览', key: 'cloud_template_package_preview_td_bi' },
+  { name: '敏捷大屏预览', key: 'cloud_template_package_preview_td_visualization' },
+  { name: '敏捷应用预览', key: 'cloud_template_package_preview_td_lowcode' },
+  { name: '数智平台查看', key: 'cloud_template_package_view_bi' },
+  { name: '敏捷应用查看', key: 'cloud_template_package_view_lowcode' },
+  { name: '数融平台查看', key: 'cloud_template_package_view_data' },
+  { name: '敏捷大屏查看', key: 'cloud_template_package_view_visualization' },
+  { name: '模板重试', key: 'cloud_template_package_retry' },
+  { name: '数智平台重试', key: 'cloud_template_package_retry_bi' },
+  { name: '敏捷应用重试', key: 'cloud_template_package_retry_lowcode' },
+  { name: '数融平台重试', key: 'cloud_template_package_retry_data' },
+  { name: '敏捷大屏重试', key: 'cloud_template_package_retry_visualization' },
+];

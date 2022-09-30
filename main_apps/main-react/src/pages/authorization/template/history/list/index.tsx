@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 仇艳
- * @LastEditTime: 2022-09-28 15:22:06
+ * @LastEditTime: 2022-09-30 10:05:41
  */
 import React from 'react';
 import { message, Select } from 'antd';
@@ -15,8 +15,14 @@ import useTemplateHistoryListService from './useTemplateHistoryListService';
 import { enumToValueEnum } from '@/utils/array';
 
 export default () => {
-  const { loading, actionRef, templatePackageList, fetchList, handleTemplateRetry } =
-    useTemplateHistoryListService();
+  const {
+    loading,
+    actionRef,
+    templatePackageList,
+    templateAuthMap,
+    fetchList,
+    handleTemplateRetry,
+  } = useTemplateHistoryListService();
 
   const columns: ProColumns<defs.platform.TemListDTO>[] = [
     {
@@ -123,13 +129,15 @@ export default () => {
         return (
           row.status === HISTORY_STATUS_MAP.失败 && (
             <LinkButtons
-              buttons={[
-                {
-                  name: '重试',
-                  key: 'retry',
-                  onClick: () => handleTemplateRetry({ orgTemplateId: row?.orgTemplateId }),
-                },
-              ]}
+              buttons={
+                templateAuthMap['模板重试'] && [
+                  {
+                    name: '重试',
+                    key: 'retry',
+                    onClick: () => handleTemplateRetry({ orgTemplateId: row?.orgTemplateId }),
+                  },
+                ]
+              }
             />
           )
         );
