@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { message } from 'antd';
 import { useRequest } from 'ahooks';
 import { useImmer } from 'use-immer';
@@ -18,7 +18,7 @@ export default () => {
   const [selectedItem, setSelected] = useState('');
   const [loading, setLoading] = useState(false);
   const [margin, setMargin] = useState(0);
-  const [taskClearMap, setTaskClearMap] = useState({});
+  const taskClearRef = useRef({});
 
   const [result, setResult] = useState<defs.platform.Page<defs.platform.TemPackageDTO>>({
     list: [],
@@ -101,9 +101,9 @@ export default () => {
         });
         if (data?.templateList?.length) {
           // 每个子系统需要调用接口去创建
-          data?.templateList?.forEach((template) => {
-            handleTemplateRetry({ orgTemplateId: template.orgTemplateId });
-          });
+          data?.templateList?.forEach((template) =>
+            handleTemplateRetry({ orgTemplateId: template.orgTemplateId }),
+          );
         }
       },
     },
@@ -154,10 +154,7 @@ export default () => {
           const clear = setInterval(() => {
             runTask({ orgTemplateId: data?.orgTemplateId! });
           }, TEMPLATE_INTERVAL_TIME);
-          setTaskClearMap((clearMap) => {
-            clearMap[data?.orgTemplateId!] = clear;
-            return clearMap;
-          });
+          taskClearRef.current[data?.orgTemplateId!] = clear;
         }
       } else {
         message.success('操作成功');
@@ -180,18 +177,21 @@ export default () => {
       // 异步接口返回结果，取消定时任务
       if (
         data.status !== TEMPLATE_STATUS_MAP.创建中 &&
-        Object.keys(taskClearMap)?.includes(data?.orgTemplateId!)
+        Object.keys(taskClearRef?.current)?.includes(data?.orgTemplateId!)
       ) {
-        clearInterval(taskClearMap[data?.orgTemplateId!]);
+        clearInterval(taskClearRef?.current?.[data?.orgTemplateId!]);
       }
     },
   });
 
   useEffect(() => {
     const clearAll = () => {
+      const taskClearMap = taskClearRef?.current || {};
+
       Object.keys(taskClearMap).forEach((key) => {
         clearInterval(taskClearMap[key]);
       });
+      taskClearRef.current = {};
     };
     if (!createModalConfig.visible) {
       clearAll();
