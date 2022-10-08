@@ -219,7 +219,9 @@ export default () => {
     const totalWidth = dom.clientWidth;
     if (!totalWidth) return;
     // 一行几个
-    const count = Math.floor(totalWidth / CARD_WIDTH) - 1;
+    const remainWidth = totalWidth % CARD_WIDTH;
+    const maxCount = Math.floor(totalWidth / CARD_WIDTH);
+    const count = remainWidth > maxCount * 20 ? maxCount : maxCount - 1;
     // 根据余下的宽度算出每个的左右边距
     const margin = Math.floor((totalWidth - count * CARD_WIDTH) / count / 2);
     setMargin(margin);
