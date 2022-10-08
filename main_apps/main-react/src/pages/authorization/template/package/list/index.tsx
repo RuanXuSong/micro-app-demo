@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 仇艳
- * @LastEditTime: 2022-09-30 11:46:14
+ * @LastEditTime: 2022-10-08 14:51:27
  */
 import React, { useRef } from 'react';
 import { Tag, Image, Button, Spin } from 'antd';
@@ -124,7 +124,7 @@ export default () => {
                             type="primary"
                             style={{ marginRight: 10 }}
                             ghost={item.status === TEMPLATE_STATUS_MAP.未创建}
-                            onClick={() => handlePreviewTemplate({ packageId: item.id })}
+                            onClick={() => handlePreviewTemplate({ packageId: item.id! })}
                           >
                             预览
                           </Button>
@@ -132,7 +132,7 @@ export default () => {
                         {item.status === TEMPLATE_STATUS_MAP.未创建 && templateAuthMap['模板创建'] && (
                           <Button
                             type="primary"
-                            onClick={() => handleCreateTemplate({ packageId: item.id })}
+                            onClick={() => handleCreateTemplate({ packageId: item.id! })}
                           >
                             创建
                           </Button>
@@ -182,6 +182,7 @@ export default () => {
         />
         <PreviewModal
           visible={previewModalConfig.visible}
+          loading={previewModalConfig.loading}
           data={previewModalConfig.data}
           toggleVisible={() => handleModalHide('preview')}
           templateAuthMap={templateAuthMap}

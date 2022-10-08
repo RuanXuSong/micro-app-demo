@@ -89,40 +89,48 @@ export default () => {
   }, []);
 
   /** 创建模板 */
-  const { run: handleCreateTemplate } = useRequest(
-    API.platform.template.createTemplatePackage.fetch,
-    {
-      manual: true,
-      onSuccess: (data) => {
-        setCreateModalConfig((config) => {
-          config.visible = true;
-          config.loading = true;
-          config.data = data;
-        });
-        if (data?.templateList?.length) {
-          // 每个子系统需要调用接口去创建
-          data?.templateList?.forEach((template) =>
-            handleTemplateRetry({ orgTemplateId: template.orgTemplateId }),
-          );
-        }
-      },
+  const handleCreateTemplate = (value: { packageId: string }) => {
+    setCreateModalConfig((config) => {
+      config.visible = true;
+      config.loading = true;
+    });
+    createTemplate(value);
+  };
+  const { run: createTemplate } = useRequest(API.platform.template.createTemplatePackage.fetch, {
+    manual: true,
+    onSuccess: (data) => {
+      setCreateModalConfig((config) => {
+        config.visible = true;
+        config.loading = false;
+        config.data = data;
+      });
+      if (data?.templateList?.length) {
+        // 每个子系统需要调用接口去创建
+        data?.templateList?.forEach((template) =>
+          handleTemplateRetry({ orgTemplateId: template.orgTemplateId }),
+        );
+      }
     },
-  );
+  });
 
   /** 预览模板 */
-  const { run: handlePreviewTemplate } = useRequest(
-    API.platform.template.detailTemplatePackage.fetch,
-    {
-      manual: true,
-      onSuccess: (data) => {
-        setPreviewModalConfig((config) => {
-          config.visible = true;
-          config.loading = true;
-          config.data = data;
-        });
-      },
+  const handlePreviewTemplate = (value: { packageId: string }) => {
+    setPreviewModalConfig((config) => {
+      config.visible = true;
+      config.loading = true;
+    });
+    previewTemplate(value);
+  };
+  const { run: previewTemplate } = useRequest(API.platform.template.detailTemplatePackage.fetch, {
+    manual: true,
+    onSuccess: (data) => {
+      setPreviewModalConfig((config) => {
+        config.visible = true;
+        config.loading = false;
+        config.data = data;
+      });
     },
-  );
+  });
 
   /** 查看模板指南 */
   const handleViewMarkDown = async (fileUrl: string) => {

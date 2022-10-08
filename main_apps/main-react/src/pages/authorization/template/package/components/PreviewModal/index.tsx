@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Image, List, Button, Tag } from 'antd';
+import { Modal, Image, List, Button, Tag, Spin } from 'antd';
 import { Store } from 'antd/es/form/interface';
 
 import img from '../../assets/preview.png';
@@ -11,9 +11,11 @@ export default ({
   visible,
   toggleVisible,
   data,
+  loading,
   templateAuthMap,
 }: {
   visible: boolean;
+  loading: boolean;
   toggleVisible: () => void;
   data: Store;
   templateAuthMap: Object;
@@ -42,43 +44,45 @@ export default ({
         </Button>,
       ]}
     >
-      <List
-        className="demo-loadmore-list"
-        itemLayout="horizontal"
-        dataSource={data.templateList}
-        size="small"
-        renderItem={(item: any) => (
-          <List.Item
-            actions={
-              item?.redirectUrl &&
-              templateAuthMap[`${item.name}预览`] && [
-                <a href={item.templateRedirectUrl} target="_blank" rel="noopener">
-                  预览
-                </a>,
-              ]
-            }
-          >
-            <List.Item.Meta
-              avatar={
-                <Image src={item.picture ?? img} className={styles.preview} preview={false} />
+      <Spin spinning={loading}>
+        <List
+          className="demo-loadmore-list"
+          itemLayout="horizontal"
+          dataSource={data.templateList}
+          size="small"
+          renderItem={(item: any) => (
+            <List.Item
+              actions={
+                item?.redirectUrl &&
+                templateAuthMap[`${item.name}预览`] && [
+                  <a href={item.templateRedirectUrl} target="_blank" rel="noopener">
+                    预览
+                  </a>,
+                ]
               }
-              title={
-                <div>
-                  {enumToValueEnum(TEMPLATE_CLIENT_ENUM)[item.clientKey]?.text}-{item?.name}
-                  &nbsp;&nbsp;
-                  {item?.tags &&
-                    JSON.parse(item?.tags || '[]')?.map((term: string) => (
-                      <Tag className={styles.featureTag} key={term}>
-                        {term}
-                      </Tag>
-                    ))}
-                </div>
-              }
-              description={<div className={styles.description}>{item.description}</div>}
-            />
-          </List.Item>
-        )}
-      />
+            >
+              <List.Item.Meta
+                avatar={
+                  <Image src={item.picture ?? img} className={styles.preview} preview={false} />
+                }
+                title={
+                  <div>
+                    {enumToValueEnum(TEMPLATE_CLIENT_ENUM)[item.clientKey]?.text}-{item?.name}
+                    &nbsp;&nbsp;
+                    {item?.tags &&
+                      JSON.parse(item?.tags || '[]')?.map((term: string) => (
+                        <Tag className={styles.featureTag} key={term}>
+                          {term}
+                        </Tag>
+                      ))}
+                  </div>
+                }
+                description={<div className={styles.description}>{item.description}</div>}
+              />
+            </List.Item>
+          )}
+        />
+      </Spin>
     </Modal>
   );
 };
