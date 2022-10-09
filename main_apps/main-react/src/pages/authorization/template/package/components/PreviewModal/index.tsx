@@ -54,7 +54,9 @@ export default ({
             <List.Item
               actions={
                 item?.redirectUrl &&
-                templateAuthMap[`${item.name}预览`] && [
+                templateAuthMap[
+                  `${enumToValueEnum(TEMPLATE_CLIENT_ENUM)[item.clientKey]?.text}预览`
+                ] && [
                   <a href={item.templateRedirectUrl} target="_blank" rel="noopener">
                     预览
                   </a>,

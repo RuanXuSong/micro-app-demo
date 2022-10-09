@@ -2,11 +2,17 @@ import React from 'react';
 import { Modal, Spin, Image, Badge, List, Button } from 'antd';
 
 import { Store } from 'antd/es/form/interface';
-import { HISTORY_STATUS_MAP, TEMPLATE_STATUS_COLOR_MAP, TEMPLATE_STATUS_MAP } from '@/constant';
+import {
+  HISTORY_STATUS_MAP,
+  TEMPLATE_CLIENT_ENUM,
+  TEMPLATE_STATUS_COLOR_MAP,
+  TEMPLATE_STATUS_MAP,
+} from '@/constant';
 
 import img from '../../assets/preview.png';
 import styles from './index.module.less';
 import { SyncOutlined } from '@ant-design/icons';
+import { enumToValueEnum } from '@/utils/array';
 
 export default ({
   visible,
@@ -28,6 +34,7 @@ export default ({
   const modalStatus = data?.templateList?.every(
     (item: { status: HISTORY_STATUS_MAP }) => item.status === HISTORY_STATUS_MAP.成功,
   );
+
   return (
     <Modal
       centered
@@ -81,7 +88,9 @@ export default ({
             <List.Item
               actions={[
                 item?.status! === HISTORY_STATUS_MAP.失败
-                  ? templateAuthMap[`${item.name}重试`] && (
+                  ? templateAuthMap[
+                      `${enumToValueEnum(TEMPLATE_CLIENT_ENUM)[item.clientKey]?.text}重试`
+                    ] && (
                       <span
                         className={styles.action}
                         onClick={() => handleTemplateRetry({ orgTemplateId: item?.orgTemplateId! })}
@@ -91,7 +100,9 @@ export default ({
                       </span>
                     )
                   : item?.redirectUrl &&
-                    templateAuthMap[`${item.name}查看`] && (
+                    templateAuthMap[
+                      `${enumToValueEnum(TEMPLATE_CLIENT_ENUM)[item.clientKey]?.text}查看`
+                    ] && (
                       <a
                         className={styles.action}
                         href={item.redirectUrl}
@@ -110,7 +121,9 @@ export default ({
                 title={item?.name}
                 description={
                   <div>
-                    {item?.status === TEMPLATE_STATUS_MAP.创建中 ? (
+                    {[TEMPLATE_STATUS_MAP.创建中, TEMPLATE_STATUS_MAP.未创建].includes(
+                      item?.status,
+                    ) ? (
                       <SyncOutlined spin style={{ marginRight: 5 }} />
                     ) : (
                       <Badge color={TEMPLATE_STATUS_COLOR_MAP[item?.status]} />

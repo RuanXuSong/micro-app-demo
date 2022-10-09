@@ -106,9 +106,14 @@ export default () => {
       });
       if (data?.templateList?.length) {
         // 每个子系统需要调用接口去创建
-        data?.templateList?.forEach((template) =>
-          handleTemplateRetry({ orgTemplateId: template.orgTemplateId }),
-        );
+        data?.templateList?.forEach((template) => {
+          handleTemplateRetry({ orgTemplateId: template.orgTemplateId });
+          // 加入定时任务
+          const clear = setInterval(() => {
+            runTask({ orgTemplateId: template?.orgTemplateId! });
+          }, TEMPLATE_INTERVAL_TIME);
+          taskClearRef.current[template?.orgTemplateId!] = clear;
+        });
       }
     },
   });
@@ -157,13 +162,6 @@ export default () => {
           config.loading = false;
           config.data = { ...newData, templateList: newTemplateList };
         });
-        // 获取异步接口的子系统，加入定时任务中
-        if (data.status === TEMPLATE_STATUS_MAP.创建中) {
-          const clear = setInterval(() => {
-            runTask({ orgTemplateId: data?.orgTemplateId! });
-          }, TEMPLATE_INTERVAL_TIME);
-          taskClearRef.current[data?.orgTemplateId!] = clear;
-        }
       } else {
         message.success('操作成功');
       }

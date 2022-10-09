@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 仇艳
- * @LastEditTime: 2022-09-30 14:26:03
+ * @LastEditTime: 2022-10-09 10:25:00
  */
 import React from 'react';
 import { message, Select } from 'antd';
@@ -145,26 +145,24 @@ export default () => {
   ];
 
   return (
-    <>
-      <ProTable
-        loading={loading}
-        style={{ padding: '18px 22px' }}
-        actionRef={actionRef}
-        request={fetchList as any}
-        onRequestError={(error) => {
-          console.error(error.message);
-          message.error(`数据加载失败,${error.message}`);
-        }}
-        columns={columns}
-        bordered
-        rowKey="orgTemplateId"
-        pagination={{
-          size: 'default',
-        }}
-        dateFormatter="string"
-        headerTitle="模板历史"
-        tableAlertRender={false}
-      />
-    </>
+    <ProTable
+      loading={loading}
+      style={{ padding: '18px 22px' }}
+      actionRef={actionRef}
+      request={fetchList as any}
+      onRequestError={(error) => {
+        console.error(error.message);
+        message.error(`数据加载失败,${error.message}`);
+      }}
+      columns={columns}
+      bordered
+      rowKey="orgTemplateId"
+      pagination={{
+        size: 'default',
+      }}
+      dateFormatter="string"
+      headerTitle="模板历史"
+      tableAlertRender={false}
+    />
   );
 };
