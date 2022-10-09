@@ -1,5 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsxCustomEvent */
+// @ts-ignore
+import jsxCustomEvent from '@micro-zoe/micro-app/polyfill/jsx-custom-event';
 import config, { LOGOUT_PATH } from '../../config';
 import { ROUTE_PATH } from '@/constant';
 
