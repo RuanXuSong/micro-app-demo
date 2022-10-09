@@ -6,7 +6,6 @@
  * @LastEditors: 仇艳
  * @LastEditTime: 2022-10-09 10:25:00
  */
-import React from 'react';
 import { message, Select } from 'antd';
 import ProTable, { ProColumns } from '@ant-design/pro-table';
 import { HISTORY_STATUS_MAP, TEMPLATE_CLIENT_ENUM } from '@/constant';

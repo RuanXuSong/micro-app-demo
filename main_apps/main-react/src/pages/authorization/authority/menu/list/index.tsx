@@ -6,7 +6,6 @@
  * @LastEditors: 阮旭松
  * @LastEditTime: 2022-08-30 16:01:13
  */
-import React from 'react';
 import { message, Button, Select } from 'antd';
 import ProTable, { ProColumns } from '@ant-design/pro-table';
 import { PlusOutlined } from '@ant-design/icons';

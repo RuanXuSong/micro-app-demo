@@ -1,4 +1,3 @@
-import React from 'react';
 import { Modal, Image, List, Button, Tag, Spin } from 'antd';
 import { Store } from 'antd/es/form/interface';
 

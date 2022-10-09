@@ -1,4 +1,3 @@
-import React from 'react';
 import LoginForm from '@/components/LoginForm';
 import styles from './index.module.less';
 import { Link } from 'umi';

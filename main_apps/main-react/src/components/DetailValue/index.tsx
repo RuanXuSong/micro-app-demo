@@ -2,7 +2,7 @@
  * 详情展示项。可以根据type渲染不同的展示
  * type目前支持：default(默认)/file(文件，包括图片)
  */
-import React, { forwardRef, useState } from 'react';
+import { forwardRef, useState } from 'react';
 import { FileDTO } from '@/interfaces/common';
 import { Row, Col, Modal } from 'antd';
 import { useToggle } from 'ahooks';

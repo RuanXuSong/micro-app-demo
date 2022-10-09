@@ -1,5 +1,4 @@
 import { LockTwoTone, MailTwoTone, MobileTwoTone, UserOutlined } from '@ant-design/icons';
-import React from 'react';
 
 export default {
   UserName: {

@@ -6,7 +6,6 @@
  * @LastEditors: 阮旭松
  * @LastEditTime: 2022-08-26 15:40:08
  */
-import React from 'react';
 import { message, Button, Modal } from 'antd';
 import ProTable, { ProColumns } from '@ant-design/pro-table';
 import { ROLE_STATUS_MAP } from '@/constant';

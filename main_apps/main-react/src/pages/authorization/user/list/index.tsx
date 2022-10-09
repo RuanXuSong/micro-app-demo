@@ -6,7 +6,6 @@
  * @LastEditors: 阮旭松
  * @LastEditTime: 2022-08-30 15:55:42
  */
-import React from 'react';
 import { message, Button, Modal, Select } from 'antd';
 import ProTable, { ProColumns } from '@ant-design/pro-table';
 import { ROLE_STATUS_MAP, SEX_ENUM } from '@/constant';

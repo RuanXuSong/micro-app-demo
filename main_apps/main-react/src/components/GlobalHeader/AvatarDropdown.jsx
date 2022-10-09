@@ -1,7 +1,12 @@
-import { LOGOUT_PATH } from '@/config';
-import { LogoutOutlined, SettingOutlined, UserOutlined ,FormatPainterOutlined} from '@ant-design/icons';
-import { Avatar, Menu, Spin } from 'antd';
 import React from 'react';
+import { LOGOUT_PATH } from '@/config';
+import {
+  LogoutOutlined,
+  SettingOutlined,
+  UserOutlined,
+  FormatPainterOutlined,
+} from '@ant-design/icons';
+import { Avatar, Menu, Spin } from 'antd';
 import { history, connect } from 'umi';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
@@ -11,19 +16,19 @@ import { enable as enableDarkMode, disable as disableDarkMode } from 'darkreader
 class AvatarDropdown extends React.Component {
   state = {
     showDropDown: false,
-    dark:false,
+    dark: false,
   };
 
-  changeTheme(){
-   if (this.state.dark) {
-    enableDarkMode({
-      brightness: 100,
-      contrast: 90,
-      sepia: 10,
-    });
-    return;
-  }
-  disableDarkMode();
+  changeTheme() {
+    if (this.state.dark) {
+      enableDarkMode({
+        brightness: 100,
+        contrast: 90,
+        sepia: 10,
+      });
+      return;
+    }
+    disableDarkMode();
   }
 
   onMenuClick = (event) => {
@@ -42,8 +47,8 @@ class AvatarDropdown extends React.Component {
       return;
     }
 
-    if(key ==='changeTheme'){
-      this.setState({ dark: !this.state.dark },()=>{
+    if (key === 'changeTheme') {
+      this.setState({ dark: !this.state.dark }, () => {
         localStorage.setItem('dark', this.state.dark);
         this.changeTheme();
       });
@@ -53,8 +58,6 @@ class AvatarDropdown extends React.Component {
     history.push(`/account/${key}`);
   };
 
-  
-
   handleGlobalDataForBaseApp = (data) => {
     this.setState({ showDropDown: data.showDropDown });
   };
@@ -62,12 +65,11 @@ class AvatarDropdown extends React.Component {
   componentDidMount() {
     microApp.addGlobalDataListener(this.handleGlobalDataForBaseApp);
 
-    const dark = localStorage.getItem("dark");
-    
-    this.setState({ dark: dark!="false" },()=>{
+    const dark = localStorage.getItem('dark');
+
+    this.setState({ dark: dark != 'false' }, () => {
       this.changeTheme();
     });
-
   }
 
   render() {
@@ -79,13 +81,9 @@ class AvatarDropdown extends React.Component {
       menu,
     } = this.props;
     const menuHeaderDropdown = (
-      <Menu
-        className={styles.menu}
-        selectedKeys={[]}
-        onClick={this.onMenuClick}
-      >
+      <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
         <Menu.Item key="changeTheme">
-          <FormatPainterOutlined /> 
+          <FormatPainterOutlined />
           切换主题
         </Menu.Item>
         <Menu.Item key="logout">

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Form, Button, Input, Upload, Spin } from 'antd';
 import styles from './index.module.less';
 import { FILE_TYPE_MAP, getPublicUploadProps, handleUpload } from '@/utils/upload';

@@ -1,6 +1,5 @@
 /** @jsxRuntime classic */
 /** @jsx jsxCustomEvent */
-import jsxCustomEvent from '@micro-zoe/micro-app/polyfill/jsx-custom-event';
 import { useEffect } from 'react';
 import microApp from '@micro-zoe/micro-app';
 import { connect } from 'umi';

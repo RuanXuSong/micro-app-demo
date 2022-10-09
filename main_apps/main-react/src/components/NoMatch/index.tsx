@@ -1,6 +1,5 @@
 import { LOGOUT_PATH } from '@/config';
 import { Result, Button } from 'antd';
-import React from 'react';
 
 export default (
   <Result

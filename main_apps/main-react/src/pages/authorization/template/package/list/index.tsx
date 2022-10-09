@@ -6,7 +6,7 @@
  * @LastEditors: 仇艳
  * @LastEditTime: 2022-10-08 14:51:27
  */
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Tag, Image, Button, Spin } from 'antd';
 import ProForm, { ProFormSelect, ProFormText } from '@ant-design/pro-form';
 import { TEMPLATE_CLIENT_ENUM, TEMPLATE_STATUS_COLOR_MAP, TEMPLATE_STATUS_MAP } from '@/constant';

@@ -1,4 +1,4 @@
-import React, { Key } from 'react';
+import { Key } from 'react';
 import { Tree, TreeProps } from 'antd';
 import type { DataNode, EventDataNode } from 'antd/es/tree';
 import { isEmpty } from 'lodash';

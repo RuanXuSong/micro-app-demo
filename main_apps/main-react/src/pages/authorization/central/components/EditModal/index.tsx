@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal, Form, Spin, Input, message } from 'antd';
 import { isEmpty } from 'lodash-es';
 import 'antd/lib/form';

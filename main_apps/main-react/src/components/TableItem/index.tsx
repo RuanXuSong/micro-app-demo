@@ -1,4 +1,4 @@
-import React, { Key, useEffect, useRef, useState } from 'react';
+import { Key, useEffect, useRef, useState } from 'react';
 import ProTable, { ProTableProps } from '@ant-design/pro-table';
 import { TableRowSelection } from 'antd/es/table/interface';
 import compareArr from '@/utils/compareArr';

@@ -1,5 +1,4 @@
 import { PrivilegeResource } from '@/interfaces/common';
-import React from 'react';
 import { history, useModel } from 'umi';
 import styles from './index.module.less';
 

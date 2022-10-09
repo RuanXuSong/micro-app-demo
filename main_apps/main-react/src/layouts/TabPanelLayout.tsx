@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Tabs } from 'antd';
 import { connect } from 'dva';
 import { history } from 'umi';

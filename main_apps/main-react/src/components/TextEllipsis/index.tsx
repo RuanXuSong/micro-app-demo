@@ -7,7 +7,6 @@
  * @LastEditTime: 2022-08-15 16:54:28
  */
 
-import React from 'react';
 import { Tooltip } from 'antd';
 import string from '@/utils/string';
 

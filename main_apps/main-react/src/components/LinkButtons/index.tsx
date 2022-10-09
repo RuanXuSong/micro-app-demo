@@ -4,10 +4,10 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-01 17:31:02
+ * @LastEditTime: 2022-10-09 16:57:12
  */
 
-import React, { useMemo } from 'react';
+import React, { useMemo, CSSProperties } from 'react';
 import { Dropdown, Menu } from 'antd';
 import { history } from 'umi';
 
@@ -24,7 +24,7 @@ export interface HandleButtonsProps {
   buttons: ButtonsType[];
   /** 允许展示的最大数量，默认3 */
   maxNumber?: number;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   className?: string;
 }
 

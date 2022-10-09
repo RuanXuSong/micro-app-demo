@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Modal, Form, Spin, Input, message, DatePicker, Select, notification } from 'antd';
 import { isNil } from 'lodash-es';
 import 'antd/lib/form';

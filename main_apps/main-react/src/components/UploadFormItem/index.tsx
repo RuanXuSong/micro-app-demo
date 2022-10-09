@@ -6,7 +6,7 @@
  * @LastEditors: 阮旭松
  * @LastEditTime: 2022-07-28 17:37:11
  */
-import React, { forwardRef, CSSProperties } from 'react';
+import { forwardRef, CSSProperties } from 'react';
 import { Form, Button, Upload, Tooltip } from 'antd';
 import {
   getFileValidators,

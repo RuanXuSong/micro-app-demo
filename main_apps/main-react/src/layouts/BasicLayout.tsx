@@ -1,5 +1,5 @@
 import ProLayout, { MenuDataItem } from '@ant-design/pro-layout';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link, connect, history, useModel } from 'umi';
 import Authorized from '@/utils/Authorized';
 import NoMatch from '@/components/NoMatch';

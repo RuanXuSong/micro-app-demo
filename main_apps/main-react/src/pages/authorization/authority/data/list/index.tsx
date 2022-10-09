@@ -6,7 +6,7 @@
  * @LastEditors: 阮旭松
  * @LastEditTime: 2022-09-08 11:02:37
  */
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { message, Button, Row, Col, Select } from 'antd';
 import ProTable, { ProColumns } from '@ant-design/pro-table';
 import { PlusOutlined } from '@ant-design/icons';
