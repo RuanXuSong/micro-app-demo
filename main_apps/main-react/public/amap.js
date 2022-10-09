@@ -8,11 +8,6 @@ AMapLoader.load({
     'AMap.CitySearch',
     'AMap.Geocoder',
   ], // 需要使用的的插件列表，如比例尺'AMap.Scale'等
-})
-  .then((AMap) => {
-    var map = new AMap.Map('container');
-    map.addControl(new AMap.Scale());
-  })
-  .catch((e) => {
-    console.error(e); //加载错误提示
-  });
+}).catch((e) => {
+  console.error(e); //加载错误提示
+});
