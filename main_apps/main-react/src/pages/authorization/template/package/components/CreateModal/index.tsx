@@ -114,7 +114,8 @@ export default ({
                   : item?.redirectUrl &&
                     templateAuthMap[
                       `${enumToValueEnum(TEMPLATE_CLIENT_ENUM)[item.clientKey]?.text}查看`
-                    ] && (
+                    ] &&
+                    item?.status === HISTORY_STATUS_MAP.成功 && (
                       <a
                         className={styles.action}
                         href={item.redirectUrl}

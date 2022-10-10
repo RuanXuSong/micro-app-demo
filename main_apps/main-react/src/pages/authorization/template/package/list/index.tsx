@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 仇艳
- * @LastEditTime: 2022-10-08 14:51:27
+ * @LastEditTime: 2022-10-10 17:02:24
  */
 import { useRef } from 'react';
 import { Tag, Image, Button, Spin } from 'antd';
@@ -14,7 +14,7 @@ import styles from './index.module.less';
 import useTemplatePackageListService from './useTemplatePackageListService';
 import CreateModal from '../components/CreateModal';
 import PreviewModal from '../components/PreviewModal';
-import { QuestionCircleOutlined } from '@ant-design/icons';
+import { QuestionCircleOutlined, ReloadOutlined } from '@ant-design/icons';
 import { enumToValueEnum } from '@/utils/array';
 import { FormInstance } from 'antd/es/form';
 import MarkdownViewModal from '../components/MarkdownViewModal';
@@ -85,7 +85,10 @@ export default () => {
       </div>
       <Spin spinning={loading}>
         <div className={styles.content}>
-          <div className={styles.title}>模板套餐</div>
+          <div className={styles.title}>
+            模板套餐 &nbsp;&nbsp;
+            <ReloadOutlined onClick={() => fetchList()} />
+          </div>
           <div className={styles.item} ref={getRef}>
             {list?.map((item, index) => (
               <div
