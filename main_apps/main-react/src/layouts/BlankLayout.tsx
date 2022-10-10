@@ -25,7 +25,7 @@ const Layout: React.FC<any> = ({ children, location }) => {
             try {
               const errorJSON = JSON.parse(error.message);
               message.error(errorJSON.message);
-            } catch (err) {
+            } catch (err: any) {
               message.error(err.message);
             }
           }
