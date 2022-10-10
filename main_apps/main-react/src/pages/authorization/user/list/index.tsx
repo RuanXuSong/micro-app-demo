@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 仇艳
- * @LastEditTime: 2022-10-10 10:39:01
+ * @LastEditTime: 2022-10-10 16:01:22
  */
 import { message, Button, Modal, Select } from 'antd';
 import ProTable, { ProColumns } from '@ant-design/pro-table';
@@ -44,7 +44,19 @@ const UserList = () => {
       hideInSearch: !showCompanySelect,
       hideInTable: true,
       renderFormItem: () => (
-        <Select allowClear value={orgId} onChange={setOrgId} options={companyIdMapOptions}></Select>
+        <Select
+          allowClear
+          showSearch
+          value={orgId}
+          onChange={setOrgId}
+          options={companyIdMapOptions}
+          filterOption={(inputValue, option) => {
+            if (!!option?.label) {
+              return option?.label?.toString()?.indexOf(inputValue) >= 0;
+            }
+            return false;
+          }}
+        ></Select>
       ),
     },
     {
