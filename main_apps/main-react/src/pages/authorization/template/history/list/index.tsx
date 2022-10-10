@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 仇艳
- * @LastEditTime: 2022-10-09 10:25:00
+ * @LastEditTime: 2022-10-10 10:38:26
  */
 import { message, Select } from 'antd';
 import ProTable, { ProColumns } from '@ant-design/pro-table';
@@ -14,14 +14,8 @@ import useTemplateHistoryListService from './useTemplateHistoryListService';
 import { enumToValueEnum } from '@/utils/array';
 
 export default () => {
-  const {
-    loading,
-    actionRef,
-    templatePackageList,
-    templateAuthMap,
-    fetchList,
-    handleTemplateRetry,
-  } = useTemplateHistoryListService();
+  const { actionRef, templatePackageList, templateAuthMap, fetchList, handleTemplateRetry } =
+    useTemplateHistoryListService();
 
   const columns: ProColumns<defs.platform.TemListDTO>[] = [
     {
@@ -145,7 +139,6 @@ export default () => {
 
   return (
     <ProTable
-      loading={loading}
       style={{ padding: '18px 22px' }}
       actionRef={actionRef}
       request={fetchList as any}

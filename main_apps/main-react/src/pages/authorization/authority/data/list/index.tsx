@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
- * @LastEditors: 阮旭松
- * @LastEditTime: 2022-09-08 11:02:37
+ * @LastEditors: 仇艳
+ * @LastEditTime: 2022-10-10 10:44:01
  */
 import { useEffect } from 'react';
 import { message, Button, Row, Col, Select } from 'antd';
@@ -22,7 +22,6 @@ import useCompanySelect from '@/hooks/useCompanySelect';
 
 export default () => {
   const {
-    loading,
     actionRef,
     reload,
     clientKey,
@@ -161,7 +160,6 @@ export default () => {
         </Row>
       </div>
       <ProTable
-        loading={loading}
         style={{ padding: '18px 22px' }}
         actionRef={actionRef}
         request={fetchList}

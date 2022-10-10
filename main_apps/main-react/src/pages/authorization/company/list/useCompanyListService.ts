@@ -32,51 +32,42 @@ export default () => {
   /**
    * 重置密码
    */
-  const { run: handleResetPassword, loading: resetLoading } = useRequest(
-    API.platform.sysOrg.resetPassword.fetch,
-    {
-      manual: true,
-      onSuccess: (secretCode) => {
-        message.success('重置成功');
-        reload?.();
-        secretCode &&
-          notification.success({
-            message: `密码重置成功`,
-            description: `密码为: ${secretCode}`,
-            duration: null,
-          });
-      },
+  const { run: handleResetPassword } = useRequest(API.platform.sysOrg.resetPassword.fetch, {
+    manual: true,
+    onSuccess: (secretCode) => {
+      message.success('重置成功');
+      reload?.();
+      secretCode &&
+        notification.success({
+          message: `密码重置成功`,
+          description: `密码为: ${secretCode}`,
+          duration: null,
+        });
     },
-  );
+  });
 
   /**
    * 启用/禁用
    */
-  const { run: handleUpdateStatus, loading: updateLoading } = useRequest(
-    API.platform.sysOrg.updateStatus.fetch,
-    {
-      manual: true,
-      onSuccess: () => {
-        message.success('操作成功');
-        reload?.();
-      },
+  const { run: handleUpdateStatus } = useRequest(API.platform.sysOrg.updateStatus.fetch, {
+    manual: true,
+    onSuccess: () => {
+      message.success('操作成功');
+      reload?.();
     },
-  );
+  });
 
   /**
    * 角色删除
    * @param id
    */
-  const { run: handleDelete, loading: deleteLoading } = useRequest(
-    API.authorization.resourceRole.resourceDelete.fetch,
-    {
-      manual: true,
-      onSuccess: () => {
-        message.success('删除成功');
-        reload?.();
-      },
+  const { run: handleDelete } = useRequest(API.authorization.resourceRole.resourceDelete.fetch, {
+    manual: true,
+    onSuccess: () => {
+      message.success('删除成功');
+      reload?.();
     },
-  );
+  });
 
   /**
    * 获取普通分页列表
@@ -137,10 +128,7 @@ export default () => {
     });
   };
 
-  const loading = resetLoading || updateLoading || deleteLoading;
-
   return {
-    loading,
     actionRef,
     reload,
     editModalConfig,

@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
- * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-30 15:55:42
+ * @LastEditors: 仇艳
+ * @LastEditTime: 2022-10-10 10:39:01
  */
 import { message, Button, Modal, Select } from 'antd';
 import ProTable, { ProColumns } from '@ant-design/pro-table';
@@ -21,7 +21,6 @@ const UserList = () => {
   const { showCompanySelect } = useCompanySelect('cloud_user_list_company');
   const { companyIdMapOptions } = useModel('company');
   const {
-    loading,
     actionRef,
     reload,
     disabledAction,
@@ -167,7 +166,6 @@ const UserList = () => {
   return (
     <>
       <ProTable
-        loading={loading}
         style={{ padding: '18px 22px' }}
         actionRef={actionRef}
         request={fetchList as any}

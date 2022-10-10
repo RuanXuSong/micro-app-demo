@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
- * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-26 15:40:08
+ * @LastEditors: 仇艳
+ * @LastEditTime: 2022-10-10 10:44:57
  */
 import { message, Button, Modal } from 'antd';
 import ProTable, { ProColumns } from '@ant-design/pro-table';
@@ -20,7 +20,6 @@ import moment from 'moment';
 
 export default () => {
   const {
-    loading,
     actionRef,
     reload,
     editModalConfig,
@@ -174,7 +173,6 @@ export default () => {
   return (
     <>
       <ProTable
-        loading={loading}
         style={{ padding: '18px 22px' }}
         actionRef={actionRef}
         request={fetchList as any}

@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
- * @LastEditors: 阮旭松
- * @LastEditTime: 2022-08-30 16:01:13
+ * @LastEditors: 仇艳
+ * @LastEditTime: 2022-10-10 10:42:00
  */
 import { message, Button, Select } from 'antd';
 import ProTable, { ProColumns } from '@ant-design/pro-table';
@@ -21,7 +21,6 @@ export default () => {
   const { companyMapOptions } = useModel('company');
   const { showCompanySelect } = useCompanySelect('cloud_authority_menu_company');
   const {
-    loading,
     orgCode,
     setOrgCode,
     disabledAction,
@@ -125,7 +124,6 @@ export default () => {
   return (
     <>
       <ProTable
-        loading={loading}
         style={{ padding: '18px 22px' }}
         actionRef={actionRef}
         request={fetchList}
