@@ -99,11 +99,15 @@ export default () => {
   const { run: createTemplate } = useRequest(API.platform.template.createTemplatePackage.fetch, {
     manual: true,
     onSuccess: (data) => {
+      // 模板开始创建修改所有子系统状态为创建中
+      data?.templateList?.map((template) => (template.status = TEMPLATE_STATUS_MAP.创建中));
+
       setCreateModalConfig((config) => {
         config.visible = true;
         config.loading = false;
         config.data = data;
       });
+
       if (data?.templateList?.length) {
         // 每个子系统需要调用接口去创建
         data?.templateList?.forEach((template) => {
