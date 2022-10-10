@@ -30,8 +30,12 @@ export default ({
   reload?: () => void;
   templateAuthMap: Object;
 }) => {
-  const modalStatus = data?.templateList?.every(
-    (item: { status: HISTORY_STATUS_MAP }) => item.status === HISTORY_STATUS_MAP.成功,
+  const modalStatus = data?.templateList?.every((item: { status: HISTORY_STATUS_MAP }) =>
+    [HISTORY_STATUS_MAP.失败, HISTORY_STATUS_MAP.成功].includes(item?.status),
+  );
+
+  const failStatus = data?.templateList?.some(
+    (item: { status: HISTORY_STATUS_MAP }) => item?.status === HISTORY_STATUS_MAP.失败,
   );
 
   return (
@@ -52,8 +56,17 @@ export default ({
           ) : (
             <>
               &nbsp;&nbsp;{data.name}&nbsp;&nbsp;
-              <Badge color="#17F9AD" />
-              <span className={styles.successTitle}>已完成</span>
+              {failStatus ? (
+                <span className={styles.failTitle}>
+                  <Badge color="#FF0000" />
+                  失败
+                </span>
+              ) : (
+                <span className={styles.successTitle}>
+                  <Badge color="#17F9AD" />
+                  已完成
+                </span>
+              )}
             </>
           )}
         </div>

@@ -176,6 +176,9 @@ export default () => {
   const { run: runTask } = useRequest(API.platform.template.detailTemplate.fetch, {
     manual: true,
     onSuccess: (data) => {
+      if ([TEMPLATE_STATUS_MAP.创建中, TEMPLATE_STATUS_MAP.未创建].includes(data?.status!)) {
+        return;
+      }
       const newData = createModalConfig?.data;
       const templateList = createModalConfig?.data?.templateList?.filter(
         (item: { orgTemplateId: string | undefined }) => item.orgTemplateId !== data.orgTemplateId,
