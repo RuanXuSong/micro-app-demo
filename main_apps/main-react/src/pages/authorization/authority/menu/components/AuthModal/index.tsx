@@ -9,7 +9,7 @@ import styles from './index.module.less';
 import { useImmer } from 'use-immer';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { LOGIN_CONFIG } from '@/constant';
-import { useModel } from 'umi';
+import { useModel } from '@umijs/max';
 
 /**
  * 初始化分页数据

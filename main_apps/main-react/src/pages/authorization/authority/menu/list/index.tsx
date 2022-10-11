@@ -13,7 +13,7 @@ import LinkButtons from '@/components/LinkButtons';
 import EditModal from '../components/EditModal';
 import AuthModal from '../components/AuthModal';
 import useAuthMenuListService from './useAuthMenuListService';
-import { useModel } from 'umi';
+import { useModel } from '@umijs/max';
 import useCompanySelect from '@/hooks/useCompanySelect';
 import TextEllipsis from '@/components/TextEllipsis';
 

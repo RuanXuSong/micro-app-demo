@@ -13,8 +13,7 @@
     "main-react": "cd main_apps/main-react && yarn start",
     "lint": "prettier --check main_apps/**/*.ts main_apps/**/*.tsx",
     "lint:fix": "prettier --check main_apps/**/*.ts main_apps/main-react/src/utils/*.ts main_apps/**/*.tsx --write",
-    "commit": "git-cz",
-    "tsc": "cd main_apps/main-react && tsc --noEmit"
+    "commit": "git-cz"
   },
   "config": {
     "commitizen": {
@@ -38,7 +37,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint:fix && lint-staged && yarn tsc",
+      "pre-commit": "npm run lint:fix && lint-staged",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },

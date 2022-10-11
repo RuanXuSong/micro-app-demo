@@ -2,7 +2,7 @@ import { message } from 'antd';
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
 import { ConnectState } from '@/models/connect';
-import { history } from 'umi';
+import { history } from '@umijs/max';
 import { TabCloseType } from '@/constant';
 
 export interface TabModel {

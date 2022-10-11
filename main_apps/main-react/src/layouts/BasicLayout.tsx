@@ -1,6 +1,6 @@
 import ProLayout, { MenuDataItem } from '@ant-design/pro-layout';
 import { useEffect, useRef } from 'react';
-import { Link, connect, history, useModel } from 'umi';
+import { Link, connect, history, useModel, useOutlet, useLocation } from '@umijs/max';
 import Authorized from '@/utils/Authorized';
 import NoMatch from '@/components/NoMatch';
 import logo from '@/assets/logo.svg';
@@ -10,13 +10,18 @@ import { isEmpty } from 'lodash';
 import { BaseMenuProps } from '@ant-design/pro-layout/lib/components/SiderMenu/BaseMenu';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import useInitialRoute from '@/hooks/useInitialRoute';
+import { MENU_ICONS_OBJ } from '@/constant';
+import convertResourceToMenu from '@/utils/convertResourceToMenu';
 
 const BasicLayout = (props: any) => {
+  const element = useOutlet();
   const { initialState } = useModel('@@initialState');
   const { userInfo } = initialState || {};
   const { resourceList } = useModel('resourceData');
+  const menus = convertResourceToMenu(resourceList);
   const { checkAuth } = useModel('authority');
   const { initialRoute } = useInitialRoute();
+  const location = useLocation();
 
   const menuDataRender = (menuList: any) =>
     menuList.map((item: any) => {
@@ -28,15 +33,7 @@ const BasicLayout = (props: any) => {
       const resourceKeys = resourceList.map((item) => `/${item.resourceKey}`);
       return resourceKeys.includes(localItem.key) ? localItem : null;
     });
-  const {
-    dispatch,
-    children,
-    settings,
-    headerCollapsed,
-    location = {
-      pathname: '/',
-    },
-  } = props;
+  const { dispatch, settings, headerCollapsed } = props;
   const menuDataRef = useRef<MenuDataItem[]>([]);
 
   useEffect(() => {
@@ -49,7 +46,7 @@ const BasicLayout = (props: any) => {
   }, [userInfo]);
 
   useEffect(() => {
-    const { pathname = '' } = props.location || {};
+    const { pathname = '' } = location || {};
     // 重定向到权限管理页
     if (/^\/authorization\/?$/.test(pathname)) {
       history.replace('/authorization/resource/list');
@@ -67,8 +64,9 @@ const BasicLayout = (props: any) => {
 
   /** 渲染菜单元素 */
   const renderMenuItem: BaseMenuProps['subMenuItemRender'] = (menuItemProps, defaultDom) => {
-    const { customIcon, name, pro_layout_parentKeys = [] } = menuItemProps;
+    const { name, key, pro_layout_parentKeys = [] } = menuItemProps;
     const isChild = !isEmpty(pro_layout_parentKeys);
+    const customIcon = MENU_ICONS_OBJ[key!] || {};
     return (
       <div className={classNames(!isChild ? styles.menuItemWrap : styles.childMenuItem)}>
         <img src={require(`@/assets/icon/${customIcon}.png`)} alt={name} />
@@ -85,6 +83,7 @@ const BasicLayout = (props: any) => {
       {...settings}
       title={userInfo?.orgName ?? '雷数云平台'}
       onCollapse={handleMenuCollapse}
+      menus={menus}
       onMenuHeaderClick={() => history.push(initialRoute)}
       menuItemRender={(menuItemProps, defaultDom) => {
         if (
@@ -108,9 +107,9 @@ const BasicLayout = (props: any) => {
       footerRender={() => {
         return null;
       }}
-      menuDataRender={menuDataRender}
+      menuDataRender={() => menuDataRender(menus)}
       rightContentRender={() => <RightContent />}
-      postMenuData={(menuData) => {
+      postMenuData={(menuData: any[]) => {
         if (!menuData) return [];
         // 筛选菜单为精准匹配路由
         const modifiedData = menuData.filter((item) => !(item.path!.indexOf('/*') > -1));
@@ -119,7 +118,7 @@ const BasicLayout = (props: any) => {
       }}
     >
       <Authorized authority={checkAuth(location.pathname, 'children')} noMatch={NoMatch}>
-        {children}
+        {element}
       </Authorized>
     </ProLayout>
   );

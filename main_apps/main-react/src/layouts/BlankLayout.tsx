@@ -1,18 +1,17 @@
 import React from 'react';
 import { ConfigProvider, message } from 'antd';
-import { Inspector } from 'react-dev-inspector';
 import zhCN from 'antd/es/locale/zh_CN';
 import 'moment/locale/zh-cn';
 import { UseRequestProvider } from 'ahooks';
 import { THROTTLE_INTERVAL } from '@/constant';
 import { PREFIX_CLASS } from '@/constant';
 import useAuth from '@/hooks/useAuth';
-import { useModel } from 'umi';
+import { useModel, useLocation, useOutlet } from '@umijs/max';
 
-const InspectorWrapper = process.env.NODE_ENV === 'development' ? Inspector : React.Fragment;
-
-const Layout: React.FC<any> = ({ children, location }) => {
+const Layout: React.FC<any> = () => {
+  const location = useLocation();
   const { ready } = useModel('authority');
+  const element = useOutlet();
   // 权限管理
   useAuth(location.pathname);
   return (
@@ -34,7 +33,7 @@ const Layout: React.FC<any> = ({ children, location }) => {
       }}
     >
       <ConfigProvider locale={zhCN} prefixCls={PREFIX_CLASS}>
-        <InspectorWrapper>{ready && children}</InspectorWrapper>
+        {ready && element}
       </ConfigProvider>
     </UseRequestProvider>
   );

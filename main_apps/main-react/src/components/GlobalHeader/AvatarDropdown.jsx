@@ -7,7 +7,7 @@ import {
   FormatPainterOutlined,
 } from '@ant-design/icons';
 import { Avatar, Menu, Spin } from 'antd';
-import { history, connect } from 'umi';
+import { history, connect } from '@umijs/max';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 import microApp from '@micro-zoe/micro-app';

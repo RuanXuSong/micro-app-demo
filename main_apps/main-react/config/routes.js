@@ -18,42 +18,35 @@ export default [
                 path: '/cloud',
                 name: '首页',
                 customIcon: 'data-front',
-                component: '../layouts/TabPanelLayout',
                 routes: [
                   {
                     path: '/cloud/homepage',
                     name: '首页',
                     component: './homepage',
-                    fontIcon: 'icon-homepage',
                   },
                   {
                     path: '/cloud/company/list',
                     name: '企业管理',
                     component: './authorization/company/list',
-                    fontIcon: 'icon-company',
                   },
                   {
                     path: '/cloud/user/list',
                     name: '用户管理',
                     component: './authorization/user/list',
-                    fontIcon: 'icon-person',
                   },
                   {
                     path: '/cloud/authority',
                     name: '权限管理',
-                    fontIcon: 'icon-authority',
                     routes: [
                       {
                         path: '/cloud/authority/menu',
                         name: '菜单权限',
                         component: './authorization/authority/menu/list',
-                        fontIcon: 'icon-menu',
                       },
                       {
                         path: '/cloud/authority/data',
                         name: '数据权限',
                         component: './authorization/authority/data/list',
-                        fontIcon: 'icon-data',
                       },
                     ],
                   },
@@ -61,24 +54,20 @@ export default [
                     path: '/cloud/central',
                     name: '个人中心',
                     component: './authorization/central',
-                    fontIcon: 'icon-person',
                   },
                   {
                     path: '/cloud/template',
                     name: '模板中心',
-                    fontIcon: 'icon-template',
                     routes: [
                       {
                         path: '/cloud/template/package',
                         name: '模板套餐',
                         component: './authorization/template/package/list',
-                        fontIcon: 'icon-package',
                       },
                       {
                         path: '/cloud/template/history',
                         name: '模板历史',
                         component: './authorization/template/history/list',
-                        fontIcon: 'icon-history',
                       },
                     ],
                   },

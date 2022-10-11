@@ -9,7 +9,7 @@
 
 import React, { useMemo, CSSProperties } from 'react';
 import { Dropdown, Menu } from 'antd';
-import { history } from 'umi';
+import { history } from '@umijs/max';
 
 export interface ButtonsType {
   name: string;

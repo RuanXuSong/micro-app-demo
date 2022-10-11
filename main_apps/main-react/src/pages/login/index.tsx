@@ -1,6 +1,6 @@
 import LoginForm from '@/components/LoginForm';
 import styles from './index.module.less';
-import { Link } from 'umi';
+import { Link } from '@umijs/max';
 
 const { UserName, Password, Submit } = LoginForm;
 

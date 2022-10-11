@@ -27,6 +27,6 @@
     "experimentalDecorators": true
   },
   "include": ["main_apps"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules/*"],
   "compileOnSave": false
 }

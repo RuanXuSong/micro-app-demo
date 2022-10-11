@@ -1,5 +1,5 @@
 import { PrivilegeResource } from '@/interfaces/common';
-import { history, useModel } from 'umi';
+import { history, useModel } from '@umijs/max';
 import styles from './index.module.less';
 
 interface CardItemProps {

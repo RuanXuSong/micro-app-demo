@@ -1,6 +1,6 @@
 import { Tooltip, Tag } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
-import { connect, SelectLang } from 'umi';
+import { connect, SelectLang } from '@umijs/max';
 import Avatar from './AvatarDropdown';
 import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
@@ -21,11 +21,6 @@ const GlobalHeaderRight = (props) => {
   return (
     <div className={className}>
       <Avatar />
-      {REACT_APP_ENV && (
-        <span>
-          <Tag color={ENVTagColor[REACT_APP_ENV]}>{REACT_APP_ENV}</Tag>
-        </span>
-      )}
       {/* <SelectLang className={styles.action} /> */}
     </div>
   );

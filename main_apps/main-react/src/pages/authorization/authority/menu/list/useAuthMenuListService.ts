@@ -7,7 +7,7 @@ import { initialPagination } from '@/constant';
 import { removeEmpty } from '@/utils/json';
 import { getResourceIds } from '@/utils/getResourceIds';
 import useResourceData from '@/hooks/useResourceData';
-import { useModel } from 'umi';
+import { useModel } from '@umijs/max';
 
 export default () => {
   const { initialState } = useModel('@@initialState');

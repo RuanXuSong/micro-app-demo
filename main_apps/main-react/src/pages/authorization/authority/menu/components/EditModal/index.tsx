@@ -5,7 +5,7 @@ import 'antd/lib/form';
 import { Store } from 'antd/es/form/interface';
 import { useRequest } from 'ahooks';
 import useSpinning from '@/hooks/useSpinning';
-import { useModel } from 'umi';
+import { useModel } from '@umijs/max';
 import { LOGIN_CONFIG, SMART_DATA_CODE } from '@/constant';
 import styles from './index.module.less';
 import { getResourceIds } from '@/utils/getResourceIds';

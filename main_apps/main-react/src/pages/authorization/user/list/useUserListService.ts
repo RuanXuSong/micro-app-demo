@@ -1,4 +1,4 @@
-import { useModel } from 'umi';
+import { useModel } from '@umijs/max';
 import { removeEmpty } from './../../../../utils/json';
 import { useRef, useState, useEffect } from 'react';
 import { useImmer } from 'use-immer';

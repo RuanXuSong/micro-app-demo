@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import { useModel } from 'umi';
+import { useModel } from '@umijs/max';
 import { isEmpty } from 'lodash-es';
 import convertSourceToTreeData from '@/utils/convertSourceToTreeData';
 import { useRequest } from 'ahooks';

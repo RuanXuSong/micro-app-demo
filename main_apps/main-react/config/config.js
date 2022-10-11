@@ -1,24 +1,19 @@
 // https://umijs.org/config/
 const openBrowser = require('react-dev-utils/openBrowser');
-import { defineConfig } from 'umi';
+import { defineConfig } from '@umijs/max';
 import defaultSettings from './defaultSettings';
 import routes from './routes';
 import { PREFIX_CLASS } from '../src/constant';
 const path = require('path');
 
-const { REACT_APP_ENV } = process.env;
 export default defineConfig({
-  antd: {
-    config: {
-      prefixCls: PREFIX_CLASS,
-    },
-  },
-  dva: {
-    hmr: true,
-  },
-  dynamicImport: {
-    loading: '@/components/PageLoading/index',
-  },
+  plugins: [
+    require.resolve('@alita/plugins/dist/keepalive'),
+    require.resolve('@alita/plugins/dist/tabs-layout'),
+  ],
+  keepalive: [/cloud/],
+  tabsLayout: {},
+  dva: {},
   targets: {
     ie: 11,
   },
@@ -56,7 +51,9 @@ export default defineConfig({
       '@ant-prefix': PREFIX_CLASS,
     },
   },
-  esbuild: {},
+  model: {},
+  request: {},
+  initialState: {},
   outputPath: 'build',
   publicPath: '/',
   chainWebpack(config) {

@@ -3,7 +3,7 @@ import { message } from 'antd';
 import { isEmpty } from 'lodash-es';
 import { useEffect } from 'react';
 
-import { history, useModel } from 'umi';
+import { history, useModel } from '@umijs/max';
 
 export default function useAuth(pathname: string) {
   const { getAuthority, ready } = useModel('authority');

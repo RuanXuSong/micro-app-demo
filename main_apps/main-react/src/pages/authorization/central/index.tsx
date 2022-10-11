@@ -1,7 +1,7 @@
 import { Form, Button, Input, Upload, Spin } from 'antd';
 import styles from './index.module.less';
 import { FILE_TYPE_MAP, getPublicUploadProps, handleUpload } from '@/utils/upload';
-import { connect } from 'umi';
+import { connect } from '@umijs/max';
 import { AVATAR_URL } from '@/constant';
 import EditModal from './components/EditModal';
 import useCentralService from './useCentralService';

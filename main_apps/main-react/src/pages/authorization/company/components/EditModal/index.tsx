@@ -14,7 +14,7 @@ import { orgCodeValidator, phoneValidator } from '@/utils/validators';
 import classNames from 'classnames';
 import moment from 'moment';
 import { removeEmpty } from '@/utils/json';
-import { useModel } from 'umi';
+import { useModel } from '@umijs/max';
 import { disabledDate } from '@/utils/getDisabledDate';
 import { enumToOptions } from '@/utils/array';
 import { ROLE_STATUS_MAP } from '@/constant';

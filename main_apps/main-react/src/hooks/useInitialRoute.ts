@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { INITIAL_PATH } from '@/constant';
 import { isEmpty } from 'lodash';
-import { useModel } from 'umi';
+import { useModel } from '@umijs/max';
 
 export default function useInitialRoute() {
   const { initialState } = useModel('@@initialState');

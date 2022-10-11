@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useModel } from 'umi';
+import { useModel } from '@umijs/max';
 
 export default function useCompanySelect(resourceKey: string) {
   const { initialState } = useModel('@@initialState');

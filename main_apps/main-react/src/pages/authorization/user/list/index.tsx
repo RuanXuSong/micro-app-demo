@@ -14,7 +14,7 @@ import { enumToValueEnum } from '@/utils/array';
 import LinkButtons from '@/components/LinkButtons';
 import Edit from '../edit';
 import useUserListService from './useUserListService';
-import { useModel } from 'umi';
+import { useModel } from '@umijs/max';
 import useCompanySelect from '@/hooks/useCompanySelect';
 
 const UserList = () => {

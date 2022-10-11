@@ -13,7 +13,7 @@ import { emailValidator, phoneValidator, userAccountValidator } from '@/utils/va
 import { ROLE_STATUS_MAP, SEX_ENUM } from '@/constant';
 import { enumToOptions } from '@/utils/array';
 import { removeEmpty } from '@/utils/json';
-import { useModel } from 'umi';
+import { useModel } from '@umijs/max';
 
 const formLayout = {
   labelCol: {

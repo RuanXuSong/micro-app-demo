@@ -8,7 +8,7 @@ import useSpinning from '@/hooks/useSpinning';
 import styles from './index.module.less';
 import { useImmer } from 'use-immer';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
-import { useModel } from 'umi';
+import { useModel } from '@umijs/max';
 import { removeEmpty } from '@/utils/json';
 
 /**

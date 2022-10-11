@@ -16,7 +16,7 @@ import AuthModal from '../components/AuthModal';
 import useAuthDataListService from './useAuthDataListService';
 import styles from './index.module.less';
 import ScopeModal from '../components/ScopeModal';
-import { useModel } from 'umi';
+import { useModel } from '@umijs/max';
 import { isEmpty } from 'lodash';
 import useCompanySelect from '@/hooks/useCompanySelect';
 

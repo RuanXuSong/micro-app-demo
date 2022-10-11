@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { reloadAuthorized } from '@/utils/Authorized';
-import { useModel } from 'umi';
+import { useModel } from '@umijs/max';
 import { isEmpty } from 'lodash';
 
 export default () => {

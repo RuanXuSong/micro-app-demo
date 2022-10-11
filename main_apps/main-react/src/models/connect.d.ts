@@ -1,11 +1,11 @@
 import { AnyAction } from 'redux';
 import { MenuDataItem } from '@ant-design/pro-layout';
-import { RouterTypes } from 'umi';
+import { RouterTypes } from '@umijs/max';
 import { GlobalModelState } from './global';
 import { DefaultSettings as SettingModelState } from '../../config/defaultSettings';
 import { UserModelState } from './user';
 import { StateType } from './login';
-import {TabModelState} from "./tabs";
+import { TabModelState } from './tabs';
 
 export { GlobalModelState, SettingModelState, UserModelState };
 

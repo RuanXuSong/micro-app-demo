@@ -1,6 +1,6 @@
 import { AUTH_KEY_LIST } from '@/constant';
 import { useMemo } from 'react';
-import { useModel } from 'umi';
+import { useModel } from '@umijs/max';
 
 export default function useTemplateAuth() {
   const { initialState } = useModel('@@initialState');

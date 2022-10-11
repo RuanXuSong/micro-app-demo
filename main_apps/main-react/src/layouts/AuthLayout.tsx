@@ -1,6 +1,6 @@
-import ProLayout, { BasicLayoutProps, MenuDataItem } from '@ant-design/pro-layout';
-import { useEffect, useRef } from 'react';
-import { Link, connect, history, useModel } from 'umi';
+import ProLayout, { BasicLayoutProps } from '@ant-design/pro-layout';
+import { useEffect } from 'react';
+import { Link, connect, history, useModel, useLocation, useKeepOutlets } from '@umijs/max';
 import Authorized from '@/utils/Authorized';
 import logo from '../assets/logo.svg';
 import microApp from '@micro-zoe/micro-app';
@@ -14,7 +14,10 @@ import RightContent from '@/components/GlobalHeader/RightContent';
 import useInitialRoute from '@/hooks/useInitialRoute';
 
 const AuthLayout = (props: any) => {
+  const location = useLocation();
   const { initialState } = useModel('@@initialState');
+  const tabsElements = useKeepOutlets();
+
   const { menus = [], userInfo } = initialState || {};
   const { checkAuth } = useModel('authority');
   const { initialRoute } = useInitialRoute();
@@ -32,16 +35,7 @@ const AuthLayout = (props: any) => {
       .filter((item) => !!item);
     return menuData;
   };
-  const {
-    dispatch,
-    children,
-    settings,
-    location = {
-      pathname: '/',
-    },
-    collapsed,
-  } = props;
-  const menuDataRef = useRef<MenuDataItem[]>([]);
+  const { dispatch, settings, collapsed } = props;
   useEffect(() => {
     microApp.setGlobalData({ showDropDown: true });
 
@@ -70,22 +64,19 @@ const AuthLayout = (props: any) => {
 
   /** 渲染菜单元素 */
   const renderMenuItem: BaseMenuProps['subMenuItemRender'] = (menuItemProps, defaultDom) => {
-    const { customIcon, fontIcon, name, pro_layout_parentKeys = [] } = menuItemProps;
+    const { pro_layout_parentKeys = [], customIcon } = menuItemProps;
     const isChild = !isEmpty(pro_layout_parentKeys);
     return isChild ? (
       <div
         className={classNames(!isChild ? styles.menuItemWrap : styles.childMenuItem)}
         style={collapsed ? { paddingLeft: 2 } : {}}
       >
-        {fontIcon ? (
-          <Iconfont
-            name={fontIcon}
-            className={styles.fontIcon}
-            style={{ marginRight: collapsed ? 14 : 10 }}
-          />
-        ) : (
-          <img src={require(`@/assets/icon/${customIcon}.png`)} alt={name} />
-        )}
+        <Iconfont
+          name={customIcon}
+          className={styles.fontIcon}
+          style={{ marginRight: collapsed ? 14 : 10 }}
+        />
+
         <div className={styles.menuTitle}>{defaultDom}</div>
       </div>
     ) : null;
@@ -120,28 +111,19 @@ const AuthLayout = (props: any) => {
           <span>{route.breadcrumbName}</span>
         );
       }}
-      menuDataRender={menuDataRender}
+      menuDataRender={() => menuDataRender(menus)}
       rightContentRender={() => <RightContent />}
-      postMenuData={(menuData) => {
-        menuDataRef.current = menuData || [];
-        return menuData || [];
-      }}
     >
       <Authorized authority={checkAuth(location.pathname)} noMatch={NoMatch}>
-        <div>{children}</div>
+        {tabsElements}
       </Authorized>
     </ProLayout>
   );
 };
 
 function mapStateToProps(state: any) {
-  const {
-    router: { location },
-    global,
-    settings,
-  } = state;
-  const menuKey = location.pathname;
-  return { menuKey, collapsed: global.collapsed, settings };
+  const { global, settings } = state;
+  return { collapsed: global.collapsed, settings };
 }
 
 export default connect(mapStateToProps)(AuthLayout);

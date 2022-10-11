@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 阮旭松
  * @Date: 2022-07-28 18:10:42
- * @LastEditors: 仇艳
- * @LastEditTime: 2022-09-30 16:26:31
+ * @LastEditors: 阮旭松
+ * @LastEditTime: 2022-10-11 18:46:09
  */
 
 /** 云平台 antd 样式前缀（防止子应用样式污染） */
@@ -160,3 +160,12 @@ export const AUTH_KEY_LIST = [
 
 /** 模板异步获取结果的轮询时间: 10秒 */
 export const TEMPLATE_INTERVAL_TIME = 10000;
+
+/** 菜单 icon */
+export const MENU_ICONS_OBJ = {
+  '/smart-data': 'data-front',
+  '/smart-lowcode': 'bisheng',
+  '/smart-bi': 'thunder-bi',
+  '/smart-visualization': 'thunder-bi',
+  '/smart-iot': 'data-front',
+};

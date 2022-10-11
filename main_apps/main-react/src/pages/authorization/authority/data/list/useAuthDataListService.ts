@@ -1,4 +1,4 @@
-import { useModel } from 'umi';
+import { useModel } from '@umijs/max';
 import { useRef, useState, useMemo, useEffect } from 'react';
 import { useImmer } from 'use-immer';
 import { message } from 'antd';

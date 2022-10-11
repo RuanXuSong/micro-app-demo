@@ -6,7 +6,7 @@ import { Store } from 'antd/es/form/interface';
 import { useRequest } from 'ahooks';
 import useSpinning from '@/hooks/useSpinning';
 import { removeEmpty } from '@/utils/json';
-import { useModel } from 'umi';
+import { useModel } from '@umijs/max';
 
 const formLayout = {
   labelCol: {
