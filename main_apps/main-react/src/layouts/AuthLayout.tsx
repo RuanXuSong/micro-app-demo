@@ -12,6 +12,7 @@ import NoMatch from '@/components/NoMatch';
 import { BaseMenuProps } from '@ant-design/pro-layout/lib/components/SiderMenu/BaseMenu';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import useInitialRoute from '@/hooks/useInitialRoute';
+import Footer from '@/components/Footer';
 
 const AuthLayout = (props: any) => {
   const location = useLocation();
@@ -103,6 +104,7 @@ const AuthLayout = (props: any) => {
       }}
       subMenuItemRender={(menuItemProps, defaultDom) => renderMenuItem(menuItemProps, defaultDom)}
       splitMenus
+      footerRender={() => <Footer />}
       itemRender={(route, _params, routes, paths) => {
         const first = routes.indexOf(route) === 0;
         return first ? (
