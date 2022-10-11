@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkant_design_pro=self.webpackChunkant_design_pro||[]).push([[848],{37471:function(e,t,n){n.r(t);var a=n(10496),u=n(43758),c=n(85893);t.default=function(){return(0,c.jsx)("div",{style:{height:"100%"},children:(0,c.jsx)("micro-app",{name:u.u6.IOT,baseRoute:"/".concat(u.u6.IOT),url:"".concat(a.Z.iot),"keep-alive":!0,data:{logoutUrl:a.G}})})}}}]);

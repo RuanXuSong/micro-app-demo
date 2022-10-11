@@ -12,7 +12,9 @@ export default defineConfig({
     require.resolve('@alita/plugins/dist/tabs-layout'),
   ],
   keepalive: [/cloud/],
-  tabsLayout: {},
+  tabsLayout: {
+    hasDropdown: true,
+  },
   dva: {},
   targets: {
     ie: 11,
@@ -42,6 +44,7 @@ export default defineConfig({
   theme: {
     'primary-color': defaultSettings.primaryColor,
   },
+  jsMinifier: 'terser',
   title: false,
   manifest: {
     basePath: '/',
