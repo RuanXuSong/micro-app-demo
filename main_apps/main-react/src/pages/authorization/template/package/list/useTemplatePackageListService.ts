@@ -52,7 +52,7 @@ export default () => {
     loading: boolean;
   }>({
     visible: false,
-    data: '',
+    data: {},
     loading: false,
   });
 
@@ -142,12 +142,12 @@ export default () => {
   });
 
   /** 查看模板指南 */
-  const handleViewMarkDown = async (fileUrl: string) => {
+  const handleViewMarkDown = async (name: string, fileUrl: string) => {
     const result = await fetch(fileUrl);
     const data = await result.text();
     setMarkDownConfig((config) => {
       config.visible = true;
-      config.data = data;
+      config.data = { name, data };
     });
   };
 
@@ -222,7 +222,7 @@ export default () => {
     methodsObj[type]((config) => {
       config.visible = false;
       config.loading = false;
-      config.data = type === 'markdown' ? '' : {};
+      config.data = {};
     });
   };
 

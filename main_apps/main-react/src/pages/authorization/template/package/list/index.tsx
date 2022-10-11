@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 仇艳
- * @LastEditTime: 2022-10-10 17:02:24
+ * @LastEditTime: 2022-10-11 14:39:22
  */
 import { useRef } from 'react';
 import { Tag, Image, Button, Spin } from 'antd';
@@ -115,7 +115,7 @@ export default () => {
                     <div>
                       <span
                         className={styles.guide}
-                        onClick={() => handleViewMarkDown(item?.guideUrl!)}
+                        onClick={() => handleViewMarkDown(item?.name!, item?.guideUrl!)}
                       >
                         <QuestionCircleOutlined />
                         模板指南

@@ -7,7 +7,7 @@ export default ({
   data,
 }: {
   visible: boolean;
-  data: string;
+  data: { name: ''; data: '' };
   toggleVisible: () => void;
 }) => {
   return (
@@ -16,7 +16,7 @@ export default ({
       visible={visible}
       forceRender
       maskClosable={false}
-      title="模板指南"
+      title={`${data?.name}指南`}
       okButtonProps={{
         htmlType: 'submit',
       }}
@@ -34,7 +34,7 @@ export default ({
         </Button>,
       ]}
     >
-      <ReactMarkdown source={data} />
+      <ReactMarkdown source={data?.data} />
     </Modal>
   );
 };
