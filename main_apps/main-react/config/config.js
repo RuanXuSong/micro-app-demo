@@ -11,6 +11,11 @@ export default defineConfig({
     require.resolve('@alita/plugins/dist/keepalive'),
     require.resolve('@alita/plugins/dist/tabs-layout'),
   ],
+  antd: {
+    configProvider: {
+      prefixCls: PREFIX_CLASS,
+    },
+  },
   keepalive: [/cloud/],
   tabsLayout: {
     hasDropdown: true,
@@ -59,7 +64,6 @@ export default defineConfig({
   initialState: {},
   outputPath: 'build',
   publicPath: '/',
-  hash: true,
   chainWebpack(config) {
     config.module.rule('otf').test(/.otf$/).use('file-loader').loader('file-loader');
   },
