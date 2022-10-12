@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 仇艳
- * @LastEditTime: 2022-10-11 14:39:22
+ * @LastEditTime: 2022-10-12 10:48:29
  */
 import { useRef } from 'react';
 import { Tag, Image, Button, Spin } from 'antd';
@@ -96,6 +96,7 @@ export default () => {
                 key={index}
                 tabIndex={index}
                 onMouseMove={() => setSelected(item?.id!)}
+                onMouseLeave={() => setSelected('')}
                 style={{ marginRight: margin, marginLeft: margin }}
               >
                 <div className={styles.imageDiv}>
