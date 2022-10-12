@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 仇艳
- * @LastEditTime: 2022-10-10 16:01:22
+ * @LastEditTime: 2022-10-12 15:18:34
  */
 import { message, Button, Modal, Select } from 'antd';
 import ProTable, { ProColumns } from '@ant-design/pro-table';
@@ -41,7 +41,7 @@ const UserList = () => {
       align: 'left',
       copyable: false,
       valueType: 'text',
-      hideInSearch: !showCompanySelect,
+      hideInSearch: !showCompanySelect || !companyIdMapOptions?.length,
       hideInTable: true,
       renderFormItem: () => (
         <Select
