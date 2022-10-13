@@ -1,5 +1,5 @@
 diff --git a/node_modules/@alita/plugins/templates/keepalive/context.tpl b/node_modules/@alita/plugins/templates/keepalive/context.tpl
-index 51fc022..4633b8e 100644
+index 51fc022..e117bfd 100644
 --- a/node_modules/@alita/plugins/templates/keepalive/context.tpl
 +++ b/node_modules/@alita/plugins/templates/keepalive/context.tpl
 @@ -25,8 +25,13 @@ import { useIntl } from '../exports';
@@ -16,10 +16,16 @@ index 51fc022..4633b8e 100644
  
  export const KeepAliveContext = React.createContext({});
  // 兼容非全路径的 path
-@@ -322,6 +327,18 @@ export function useKeepOutlets() {
+@@ -320,8 +325,22 @@ export function useKeepOutlets() {
+ {{/hasCustomTabs}}
+         {
              Object.entries(keepElements.current).map(([pathname, { children }]: any) => (
-                 <div key={`${pathname}:${cacheKeyMap[pathname] || '_'}`} style={ { height: '100%', width: '100%', position: 'relative', overflow: 'hidden auto' } } className="runtime-keep-alive-layout" hidden={!matchPath(location.pathname, pathname)}>
-                     {children}
+-                <div key={`${pathname}:${cacheKeyMap[pathname] || '_'}`} style={ { height: '100%', width: '100%', position: 'relative', overflow: 'hidden auto' } } className="runtime-keep-alive-layout" hidden={!matchPath(location.pathname, pathname)}>
+-                    {children}
++                <div key={`${pathname}:${cacheKeyMap[pathname] || '_'}`} style={ { height: '100%', width: '100%', position: 'relative', overflow: 'hidden auto',display: 'flex', flexDirection: 'column' } } className="runtime-keep-alive-layout" hidden={!matchPath(location.pathname, pathname)}>
++                    <div style={ { flex: 1 } }>
++                      {children}
++                    </div>
 +                    <div style={ { position: 'relative',width:'100%',height:'80px',display:'flex',justifyContent: 'center',zIndex: 2 } }>
 +                      <span>
 +                        杭州雷数科技有限公司 版权所有 ©️ 2017-{formatDate(new Date(), 'YYYY')} All Rights Reserved
