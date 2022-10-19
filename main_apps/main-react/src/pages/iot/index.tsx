@@ -13,7 +13,7 @@ function IOT() {
       <micro-app
         name={ROUTE_PATH.IOT}
         baseRoute={`/${ROUTE_PATH.IOT}`}
-        url={`${config['smart-iot']}`}
+        url={`${config.iot}`}
         keep-alive
         data={{ logoutUrl: LOGOUT_PATH }}
       />

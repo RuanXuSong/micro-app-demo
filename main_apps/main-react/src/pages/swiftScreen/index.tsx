@@ -35,7 +35,7 @@ function SwiftScreen(props: any) {
       <micro-app
         name={ROUTE_PATH.SWIFT_SCREEN}
         baseRoute={`/${ROUTE_PATH.SWIFT_SCREEN}`}
-        url={`${config['smart-visualization']}`}
+        url={`${config.swiftScreen}`}
         keep-alive
         data={{ logoutUrl: LOGOUT_PATH }}
       />

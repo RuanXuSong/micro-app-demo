@@ -13,7 +13,7 @@ function DataFront() {
       <micro-app
         name={ROUTE_PATH.DATA_FRONT}
         baseRoute={`/${ROUTE_PATH.DATA_FRONT}`}
-        url={`${config['smart-data']}`}
+        url={`${config.dataFront}`}
         keep-alive
         data={{ logoutUrl: LOGOUT_PATH }}
       />

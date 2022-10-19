@@ -14,7 +14,7 @@ function BiSheng() {
       <micro-app
         name={ROUTE_PATH.BI_SHENG}
         baseRoute={`/${ROUTE_PATH.BI_SHENG}`}
-        url={`${config['smart-lowcode']}`}
+        url={`${config.biSheng}`}
         keep-alive
         data={{ logoutUrl: LOGOUT_PATH }}
       />

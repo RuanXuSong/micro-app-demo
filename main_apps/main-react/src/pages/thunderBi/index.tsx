@@ -13,7 +13,7 @@ function ThunderBi() {
       <micro-app
         name={ROUTE_PATH.THUNDER_BI}
         baseRoute={`/${ROUTE_PATH.THUNDER_BI}`}
-        url={`${config['smart-bi']}`}
+        url={`${config.thunderBi}`}
         keep-alive
         data={{ logoutUrl: LOGOUT_PATH }}
       />
