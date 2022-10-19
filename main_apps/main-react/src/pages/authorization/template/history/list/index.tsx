@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 仇艳
- * @LastEditTime: 2022-10-10 10:38:26
+ * @LastEditTime: 2022-10-19 14:46:25
  */
 import { message, Select } from 'antd';
 import ProTable, { ProColumns } from '@ant-design/pro-table';
@@ -91,7 +91,6 @@ export default () => {
       align: 'left',
       copyable: false,
       valueType: 'text',
-      hideInSearch: true,
       valueEnum: {
         [HISTORY_STATUS_MAP.失败]: {
           text: '失败',
@@ -120,7 +119,7 @@ export default () => {
       hideInSearch: true,
       render: (_, row) => {
         return (
-          row.status === HISTORY_STATUS_MAP.失败 &&
+          [HISTORY_STATUS_MAP.失败, HISTORY_STATUS_MAP.未创建].includes(row.status) &&
           templateAuthMap['模板重试'] && (
             <LinkButtons
               buttons={[
