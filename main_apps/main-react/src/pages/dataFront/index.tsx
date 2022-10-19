@@ -6,7 +6,7 @@ import Loading from '@/components/Loading';
 import useLoading from '@/hooks/useLoading';
 
 function DataFront() {
-  const { loading } = useLoading(ROUTE_PATH.BI_SHENG);
+  const { loading } = useLoading(ROUTE_PATH.DATA_FRONT);
   return (
     <div style={{ height: '100%' }}>
       <Loading loading={loading} />
@@ -14,12 +14,6 @@ function DataFront() {
         name={ROUTE_PATH.DATA_FRONT}
         baseRoute={`/${ROUTE_PATH.DATA_FRONT}`}
         url={`${config.dataFront}`}
-        onMounted={() => {
-          console.log('onMounted: ');
-        }}
-        onAftershow={() => {
-          console.log('onAftershow: ');
-        }}
         keep-alive
         data={{ logoutUrl: LOGOUT_PATH }}
       />

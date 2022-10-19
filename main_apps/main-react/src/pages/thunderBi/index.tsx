@@ -7,7 +7,6 @@ import useLoading from '@/hooks/useLoading';
 
 function ThunderBi() {
   const { loading } = useLoading(ROUTE_PATH.THUNDER_BI);
-  console.log('loading: ', loading);
   return (
     <div style={{ height: '100%' }}>
       <Loading loading={loading} />
