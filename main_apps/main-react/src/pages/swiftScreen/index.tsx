@@ -5,8 +5,11 @@ import microApp from '@micro-zoe/micro-app';
 import { connect } from '@umijs/max';
 import config, { LOGOUT_PATH } from '../../config';
 import { ROUTE_PATH } from '@/constant';
+import Loading from '@/components/Loading';
+import useLoading from '@/hooks/useLoading';
 
 function SwiftScreen(props: any) {
+  const { loading } = useLoading(ROUTE_PATH.SWIFT_SCREEN);
   function handleData(data: any) {
     const { payload, type } = data || {};
     const { dispatch } = props;
@@ -28,6 +31,7 @@ function SwiftScreen(props: any) {
 
   return (
     <div style={{ height: '100%' }}>
+      <Loading loading={loading} />
       <micro-app
         name={ROUTE_PATH.SWIFT_SCREEN}
         baseRoute={`/${ROUTE_PATH.SWIFT_SCREEN}`}
