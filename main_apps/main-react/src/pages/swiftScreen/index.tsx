@@ -1,12 +1,14 @@
 // @ts-ignore
 import jsxCustomEvent from '@micro-zoe/micro-app/polyfill/jsx-custom-event';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import microApp from '@micro-zoe/micro-app';
 import { connect } from '@umijs/max';
 import config, { LOGOUT_PATH } from '../../config';
 import { ROUTE_PATH } from '@/constant';
+import Loading from '@/components/Loading';
 
 function SwiftScreen(props: any) {
+  const [showLoading, setShowLoading] = useState<boolean>(true);
   function handleData(data: any) {
     const { payload, type } = data || {};
     const { dispatch } = props;
@@ -28,10 +30,13 @@ function SwiftScreen(props: any) {
 
   return (
     <div style={{ height: '100%' }}>
+      <Loading loading={showLoading} />
       <micro-app
         name={ROUTE_PATH.SWIFT_SCREEN}
         baseRoute={`/${ROUTE_PATH.SWIFT_SCREEN}`}
         url={`${config.swiftScreen}`}
+        onMounted={() => setShowLoading(false)}
+        onAftershow={() => setShowLoading(false)}
         keep-alive
         data={{ logoutUrl: LOGOUT_PATH }}
       />
