@@ -45,13 +45,13 @@ export default ({
       forceRender
       maskClosable={false}
       title={
-        <div>
+        <div className={styles.title}>
           {!modalStatus ? (
             <>
               <SyncOutlined spin />
               &nbsp;&nbsp;{data.name}&nbsp;&nbsp;
               <Badge color="#108ee9" />
-              <span className={styles.readyTitle}>创建中</span>
+              <span className={styles.readyTitle}>&nbsp;&nbsp;创建中</span>
             </>
           ) : (
             <>
@@ -59,12 +59,12 @@ export default ({
               {failStatus ? (
                 <span className={styles.failTitle}>
                   <Badge color="#FF0000" />
-                  失败
+                  &nbsp;&nbsp; 失败
                 </span>
               ) : (
                 <span className={styles.successTitle}>
-                  <Badge color="#17F9AD" />
-                  已完成
+                  <Badge color="#64B449" />
+                  &nbsp;&nbsp; 已完成
                 </span>
               )}
             </>
@@ -142,7 +142,7 @@ export default ({
                       <Badge color={TEMPLATE_STATUS_COLOR_MAP[item?.status]} />
                     )}
                     <span style={{ color: TEMPLATE_STATUS_COLOR_MAP[item?.status] }}>
-                      {HISTORY_STATUS_MAP[item?.status]}
+                      &nbsp;&nbsp;{HISTORY_STATUS_MAP[item?.status]}
                     </span>
                   </div>
                 }
