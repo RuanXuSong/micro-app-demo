@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-19 15:52:41
  * @LastEditors: 仇艳
- * @LastEditTime: 2022-10-12 10:48:29
+ * @LastEditTime: 2022-10-19 11:45:17
  */
 import { useRef } from 'react';
 import { Tag, Image, Button, Spin } from 'antd';
@@ -136,7 +136,9 @@ export default () => {
                         {item.status === TEMPLATE_STATUS_MAP.未创建 && templateAuthMap['模板创建'] && (
                           <Button
                             type="primary"
-                            onClick={() => handleCreateTemplate({ packageId: item.id! })}
+                            onClick={() =>
+                              handleCreateTemplate({ packageId: item.id!, name: item.name! })
+                            }
                           >
                             创建
                           </Button>

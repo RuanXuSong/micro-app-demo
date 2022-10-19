@@ -89,12 +89,14 @@ export default () => {
   }, []);
 
   /** 创建模板 */
-  const handleCreateTemplate = (value: { packageId: string }) => {
+  const handleCreateTemplate = (value: { packageId: string; name: string }) => {
+    const { name, packageId } = value;
     setCreateModalConfig((config) => {
       config.visible = true;
       config.loading = true;
+      config.data = { name };
     });
-    createTemplate(value);
+    createTemplate({ packageId });
   };
   const { run: createTemplate } = useRequest(API.platform.template.createTemplatePackage.fetch, {
     manual: true,
