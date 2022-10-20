@@ -11,8 +11,6 @@ export default () => {
   const { setAuthority, setReady } = useModel('authority');
   const { data: resourceList } = useRequest(API.platform.sysUser.myResourceList.fetch, {
     onSuccess: (resourceArr) => {
-      console.log('resourceArr: ', resourceArr);
-
       if (!isEmpty(resourceArr)) {
         setAuthority(
           resourceArr.map((item) => item.apiUrl!),
@@ -22,7 +20,6 @@ export default () => {
           .map((item) => item.resourceKey)
           .filter((item) => item !== 'manage-center')
           .map((item) => ({ name: item, url: config[item] }));
-        console.log('appList: ', appList);
         // 预加载减少首屏白屏时间
         preFetch(appList);
       }
