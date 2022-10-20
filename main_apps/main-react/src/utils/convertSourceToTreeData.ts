@@ -20,6 +20,7 @@ function convertSourceToTreeData(source?: any[]) {
       return {
         title: description,
         key: id,
+        value: id,
         children: loopData((privilegeList || []).concat(children || [])),
       };
     });
