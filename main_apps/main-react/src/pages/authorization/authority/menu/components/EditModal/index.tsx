@@ -12,6 +12,7 @@ import { getResourceIds } from '@/utils/getResourceIds';
 import { removeEmpty } from '@/utils/json';
 import { ProColumns } from '@ant-design/pro-table';
 import TableItem from '@/components/TableItem';
+import CustomTreeSelect from '@/components/CustomTreeSelect';
 
 const formLayout = {
   labelCol: {
@@ -108,6 +109,7 @@ const EditModal = ({
       reload?.();
     },
   });
+  console.log('resourceTreeData: ', resourceTreeData);
 
   const columns: ProColumns<defs.platform.ResourceTreeObject>[] = [
     {
@@ -175,7 +177,13 @@ const EditModal = ({
                 },
               ]}
             >
-              <TreeSelect treeData={resourceTreeData} allowClear multiple placeholder="请选择" />
+              <CustomTreeSelect
+                className={styles.tree}
+                treeData={resourceTreeData}
+                allowClear
+                multiple
+                placeholder="请选择"
+              />
             </Form.Item>
           </div>
         </Spin>
