@@ -12,8 +12,7 @@ if (isEnvPro) {
     'smart-bi': 'http://smart-bi.jxzk.thundersdata.com:38204/smart-bi',
     'smart-data': 'http://smart-data.platform.jxas.ac.cn:82/smart-data/',
     'smart-lowcode': 'http://lowcode.jxzk.thundersdata.com:38204',
-    'smart-visualization':
-      'http://smart-visualization.jxzk.thundersdata.com:38204/smart-visualization',
+    'smart-visualization': 'http://smart-visualization.platform.jxas.ac.cn:82/smart-visualization',
     'smart-iot': 'http://smart-iot.jxzk.thundersdata.com:38204/smart-iot',
   };
 }
