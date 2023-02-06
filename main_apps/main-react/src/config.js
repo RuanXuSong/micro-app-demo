@@ -10,7 +10,7 @@ const isEnvPro = process.env.NODE_ENV === 'production';
 if (isEnvPro) {
   config = {
     'smart-bi': 'http://smart-bi.jxzk.thundersdata.com:38204/smart-bi',
-    'smart-data': 'http://smart-data.jxzk.thundersdata.com:38204/smart-data/',
+    'smart-data': 'http://smart-data.platform.jxas.ac.cn:82/smart-data/',
     'smart-lowcode': 'http://lowcode.jxzk.thundersdata.com:38204',
     'smart-visualization':
       'http://smart-visualization.jxzk.thundersdata.com:38204/smart-visualization',
@@ -20,6 +20,6 @@ if (isEnvPro) {
 
 /** 退出登录跳转页 */
 export const LOGOUT_PATH =
-  'http://platform-frontend.jxzk.thundersdata.com:38204/logout?redirect_url=http://platform-frontend.jxzk.thundersdata.com:38204/';
+  'http://platform-frontend.platform.jxas.ac.cn:82/logout?redirect_url=http://platform-frontend.platform.jxas.ac.cn:82/';
 
 export default config;

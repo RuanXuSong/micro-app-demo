@@ -10,11 +10,11 @@
   "origins": [
     {
       "name": "authorization",
-      "originUrl": "http://platform-center.jxzk.thundersdata.com:38204/auth/v2/api-docs"
+      "originUrl": "http://authorization.platform.jxas.ac.cn:82/v2/api-docs"
     },
     {
       "name": "platform",
-      "originUrl": "http://platform-backend.jxzk.thundersdata.com:38204/v2/api-docs"
+      "originUrl": "http://platform-backend.platform.jxas.ac.cn:82/v2/api-docs"
     }
   ]
 }
