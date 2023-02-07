@@ -9,11 +9,11 @@ const isEnvPro = process.env.NODE_ENV === 'production';
 
 if (isEnvPro) {
   config = {
-    'smart-bi': 'http://smart-bi.jxzk.thundersdata.com:38204/smart-bi',
-    'smart-data': 'http://smart-data.platform.jxas.ac.cn:82/smart-data/',
-    'smart-lowcode': 'http://lowcode.jxzk.thundersdata.com:38204',
+    'smart-bi': 'http://smart-bi.platform.jxas.ac.cn:82/smart-bi',
+    'smart-data': 'http://smart-data.platform.jxas.ac.cn:82/smart-data',
+    'smart-lowcode': 'http://lowcode.platform.jxas.ac.cn:82',
     'smart-visualization': 'http://smart-visualization.platform.jxas.ac.cn:82/smart-visualization',
-    'smart-iot': 'http://smart-iot.jxzk.thundersdata.com:38204/smart-iot',
+    'smart-iot': 'http://smart-iot.platform.jxas.ac.cn:82/smart-iot',
   };
 }
 
