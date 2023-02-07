@@ -14,7 +14,7 @@
     },
     {
       "name": "platform",
-      "originUrl": "http://platform-backend.platform.jxas.ac.cn:82/v2/api-docs"
+      "originUrl": "http://platform-backend-sso.platform.jxas.ac.cn:82/v2/api-docs"
     }
   ]
 }
