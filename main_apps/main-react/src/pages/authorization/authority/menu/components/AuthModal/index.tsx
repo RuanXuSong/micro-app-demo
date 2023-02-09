@@ -167,13 +167,14 @@ export default ({
               dataSource={userList?.list}
               pagination={{
                 ...paginationConfig,
+                total: userList?.total,
                 current: paginationConfig.page,
                 onChange: (page) => {
                   setPaginationConfig((config) => {
                     config.page = page;
                   });
                 },
-                showQuickJumper: true,
+                showQuickJumper: false,
               }}
               renderItem={renderItem}
             />
