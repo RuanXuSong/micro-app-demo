@@ -6,16 +6,16 @@ import { connect } from '@umijs/max';
 import config, { LOGOUT_PATH } from '../../config';
 import { ROUTE_PATH } from '@/constant';
 
-function SwiftScreen() {
-  function handleData() {
-    // const { payload, type } = data || {};
-    // const { dispatch } = props;
-    // if (type === 'changeHeaderCollapsed') {
-    //   dispatch({
-    //     type: 'global/changeHeaderCollapsed',
-    //     payload,
-    //   });
-    // }
+function SwiftScreen(props: any) {
+  function handleData(data: any) {
+    const { payload, type } = data || {};
+    const { dispatch } = props;
+    if (type === 'changeHeaderCollapsed') {
+      dispatch({
+        type: 'global/changeHeaderCollapsed',
+        payload,
+      });
+    }
   }
 
   useEffect(() => {
