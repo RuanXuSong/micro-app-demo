@@ -1,24 +1,15 @@
 let config = {
-  'smart-bi': 'http://bi-sso.dev.thundersdata.com:8181/',
-  'smart-data': 'http://127.0.0.1:8000/',
-  'smart-lowcode': 'http://localhost:3001/',
-  'smart-visualization': 'http://localhost:38204',
-  'smart-iot': 'http://127.0.0.1:8000/',
+  react16: 'http://localhost:3001',
+  react17: 'http://localhost:3002',
 };
 const isEnvPro = process.env.NODE_ENV === 'production';
 
 if (isEnvPro) {
+  const baseUrl = `${window.location.origin}/`;
   config = {
-    'smart-bi': 'http://smart-bi.platform.jxas.ac.cn:82/smart-bi',
-    'smart-data': 'http://smart-data.platform.jxas.ac.cn:82/smart-data',
-    'smart-lowcode': 'http://lowcode.platform.jxas.ac.cn:82',
-    'smart-visualization': 'http://smart-visualization.platform.jxas.ac.cn:82/smart-visualization',
-    'smart-iot': 'http://smart-iot.platform.jxas.ac.cn:82/smart-iot',
+    react16: baseUrl,
+    react17: baseUrl,
   };
 }
-
-/** 退出登录跳转页 */
-export const LOGOUT_PATH =
-  'http://platform-frontend.platform.jxas.ac.cn:82/logout?redirect_url=http://platform-frontend.platform.jxas.ac.cn:82/';
 
 export default config;

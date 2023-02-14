@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkant_design_pro=self.webpackChunkant_design_pro||[]).push([[571],{9826:function(t,n,e){e.r(n);var r=e(98808),s=e(71577),u=e(84354),i=e(85893);n.default=function(){return(0,i.jsx)(r.ZP,{status:"404",title:"404",subTitle:"抱歉，当前页面不存在",extra:(0,i.jsx)(s.Z,{type:"primary",onClick:function(){return u.history.push("/")},children:"返回首页"})})}}}]);

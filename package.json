@@ -1,12 +1,16 @@
 {
   "name": "platform-frontend",
   "version": "0.0.1",
-  "description": "雷数云平台",
+  "description": "demo平台",
   "author": "rxs-michael",
   "private": false,
   "scripts": {
     "bootstrap": "yarn && npm-run-all --serial install:*",
-    "start": "npm run main-react",
+    "start": "yarn start:main-react",
+    "start:main-react": "npm-run-all --parallel build:watch start-child:* main-react",
+    "start-child:react16": "cd main_apps/children/react16 && yarn start",
+    "start-child:react17": "cd main_apps/children/react17 && yarn start",
+    "build:watch": "cross-env NODE_ENV='development' npm run",
     "build": "npm run install:main-react && npm run build:main-react",
     "install:main-react": "cd main_apps/main-react && yarn",
     "build:main-react": "cd main_apps/main-react && yarn build",

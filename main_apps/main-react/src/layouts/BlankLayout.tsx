@@ -1,19 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ConfigProvider, message } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
 import 'moment/locale/zh-cn';
 import { UseRequestProvider } from 'ahooks';
 import { THROTTLE_INTERVAL } from '@/constant';
 import { PREFIX_CLASS } from '@/constant';
-import useAuth from '@/hooks/useAuth';
-import { useModel, useLocation, useOutlet } from '@umijs/max';
+import { useOutlet } from '@umijs/max';
 
 const Layout: React.FC<any> = () => {
-  const location = useLocation();
-  const { ready } = useModel('authority');
   const element = useOutlet();
-  // 权限管理
-  useAuth(location.pathname);
 
   return (
     <UseRequestProvider
@@ -34,7 +29,7 @@ const Layout: React.FC<any> = () => {
       }}
     >
       <ConfigProvider locale={zhCN} prefixCls={PREFIX_CLASS}>
-        {ready && element}
+        {element}
       </ConfigProvider>
     </UseRequestProvider>
   );

@@ -1,7 +1,6 @@
 import 'babel-polyfill';
 import microApp, { unmountApp, unmountAllApps } from '@micro-zoe/micro-app';
 import config from './config';
-import './services';
 
 microApp.start({
   // shadowDOM: true,

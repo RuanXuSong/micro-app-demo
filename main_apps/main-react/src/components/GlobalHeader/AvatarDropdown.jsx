@@ -1,5 +1,4 @@
 import React from 'react';
-import { LOGOUT_PATH } from '@/config';
 import {
   LogoutOutlined,
   SettingOutlined,
@@ -35,7 +34,7 @@ class AvatarDropdown extends React.Component {
     const { key } = event;
 
     if (key === 'logout') {
-      window.location.href = LOGOUT_PATH;
+      window.location.href = '';
       // const { dispatch } = this.props;
 
       // if (dispatch) {

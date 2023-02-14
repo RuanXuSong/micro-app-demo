@@ -8,7 +8,7 @@ const proSettings = {
   fixedHeader: false,
   fixSiderbar: false,
   colorWeak: false,
-  title: '雷数云平台',
+  title: 'demo平台',
   pwa: false,
   iconfontUrl: '',
   headerHeight: 72,

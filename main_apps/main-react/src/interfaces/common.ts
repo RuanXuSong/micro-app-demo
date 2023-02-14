@@ -8,18 +8,3 @@ export interface FileDTO {
   /** 文件url */
   fileUrl?: string;
 }
-
-export interface PrivilegeResource {
-  apiUrl: string;
-  description: string;
-  icon: string;
-  id: number;
-  orderValue: number;
-  resourceKey: string;
-  type: number;
-  privilegeList: PrivilegeResource[];
-  resourceBusinessValue: string;
-  children: PrivilegeResource[];
-  isVisible: boolean;
-  comment: string;
-}

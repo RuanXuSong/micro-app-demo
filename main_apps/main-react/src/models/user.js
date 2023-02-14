@@ -1,31 +1,29 @@
+import { queryCurrent, query as queryUsers } from '@/services/user';
 const UserModel = {
   namespace: 'user',
   state: {
     currentUser: {},
   },
   effects: {
-    *fetchCurrent(_, { call, put }) {
-      const response = yield call(API.platform.sysUser.myself.fetch);
+    *fetch(_, { call, put }) {
+      const response = yield call(queryUsers);
       yield put({
-        type: 'saveCurrentUser',
+        type: 'save',
         payload: response,
       });
     },
 
-    *setCurrentUser({ payload }, { call, put }) {
+    *fetchCurrent(_, { call, put }) {
+      const response = yield call(queryCurrent);
       yield put({
-        type: 'changeCurrentUser',
-        payload: payload,
+        type: 'saveCurrentUser',
+        payload: response,
       });
     },
   },
   reducers: {
     saveCurrentUser(state, action) {
       return { ...state, currentUser: action.payload || {} };
-    },
-
-    changeCurrentUser(state, { payload }) {
-      return { ...state, currentUser: payload || {} };
     },
 
     changeNotifyCount(

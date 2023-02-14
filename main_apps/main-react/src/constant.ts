@@ -4,7 +4,7 @@
  * @作者: 阮旭松
  * @Date: 2022-07-28 18:10:42
  * @LastEditors: 阮旭松
- * @LastEditTime: 2022-10-19 15:54:32
+ * @LastEditTime: 2023-02-14 19:55:29
  */
 
 /** 云平台 antd 样式前缀（防止子应用样式污染） */
@@ -120,52 +120,3 @@ export enum TabCloseType {
 /** 默认头像地址 */
 export const AVATAR_URL =
   'https://td-dev-public.oss-cn-hangzhou.aliyuncs.com/maoyes-app/1658819849135012474.png';
-
-export enum ROUTE_PATH {
-  THUNDER_BI = 'smart-bi',
-  SWIFT_SCREEN = 'smart-visualization',
-  DATA_FRONT = 'smart-data',
-  BI_SHENG = 'smart-lowcode',
-  IOT = 'smart-iot',
-}
-
-export enum RESOURCE_TYPE_ENUM {
-  路由级资源 = 0,
-  页面级资源 = 1,
-}
-
-// 敏捷应用对应code
-export const SMART_DATA_CODE = 0;
-
-// 初始路径
-export const INITIAL_PATH = '/cloud/homepage';
-
-// 模板中心的所有权限资源
-export const AUTH_KEY_LIST = [
-  { name: '模板创建', key: 'cloud_template_package_create' },
-  { name: '模板预览', key: 'cloud_template_package_preview' },
-  { name: '数智平台预览', key: 'cloud_template_package_preview_td_bi' },
-  { name: '敏捷大屏预览', key: 'cloud_template_package_preview_td_visualization' },
-  { name: '敏捷应用预览', key: 'cloud_template_package_preview_td_lowcode' },
-  { name: '数智平台查看', key: 'cloud_template_package_view_bi' },
-  { name: '敏捷应用查看', key: 'cloud_template_package_view_lowcode' },
-  { name: '数融平台查看', key: 'cloud_template_package_view_data' },
-  { name: '敏捷大屏查看', key: 'cloud_template_package_view_visualization' },
-  { name: '模板重试', key: 'cloud_template_package_retry' },
-  { name: '数智平台重试', key: 'cloud_template_package_retry_bi' },
-  { name: '敏捷应用重试', key: 'cloud_template_package_retry_lowcode' },
-  { name: '数融平台重试', key: 'cloud_template_package_retry_data' },
-  { name: '敏捷大屏重试', key: 'cloud_template_package_retry_visualization' },
-];
-
-/** 模板异步获取结果的轮询时间: 10秒 */
-export const TEMPLATE_INTERVAL_TIME = 10000;
-
-/** 菜单 icon */
-export const MENU_ICONS_OBJ = {
-  '/smart-data': 'data-front',
-  '/smart-lowcode': 'bisheng',
-  '/smart-bi': 'thunder-bi',
-  '/smart-visualization': 'thunder-bi',
-  '/smart-iot': 'data-front',
-};
