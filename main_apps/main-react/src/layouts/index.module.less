@@ -1,0 +1,149 @@
+.menuItemWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 108px;
+  height: 72px;
+  padding: 12px 0;
+
+  .menuTitle {
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  img {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.childMenuItem {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding-left: 24px;
+  transition: all 0.2s ease-out;
+
+  .menuTitle {
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  img {
+    width: 14px;
+    height: 14px;
+    margin-right: 10px;
+  }
+
+  .fontIcon {
+    color: rgba(0, 0, 0, 0.65);
+  }
+}
+
+:global {
+  .auth-layout {
+    .cloud-menu-item {
+      .iconfont,
+      span {
+        color: rgba(0, 0, 0, 0.65);
+      }
+
+      &:hover {
+        .iconfont,
+        span {
+          color: #1890ff !important;
+        }
+      }
+    }
+
+    .cloud-menu-item-selected,
+    .cloud-menu-item-active {
+      .iconfont,
+      span {
+        color: #1890ff !important;
+      }
+    }
+  }
+  .basic-layout {
+    .cloud-pro-top-nav-header-menu {
+      .cloud-menu-item-active {
+        background-color: rgba(24, 144, 255, 0.6) !important;
+      }
+      .cloud-menu-item-selected {
+        background-color: #1890ff !important;
+      }
+    }
+  }
+}
+
+.tabContainer {
+  height: calc(100vh - 72px);
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.tabsNavWrap {
+  :global {
+    .cloud-tabs-nav {
+      margin: 0 !important;
+    }
+  }
+}
+
+.tabPaneContainer {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 112px);
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .comWrap {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  :global {
+    .cloud-pro-table {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .cloud-card {
+      flex: 1;
+      height: auto !important;
+    }
+  }
+}
+
+:global {
+  .collapsed-basic-layout {
+    .cloud-layout-header {
+      display: none;
+    }
+
+    micro-app-body {
+      #root,
+      #application-root,
+      #app {
+        margin-top: 0px !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,274 @@
+@import '~antd/es/style/themes/default.less';
+@import './assets/iconfont/iconfont.css';
+@import './assets/css/ace.css';
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+}
+
+.colorWeak {
+  filter: invert(80%);
+}
+
+.cloud-layout {
+  min-height: 100vh;
+}
+
+canvas {
+  display: block;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+.cloud-menu-inline-collapsed-tooltip {
+  .iconfont,
+  .cloud-pro-menu-item-title {
+    color: #fff !important;
+  }
+}
+
+.cloud-pro-table-search .cloud-form-item .cloud-form-item-label {
+  flex: unset !important;
+  min-width: 80px;
+}
+
+@media (max-width: @screen-xs) {
+  .cloud-table {
+    width: 100%;
+    overflow-x: auto;
+    &-thead > tr,
+    &-tbody > tr {
+      > th,
+      > td {
+        white-space: pre;
+        > span {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+// 兼容IE11
+@media screen and(-ms-high-contrast: active), (-ms-high-contrast: none) {
+  body .cloud-design-pro > .cloud-layout {
+    min-height: 100vh;
+  }
+}
+
+.btn-con {
+  margin-bottom: 10px;
+}
+
+micro-app,
+micro-app-body {
+  width: 100%;
+  height: 100%;
+}
+
+.cloud-pro-table {
+  flex: 1;
+  height: auto !important;
+
+  .cloud-card {
+    background: transparent;
+  }
+
+  .cloud-card-body {
+    background: #fff;
+  }
+}
+
+.cloud-pro-basicLayout {
+  height: 100%;
+  overflow: hidden;
+}
+
+.cloud-pro-basicLayout-content {
+  margin: 0 !important;
+}
+
+.cloud-pro-fixed-header {
+  z-index: 10 !important;
+}
+
+.cloud-form-item-control-input-content .cloud-picker {
+  width: 100%;
+}
+
+micro-app-body {
+  #root,
+  #application-root,
+  #app {
+    margin-top: -72px !important;
+  }
+}
+
+.cloud-layout-header {
+  height: 72px !important;
+}
+
+.cloud-pro-top-nav-header-main {
+  padding-left: 24px;
+}
+
+.cloud-pro-top-nav-header-main-left {
+  padding-left: 8px;
+}
+
+.cloud-pro-top-nav-header-logo {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.cloud-pro-top-nav-header-logo h1 {
+  font-weight: 700;
+  font-size: 20px;
+  font-family: 'Alibaba PuHuiTi';
+}
+
+.auth-layout {
+  .runtime-keep-alive-tabs-layout {
+    height: 42px;
+  }
+
+  .cloud-tabs-tab {
+    border: 0 !important;
+  }
+
+  .cloud-pro-top-nav-header-menu .top-nav-menu {
+    display: none;
+  }
+
+  .cloud-tabs-tab-btn {
+    color: #8c8c8c;
+  }
+
+  .cloud-tabs-tab-btn:hover {
+    color: #1890ff;
+  }
+
+  .cloud-tabs-card > .cloud-tabs-nav .cloud-tabs-tab,
+  .cloud-tabs-card > div > .cloud-tabs-nav .cloud-tabs-tab {
+    padding: 8px 4px 8px 12px !important;
+    background: #fff !important;
+  }
+
+  .cloud-tabs-card > .cloud-tabs-nav .cloud-tabs-ink-bar,
+  .cloud-tabs-card > div > .cloud-tabs-nav .cloud-tabs-ink-bar {
+    visibility: visible !important;
+  }
+
+  .cloud-tabs-tab.cloud-tabs-tab-active {
+    .cloud-tabs-tab-remove {
+      color: #1890ff;
+    }
+  }
+
+  .rumtime-keep-alive-tabs-layout {
+    margin-bottom: 40px;
+  }
+
+  .rumtime-keep-alive-layout {
+    overflow: visible !important;
+  }
+  .cloud-tabs-nav {
+    height: 40px;
+    margin: 0;
+    padding: 0 20px;
+    background: #fff;
+  }
+}
+
+.cloud-form-item-label svg {
+  cursor: auto;
+}
+
+micro-app[name='swiftScreen'] {
+  @font-face {
+    font-family: 'PangMenZhengDao-3';
+    src: url('../public/font/pmzd.otf');
+  }
+}
+
+micro-app[name='biSheng'] {
+  position: relative;
+
+  .cloud-input-affix-wrapper {
+    border: 0;
+  }
+
+  .cloud-layout-header {
+    z-index: 21;
+  }
+
+  .cloud-input-affix-wrapper::before {
+    content: '';
+  }
+
+  .header .dark .action {
+    color: #fff !important;
+  }
+
+  .user-wrapper {
+    position: fixed;
+    top: 0;
+    right: -79px;
+    z-index: 100;
+    height: 72px !important;
+    color: #fff;
+    line-height: 72px;
+
+    .logout_title {
+      display: none;
+    }
+
+    .cloud-dropdown-link span {
+      color: transparent;
+    }
+
+    .action {
+      height: auto !important;
+
+      .avatar {
+        visibility: hidden;
+      }
+    }
+  }
+
+  .user-dropdown-menu-wrapper.cloud-dropdown-menu .cloud-dropdown-menu-item {
+    width: auto !important;
+  }
+
+  .logout_menu_item {
+    display: block !important;
+  }
+
+  .cloud-popover.header-notice-wrapper {
+    top: 0px !important;
+  }
+}
+
+.cloud-table-content table {
+  width: 100%;
+}
+
+.cloud-upload-list-item-name {
+  display: none !important;
+}
