@@ -10,6 +10,7 @@ function BiSheng() {
         name={ROUTE_PATH.BI_SHENG}
         baseRoute={`/${ROUTE_PATH.BI_SHENG}`}
         url={`${config['smart-lowcode']}`}
+        keep-alive
         data={{ logoutUrl: LOGOUT_PATH }}
       />
     </div>

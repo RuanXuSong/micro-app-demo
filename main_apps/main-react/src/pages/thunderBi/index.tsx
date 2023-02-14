@@ -10,6 +10,7 @@ function ThunderBi() {
         name={ROUTE_PATH.THUNDER_BI}
         baseRoute={`/${ROUTE_PATH.THUNDER_BI}`}
         url={`${config['smart-bi']}`}
+        keep-alive
         data={{ logoutUrl: LOGOUT_PATH }}
       />
     </div>

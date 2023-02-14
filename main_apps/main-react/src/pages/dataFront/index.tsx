@@ -10,6 +10,7 @@ function DataFront() {
         name={ROUTE_PATH.DATA_FRONT}
         baseRoute={`/${ROUTE_PATH.DATA_FRONT}`}
         url={`${config['smart-data']}`}
+        keep-alive
         data={{ logoutUrl: LOGOUT_PATH }}
       />
     </div>

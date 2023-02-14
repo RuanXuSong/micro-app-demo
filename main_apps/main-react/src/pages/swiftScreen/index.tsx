@@ -32,6 +32,7 @@ function SwiftScreen(props: any) {
         name={ROUTE_PATH.SWIFT_SCREEN}
         baseRoute={`/${ROUTE_PATH.SWIFT_SCREEN}`}
         url={`${config['smart-visualization']}`}
+        keep-alive
         data={{ logoutUrl: LOGOUT_PATH }}
       />
     </div>
