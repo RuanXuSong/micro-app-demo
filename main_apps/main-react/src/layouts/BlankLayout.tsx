@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ConfigProvider, message } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
 import 'moment/locale/zh-cn';
@@ -14,6 +14,17 @@ const Layout: React.FC<any> = () => {
   const element = useOutlet();
   // 权限管理
   useAuth(location.pathname);
+
+  useEffect(() => {
+    window.addEventListener(
+      'popstate',
+      function (e) {
+        console.log('popstate: ', e);
+        // router.replace(href.replace(origin, ''))
+      },
+      false,
+    );
+  }, []);
   return (
     <UseRequestProvider
       value={{
