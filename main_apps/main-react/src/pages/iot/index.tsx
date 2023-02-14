@@ -10,7 +10,6 @@ function IOT() {
         name={ROUTE_PATH.IOT}
         baseRoute={`/${ROUTE_PATH.IOT}`}
         url={`${config['smart-iot']}`}
-        keep-alive
         data={{ logoutUrl: LOGOUT_PATH }}
       />
     </div>
