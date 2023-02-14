@@ -6,7 +6,7 @@ import { UseRequestProvider } from 'ahooks';
 import { THROTTLE_INTERVAL } from '@/constant';
 import { PREFIX_CLASS } from '@/constant';
 import useAuth from '@/hooks/useAuth';
-import { useModel, useLocation, useOutlet, history } from '@umijs/max';
+import { useModel, useLocation, useOutlet } from '@umijs/max';
 
 const Layout: React.FC<any> = () => {
   const location = useLocation();
@@ -18,10 +18,9 @@ const Layout: React.FC<any> = () => {
   useEffect(() => {
     window.addEventListener(
       'popstate',
-      function () {
-        const { href } = window.location;
-        console.log('href: ', href);
-        history.replace(href);
+      function (e) {
+        console.log('popstate: ', e);
+        // router.replace(href.replace(origin, ''))
       },
       false,
     );

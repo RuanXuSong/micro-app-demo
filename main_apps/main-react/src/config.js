@@ -1,8 +1,8 @@
 let config = {
-  'smart-bi': 'http://localhost:8887',
+  'smart-bi': 'http://bi-sso.dev.thundersdata.com:8181/',
   'smart-data': 'http://127.0.0.1:8000/',
   'smart-lowcode': 'http://localhost:3001/',
-  'smart-visualization': 'http://localhost:8889',
+  'smart-visualization': 'http://localhost:38204',
   'smart-iot': 'http://127.0.0.1:8000/',
 };
 const isEnvPro = process.env.NODE_ENV === 'production';
