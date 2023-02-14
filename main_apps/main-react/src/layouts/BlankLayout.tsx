@@ -15,16 +15,6 @@ const Layout: React.FC<any> = () => {
   // 权限管理
   useAuth(location.pathname);
 
-  useEffect(() => {
-    window.addEventListener(
-      'popstate',
-      function (e) {
-        console.log('popstate: ', e);
-        // router.replace(href.replace(origin, ''))
-      },
-      false,
-    );
-  }, []);
   return (
     <UseRequestProvider
       value={{
