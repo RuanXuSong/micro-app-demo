@@ -16,7 +16,7 @@
     "build:main-react": "cd main_apps/main-react && yarn build",
     "main-react": "cd main_apps/main-react && yarn start",
     "lint": "prettier --check main_apps/**/*.ts main_apps/**/*.tsx",
-    "lint:fix": "prettier --check main_apps/**/*.ts main_apps/main-react/src/utils/*.ts main_apps/**/*.tsx --write",
+    "lint:fix": "prettier --check main_apps/**/*.ts main_apps/**/*.tsx --write",
     "commit": "git-cz"
   },
   "config": {
