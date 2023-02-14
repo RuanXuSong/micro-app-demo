@@ -11,7 +11,7 @@ import { history, connect } from '@umijs/max';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 import microApp from '@micro-zoe/micro-app';
-import { enable as enableDarkMode, disable as disableDarkMode } from 'darkreader';
+import { setFetchMethod, enable as enableDarkMode, disable as disableDarkMode } from 'darkreader';
 
 class AvatarDropdown extends React.Component {
   state = {
@@ -65,6 +65,7 @@ class AvatarDropdown extends React.Component {
   componentDidMount() {
     microApp.addGlobalDataListener(this.handleGlobalDataForBaseApp);
 
+    setFetchMethod(window.fetch);
     const dark = localStorage.getItem('dark');
 
     this.setState({ dark: dark != 'false' }, () => {
