@@ -4,7 +4,7 @@
  * @see You can view component api by: https://github.com/ant-design/ant-design-pro-layout
  */
 import ProLayout from '@ant-design/pro-layout';
-import { Link, connect, history } from 'umi';
+import { Link, connect, history, useLocation } from 'umi';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import logo from '../assets/logo.svg';
 import { useOutlet } from '@umijs/max';
@@ -18,12 +18,8 @@ const menuDataRender = () => {
 };
 
 const BasicLayout = (props) => {
-  const {
-    settings,
-    location = {
-      pathname: '/',
-    },
-  } = props;
+  const location = useLocation();
+  const { settings } = props;
   const element = useOutlet();
 
   return (
